@@ -2,7 +2,7 @@ name: Deploy Eleventy to GitHub Pages
 
 on:
   push:
-    branches: [ "main" ] # Triggers on pushes to your main branch
+    branches: [ "main" ]
 
 permissions:
   contents: read
@@ -20,13 +20,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-     - name: Setup Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      - name: Install dependencies
-        run: npm install
 
       - name: Install dependencies
         run: npm install
@@ -37,7 +34,7 @@ jobs:
       - name: Upload production artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '_site' # Directs GitHub to your eleventy build output folder
+          path: '_site'
 
   deploy:
     environment:
