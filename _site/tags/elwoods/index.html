@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  </head>
+<body>
+  <main class="archive-container">
+    <section class="single-post-container">
+      <div class="carousel">
+        <div class="carousel-slides">
+          <link rel="stylesheet" href="/src/archive/styles.css">
+<div class="archive-container-layout">
+  
+  <!-- LEFT: Filtered Post Grid -->
+  <main class="archive-main">
+    <h1>Posts tagged with <span style="color: #0066cc;">#elwoods</span></h1>
+    <p><a href="/archive/" style="text-decoration: none; color: #666; font-weight: bold;">← View All Posts</a></p>
+
+    <div class="imageboard-grid">
+      
+        <div class="post-card">
+          <div class="post-thumbnail">
+            <a href="/archive/ul/bovinetesting/">
+              
+                <img src="/archive/ul/bovinetesting/1.jpg" alt="Melwood's bovine testing solutions">
+              
+            </a>
+          </div>
+          <div class="post-details">
+            <h2 class="post-title"><a href="/archive/ul/bovinetesting/">Melwood's bovine testing solutions</a></h2>
+            
+              <div class="ig-link-container">
+                <a href="https://www.instagram.com/p/DXsEBbRDK-v/" target="_blank" rel="noopener noreferrer" class="instagram-link">View on Instagram ↗</a>
+              </div>
+            
+          </div>
+        </div>
+      
+    </div>
+  </main>
+
+  <!-- RIGHT: Keep Sidebar accessible even when filtering -->
+ <aside class="sidebar">
+  <h3>Filter by Topic</h3>
+  <ul class="tag-list">
+    <li><a href="/archive/" class="tag-pill active-pill">All Posts</a></li>
+    
+    
+      
+      
+    
+      
+      
+        <li>
+          <a href="/tags/dog-comparisons/" class="tag-pill">#dog comparisons</a>
+        </li>
+      
+    
+      
+      
+        <li>
+          <a href="/tags/elwoods/" class="tag-pill">#elwoods</a>
+        </li>
+      
+    
+      
+      
+        <li>
+          <a href="/tags/utilitarianism/" class="tag-pill">#utilitarianism</a>
+        </li>
+      
+    
+      
+      
+        <li>
+          <a href="/tags/welfarism/" class="tag-pill">#welfarism</a>
+        </li>
+      
+    
+      
+      
+        <li>
+          <a href="/tags/sic/" class="tag-pill">#sic</a>
+        </li>
+      
+    
+      
+      
+        <li>
+          <a href="/tags/carnism/" class="tag-pill">#carnism</a>
+        </li>
+      
+    
+      
+      
+        <li>
+          <a href="/tags/reducetarianism/" class="tag-pill">#reducetarianism</a>
+        </li>
+      
+    
+      
+      
+        <li>
+          <a href="/tags/misinformation/" class="tag-pill">#misinformation</a>
+        </li>
+      
+    
+      
+      
+        <li>
+          <a href="/tags/melanie-joy/" class="tag-pill">#Melanie Joy</a>
+        </li>
+      
+    
+      
+      
+        <li>
+          <a href="/tags/holocaust/" class="tag-pill">#holocaust</a>
+        </li>
+      
+    
+      
+      
+        <li>
+          <a href="/tags/leftist-anti-veganism/" class="tag-pill">#leftist-anti-veganism</a>
+        </li>
+      
+    
+      
+      
+        <li>
+          <a href="/tags/excuses/" class="tag-pill">#excuses</a>
+        </li>
+      
+    
+      
+      
+        <li>
+          <a href="/tags/taglist/" class="tag-pill">#tagList</a>
+        </li>
+      
+    
+      
+      
+    
+  </ul>
+</aside>
+
+</div>
+
+<style>
+   /* Split layout */
+  .archive-layout {
+    display: flex;
+    max-width: 1200px;
+    margin: 40px auto;
+    gap: 40px;
+    padding: 0 20px;
+    font-family: sans-serif;
+  }
+
+  .main-content {
+    flex: 3;
+  }
+
+  .sidebar {
+    flex: 1;
+    border-left: 1px solid #eee;
+    padding-left: 20px;
+    min-width: 200px;
+  }
+
+  .tag-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .tag-list li {
+    margin-bottom: 8px;
+  }
+
+  .tag-list a {
+    text-decoration: none;
+    color: #555;
+    font-size: 0.95rem;
+  }
+
+  .tag-list a:hover {
+    color: #0066cc;
+    text-decoration: underline;
+  }
+
+  .active-tag {
+    font-weight: bold;
+    color: #111 !important;
+  }
+
+  /* Grid styles */
+  .imageboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+
+  .post-card {
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-thumbnail {
+    width: 100%;
+    aspect-ratio: 1;
+    background: #eaeaea;
+  }
+
+  .post-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .post-details {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin: 5px;
+  }
+
+  .post-title {
+    font-size: 1rem;
+    margin: 0 0 2px 0;
+  }
+
+  .post-title a {
+    color: #111;
+    text-decoration: none;
+  }
+
+  .ig-link-container {
+    margin-top: auto;
+  }
+
+  .instagram-link {
+    font-size: 0.8rem;
+    color: #d62976;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .tag-pill {
+  display: inline-block;
+  padding: 4px 10px;
+  background-color: #e0e0e0;
+  color: #333 !important;
+  text-decoration: none !important;
+  font-size: 0.85rem;
+  border-radius: 12px;
+  margin: 2px 0;
+  transition: all 0.2s ease;
+}
+
+.tag-pill:hover {
+  background-color: #0066cc;
+  color: #fff !important;
+}
+
+.active-pill {
+  background-color: #333;
+  color: #fff !important;
+}
+</style>
+        </div>
+      </div>
+
+      <aside class="post-sidebar">
+        <h1></h1>
+        <div class="post-metadata">
+          <span class="author">Author: </span>
+        </div>
+        <div class="tag-list">
+          
+        </div>
+      </aside>
+    </section>
+  </main>
+</body>
+</html>

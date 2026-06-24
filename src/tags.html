@@ -1,0 +1,62 @@
+---
+---
+layout: post.njk
+pagination:
+  data: collections
+  size: 1
+  alias: tag
+  filter:
+    - all
+    - posts
+    - tagList
+permalink: /tags/{{ tag | slugify }}/
+---
+<link rel="stylesheet" href="/archive/styles.css">
+<div class="archive-layout">
+  
+  <main class="main-content">
+    <h1>Posts tagged with <span style="color: #0066cc;">#{{ tag }}</span></h1>
+    <p style="margin-bottom: 20px;"><a href="/archive/" style="text-decoration: none; color: #666; font-weight: bold;">← View All Posts</a></p>
+
+    <div class="imageboard-grid">
+      {% for post in collections[tag] %}
+      <div class="post-card">
+        <div class="post-thumbnail">
+          <a href="{{ post.url }}">
+            {% if post.data.thumbnail %}
+              <img src="{{ post.data.thumbnail }}" alt="{{ post.data.title }}" loading="lazy">
+            {% else %}
+              <div class="placeholder-thumb">No Image</div>
+            {% endif %}
+          </a>
+        </div>
+        <div class="post-details">
+          <h2 class="post-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
+          <h5 class="post-author">{{ post.data.author }}</h5>
+          {% if post.data.instagram_url %}
+          <div class="ig-link-container">
+            <a href="{{ post.data.instagram_url }}" target="_blank" rel="noopener noreferrer" class="instagram-link">View on Instagram ↗</a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </main>
+
+  <aside class="sidebar">
+    <h3>Filter by Topic</h3>
+    <ul class="tag-list">
+      <li><a href="/archive/" class="tag-pill">All Posts</a></li>
+      {% for tagPair in collections %}
+        {% assign tagName = tagPair[0] %}
+        {% if tagName != "all" and tagName != "posts" %}
+          <li>
+            <a href="/tags/{{ tagName | slugify }}/" class="tag-pill {% if tagName == tag %}active-pill{% endif %}">#{{ tagName }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </aside>
+
+</div>
