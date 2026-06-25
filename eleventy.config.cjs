@@ -37,8 +37,8 @@ module.exports = function (eleventyConfig) {
     let metadata = await Image(resolvedPath, {
       widths: [600],
       formats: ["webp"],
-      outputDir: "./_site/img/",
-      urlPath: "/img/"
+      outputDir: "./docs/img/",
+      urlPath: "/Vegan-Archive/img/"
     });
 
     let imageAttributes = {
