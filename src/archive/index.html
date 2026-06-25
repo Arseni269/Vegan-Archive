@@ -14,7 +14,7 @@ permalink: /archive/
         <div class="post-thumbnail">
           <a href="{{ post.url | url }}">
             {% if post.data.thumbnail %}
-            <img src="/Vegan-Archive/archive/{{ post.data.thumbnail }}" alt="{{ post.data.title }}" loading="lazy">
+            <img src=".{{ post.url }}{{ post.data.thumbnail }}" alt="{{ post.data.title }}" loading="lazy">
             {% else %}
             <div class="placeholder-thumb">No Image</div>
             {% endif %}
@@ -38,18 +38,18 @@ permalink: /archive/
 
   <aside class="sidebar">
     <div class="filter-group">
-      <a href="/archive/" class="tag-pill active-pill">✨ All Archives</a>
+      <a href="/Vegan-Archive/archive/" class="tag-pill active-pill">✨ All Archives</a>
     </div>
 
     <hr class="sidebar-divider">
 
-    <a href="/Vegan-Archive/archive/" class="tag-pill active-pill">✨ All Archives</a>
-
-    <li><a href="/Vegan-Archive/authors/uncompromised-liberation/" class="filter-link">👤 Uncompromised Liberation</a>
-    </li>
-    <li><a href="/Vegan-Archive/authors/vegangelic/" class="filter-link">👤 Vegangelic</a></li>
-
-    <a href="/Vegan-Archive/tags/{{ tagName | slugify }}/" class="tag-pill">#{{ tagName }}</a>
+    <div class="filter-group">
+      <h3>Filter by Creator</h3>
+      <ul class="filter-list">
+        <li><a href="/Vegan-Archive/authors/uncompromised-liberation/" class="filter-link">👤 Uncompromised Liberation</a></li>
+        <li><a href="/Vegan-Archive/authors/vegangelic/" class="filter-link">👤 Vegangelic</a></li>
+      </ul>
+    </div>
 
     <hr class="sidebar-divider">
 
@@ -58,10 +58,9 @@ permalink: /archive/
       <ul class="tag-list">
         {% for tagPair in collections %}
         {% assign tagName = tagPair[0] %}
-        {% if tagName != "all" and tagName != "posts" and tagName != "Uncompromised Liberation" and tagName !=
-        "Vegangelic" %}
+        {% if tagName != "all" and tagName != "posts" and tagName != "Uncompromised Liberation" and tagName != "Vegangelic" %}
         <li>
-          <a href="/tags/{{ tagName | slugify }}/" class="tag-pill">#{{ tagName }}</a>
+          <a href="/Vegan-Archive/tags/{{ tagName | slugify }}/" class="tag-pill">#{{ tagName }}</a>
         </li>
         {% endif %}
         {% endfor %}
@@ -76,11 +75,10 @@ permalink: /archive/
     // 1. If we have a saved position for this page, snap back to it
     const savedScrollPos = sessionStorage.getItem("archiveScrollPosition");
     if (savedScrollPos) {
-      // Use a slight timeout to let Eleventy's image layout finish rendering first
       setTimeout(() => {
         window.scrollTo({
           top: parseInt(savedScrollPos, 10),
-          behavior: "instant" // "instant" prevents awkward layout jumps
+          behavior: "instant"
         });
       }, 50);
     }
