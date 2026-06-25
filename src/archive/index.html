@@ -15,7 +15,7 @@ permalink: /archive/
           <a href="/Vegan-Archive{{ post.url }}">
             {% if post.data.thumbnail %}
             <!-- Combines the absolute site root directory with the post url and thumbnail filename safely -->
-            <img src="/Vegan-Archive{{ post.url }}{{ post.data.thumbnail }}" alt="{{ post.data.title }}" loading="lazy">
+            <img src="/Vegan-Archive{{ post.data.thumbnail }}" alt="{{ post.data.title }}" loading="lazy">
             {% else %}
             <div class="placeholder-thumb">No Image</div>
             {% endif %}
