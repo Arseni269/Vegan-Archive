@@ -79,8 +79,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/archive/**/*.jpg");
   eleventyConfig.addPassthroughCopy("src/archive/**/*.png");
   eleventyConfig.addPassthroughCopy("src/archive/**/*.webp");
-
- return {
+  eleventyConfig.addPassthroughCopy("src/.nojekyll");
+  return {
     dir: {
       input: "src",
       output: "docs"  // <-- Changed from _site to docs
