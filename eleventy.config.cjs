@@ -94,10 +94,11 @@ module.exports = function (eleventyConfig) {
   });
   // Look for your existing return statement at the bottom and make it look like this:
   return {
-    pathPrefix: "/Vegan-Archive/", // <-- JUST ADD THIS LINE HERE
     dir: {
       input: "src",
-      output: "docs"
-    }
+      output: "docs", // Make sure this says docs, not _site
+      includes: "_includes"
+    },
+    pathPrefix: "/Vegan-Archive/"
   };
 };
