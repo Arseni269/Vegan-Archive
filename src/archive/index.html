@@ -10,15 +10,28 @@ permalink: /archive/
     <div class="imageboard-grid">
       {% for post in collections.all %}
       {% if post.data.title and post.url != '/archive/' and post.data.title != 'The Vegan Archive' %}
-      <div class="post-thumbnail">
-  <a href="{{ post.url | url }}">
-    {% if post.data.thumbnail %}
-      <img src="{{ post.url | url }}{{ post.data.thumbnail }}" alt="{{ post.data.title }}" loading="lazy">
-    {% else %}
-      <div class="placeholder-thumb">No Image</div>
-    {% endif %}
-  </a>
-</div>
+      <div class="post-card">
+        <div class="post-thumbnail">
+          <a href="/Vegan-Archive{{ post.url }}">
+            {% if post.data.thumbnail %}
+            <!-- Combines the absolute site root directory with the post url and thumbnail filename safely -->
+            <img src="/Vegan-Archive{{ post.url }}{{ post.data.thumbnail }}" alt="{{ post.data.title }}" loading="lazy">
+            {% else %}
+            <div class="placeholder-thumb">No Image</div>
+            {% endif %}
+          </a>
+        </div>
+        <div class="post-details">
+          <h2 class="post-title"><a href="/Vegan-Archive{{ post.url }}">{{ post.data.title }}</a></h2>
+          <h5 class="post-author">{{ post.data.author }}</h5>
+          {% if post.data.instagram_url %}
+          <div class="ig-link-container">
+            <a href="{{ post.data.instagram_url }}" target="_blank" rel="noopener noreferrer"
+              class="instagram-link">View on Instagram ↗</a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
       {% endif %}
       {% endfor %}
     </div>
@@ -60,7 +73,6 @@ permalink: /archive/
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    // 1. If we have a saved position for this page, snap back to it
     const savedScrollPos = sessionStorage.getItem("archiveScrollPosition");
     if (savedScrollPos) {
       setTimeout(() => {
@@ -71,7 +83,6 @@ permalink: /archive/
       }, 50);
     }
 
-    // 2. Listen for clicks on your post links, and save the current pixel scroll height
     const postLinks = document.querySelectorAll(".post-card a, .gallery-grid a");
     postLinks.forEach(link => {
       link.addEventListener("click", () => {
