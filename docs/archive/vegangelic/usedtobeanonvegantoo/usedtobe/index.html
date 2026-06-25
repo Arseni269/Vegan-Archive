@@ -11,6 +11,24 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
 
 <style>
+  /* Back Button styling */
+  .back-to-archive-nav {
+    margin-bottom: 1.5rem;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #475569;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .back-link:hover {
+    color: #0f172a;
+  }
+
   /* 1. Base Layout Split Layout */
   .post-layout-grid {
     display: grid;
@@ -100,18 +118,16 @@
     margin-bottom: 1.25rem;
   }
 
-  /* Target dynamically generated links */
   .post-markdown-content a {
     color: #0066cc;
     text-decoration: underline;
-    word-break: break-all; /* Prevents long academic URLs from breaking layout grids */
+    word-break: break-all;
   }
 
   .post-markdown-content a:hover {
     color: #004499;
   }
 
-  /* Prevent duplicates */
   .post-markdown-content video,
   .post-markdown-content img {
     display: none !important;
@@ -125,8 +141,11 @@
 
 <main class="single-post-wrapper">
   
+  <nav class="back-to-archive-nav">
+    <a href="/Vegan-Archive/archive/" class="back-link">← Back to Archive Nav</a>
+  </nav>
+
   <header class="post-header">
-    <a href="/Vegan-Archive/archive/" class="back-button">← Back to Archive</a>
     <h1>You can&#39;t judge non-vegans because you used to be a non-vegan too!</h1>
   </header>
 
@@ -264,15 +283,12 @@
       draggable: true           
     });
 
-    // 2. NEW: AUTOMATICALLY CONVERT TEXT LINKS INTO CLICKABLE HYPERLINKS
+    // 2. AUTOMATICALLY CONVERT TEXT LINKS INTO CLICKABLE HYPERLINKS
     const contentContainer = document.getElementById("description-content");
     if (contentContainer) {
-      // Regex pattern to accurately identify naked URLs (http/https)
       const urlPattern = /(\b(https?):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
       
-      // Scans through inner content and wraps unlinked URLs inside standard HTML <a> elements safely
       contentContainer.innerHTML = contentContainer.innerHTML.replace(urlPattern, function(url) {
-        // Simple safety check: Don't double-wrap strings that are already part of an HTML attribute
         if (url.includes('src=') || url.includes('href=')) {
           return url;
         }
