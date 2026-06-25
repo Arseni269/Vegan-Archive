@@ -83,7 +83,7 @@ module.exports = function (eleventyConfig) {
  return {
     dir: {
       input: "src",
-      output: "docs"  // <-- Changed from _site to docs
+      output: "_site"
     },
     pathPrefix: "/Vegan-Archive/"
   };
