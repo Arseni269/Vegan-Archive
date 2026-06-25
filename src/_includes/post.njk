@@ -151,7 +151,7 @@ templateEngineOverride: njk
         {% if video_path %}
           <div class="video-post-container">
             <video controls>
-              <source src="{{ video_path }}" type="video/mp4">
+              <source src="/Vegan-Archive{{ video_path }}" type="video/mp4">
               Your browser does not support the video tag.
             </video>
           </div>
@@ -164,6 +164,7 @@ templateEngineOverride: njk
             {% if "thumbnail" not in imgName and ".mp4" not in imgName and imgName != "1.png" %}
               {% set finalImgPath = galleryData.folder + "/" + imgName %}
               <a href="#" class="glightbox" data-gallery="post-slides" data-title="Slide {{ loop.index }}">
+                {# Pass outputDir to your image shortcode if needed, or we rely on GLightbox JS to intercept #}
                 {% image finalImgPath, "Slide " + loop.index %}
               </a>
             {% endif %}
@@ -213,8 +214,8 @@ templateEngineOverride: njk
       <div class="full-width-description">
         <span class="meta-label" style="display: block; margin-bottom: 1rem;">Post Description & References</span>
         <div class="post-markdown-content" id="description-content">
-  {{ content | safe }}
-</div>
+          {{ content | safe }}
+        </div>
       </div>
     {% endif %}
 
@@ -224,12 +225,31 @@ templateEngineOverride: njk
 <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    // 1. LIGHTBOX FUNCTIONALITY
+    // 1. LIGHTBOX FUNCTIONALITY WITH SUBFOLDER SUPPORT
     const lightboxLinks = document.querySelectorAll(".carousel-grid a.glightbox");
     lightboxLinks.forEach(link => {
       const generatedImg = link.querySelector("img");
       if (generatedImg) {
-        link.setAttribute("href", generatedImg.getAttribute("src"));
+        let imgSrc = generatedImg.getAttribute("src");
+        
+        // Defensive check: If Eleventy Image Plugin stripped the /Vegan-Archive prefix out of the generated image tag, patch it dynamically
+        if (imgSrc && !imgSrc.startsWith("http") && !imgSrc.startsWith("/Vegan-Archive")) {
+          // Clean up leading slashes to prevent double-slashes
+          if (imgSrc.startsWith("/")) imgSrc = imgSrc.substring(1);
+          imgSrc = "/Vegan-Archive/" + imgSrc;
+          generatedImg.setAttribute("src", imgSrc);
+          
+          // Also check for responsive HTML5 <source> tags inside <picture> and prepend them
+          const pictureSources = link.querySelectorAll("picture source");
+          pictureSources.forEach(srcTag => {
+            let srcset = srcTag.getAttribute("srcset");
+            if (srcset && !srcset.startsWith("/Vegan-Archive")) {
+              srcTag.setAttribute("srcset", "/Vegan-Archive" + (srcset.startsWith("/") ? "" : "/") + srcset);
+            }
+          });
+        }
+        
+        link.setAttribute("href", imgSrc);
       }
     });
 
@@ -243,7 +263,7 @@ templateEngineOverride: njk
     // 2. AUTOMATICALLY CONVERT TEXT LINKS INTO CLICKABLE HYPERLINKS
     const contentContainer = document.getElementById("description-content");
     if (contentContainer) {
-      const urlPattern = /(\b(https?):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+      const urlPattern = /(\b(https?):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|]/ig);
       
       contentContainer.innerHTML = contentContainer.innerHTML.replace(urlPattern, function(url) {
         if (url.includes('src=') || url.includes('href=')) {
