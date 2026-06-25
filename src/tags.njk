@@ -52,16 +52,14 @@ permalink: /tags/{{ tag | slugify }}/index.html
     <hr class="sidebar-divider">
 
     <details open class="filter-group-wrapper">
-    <summary class="group-title">🌱 Core Concepts & Topics</summary>
-    <ul class="tag-list">
-      {% for tagName, posts in collections %}
-        {% if tagName != "all" and tagName != "posts" and tagName != "tagList" and tagName != "uniqTags" and tagName != "Uncompromised Liberation" and tagName != "Vegangelic" and tagName != "ex-vegans" and tagName != "carnivore-diet" %}
-        <li>
-          <a href="/Vegan-Archive/tags/{{ tagName | slugify }}/" class="tag-pill {% if tagName == tag %}active-pill{% endif %}">
-            #{{ tagName }} <span class="pill-count">({{ posts | length }})</span>
-          </a>
-        </li>
-        {% endif %}
+    <summary class="group-title">👤 Archived Creators</summary>
+    <ul class="filter-list">
+      {% for slug, creator in collections.creators %}
+      <li>
+        <a href="/Vegan-Archive/tags/{{ slug }}/" class="filter-link {% if tag | slugify == slug %}active-link{% endif %}">
+          <span>{{ creator.name }}</span> <span class="item-count">{{ creator.count }}</span>
+        </a>
+      </li>
       {% endfor %}
     </ul>
   </details>

@@ -90,6 +90,28 @@ module.exports = function (eleventyConfig) {
       });
     });
 
+    // DYNAMIC CREATOR ARCHIVE COLLECTION
+  eleventyConfig.addCollection("creators", function(collectionApi) {
+    const creatorMap = {};
+    
+    collectionApi.getAll().forEach(function(item) {
+      const author = item.data.author;
+      if (!author) return;
+      
+      // Create a URL-safe slug for the author
+      const slug = author.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+      
+      if (!creatorMap[slug]) {
+        creatorMap[slug] = {
+          name: author,
+          count: 0
+        };
+      }
+      creatorMap[slug].count++;
+    });
+    
+    return creatorMap;
+  });
     return cleanTags;
   });
   // Look for your existing return statement at the bottom and make it look like this:

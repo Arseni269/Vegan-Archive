@@ -15,9 +15,9 @@ templateEngineOverride: njk
         <div class="post-thumbnail">
           <a href="/Vegan-Archive{{ post.url }}">
             {% if post.data.thumbnail %}
-              <img src="/Vegan-Archive{{ post.data.thumbnail }}" alt="{{ post.data.title }}">
+            <img src="/Vegan-Archive{{ post.data.thumbnail }}" alt="{{ post.data.title }}">
             {% else %}
-              <div class="placeholder-thumb">No Image</div>
+            <div class="placeholder-thumb">No Image</div>
             {% endif %}
           </a>
         </div>
@@ -26,7 +26,8 @@ templateEngineOverride: njk
           <h5 class="post-author">{{ post.data.author }}</h5>
           {% if post.data.instagram_url %}
           <div class="ig-link-container">
-            <a href="{{ post.data.instagram_url }}" target="_blank" rel="noopener noreferrer" class="instagram-link">View on Instagram ↗</a>
+            <a href="{{ post.data.instagram_url }}" target="_blank" rel="noopener noreferrer"
+              class="instagram-link">View on Instagram ↗</a>
           </div>
           {% endif %}
         </div>
@@ -37,38 +38,36 @@ templateEngineOverride: njk
   </main>
 
   <aside class="sidebar">
-  <div class="sidebar-header">
-    <h2>🎯 Content Directory</h2>
-    <a href="/Vegan-Archive/archive/" class="clear-all-btn">✨ Show All</a>
-  </div>
+    <div class="sidebar-header">
+      <h2>🎯 Content Directory</h2>
+      <a href="/Vegan-Archive/archive/" class="clear-all-btn">✨ Show All</a>
+    </div>
 
-  <hr class="sidebar-divider">
+    <hr class="sidebar-divider">
 
-  <details open class="filter-group-wrapper">
+    <details open class="filter-group-wrapper">
     <summary class="group-title">👤 Archived Creators</summary>
     <ul class="filter-list">
-      {% set countUL = collections["Uncompromised Liberation"] | length %}
-      {% set countV = collections["Vegangelic"] | length %}
+      {% for slug, creator in collections.creators %}
       <li>
-        <a href="/Vegan-Archive/tags/uncompromised-liberation/" class="filter-link">
-          <span>Uncompromised Liberation</span> <span class="item-count">{{ countUL }}</span>
+        <a href="/Vegan-Archive/tags/{{ slug }}/" class="filter-link {% if tag | slugify == slug %}active-link{% endif %}">
+          <span>{{ creator.name }}</span> <span class="item-count">{{ creator.count }}</span>
         </a>
       </li>
-      <li>
-        <a href="/Vegan-Archive/tags/vegangelic/" class="filter-link">
-          <span>Vegangelic</span> <span class="item-count">{{ countV }}</span>
-        </a>
-      </li>
+      {% endfor %}
     </ul>
   </details>
 
-  <details open class="filter-group-wrapper">
+    <details open class="filter-group-wrapper">
     <summary class="group-title">🌱 Core Concepts & Topics</summary>
     <ul class="tag-list">
       {% for tagName, posts in collections %}
-        {% if tagName != "all" and tagName != "posts" and tagName != "tagList" and tagName != "uniqTags" and tagName != "Uncompromised Liberation" and tagName != "Vegangelic" and tagName != "ex-vegans" and tagName != "carnivore-diet" %}
+        {% set tagSlug = tagName | slugify %}
+        {% set isCreator = collections.creators[tagSlug] %}
+        
+        {% if not isCreator and tagName != "all" and tagName != "posts" and tagName != "tagList" and tagName != "uniqTags" and tagName != "ex-vegans" and tagName != "carnivore-diet" %}
         <li>
-          <a href="/Vegan-Archive/tags/{{ tagName | slugify }}/" class="tag-pill {% if tagName == tag %}active-pill{% endif %}">
+          <a href="/Vegan-Archive/tags/{{ tagSlug }}/" class="tag-pill {% if tagName == tag %}active-pill{% endif %}">
             #{{ tagName }} <span class="pill-count">({{ posts | length }})</span>
           </a>
         </li>
@@ -77,21 +76,22 @@ templateEngineOverride: njk
     </ul>
   </details>
 
-  <details open class="filter-group-wrapper">
-    <summary class="group-title">⚠️ Debunking Targets</summary>
-    <ul class="tag-list">
-      {% for tagName, posts in collections %}
+    <details open class="filter-group-wrapper">
+      <summary class="group-title">⚠️ Debunking Targets</summary>
+      <ul class="tag-list">
+        {% for tagName, posts in collections %}
         {% if tagName == "ex-vegans" or tagName == "carnivore-diet" %}
         <li>
-          <a href="/Vegan-Archive/tags/{{ tagName | slugify }}/" class="tag-pill target-pill {% if tagName == tag %}active-pill{% endif %}">
+          <a href="/Vegan-Archive/tags/{{ tagName | slugify }}/"
+            class="tag-pill target-pill {% if tagName == tag %}active-pill{% endif %}">
             #{{ tagName }} <span class="pill-count">({{ posts | length }})</span>
           </a>
         </li>
         {% endif %}
-      {% endfor %}
-    </ul>
-  </details>
-</aside>
+        {% endfor %}
+      </ul>
+    </details>
+  </aside>
 
 </div>
 

@@ -1,121 +1,129 @@
-  /* Split layout */
-  .archive-layout {
-    display: flex;
-    max-width: 1600px;
-    margin: 10px 10px;
-    gap: 10px;
-    padding: 0 60px;
-    font-family: sans-serif;
-  }
+/* Core Structural Layout Fix */
+.archive-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  /* Force the layout into explicit columns */
+  gap: 2rem;
+  align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
 
-  .main-content {
-    flex: 3;
-  }
+.main-content {
+  flex: 3;
+}
 
-  main img, 
+main img,
 .post-content img,
 article img {
   gap: 100px;
   display: block;
-  size: 1000px;       /* Keeps carousel slides at a reasonable viewing size */
-  width: 100%;            /* Allows them to scale down cleanly on mobile screens */
-  height: auto;           /* Maintains original aspect ratios */
+  size: 1000px;
+  /* Keeps carousel slides at a reasonable viewing size */
+  width: 100%;
+  /* Allows them to scale down cleanly on mobile screens */
+  height: auto;
+  /* Maintains original aspect ratios */
   /*margin: 20px 0;         /* Spacing between carousel slides */
-  border-radius: 6px;     /* Gives them a clean look matching your grid */
-  border: 1px solid #eee; /* Light boundary around bright slides */
+  border-radius: 6px;
+  /* Gives them a clean look matching your grid */
+  border: 1px solid #eee;
+  /* Light boundary around bright slides */
 }
 
-  .sidebar {
-    flex-direction: row-reverse;
-    border-left: 1px solid #eee;
-    padding-right: 10px;
-    min-width: 200px;
-    margin-right: 10px;
-  }
+/* Constrain the sidebar so tag rows don't push it wider */
+.sidebar {
+  width: 320px;
+  min-width: 320px;
+  max-width: 320px;
+  box-sizing: border-box;
+}
 
-  .tag-list {
-    list-style: none;
-    padding: 0;
-  }
+.tag-list {
+  list-style: none;
+  padding: 0;
+}
 
-  .tag-list li {
-    margin-bottom: 8px;
-  }
+.tag-list li {
+  margin-bottom: 8px;
+}
 
-  .tag-list a {
-    text-decoration: none;
-    color: #555;
-    font-size: 0.95rem;
-  }
+.tag-list a {
+  text-decoration: none;
+  color: #555;
+  font-size: 0.95rem;
+}
 
-  .tag-list a:hover {
-    color: #0066cc;
-    text-decoration: underline;
-  }
+.tag-list a:hover {
+  color: #0066cc;
+  text-decoration: underline;
+}
 
-  .active-tag {
-    font-weight: bold;
-    color: #111 !important;
-  }
+.active-tag {
+  font-weight: bold;
+  color: #111 !important;
+}
 
-  /* Grid styles */
-  .imageboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 240px));
-    gap: 20px;
-    justify-content: start;
-  }
+/* Grid styles */
+.imageboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 240px));
+  gap: 20px;
+  justify-content: start;
+}
 
-  .post-card {
-    border: 1px solid #ccc;
-    background: #f9f9f9;
-    border-radius: 4px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
+.post-card {
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
 
-  .post-thumbnail {
-    width: 100%;
-    aspect-ratio: 1;
-    background: #eaeaea;
-  }
+.post-thumbnail {
+  width: 100%;
+  aspect-ratio: 1;
+  background: #eaeaea;
+}
 
-  .post-thumbnail img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+.post-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-  .post-details {
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    margin: 5px;
-  }
+.post-details {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin: 5px;
+}
 
-  .post-title {
-    font-size: 1rem;
-    margin: 0 0 2px 0;
-  }
+.post-title {
+  font-size: 1rem;
+  margin: 0 0 2px 0;
+}
 
-  .post-title a {
-    color: #111;
-    text-decoration: none;
-  }
+.post-title a {
+  color: #111;
+  text-decoration: none;
+}
 
-  .ig-link-container {
-    margin-top: auto;
-  }
+.ig-link-container {
+  margin-top: auto;
+}
 
-  .instagram-link {
-    font-size: 0.8rem;
-    color: #d62976;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  .tag-pill {
+.instagram-link {
+  font-size: 0.8rem;
+  color: #d62976;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.tag-pill {
   display: inline-block;
   padding: 4px 10px;
   background-color: #e0e0e0;
@@ -277,22 +285,26 @@ article img {
 .carousel-grid a.glightbox {
   display: block;
   width: 100%;
-  aspect-ratio: 1 / 1;      /* Forces container to stay perfectly square */
+  aspect-ratio: 1 / 1;
+  /* Forces container to stay perfectly square */
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  position: relative;       /* Isolates image layout bounds */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  position: relative;
+  /* Isolates image layout bounds */
 }
 
 /* Image element completely fills out the anchor layout box */
 .carousel-grid img {
   width: 100% !important;
   height: 100% !important;
-  object-fit: cover !important; /* Crops square cleanly without stretching */
+  object-fit: cover !important;
+  /* Crops square cleanly without stretching */
   display: block;
   margin: 0 !important;
 }
+
 /* Turning 18 stacked images into an Image Grid */
 .carousel-grid a.glightbox {
   display: block;
@@ -301,20 +313,21 @@ article img {
   border-radius: 6px;
   overflow: hidden;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-transition: transform 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s ease;
 }
 
 .carousel-grid a.glightbox:hover {
-  transform: scale(1.02);    /* Slight hover pop effect to show it's clickable */
+  transform: scale(1.02);
+  /* Slight hover pop effect to show it's clickable */
 }
 
 .carousel-grid img {
   display: block;
   width: 100% !important;
   height: 100% !important;
-  object-fit: cover;        
-  margin: 0 !important;     
+  object-fit: cover;
+  margin: 0 !important;
 }
 
 
@@ -324,11 +337,13 @@ transition: transform 0.2s ease;
   flex-direction: column;
   gap: 1rem;
 }
+
 .sidebar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .clear-all-btn {
   font-size: 0.85rem;
   color: #0066cc;
@@ -336,19 +351,20 @@ transition: transform 0.2s ease;
   font-weight: 600;
 }
 
-/* Collapsable Layout Details Styles */
-.filter-group-wrapper {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  overflow: hidden;
-  margin-bottom: 0.5rem;
-  transition: all 0.2s ease;
+/* Ensure tag list wraps neatly without expanding the sidebar width */
+.filter-group-wrapper ul.tag-list {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 0.4rem !important;
+  padding: 0 1rem 1rem 1rem;
 }
+
 .filter-group-wrapper[open] {
   background: #ffffff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
 }
+
 .group-title {
   padding: 0.75rem 1rem;
   font-weight: 600;
@@ -361,15 +377,18 @@ transition: transform 0.2s ease;
   justify-content: space-between;
   align-items: center;
 }
+
 .group-title::after {
   content: '▼';
   font-size: 0.7rem;
   color: #64748b;
   transition: transform 0.2s;
 }
+
 .filter-group-wrapper[open] .group-title::after {
   transform: rotate(-180deg);
 }
+
 /* Custom CSS toggling indicator indicator */
 .group-title::after {
   content: '▼';
@@ -377,6 +396,7 @@ transition: transform 0.2s ease;
   color: #64748b;
   transition: transform 0.2s;
 }
+
 .filter-group-wrapper[open] .group-title::after {
   transform: rotate(-180deg);
 }
@@ -397,6 +417,7 @@ transition: transform 0.2s ease;
   flex-direction: column;
   gap: 0.5rem;
 }
+
 /* Inline flex alignment for text vs count numbers */
 .filter-link {
   display: flex;
@@ -407,9 +428,13 @@ transition: transform 0.2s ease;
   text-decoration: none;
   font-size: 0.9rem;
 }
-.filter-link:hover { color: #0f172a; }
 
-.item-count, .pill-count {
+.filter-link:hover {
+  color: #0f172a;
+}
+
+.item-count,
+.pill-count {
   font-size: 0.75rem;
   font-weight: 700;
   background: #e2e8f0;
@@ -423,10 +448,12 @@ transition: transform 0.2s ease;
   border-color: #fee2e2 !important;
   color: #991b1b !important;
 }
+
 .target-pill .pill-count {
   background: #fee2e2;
   color: #991b1b;
 }
+
 .filter-group h3 {
   font-size: 0.85rem;
   text-transform: uppercase;
@@ -459,6 +486,7 @@ transition: transform 0.2s ease;
   background: #f1f5f9;
   color: #0066cc;
 }
+
 /* ==========================================
    GLIGHTBOX OVERRIDES (MAXIMIZE IMAGE SIZE)
    ========================================== */
@@ -484,18 +512,21 @@ transition: transform 0.2s ease;
 }
 
 .gslide-image {
-  max-height: 95vh !important; /* Let the image scale up to 95% of screen height */
+  max-height: 95vh !important;
+  /* Let the image scale up to 95% of screen height */
 }
 
 .gslide-image img {
   max-height: 95vh !important;
-  object-fit: contain !important; /* Prevents stretching or distortion */
+  object-fit: contain !important;
+  /* Prevents stretching or distortion */
 }
 
 /* Example styling for your MAIN archive grid images */
 .gallery-grid img {
   width: 100%;
-  aspect-ratio: 1 / 1; /* Compels the browser to reserve a square box immediately */
+  aspect-ratio: 1 / 1;
+  /* Compels the browser to reserve a square box immediately */
   object-fit: cover;
   display: block;
 }
@@ -514,6 +545,7 @@ transition: transform 0.2s ease;
   top: 0;
   z-index: 100;
 }
+
 .nav-container {
   display: flex;
   justify-content: space-between;
@@ -521,12 +553,14 @@ transition: transform 0.2s ease;
   max-width: 1200px;
   margin: 0 auto;
 }
+
 .nav-logo {
   font-weight: 700;
   font-size: 1.25rem;
   color: #1e293b;
   text-decoration: none;
 }
+
 .nav-links {
   display: flex;
   gap: 2rem;
@@ -534,14 +568,18 @@ transition: transform 0.2s ease;
   margin: 0;
   padding: 0;
 }
+
 .nav-links a {
   text-decoration: none;
   color: #64748b;
   font-weight: 500;
   transition: color 0.2s;
 }
-.nav-links a:hover, .nav-links a.active {
-  color: #10b981; /* Accent Green */
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #10b981;
+  /* Accent Green */
 }
 
 /* Introduction Hero */
@@ -550,15 +588,19 @@ transition: transform 0.2s ease;
   padding: 4rem 2rem;
   text-align: center;
 }
+
 .hero-content {
-  max-width: 800px; /* Kept safely inside the braces where it belongs! */
+  max-width: 800px;
+  /* Kept safely inside the braces where it belongs! */
   margin: 0 auto;
 }
+
 .hero-content h1 {
   font-size: 2.5rem;
   color: #14532d;
   margin-bottom: 1rem;
 }
+
 .hero-subtitle {
   font-size: 1.2rem;
   color: #166534;
@@ -573,13 +615,16 @@ transition: transform 0.2s ease;
   color: #334155;
   font-size: 1.1rem;
 }
+
 .info-section h2 {
   color: #1e293b;
   margin-bottom: 1.5rem;
 }
+
 .cta-wrapper {
   margin-top: 2.5rem;
 }
+
 .cta-button {
   display: inline-block;
   background-color: #10b981;
@@ -590,6 +635,19 @@ transition: transform 0.2s ease;
   font-weight: 600;
   transition: background-color 0.2s;
 }
+
 .cta-button:hover {
   background-color: #059669;
+}
+
+/* Responsive fix for smaller browser viewports */
+@media (max-width: 900px) {
+  .archive-layout {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+  }
 }
