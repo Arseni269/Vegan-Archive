@@ -82,8 +82,9 @@ module.exports = function(eleventyConfig) {
 
   return {
     dir: {
-      input: "src",       
-      output: "_site"
-    }
+      input: "src",    // or "." depending on where your source files live
+      output: "."      // This forces Eleventy to build to the root directory
+    },
+    pathPrefix: "/Vegan-Archive/"
   };
 };
