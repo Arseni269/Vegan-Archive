@@ -4,7 +4,7 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "build": "eleventy"
+    "build": "node ./node_modules/@11ty/eleventy/cmd.js"
   },
   "dependencies": {
     "@11ty/eleventy": "^2.0.1"
