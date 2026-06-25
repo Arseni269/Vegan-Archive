@@ -10,27 +10,15 @@ permalink: /archive/
     <div class="imageboard-grid">
       {% for post in collections.all %}
       {% if post.data.title and post.url != '/archive/' and post.data.title != 'The Vegan Archive' %}
-      <div class="post-card">
-        <div class="post-thumbnail">
-          <a href="{{ post.url | url }}">
-            {% if post.data.thumbnail %}
-            <img src=".{{ post.url }}{{ post.data.thumbnail }}" alt="{{ post.data.title }}" loading="lazy">
-            {% else %}
-            <div class="placeholder-thumb">No Image</div>
-            {% endif %}
-          </a>
-        </div>
-        <div class="post-details">
-          <h2 class="post-title"><a href="{{ post.url | url }}">{{ post.data.title }}</a></h2>
-          <h5 class="post-author">{{ post.data.author }}</h5>
-          {% if post.data.instagram_url %}
-          <div class="ig-link-container">
-            <a href="{{ post.data.instagram_url }}" target="_blank" rel="noopener noreferrer"
-              class="instagram-link">View on Instagram ↗</a>
-          </div>
-          {% endif %}
-        </div>
-      </div>
+      <div class="post-thumbnail">
+  <a href="{{ post.url | url }}">
+    {% if post.data.thumbnail %}
+      <img src="{{ post.url | url }}{{ post.data.thumbnail }}" alt="{{ post.data.title }}" loading="lazy">
+    {% else %}
+      <div class="placeholder-thumb">No Image</div>
+    {% endif %}
+  </a>
+</div>
       {% endif %}
       {% endfor %}
     </div>
