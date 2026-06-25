@@ -7,11 +7,4 @@ author: "Vegangelic Activism"
 tags: ["pragmatic", "reducetarianism", "welfarism", "utilitarianism",]
 ---
 
-{% for i in (1..9) %}
-  {% capture imgPath %}archive/vegangelic/pragmatic/{{ i }}{% endcapture %}
-  {% capture imgAlt %}Slide {{ i }}{% endcapture %}
-  {% image imgPath imgAlt %}
-{% endfor %}
-
-
 Slide 4 correction of typo: If we want to convey veganism as justice*

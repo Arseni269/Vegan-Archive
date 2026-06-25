@@ -7,13 +7,6 @@ author: "Vegangelic Activism"
 tags: ["George Martin", "intersectionality",]
 ---
 
-{% for i in (1..10) %}
-  {% capture imgPath %}archive/vegangelic/rightwing/{{ i }}{% endcapture %}
-  {% capture imgAlt %}Slide {{ i }}{% endcapture %}
-  {% image imgPath imgAlt %}
-{% endfor %}
-
-
 It's one thing to have certain political beliefs.
 
 It's another thing to use these political beliefs as a means of diluting an unrelated justice cause with a very specific focus.

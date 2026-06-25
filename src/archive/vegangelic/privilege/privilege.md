@@ -7,13 +7,6 @@ author: "Vegangelic Activism"
 tags: ["privilege", "excuses",]
 ---
 
-{% for i in (1..1) %}
-  {% capture imgPath %}archive/vegangelic/privilege/{{ i }}{% endcapture %}
-  {% capture imgAlt %}Slide {{ i }}{% endcapture %}
-  {% image imgPath imgAlt %}
-{% endfor %}
-
-
 Veganism is a privilege!”
 
 It most certainly isn’t, but do you know what is a privilege?

@@ -4,13 +4,10 @@ const Image = require("@11ty/eleventy-img");
 
 module.exports = function (eleventyConfig) {
 
-  // 1. SMART IMAGE SHORTCODE (Cleaned & Fixed)
+  // 1. SMART IMAGE SHORTCODE
   eleventyConfig.addNunjucksAsyncShortcode("image", async function(imagePath, alt) {
-    // Resolve the real system file path under src/
-    // Handles paths passed directly from the filter like: "archive/ul/bovinetesting/1"
     let cleanPath = imagePath.replace(/^\.?\/?src\//, "").replace(/^\//, "");
     
-    // Look for the file with standard extensions since the filter returns them without ext
     const extensions = [".jpg", ".jpeg", ".png", ".webp", ".GIF", ".PNG", ".JPG", ".JPEG"];
     let resolvedPath = null;
 
@@ -27,12 +24,11 @@ module.exports = function (eleventyConfig) {
       return `<div class="placeholder-thumb">Image Missing: src/${cleanPath}</div>`;
     }
 
-    // Process the discovered image file through Eleventy Image
     let metadata = await Image(resolvedPath, {
       widths: [600],
       formats: ["webp"],
       outputDir: "./docs/img/",
-      urlPath: "/Vegan-Archive/img/" // Maps to GitHub Pages repository root cleanly
+      urlPath: "/Vegan-Archive/img/" 
     });
 
     let imageAttributes = {
@@ -76,7 +72,8 @@ module.exports = function (eleventyConfig) {
 
   return {
     pathPrefix: "/Vegan-Archive/",
-    markdownTemplateEngine: false,
+    markdownTemplateEngine: "njk", 
+    htmlTemplateEngine: "liquid",
     dir: {
       input: "src",
       output: "docs"

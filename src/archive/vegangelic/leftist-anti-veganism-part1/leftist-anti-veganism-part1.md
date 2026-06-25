@@ -7,11 +7,4 @@ author: "Vegangelic Activism"
 tags: ["leftist-anti-veganism", "excuses"]
 ---
 
-{% for i in (1..7) %}
-  {% capture imgPath %}archive/vegangelic/leftist-anti-veganism-part1/{{ i }}{% endcapture %}
-  {% capture imgAlt %}Slide {{ i }}{% endcapture %}
-  {% image imgPath imgAlt %}
-{% endfor %}
-
-
 Yes, this is gonna be a series, and this part 1

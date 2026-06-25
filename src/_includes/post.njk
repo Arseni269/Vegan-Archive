@@ -1,5 +1,6 @@
 ---
 layout: base.njk
+templateEngineOverride: njk
 ---
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
 
@@ -212,8 +213,8 @@ layout: base.njk
       <div class="full-width-description">
         <span class="meta-label" style="display: block; margin-bottom: 1rem;">Post Description & References</span>
         <div class="post-markdown-content" id="description-content">
-          {{ content | safe }}
-        </div>
+  {{ content | safe }}
+</div>
       </div>
     {% endif %}
 

@@ -7,13 +7,6 @@ author: "Vic Valente"
 tags: ["Welfarism"]
 ---
 
-{% for i in (1..4) %}
-  {% capture imgPath %}archive/vic/political/{{ i }}{% endcapture %}
-  {% capture imgAlt %}Slide {{ i }}{% endcapture %}
-  {% image imgPath imgAlt %}
-{% endfor %}
-
-
 When anything we think or do becomes a “political act”, politics stops meaning anything concrete. In fact, if everything is political, as so many people say… then is politics God? 🙃 sorry, couldn’t resist.
 
 Being against a structure of exploitation does not automatically mean being part of any real political force against it, especially when almost all of society, the market, institutions, and more than 99.9% of the population still sustain that structure.

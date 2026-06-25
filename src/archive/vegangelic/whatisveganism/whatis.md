@@ -7,13 +7,6 @@ author: "Vegangelic Activism"
 tags: ["what is veganism"]
 ---
 
-{% for i in (1..2) %}
-  {% capture imgPath %}archive/vegangelic/whatisveganism/{{ i }}{% endcapture %}
-  {% capture imgAlt %}Slide {{ i }}{% endcapture %}
-  {% image imgPath imgAlt %}
-{% endfor %}
-
-
 “Veganism is the doctrine that man should live without exploiting animals.”
 
 - Leslie Cross (1951)

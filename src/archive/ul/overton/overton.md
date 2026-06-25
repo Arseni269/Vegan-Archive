@@ -7,10 +7,4 @@ author: "Uncompromised Liberation"
 tags: ["utilitarianism", "welfarism", "sic", "dog comparisons"]
 ---
 
-{% for i in (1..18) %}
-  {% capture imgPath %}archive/ul/overton/{{ i }}{% endcapture %}
-  {% capture imgAlt %}Slide {{ i }}{% endcapture %}
-  {% image imgPath imgAlt %}
-{% endfor %}
-
 I know this is a long post, there’s a lot more I could have added as well, but it’s important so please take the time to read ✊

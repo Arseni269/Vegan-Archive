@@ -7,13 +7,6 @@ author: "Vic Valente"
 tags: ["Welfarism"]
 ---
 
-{% for i in (1..4) %}
-  {% capture imgPath %}archive/vic/welltreated/{{ i }}{% endcapture %}
-  {% capture imgAlt %}Slide {{ i }}{% endcapture %}
-  {% image imgPath imgAlt %}
-{% endfor %}
-
-
 Prize-winning cows valued for their genetics or “productivity”, as well as show dogs and competition horses, often receive exceptional nutrition and veterinary care - not for their own sake, but because of the investment they represent to their owners.
 
 The care enslaved individuals received (and still receive) has often been interpreted as respect, or even as a step toward their liberation, by many who consider themselves abolitionists. But when the condition of property remains intact, that same care often serves to make exploitation more efficient, profitable, and socially acceptable.

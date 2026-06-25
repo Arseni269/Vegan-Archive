@@ -7,13 +7,6 @@ author: "Vegangelic Activism"
 tags: ["leftist-anti-veganism", "excuses", "anti-capitalism"]
 ---
 
-{% for i in (1..6) %}
-  {% capture imgPath %}archive/vegangelic/leftist-anti-veganism-part4/{{ i }}{% endcapture %}
-  {% capture imgAlt %}Slide {{ i }}{% endcapture %}
-  {% image imgPath imgAlt %}
-{% endfor %}
-
-
 I'm going to ethically consume the next person who says "There is no ethical consumption under capitalism" as an argument against veganism.
 
 Nom, nom, nom!

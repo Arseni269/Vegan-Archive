@@ -7,10 +7,4 @@ author: "Str8 Vedge"
 tags: ["excuses"]
 ---
 
-{% for i in (1..4) %}
-  {% capture imgPath %}archive/str8 vedge/but they are animals/{{ i }}{% endcapture %}
-  {% capture imgAlt %}Slide {{ i }}{% endcapture %}
-  {% image imgPath imgAlt %}
-{% endfor %}
-
 Yes, they're not humans, so what?

@@ -7,11 +7,4 @@ author: "Vegangelic Activism"
 tags: ["futility", "excuses",]
 ---
 
-{% for i in (1..5) %}
-  {% capture imgPath %}archive/vegangelic/nodifference/{{ i }}{% endcapture %}
-  {% capture imgAlt %}Slide {{ i }}{% endcapture %}
-  {% image imgPath imgAlt %}
-{% endfor %}
-
-
 Morally obligatory means morally obligatory.
