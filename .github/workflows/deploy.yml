@@ -37,7 +37,7 @@ jobs:
       - name: Upload production artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '_site'
+          path: 'vegan-archive/_site' # <--- Adds your folder prefix here too so it finds the built site!
 
   deploy:
     environment:
