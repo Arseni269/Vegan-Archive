@@ -63,17 +63,16 @@ module.exports = function (eleventyConfig) {
     return { files, folder: relativeDirPath };
   });
 
-  // 3. PASSTHROUGH COPIES
+// Keep whatever passthrough copies you already have, just add these if missing:
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/archive/**/*.jpg");
   eleventyConfig.addPassthroughCopy("src/archive/**/*.png");
   eleventyConfig.addPassthroughCopy("src/archive/**/*.webp");
-  eleventyConfig.addPassthroughCopy("src/.nojekyll");
+  eleventyConfig.addPassthroughCopy("src/archive/**/*.mp4");
 
+  // Look for your existing return statement at the bottom and make it look like this:
   return {
-    pathPrefix: "/Vegan-Archive/",
-    markdownTemplateEngine: "njk", 
-    htmlTemplateEngine: "liquid",
+    pathPrefix: "/Vegan-Archive/", // <-- JUST ADD THIS LINE HERE
     dir: {
       input: "src",
       output: "docs"
