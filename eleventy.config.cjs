@@ -2,10 +2,10 @@ const path = require("path");
 const fs = require("fs");
 const Image = require("@11ty/eleventy-img");
 
-module.exports = function(eleventyConfig) {
-  
+module.exports = function (eleventyConfig) {
+
   // 1. SMART IMAGE SHORTCODE (Upgraded)
-  eleventyConfig.addAsyncShortcode("image", async function(basePathWithoutExtension, alt = "") {
+  eleventyConfig.addAsyncShortcode("image", async function (basePathWithoutExtension, alt = "") {
     const extensions = [".webp", ".jpg", ".jpeg", ".png", ".PNG", ".JPG"];
     let resolvedPath = null;
 
@@ -35,7 +35,7 @@ module.exports = function(eleventyConfig) {
     }
 
     let metadata = await Image(resolvedPath, {
-      widths: [600], 
+      widths: [600],
       formats: ["webp"],
       outputDir: "./_site/img/",
       urlPath: "/img/"
@@ -53,12 +53,12 @@ module.exports = function(eleventyConfig) {
   // NEW TOOL: 2. AUTOMATIC IMAGE FINDER FILTER
   // AUTOMATIC IMAGE FINDER FILTER (Upgraded)
   // AUTOMATIC IMAGE FINDER FILTER (Final Bulletproof Version)
-  eleventyConfig.addFilter("getImagesData", function(inputPath) {
+  eleventyConfig.addFilter("getImagesData", function (inputPath) {
     let relativeDirPath = inputPath.includes('.md') ? path.dirname(inputPath) : inputPath;
     relativeDirPath = relativeDirPath.replace(/^\.\//, "").replace(/^src\//, "");
 
     const fullDirPath = path.join(__dirname, "src", relativeDirPath);
-    
+
     if (!fs.existsSync(fullDirPath) || !fs.statSync(fullDirPath).isDirectory()) {
       console.warn(`[getImagesData] Directory invalid: ${fullDirPath}`);
       return { files: [], folder: relativeDirPath };
@@ -82,8 +82,8 @@ module.exports = function(eleventyConfig) {
 
   return {
     dir: {
-      input: "src",    // or "." depending on where your source files live
-      output: "."      // This forces Eleventy to build to the root directory
+      input: "src",
+      output: "_site"
     },
     pathPrefix: "/Vegan-Archive/"
   };
