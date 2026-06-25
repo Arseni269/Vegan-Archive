@@ -282,15 +282,11 @@
       <div class="full-width-description">
         <span class="meta-label" style="display: block; margin-bottom: 1rem;">Post Description & References</span>
         <div class="post-markdown-content" id="description-content">
-            <img src="/Vegan-Archive/img/ZQQaPSUuXR-600.webp" alt="Slide 1" loading="lazy" decoding="async" width="600" height="600">
-  <img src="/Vegan-Archive/img/KJc1YNNIDR-600.webp" alt="Slide 2" loading="lazy" decoding="async" width="600" height="600">
-  <img src="/Vegan-Archive/img/DjRkT7bLaa-600.webp" alt="Slide 3" loading="lazy" decoding="async" width="600" height="600">
-  <img src="/Vegan-Archive/img/o3q_H0ixmV-600.webp" alt="Slide 4" loading="lazy" decoding="async" width="600" height="600">
-  <img src="/Vegan-Archive/img/tfr7yRUQ-1-600.webp" alt="Slide 5" loading="lazy" decoding="async" width="600" height="600">
-  <img src="/Vegan-Archive/img/0jQ2eFm7sU-600.webp" alt="Slide 6" loading="lazy" decoding="async" width="600" height="600">
-  <img src="/Vegan-Archive/img/1Y4pBvgEGg-600.webp" alt="Slide 7" loading="lazy" decoding="async" width="600" height="600">
-  <img src="/Vegan-Archive/img/a7fr0JEMVV-600.webp" alt="Slide 8" loading="lazy" decoding="async" width="600" height="600">
-  <img src="/Vegan-Archive/img/3317ja-5UJ-600.webp" alt="Slide 9" loading="lazy" decoding="async" width="600" height="600">
+          <p>{% for i in (1..9) %}
+{% capture imgPath %}archive/vegangelic/pragmatic/{{ i }}{% endcapture %}
+{% capture imgAlt %}Slide {{ i }}{% endcapture %}
+{% image imgPath imgAlt %}
+{% endfor %}</p>
 <p>Slide 4 correction of typo: If we want to convey veganism as justice*</p>
 
         </div>

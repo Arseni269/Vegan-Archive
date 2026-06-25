@@ -246,11 +246,11 @@
       <div class="full-width-description">
         <span class="meta-label" style="display: block; margin-bottom: 1rem;">Post Description & References</span>
         <div class="post-markdown-content" id="description-content">
-            <img src="/Vegan-Archive/img/dHud7daf2d-600.webp" alt="Slide 1" loading="lazy" decoding="async" width="600" height="600">
-  <img src="/Vegan-Archive/img/BchZ9Z7Mxl-600.webp" alt="Slide 2" loading="lazy" decoding="async" width="600" height="600">
-  <img src="/Vegan-Archive/img/ihjZHGngH9-600.webp" alt="Slide 3" loading="lazy" decoding="async" width="600" height="600">
-  <img src="/Vegan-Archive/img/MErBLQoFh8-600.webp" alt="Slide 4" loading="lazy" decoding="async" width="600" height="600">
-  <img src="/Vegan-Archive/img/J9vkJkm3ey-600.webp" alt="Slide 5" loading="lazy" decoding="async" width="600" height="600">
+          <p>{% for i in (1..5) %}
+{% capture imgPath %}archive/vegangelic/nodifference/{{ i }}{% endcapture %}
+{% capture imgAlt %}Slide {{ i }}{% endcapture %}
+{% image imgPath imgAlt %}
+{% endfor %}</p>
 <p>Morally obligatory means morally obligatory.</p>
 
         </div>

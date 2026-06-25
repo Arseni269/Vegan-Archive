@@ -235,10 +235,11 @@
       <div class="full-width-description">
         <span class="meta-label" style="display: block; margin-bottom: 1rem;">Post Description & References</span>
         <div class="post-markdown-content" id="description-content">
-            <img src="/Vegan-Archive/img/tYXUkCTqVn-600.webp" alt="Slide 1" loading="lazy" decoding="async" width="600" height="750">
-  <img src="/Vegan-Archive/img/4pwYc0ILmR-600.webp" alt="Slide 2" loading="lazy" decoding="async" width="600" height="750">
-  <img src="/Vegan-Archive/img/sz47TncBTN-600.webp" alt="Slide 3" loading="lazy" decoding="async" width="600" height="750">
-  <img src="/Vegan-Archive/img/XO_pCbWFlA-600.webp" alt="Slide 4" loading="lazy" decoding="async" width="600" height="750">
+          <p>{% for i in (1..4) %}
+{% capture imgPath %}archive/vic/political/{{ i }}{% endcapture %}
+{% capture imgAlt %}Slide {{ i }}{% endcapture %}
+{% image imgPath imgAlt %}
+{% endfor %}</p>
 <p>When anything we think or do becomes a “political act”, politics stops meaning anything concrete. In fact, if everything is political, as so many people say… then is politics God? 🙃 sorry, couldn’t resist.</p>
 <p>Being against a structure of exploitation does not automatically mean being part of any real political force against it, especially when almost all of society, the market, institutions, and more than 99.9% of the population still sustain that structure.</p>
 <p>It is essential to recognize, and be very careful with, our anxiety for satisfactory results for animals so that it does not interfere with our understanding of the moment we are living through, as well as the impossibility of a political effect toward the end of animal exploitation in the same way that any feminist political effect would still have been impossible without first a change in mentality and an initial commitment from many women themselves and from the population.</p>

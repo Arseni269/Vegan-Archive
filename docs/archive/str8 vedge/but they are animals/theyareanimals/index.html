@@ -235,10 +235,11 @@
       <div class="full-width-description">
         <span class="meta-label" style="display: block; margin-bottom: 1rem;">Post Description & References</span>
         <div class="post-markdown-content" id="description-content">
-            <img src="/Vegan-Archive/img/1JvDo6VGJK-600.webp" alt="Slide 1" loading="lazy" decoding="async" width="600" height="750">
-  <img src="/Vegan-Archive/img/nu9AnFCIkj-600.webp" alt="Slide 2" loading="lazy" decoding="async" width="600" height="750">
-  <img src="/Vegan-Archive/img/5cOT-pvJiH-600.webp" alt="Slide 3" loading="lazy" decoding="async" width="600" height="750">
-  <img src="/Vegan-Archive/img/jQxsNFq26p-600.webp" alt="Slide 4" loading="lazy" decoding="async" width="600" height="750">
+          <p>{% for i in (1..4) %}
+{% capture imgPath %}archive/str8 vedge/but they are animals/{{ i }}{% endcapture %}
+{% capture imgAlt %}Slide {{ i }}{% endcapture %}
+{% image imgPath imgAlt %}
+{% endfor %}</p>
 <p>Yes, they're not humans, so what?</p>
 
         </div>

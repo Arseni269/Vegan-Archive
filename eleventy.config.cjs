@@ -4,22 +4,15 @@ const Image = require("@11ty/eleventy-img");
 
 module.exports = function (eleventyConfig) {
 
-  // 1. SMART IMAGE SHORTCODE (Upgraded)
-  eleventyConfig.addAsyncShortcode("image", async function (basePathWithoutExtension, alt = "") {
-    const extensions = [".webp", ".jpg", ".jpeg", ".png", ".PNG", ".JPG"];
+  // 1. SMART IMAGE SHORTCODE (Cleaned & Fixed)
+  eleventyConfig.addNunjucksAsyncShortcode("image", async function(imagePath, alt) {
+    // Resolve the real system file path under src/
+    // Handles paths passed directly from the filter like: "archive/ul/bovinetesting/1"
+    let cleanPath = imagePath.replace(/^\.?\/?src\//, "").replace(/^\//, "");
+    
+    // Look for the file with standard extensions since the filter returns them without ext
+    const extensions = [".jpg", ".jpeg", ".png", ".webp", ".GIF", ".PNG", ".JPG", ".JPEG"];
     let resolvedPath = null;
-
-    // Defensively clean the input path string so it doesn't duplicate folder roots
-    let cleanPath = basePathWithoutExtension
-      .trim()
-      .replace(/^src\//, "")
-      .replace(/^\.\/src\//, "")
-      .replace(/^\//, "");
-
-    // Safety: If the path doesn't start with archive/, ensure it does
-    if (!cleanPath.startsWith("archive/")) {
-      cleanPath = "archive/" + cleanPath;
-    }
 
     for (let ext of extensions) {
       const fullPath = path.join(__dirname, "src", cleanPath + ext);
@@ -30,15 +23,16 @@ module.exports = function (eleventyConfig) {
     }
 
     if (!resolvedPath) {
-      console.warn(`[Image Shortcode] File not found: src/${cleanPath}.(webp/jpg/png)`);
+      console.warn(`[Image Shortcode] File not found: src/${cleanPath}.(ext)`);
       return `<div class="placeholder-thumb">Image Missing: src/${cleanPath}</div>`;
     }
 
+    // Process the discovered image file through Eleventy Image
     let metadata = await Image(resolvedPath, {
       widths: [600],
       formats: ["webp"],
       outputDir: "./docs/img/",
-      urlPath: "/Vegan-Archive/img/"
+      urlPath: "/Vegan-Archive/img/" // Maps to GitHub Pages repository root cleanly
     });
 
     let imageAttributes = {
@@ -50,9 +44,7 @@ module.exports = function (eleventyConfig) {
     return Image.generateHTML(metadata, imageAttributes);
   });
 
-  // NEW TOOL: 2. AUTOMATIC IMAGE FINDER FILTER
-  // AUTOMATIC IMAGE FINDER FILTER (Upgraded)
-  // AUTOMATIC IMAGE FINDER FILTER (Final Bulletproof Version)
+  // 2. AUTOMATIC IMAGE FINDER FILTER
   eleventyConfig.addFilter("getImagesData", function (inputPath) {
     let relativeDirPath = inputPath.includes('.md') ? path.dirname(inputPath) : inputPath;
     relativeDirPath = relativeDirPath.replace(/^\.\//, "").replace(/^src\//, "");
@@ -74,15 +66,17 @@ module.exports = function (eleventyConfig) {
 
     return { files, folder: relativeDirPath };
   });
-  // 3. PASSTHROUGH COPIES
+
   // 3. PASSTHROUGH COPIES
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/archive/**/*.jpg");
   eleventyConfig.addPassthroughCopy("src/archive/**/*.png");
   eleventyConfig.addPassthroughCopy("src/archive/**/*.webp");
   eleventyConfig.addPassthroughCopy("src/.nojekyll");
+
   return {
     pathPrefix: "/Vegan-Archive/",
+    markdownTemplateEngine: false,
     dir: {
       input: "src",
       output: "docs"

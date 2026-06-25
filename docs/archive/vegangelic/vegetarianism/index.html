@@ -250,11 +250,11 @@
       <div class="full-width-description">
         <span class="meta-label" style="display: block; margin-bottom: 1rem;">Post Description & References</span>
         <div class="post-markdown-content" id="description-content">
-            <img src="/Vegan-Archive/img/rE3INVrsJj-600.webp" alt="Slide 1" loading="lazy" decoding="async" width="600" height="600">
-  <img src="/Vegan-Archive/img/hhYnmMbFM0-600.webp" alt="Slide 2" loading="lazy" decoding="async" width="600" height="600">
-  <img src="/Vegan-Archive/img/5WTj-cIT2M-600.webp" alt="Slide 3" loading="lazy" decoding="async" width="600" height="600">
-  <img src="/Vegan-Archive/img/70HZt1RvXw-600.webp" alt="Slide 4" loading="lazy" decoding="async" width="600" height="600">
-  <img src="/Vegan-Archive/img/9iadS6xeUY-600.webp" alt="Slide 5" loading="lazy" decoding="async" width="600" height="600">
+          <p>{% for i in (1..5) %}
+{% capture imgPath %}archive/vegangelic/vegetarianism/{{ i }}{% endcapture %}
+{% capture imgAlt %}Slide {{ i }}{% endcapture %}
+{% image imgPath imgAlt %}
+{% endfor %}</p>
 <p>Morally obligatory means morally obligatory.</p>
 
         </div>

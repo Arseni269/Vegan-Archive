@@ -221,8 +221,11 @@
       <div class="full-width-description">
         <span class="meta-label" style="display: block; margin-bottom: 1rem;">Post Description & References</span>
         <div class="post-markdown-content" id="description-content">
-            <img src="/Vegan-Archive/img/EGnR66iZrM-600.webp" alt="Slide 1" loading="lazy" decoding="async" width="600" height="600">
-  <img src="/Vegan-Archive/img/htQtCBgtw1-600.webp" alt="Slide 2" loading="lazy" decoding="async" width="600" height="600">
+          <p>{% for i in (1..2) %}
+{% capture imgPath %}archive/vegangelic/whatisveganism/{{ i }}{% endcapture %}
+{% capture imgAlt %}Slide {{ i }}{% endcapture %}
+{% image imgPath imgAlt %}
+{% endfor %}</p>
 <p>“Veganism is the doctrine that man should live without exploiting animals.”</p>
 <ul>
 <li>Leslie Cross (1951)</li>

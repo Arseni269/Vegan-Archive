@@ -235,10 +235,11 @@
       <div class="full-width-description">
         <span class="meta-label" style="display: block; margin-bottom: 1rem;">Post Description & References</span>
         <div class="post-markdown-content" id="description-content">
-            <img src="/Vegan-Archive/img/xvHz4RhQAQ-600.webp" alt="Slide 1" loading="lazy" decoding="async" width="600" height="750">
-  <img src="/Vegan-Archive/img/ek2SZK15T4-600.webp" alt="Slide 2" loading="lazy" decoding="async" width="600" height="750">
-  <img src="/Vegan-Archive/img/Yu8zq4lj2b-600.webp" alt="Slide 3" loading="lazy" decoding="async" width="600" height="750">
-  <img src="/Vegan-Archive/img/_mm24rXg5w-600.webp" alt="Slide 4" loading="lazy" decoding="async" width="600" height="750">
+          <p>{% for i in (1..4) %}
+{% capture imgPath %}archive/vic/welltreated/{{ i }}{% endcapture %}
+{% capture imgAlt %}Slide {{ i }}{% endcapture %}
+{% image imgPath imgAlt %}
+{% endfor %}</p>
 <p>Prize-winning cows valued for their genetics or “productivity”, as well as show dogs and competition horses, often receive exceptional nutrition and veterinary care - not for their own sake, but because of the investment they represent to their owners.</p>
 <p>The care enslaved individuals received (and still receive) has often been interpreted as respect, or even as a step toward their liberation, by many who consider themselves abolitionists. But when the condition of property remains intact, that same care often serves to make exploitation more efficient, profitable, and socially acceptable.</p>
 <p>A more sophisticated form of enslavement is not a step toward justice. It is merely an improvement within the very system that turns individuals into property. Perhaps that is why so many forms of care seem extraordinary: when injustice becomes normalized, even improvements within it can be mistaken for justice.</p>

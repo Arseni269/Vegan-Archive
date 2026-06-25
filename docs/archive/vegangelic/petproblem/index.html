@@ -246,11 +246,11 @@
       <div class="full-width-description">
         <span class="meta-label" style="display: block; margin-bottom: 1rem;">Post Description & References</span>
         <div class="post-markdown-content" id="description-content">
-            <img src="/Vegan-Archive/img/Ncz1-FtWwi-600.webp" alt="Slide 1" loading="lazy" decoding="async" width="600" height="600">
-  <img src="/Vegan-Archive/img/kRUZSB_dOX-600.webp" alt="Slide 2" loading="lazy" decoding="async" width="600" height="600">
-  <img src="/Vegan-Archive/img/hk8GdNFkMV-600.webp" alt="Slide 3" loading="lazy" decoding="async" width="600" height="600">
-  <img src="/Vegan-Archive/img/jINOa66jXC-600.webp" alt="Slide 4" loading="lazy" decoding="async" width="600" height="600">
-  <img src="/Vegan-Archive/img/73TEe36EGW-600.webp" alt="Slide 5" loading="lazy" decoding="async" width="600" height="600">
+          <p>{% for i in (1..5) %}
+{% capture imgPath %}archive/vegangelic/petproblem/{{ i }}{% endcapture %}
+{% capture imgAlt %}Slide {{ i }}{% endcapture %}
+{% image imgPath imgAlt %}
+{% endfor %}</p>
 <p>f we, as a movement, want to stay faithful to what veganism actually is—an abolitionist stance against animal use, regardless of the degree of suffering or death—then we must keep firmly in our minds that “pet” animals are victims of animal exploitation, too. As far as I’m concerned, no animal is truly safe from the horrifying, objectifying mentality that so many humans possess. If a non-vegan senses that they can benefit from using an animal, they will seek to use that animal in some way, shape, or form. This does not have to be via viewing the animal as a “food source,” “clothing,” or “test subject for cosmetics.” In some cases, the most exploitative actions that a human can do to another animal look benevolent on the surface, but don’t be deceived—this is an injustice like any other.</p>
 
         </div>
