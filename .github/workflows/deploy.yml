@@ -16,9 +16,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-     run:
-        working-directory: vegan-archive # <--- Tells GitHub to jump into your 'vegan' folder first!
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -37,7 +34,7 @@ jobs:
       - name: Upload production artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'vegan-archive/_site' # <--- Adds your folder prefix here too so it finds the built site!
+          path: '_site'
 
   deploy:
     environment:
