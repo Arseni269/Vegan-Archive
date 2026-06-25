@@ -7,10 +7,4 @@ author: "Vegangelic Activism"
 tags: ["carnism", "reducetarianism", "misinformation", "Melanie Joy"]
 ---
 
-{% for i in (1..5) %}
-  {% capture imgPath %}archive/vegangelic/carnism/{{ i }}{% endcapture %}
-  {% capture imgAlt %}Slide {{ i }}{% endcapture %}
-  {% image imgPath imgAlt %}
-{% endfor %}
-
 “Carnism” is a vegetarian concept that has become too popular in the so-called “vegan” movement. I am not shocked, though. This movement has drifted away from its abolitionist origins to a point where even The Vegan Society itself has left such a time behind. Misinformation in this movement is so pervasive, and there is much work to be done about getting people to understand what veganism actually is. A part of that is disowning this idea of “carnism,” coined by an apologetic welfarist who endorses reducetarianism and other anti-vegan nonsense. Read to learn why Melanie does not make me so joyful.
