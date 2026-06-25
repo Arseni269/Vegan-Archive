@@ -82,10 +82,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/archive/**/*.webp");
   eleventyConfig.addPassthroughCopy("src/.nojekyll");
   return {
+    pathPrefix: "/Vegan-Archive/",
     dir: {
       input: "src",
-      output: "docs"  // <-- Changed from _site to docs
-    },
-    pathPrefix: "/Vegan-Archive/"
+      output: "docs"
+    }
   };
 };

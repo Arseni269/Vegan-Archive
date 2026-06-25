@@ -15,8 +15,8 @@ permalink: /archive/
           <a href="/Vegan-Archive{{ post.url }}">
             {% if post.data.thumbnail %}
             <!-- Combines the absolute site root directory with the post url and thumbnail filename safely -->
-            <img src="/Vegan-Archive{{ post.data.thumbnail }}" alt="{{ post.data.title }}" loading="lazy">
-            {% else %}
+            <img src="../..{{ post.url }}{{ post.data.thumbnail }}" alt="{{ post.data.title }}" loading="lazy"> {% else
+            %}
             <div class="placeholder-thumb">No Image</div>
             {% endif %}
           </a>
@@ -47,7 +47,8 @@ permalink: /archive/
     <div class="filter-group">
       <h3>Filter by Creator</h3>
       <ul class="filter-list">
-        <li><a href="/Vegan-Archive/authors/uncompromised-liberation/" class="filter-link">👤 Uncompromised Liberation</a></li>
+        <li><a href="/Vegan-Archive/authors/uncompromised-liberation/" class="filter-link">👤 Uncompromised
+            Liberation</a></li>
         <li><a href="/Vegan-Archive/authors/vegangelic/" class="filter-link">👤 Vegangelic</a></li>
       </ul>
     </div>
@@ -59,7 +60,8 @@ permalink: /archive/
       <ul class="tag-list">
         {% for tagPair in collections %}
         {% assign tagName = tagPair[0] %}
-        {% if tagName != "all" and tagName != "posts" and tagName != "Uncompromised Liberation" and tagName != "Vegangelic" %}
+        {% if tagName != "all" and tagName != "posts" and tagName != "Uncompromised Liberation" and tagName !=
+        "Vegangelic" %}
         <li>
           <a href="/Vegan-Archive/tags/{{ tagName | slugify }}/" class="tag-pill">#{{ tagName }}</a>
         </li>
