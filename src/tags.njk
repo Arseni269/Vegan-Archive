@@ -1,15 +1,13 @@
 ---
 layout: base.njk
+templateEngineOverride: njk
 pagination:
-  data: collections
+  data: collections.uniqTags
   size: 1
   alias: tag
-  filter:
-    - all
-    - posts
-    - tagList
 permalink: /tags/{{ tag | slugify }}/index.html
 ---
+
 <link rel="stylesheet" href="/Vegan-Archive/css/styles.css">
 <div class="archive-layout">
   
