@@ -14,14 +14,14 @@ permalink: /archive/
         <div class="post-thumbnail">
           <a href="{{ post.url | url }}">
             {% if post.data.thumbnail %}
-            <img src="./{{ post.data.image }}"> alt="{{ post.data.title }}" loading="lazy">
+            <img src="/Vegan-Archive/archive/{{ post.data.thumbnail }}" alt="{{ post.data.title }}" loading="lazy">
             {% else %}
             <div class="placeholder-thumb">No Image</div>
             {% endif %}
           </a>
         </div>
         <div class="post-details">
-          <h2 class="post-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
+          <h2 class="post-title"><a href="{{ post.url | url }}">{{ post.data.title }}</a></h2>
           <h5 class="post-author">{{ post.data.author }}</h5>
           {% if post.data.instagram_url %}
           <div class="ig-link-container">
@@ -36,37 +36,38 @@ permalink: /archive/
     </div>
   </main>
 
-<aside class="sidebar">
-  <div class="filter-group">
-    <a href="/archive/" class="tag-pill active-pill">✨ All Archives</a>
-  </div>
+  <aside class="sidebar">
+    <div class="filter-group">
+      <a href="/archive/" class="tag-pill active-pill">✨ All Archives</a>
+    </div>
 
-  <hr class="sidebar-divider">
+    <hr class="sidebar-divider">
 
-  <div class="filter-group">
-    <h3>Filter by Creator</h3>
-    <ul class="filter-list">
-      <li><a href="/authors/uncompromised-liberation/" class="filter-link">👤 Uncompromised Liberation</a></li>
-      <li><a href="/authors/vegangelic/" class="filter-link">👤 Vegangelic</a></li>
-    </ul>
-  </div>
+    <a href="/Vegan-Archive/archive/" class="tag-pill active-pill">✨ All Archives</a>
 
-  <hr class="sidebar-divider">
+    <li><a href="/Vegan-Archive/authors/uncompromised-liberation/" class="filter-link">👤 Uncompromised Liberation</a>
+    </li>
+    <li><a href="/Vegan-Archive/authors/vegangelic/" class="filter-link">👤 Vegangelic</a></li>
 
-  <div class="filter-group">
-    <h3>Filter by Topic</h3>
-    <ul class="tag-list">
-      {% for tagPair in collections %}
+    <a href="/Vegan-Archive/tags/{{ tagName | slugify }}/" class="tag-pill">#{{ tagName }}</a>
+
+    <hr class="sidebar-divider">
+
+    <div class="filter-group">
+      <h3>Filter by Topic</h3>
+      <ul class="tag-list">
+        {% for tagPair in collections %}
         {% assign tagName = tagPair[0] %}
-        {% if tagName != "all" and tagName != "posts" and tagName != "Uncompromised Liberation" and tagName != "Vegangelic" %}
-          <li>
-            <a href="/tags/{{ tagName | slugify }}/" class="tag-pill">#{{ tagName }}</a>
-          </li>
+        {% if tagName != "all" and tagName != "posts" and tagName != "Uncompromised Liberation" and tagName !=
+        "Vegangelic" %}
+        <li>
+          <a href="/tags/{{ tagName | slugify }}/" class="tag-pill">#{{ tagName }}</a>
+        </li>
         {% endif %}
-      {% endfor %}
-    </ul>
-  </div>
-</aside>
+        {% endfor %}
+      </ul>
+    </div>
+  </aside>
 
 </div>
 
@@ -85,7 +86,7 @@ permalink: /archive/
     }
 
     // 2. Listen for clicks on your post links, and save the current pixel scroll height
-    const postLinks = document.querySelectorAll(".post-card a, .gallery-grid a"); 
+    const postLinks = document.querySelectorAll(".post-card a, .gallery-grid a");
     postLinks.forEach(link => {
       link.addEventListener("click", () => {
         sessionStorage.setItem("archiveScrollPosition", window.scrollY);
