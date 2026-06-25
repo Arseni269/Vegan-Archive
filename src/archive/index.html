@@ -5,21 +5,87 @@ permalink: /archive/
 templateEngineOverride: njk
 ---
 <div class="archive-layout">
+
   <main class="main-content">
     <h1>Vegan Archive</h1>
     <div class="imageboard-grid">
       {% for post in collections.all %}
-        {% if post.data.title and post.url != '/archive/' %}
-        <div class="post-card" style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
-          <h2><a href="/Vegan-Archive{{ post.url }}">{{ post.data.title }}</a></h2>
-          <h5>By: {{ post.data.author }}</h5>
-          {% if post.data.thumbnail %}
-            <p>Thumbnail path: /Vegan-Archive{{ post.data.thumbnail }}</p>
-            <img src="/Vegan-Archive{{ post.data.thumbnail }}" alt="{{ post.data.title }}" style="max-width: 150px;">
+      {% if post.data.title and post.url != '/archive/' and post.data.title != 'The Vegan Archive' %}
+      <div class="post-card">
+        <div class="post-thumbnail">
+          <a href="/Vegan-Archive{{ post.url }}">
+            {% if post.data.thumbnail %}
+              <img src="/Vegan-Archive{{ post.data.thumbnail }}" alt="{{ post.data.title }}">
+            {% else %}
+              <div class="placeholder-thumb">No Image</div>
+            {% endif %}
+          </a>
+        </div>
+        <div class="post-details">
+          <h2 class="post-title"><a href="/Vegan-Archive{{ post.url }}">{{ post.data.title }}</a></h2>
+          <h5 class="post-author">{{ post.data.author }}</h5>
+          {% if post.data.instagram_url %}
+          <div class="ig-link-container">
+            <a href="{{ post.data.instagram_url }}" target="_blank" rel="noopener noreferrer" class="instagram-link">View on Instagram ↗</a>
+          </div>
           {% endif %}
         </div>
-        {% endif %}
+      </div>
+      {% endif %}
       {% endfor %}
     </div>
   </main>
+
+  <aside class="sidebar">
+    <div class="filter-group">
+      <a href="/Vegan-Archive/archive/" class="tag-pill active-pill">✨ All Archives</a>
+    </div>
+
+    <hr class="sidebar-divider">
+
+    <div class="filter-group">
+      <h3>Filter by Creator</h3>
+      <ul class="filter-list">
+        <li><a href="/Vegan-Archive/authors/uncompromised-liberation/" class="filter-link">👤 Uncompromised Liberation</a></li>
+        <li><a href="/Vegan-Archive/authors/vegangelic/" class="filter-link">👤 Vegangelic</a></li>
+      </ul>
+    </div>
+
+    <hr class="sidebar-divider">
+
+    <div class="filter-group">
+      <h3>Filter by Topic</h3>
+      <ul class="tag-list">
+        {% for tagName, posts in collections %}
+        {% if tagName != "all" and tagName != "posts" and tagName != "Uncompromised Liberation" and tagName != "Vegangelic" %}
+        <li>
+          <a href="/Vegan-Archive/tags/{{ tagName | slugify }}/" class="tag-pill">#{{ tagName }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </aside>
+
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const savedScrollPos = sessionStorage.getItem("archiveScrollPosition");
+    if (savedScrollPos) {
+      setTimeout(() => {
+        window.scrollTo({
+          top: parseInt(savedScrollPos, 10),
+          behavior: "instant"
+        });
+      }, 50);
+    }
+
+    const postLinks = document.querySelectorAll(".post-card a, .gallery-grid a");
+    postLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        sessionStorage.setItem("archiveScrollPosition", window.scrollY);
+      });
+    });
+  });
+</script>
