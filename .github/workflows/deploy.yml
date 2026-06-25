@@ -29,7 +29,7 @@ jobs:
         run: npm install
 
       - name: Build Eleventy Site
-        run: npx @11ty/eleventy
+        run: npm run build
 
       - name: Upload production artifact
         uses: actions/upload-pages-artifact@v3
