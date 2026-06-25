@@ -80,10 +80,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/archive/**/*.png");
   eleventyConfig.addPassthroughCopy("src/archive/**/*.webp");
 
-  return {
+ return {
     dir: {
       input: "src",
-      output: "_site"
+      output: "docs"  // <-- Changed from _site to docs
     },
     pathPrefix: "/Vegan-Archive/"
   };
