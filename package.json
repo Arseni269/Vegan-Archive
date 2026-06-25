@@ -1,10 +1,9 @@
 {
   "name": "vegan-archive",
   "version": "1.0.0",
-  "description": "",
-  "main": "script.js",
+  "type": "module",
   "scripts": {
-    "build": "node ./node_modules/@11ty/eleventy/src/Cli.js"
+    "build": "node ./node_modules/@11ty/eleventy/eleventy.js"
   },
   "dependencies": {
     "@11ty/eleventy": "^3.1.6"
