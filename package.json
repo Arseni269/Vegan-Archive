@@ -1,20 +1,20 @@
 {
-  "name": "vegan",
+  "name": "vegan-archive",
   "version": "1.0.0",
   "description": "",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "eleventy"
   },
+  "dependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  }
+  ,
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6"
-  },
-  "dependencies": {
-    "@11ty/eleventy-img": "^6.0.4"
   }
 }
