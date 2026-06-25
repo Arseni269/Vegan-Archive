@@ -2,6 +2,7 @@
 layout: base.njk
 title: Archive
 permalink: /archive/
+templateEngineOverride: njk
 ---
 <div class="archive-layout">
 
@@ -55,8 +56,7 @@ permalink: /archive/
     <div class="filter-group">
       <h3>Filter by Topic</h3>
       <ul class="tag-list">
-        {% for tagPair in collections %}
-        {% assign tagName = tagPair[0] %}
+        {% for tagName, posts in collections %}
         {% if tagName != "all" and tagName != "posts" and tagName != "Uncompromised Liberation" and tagName != "Vegangelic" %}
         <li>
           <a href="/Vegan-Archive/tags/{{ tagName | slugify }}/" class="tag-pill">#{{ tagName }}</a>
