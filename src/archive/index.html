@@ -12,9 +12,9 @@ permalink: /archive/
       {% if post.data.title and post.url != '/archive/' and post.data.title != 'The Vegan Archive' %}
       <div class="post-card">
         <div class="post-thumbnail">
-          <a href="{{ post.url }}">
+          <a href="{{ post.url | url }}">
             {% if post.data.thumbnail %}
-            <img src="{{ post.data.thumbnail }}" alt="{{ post.data.title }}" loading="lazy">
+            <img src="./{{ post.data.image }}"> alt="{{ post.data.title }}" loading="lazy">
             {% else %}
             <div class="placeholder-thumb">No Image</div>
             {% endif %}
