@@ -418,7 +418,7 @@ transition: transform 0.2s ease;
   display: none !important;
 }
 
-/* Navigation Bar Branding */
+/* Navigation Header Structure */
 .main-navbar {
   background-color: #ffffff;
   border-bottom: 1px solid #e2e8f0;
@@ -432,8 +432,8 @@ transition: transform 0.2s ease;
   justify-content: space-between;
   align-items: center;
   max-width: 1200px;
-  margin: 0
-  }
+  margin: 0 auto;
+}
 .nav-logo {
   font-weight: 700;
   font-size: 1.25rem;
@@ -454,17 +454,17 @@ transition: transform 0.2s ease;
   transition: color 0.2s;
 }
 .nav-links a:hover, .nav-links a.active {
-  color: #10b981; /* Emerald/Vegan green highlight */
+  color: #10b981; /* Accent Green */
 }
 
-/* Hero Section Layout */
+/* Introduction Hero */
 .home-hero {
   background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
   padding: 4rem 2rem;
   text-align: center;
 }
 .hero-content {
-  max-width: 800px;
+  max-width: 800px; /* Kept safely inside the braces where it belongs! */
   margin: 0 auto;
 }
 .hero-content h1 {
@@ -477,7 +477,7 @@ transition: transform 0.2s ease;
   color: #166534;
 }
 
-/* Main Layout Info Blocks */
+/* Text Content Wrapper */
 .home-main-content {
   max-width: 800px;
   margin: 3rem auto;
