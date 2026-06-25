@@ -14,9 +14,14 @@ permalink: /archive/
         <div class="post-thumbnail">
           <a href="/Vegan-Archive{{ post.url }}">
             {% if post.data.thumbnail %}
-            <img src="/Vegan-Archive{{ post.data.thumbnail }}" alt="{{ post.data.title }}"> 
+              {# If the thumbnail front-matter is just "1.jpg", reconstruct its folder path dynamically #}
+              {% if post.data.thumbnail contains '/' %}
+                <img src="/Vegan-Archive{{ post.data.thumbnail }}" alt="{{ post.data.title }}">
+              {% else %}
+                <img src="/Vegan-Archive{{ post.url }}{{ post.data.thumbnail }}" alt="{{ post.data.title }}">
+              {% endif %}
             {% else %}
-            <div class="placeholder-thumb">No Image</div>
+              <div class="placeholder-thumb">No Image</div>
             {% endif %}
           </a>
         </div>
