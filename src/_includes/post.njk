@@ -5,136 +5,24 @@ templateEngineOverride: njk
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
 
 <style>
-  /* Back Button styling */
-  .back-to-archive-nav {
-    margin-bottom: 1.5rem;
-  }
-  .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: #475569;
-    text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 500;
-    transition: color 0.2s;
-  }
-  .back-link:hover {
-    color: #0f172a;
-  }
-
-  /* 1. Base Layout Split Layout */
-  .post-layout-grid {
-    display: grid;
-    grid-template-columns: 2.2fr 1fr;
-    gap: 2.5rem;
-    align-items: start;
-    margin-top: 1.5rem;
-  }
-  
-  @media (max-width: 900px) {
-    .post-layout-grid {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-  }
-  
-  /* 2. OVERRIDE STYLES.CSS: Smooth gallery distribution */
-  main .carousel .carousel-grid {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 1.5rem !important;
-    grid-template-columns: none !important;
-  }
-  
-  main .carousel .carousel-grid a.glightbox {
-    flex: 1 1 calc(50% - 1.5rem) !important;
-    min-width: 250px !important;
-    max-width: 100% !important;
-    width: auto !important;
-    height: auto !important; 
-    aspect-ratio: auto !important;
-    overflow: visible !important; 
-    display: block !important;
-    text-decoration: none !important;
-  }
-
-  main .carousel .carousel-grid a.glightbox picture {
-    display: block !important;
-    width: 100% !important;
-    height: auto !important;
-    aspect-ratio: auto !important;
-  }
-
-  main .carousel .carousel-grid img {
-    width: 100% !important;
-    height: auto !important;         
-    max-height: none !important;     
-    aspect-ratio: auto !important;   
-    object-fit: contain !important;  
-    border-radius: 8px !important;
-    display: block !important;
-  }
-
-  /* 3. Media Containers */
-  .video-post-container {
-    width: 100%;
-    max-width: 640px;
-    margin: 0;
-  }
-
-  .video-post-container video {
-    width: 100% !important;
-    max-height: 70vh !important;
-    height: auto !important;
-    border-radius: 8px;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    background: #000;
-  }
-
-  /* 4. Full-Width Bottom Description Box */
-  .full-width-description {
-    grid-column: 1 / -1; 
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid #e2e8f0;
-  }
-
-  .post-markdown-content {
-    line-height: 1.7;
-    font-size: 1rem;
-    color: #334155;
-    max-width: 850px; 
-  }
-
-  .post-markdown-content p {
-    margin-bottom: 1.25rem;
-  }
-
-  .post-markdown-content a {
-    color: #0066cc;
-    text-decoration: underline;
-    word-break: break-all;
-  }
-
-  .post-markdown-content a:hover {
-    color: #004499;
-  }
-
-  .post-markdown-content video,
-  .post-markdown-content img {
-    display: none !important;
-  }
-
-  .instagram-link-btn:hover {
-    opacity: 0.9;
-    box-shadow: 0 2px 8px rgba(220, 39, 67, 0.25);
-  }
+  .back-to-archive-nav { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.4rem; color: #475569; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+  .back-link:hover { color: #0f172a; }
+  .post-layout-grid { display: grid; grid-template-columns: 2.2fr 1fr; gap: 2.5rem; align-items: start; margin-top: 1.5rem; }
+  @media (max-width: 900px) { .post-layout-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
+  main .carousel .carousel-grid { display: flex !important; flex-wrap: wrap !important; gap: 1.5rem !important; }
+  main .carousel .carousel-grid a.glightbox { flex: 1 1 calc(50% - 1.5rem) !important; min-width: 250px !important; display: block !important; text-decoration: none !important; }
+  main .carousel .carousel-grid img { width: 100% !important; height: auto !important; border-radius: 8px !important; display: block !important; }
+  .video-post-container { width: 100%; max-width: 640px; }
+  .video-post-container video { width: 100% !important; height: auto !important; border-radius: 8px; background: #000; }
+  .full-width-description { grid-column: 1 / -1; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #e2e8f0; }
+  .post-markdown-content { line-height: 1.7; font-size: 1rem; color: #334155; max-width: 850px; }
+  .post-markdown-content p { margin-bottom: 1.25rem; }
+  .post-markdown-content a { color: #0066cc; text-decoration: underline; }
+  .post-markdown-content video, .post-markdown-content img { display: none !important; }
 </style>
 
 <main class="single-post-wrapper">
-  
   <nav class="back-to-archive-nav">
     <a href="/Vegan-Archive/archive/" class="back-link">← Back to Archive Nav</a>
   </nav>
@@ -144,10 +32,8 @@ templateEngineOverride: njk
   </header>
 
   <div class="post-layout-grid">
-    
     <div class="carousel">
       <div class="carousel-grid" id="post-gallery">
-        
         {% if video_path %}
           <div class="video-post-container">
             <video controls>
@@ -156,7 +42,6 @@ templateEngineOverride: njk
             </video>
           </div>
         {% else %}
-          
           {% set targetPath = images_folder if images_folder else page.inputPath %}
           {% set galleryData = targetPath | getImagesData %}
 
@@ -164,113 +49,79 @@ templateEngineOverride: njk
             {% if "thumbnail" not in imgName and ".mp4" not in imgName and imgName != "1.png" %}
               {% set finalImgPath = galleryData.folder + "/" + imgName %}
               <a href="#" class="glightbox" data-gallery="post-slides" data-title="Slide {{ loop.index }}">
-                {# Pass outputDir to your image shortcode if needed, or we rely on GLightbox JS to intercept #}
                 {% image finalImgPath, "Slide " + loop.index %}
               </a>
             {% endif %}
           {% endfor %}
-
         {% endif %}
-
       </div>
     </div>
 
     <aside class="post-sidebar">
-      <div class="sidebar-info-card" style="padding: 1.5rem;">
-        
+      <div class="sidebar-info-card" style="padding: 1.5rem; background: #f8fafc; border-radius: 8px;">
         <div class="meta-section" style="margin-bottom: 1.2rem;">
-          <span class="meta-label">Archived Creator</span>
-          <h3 class="meta-value" style="margin: 0.2rem 0 0 0;">{{ author if author else "Unknown Creator" }}</h3>
+          <span class="meta-label" style="font-size: 0.8rem; color: #64748b; font-weight: 600;">Archived Creator</span>
+          <h3 style="margin: 0.2rem 0 0 0;">{{ author if author else "Unknown Creator" }}</h3>
         </div>
 
         <div class="meta-section" style="margin-bottom: 1.2rem;">
-          <span class="meta-label">Assigned Topics</span>
-          <div class="sidebar-tags" style="margin-top: 0.4rem;">
+          <span class="meta-label" style="font-size: 0.8rem; color: #64748b; font-weight: 600;">Assigned Topics</span>
+          <div style="margin-top: 0.4rem; display: flex; flex-wrap: wrap; gap: 0.4rem;">
             {% for tag in tags %}
               {% if tag != "all" and tag != "posts" %}
-                <span class="tag-pill-sidebar">#{{ tag }}</span>
+                <span style="background: #e2e8f0; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.85rem;">#{{ tag }}</span>
               {% endif %}
             {% endfor %}
           </div>
         </div>
 
-        <div class="meta-section instructions" style="margin-bottom: 0;">
-          <p style="margin: 0; font-size: 0.85rem;">💡 <em>Click slides to open the zoomable lightbox reader. Arrow keys flip through cleanly.</em></p>
-        </div>
-
         {% if instagram_url %}
         <div style="margin-top: 0.5rem; border-top: 1px dashed #e2e8f0; padding-top: 1.2rem;">
-          <a href="{{ instagram_url }}" target="_blank" rel="noopener noreferrer" class="instagram-link-btn" style="display: inline-flex; align-items: center; gap: 0.5rem; background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; font-weight: 600; width: 100%; justify-content: center; box-sizing: border-box; transition: opacity 0.2s;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
-            View on Instagram
-          </a>
+          <a href="{{ instagram_url }}" target="_blank" rel="noopener noreferrer" style="display: block; text-align: center; background: #dc2743; color: white; padding: 0.5rem; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: 600;">View on Instagram</a>
         </div>
         {% endif %}
-
       </div>
     </aside>
 
     {% if content | trim %}
       <div class="full-width-description">
-        <span class="meta-label" style="display: block; margin-bottom: 1rem;">Post Description & References</span>
+        <span class="meta-label" style="display: block; margin-bottom: 1rem; font-weight: 600;">Post Description & References</span>
         <div class="post-markdown-content" id="description-content">
           {{ content | safe }}
         </div>
       </div>
     {% endif %}
-
   </div>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    // 1. LIGHTBOX FUNCTIONALITY WITH SUBFOLDER SUPPORT
     const lightboxLinks = document.querySelectorAll(".carousel-grid a.glightbox");
+    
     lightboxLinks.forEach(link => {
-      const generatedImg = link.querySelector("img");
-      if (generatedImg) {
-        let imgSrc = generatedImg.getAttribute("src");
+      // Safely target the image inside the responsive layout structures
+      const img = link.querySelector("img");
+      if (img) {
+        let currentSrc = img.currentSrc || img.getAttribute("src");
         
-        // Defensive check: If Eleventy Image Plugin stripped the /Vegan-Archive prefix out of the generated image tag, patch it dynamically
-        if (imgSrc && !imgSrc.startsWith("http") && !imgSrc.startsWith("/Vegan-Archive")) {
-          // Clean up leading slashes to prevent double-slashes
-          if (imgSrc.startsWith("/")) imgSrc = imgSrc.substring(1);
-          imgSrc = "/Vegan-Archive/" + imgSrc;
-          generatedImg.setAttribute("src", imgSrc);
-          
-          // Also check for responsive HTML5 <source> tags inside <picture> and prepend them
-          const pictureSources = link.querySelectorAll("picture source");
-          pictureSources.forEach(srcTag => {
-            let srcset = srcTag.getAttribute("srcset");
-            if (srcset && !srcset.startsWith("/Vegan-Archive")) {
-              srcTag.setAttribute("srcset", "/Vegan-Archive" + (srcset.startsWith("/") ? "" : "/") + srcset);
-            }
-          });
+        if (currentSrc) {
+          // Normalize base path mappings
+          if (!currentSrc.startsWith("http") && !currentSrc.startsWith("/Vegan-Archive")) {
+            currentSrc = "/Vegan-Archive/" + currentSrc.replace(/^\//, "");
+          }
+          // Apply directly back to the activator link anchor
+          link.setAttribute("href", currentSrc);
         }
-        
-        link.setAttribute("href", imgSrc);
       }
     });
 
+    // Fire GLightbox initialization
     const lightbox = GLightbox({
       selector: '.glightbox',
-      loop: true,               
-      zoomable: true,           
-      draggable: true           
+      loop: true,
+      zoomable: true,
+      draggable: true
     });
-
-    // 2. AUTOMATICALLY CONVERT TEXT LINKS INTO CLICKABLE HYPERLINKS
-    const contentContainer = document.getElementById("description-content");
-    if (contentContainer) {
-      const urlPattern = /(\b(https?):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|]/ig);
-      
-      contentContainer.innerHTML = contentContainer.innerHTML.replace(urlPattern, function(url) {
-        if (url.includes('src=') || url.includes('href=')) {
-          return url;
-        }
-        return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
-      });
-    }
   });
 </script>
