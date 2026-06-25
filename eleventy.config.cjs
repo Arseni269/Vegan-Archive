@@ -76,7 +76,7 @@ module.exports = function (eleventyConfig) {
   });
   // 3. PASSTHROUGH COPIES
   // 3. PASSTHROUGH COPIES
-  eleventyConfig.addPassthroughCopy("src/css/**/*");
+  eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/archive/**/*.jpg");
   eleventyConfig.addPassthroughCopy("src/archive/**/*.png");
   eleventyConfig.addPassthroughCopy("src/archive/**/*.webp");
