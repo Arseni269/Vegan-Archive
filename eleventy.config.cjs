@@ -70,26 +70,28 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/archive/**/*.webp");
   eleventyConfig.addPassthroughCopy("src/archive/**/*.mp4");
 
- // CASE-INSENSITIVE DEDUPLICATED TAG COLLECTION (CommonJS Format)
+ /// CASE-INSENSITIVE DEDUPLICATED TAG COLLECTION (Safe CommonJS)
   eleventyConfig.addCollection("uniqTags", function(collectionApi) {
-    const allTags = collectionApi.getAll().flatMap(item => item.data.tags || []);
     const uniqueSlugs = new Set();
     const cleanTags = [];
 
-    allTags.forEach(tag => {
-      if (!tag || ["all", "posts", "tagList"].includes(tag)) return;
-      
-      const slug = tag.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-      
-      if (!uniqueSlugs.has(slug)) {
-        uniqueSlugs.add(slug);
-        cleanTags.push(tag);
-      }
+    collectionApi.getAll().forEach(function(item) {
+      const tags = item.data.tags || [];
+      tags.forEach(function(tag) {
+        if (!tag || ["all", "posts", "tagList"].includes(tag)) return;
+        
+        // Safe URL slug conversion
+        const slug = tag.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        
+        if (!uniqueSlugs.has(slug)) {
+          uniqueSlugs.add(slug);
+          cleanTags.push(tag);
+        }
+      });
     });
 
     return cleanTags;
   });
-
   // Look for your existing return statement at the bottom and make it look like this:
   return {
     pathPrefix: "/Vegan-Archive/", // <-- JUST ADD THIS LINE HERE
