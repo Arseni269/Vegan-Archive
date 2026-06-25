@@ -52,37 +52,34 @@ permalink: /tags/{{ tag | slugify }}/index.html
     <hr class="sidebar-divider">
 
     <details open class="filter-group-wrapper">
-      <summary class="group-title">👤 Archived Creators</summary>
-      <ul class="filter-list">
-        {% set countUL = collections["Uncompromised Liberation"] | length %}
-        {% set countV = collections["Vegangelic"] | length %}
+    <summary class="group-title">🌱 Core Concepts & Topics</summary>
+    <ul class="tag-list">
+      {% for tagName, posts in collections %}
+        {% if tagName != "all" and tagName != "posts" and tagName != "tagList" and tagName != "uniqTags" and tagName != "Uncompromised Liberation" and tagName != "Vegangelic" and tagName != "ex-vegans" and tagName != "carnivore-diet" %}
         <li>
-          <a href="/Vegan-Archive/tags/uncompromised-liberation/" class="filter-link {% if tag == 'Uncompromised Liberation' %}active-link{% endif %}">
-            <span>Uncompromised Liberation</span> <span class="item-count">{{ countUL }}</span>
+          <a href="/Vegan-Archive/tags/{{ tagName | slugify }}/" class="tag-pill {% if tagName == tag %}active-pill{% endif %}">
+            #{{ tagName }} <span class="pill-count">({{ posts | length }})</span>
           </a>
         </li>
-        <li>
-          <a href="/Vegan-Archive/tags/vegangelic/" class="filter-link {% if tag == 'Vegangelic' %}active-link{% endif %}">
-            <span>Vegangelic</span> <span class="item-count">{{ countV }}</span>
-          </a>
-        </li>
-      </ul>
-    </details>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </details>
 
-    <details open class="filter-group-wrapper">
-      <summary class="group-title">🌱 Core Concepts & Ethics</summary>
-      <ul class="tag-list">
-        {% for tagName, posts in collections %}
-          {% if tagName == "ethics" or tagName == "speciesism" or tagName == "carnism" or tagName == "health" %}
-          <li>
-            <a href="/Vegan-Archive/tags/{{ tagName | slugify }}/" class="tag-pill {% if tagName == tag %}active-pill{% endif %}">
-              #{{ tagName }} <span class="pill-count">({{ posts | length }})</span>
-            </a>
-          </li>
-          {% endif %}
-        {% endfor %}
-      </ul>
-    </details>
+  <details open class="filter-group-wrapper">
+    <summary class="group-title">⚠️ Debunking Targets</summary>
+    <ul class="tag-list">
+      {% for tagName, posts in collections %}
+        {% if tagName == "ex-vegans" or tagName == "carnivore-diet" %}
+        <li>
+          <a href="/Vegan-Archive/tags/{{ tagName | slugify }}/" class="tag-pill target-pill {% if tagName == tag %}active-pill{% endif %}">
+            #{{ tagName }} <span class="pill-count">({{ posts | length }})</span>
+          </a>
+        </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </details>
 
     <details class="filter-group-wrapper">
       <summary class="group-title">⚠️ Debunking & Misinformers</summary>

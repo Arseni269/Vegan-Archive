@@ -63,12 +63,12 @@ templateEngineOverride: njk
   </details>
 
   <details open class="filter-group-wrapper">
-    <summary class="group-title">🌱 Core Concepts & Ethics</summary>
+    <summary class="group-title">🌱 Core Concepts & Topics</summary>
     <ul class="tag-list">
       {% for tagName, posts in collections %}
-        {% if tagName == "ethics" or tagName == "speciesism" or tagName == "carnism" or tagName == "health" %}
+        {% if tagName != "all" and tagName != "posts" and tagName != "tagList" and tagName != "uniqTags" and tagName != "Uncompromised Liberation" and tagName != "Vegangelic" and tagName != "ex-vegans" and tagName != "carnivore-diet" %}
         <li>
-          <a href="/Vegan-Archive/tags/{{ tagName | slugify }}/" class="tag-pill">
+          <a href="/Vegan-Archive/tags/{{ tagName | slugify }}/" class="tag-pill {% if tagName == tag %}active-pill{% endif %}">
             #{{ tagName }} <span class="pill-count">({{ posts | length }})</span>
           </a>
         </li>
@@ -77,13 +77,13 @@ templateEngineOverride: njk
     </ul>
   </details>
 
-  <details class="filter-group-wrapper">
-    <summary class="group-title">⚠️ Debunking & Misinformers</summary>
+  <details open class="filter-group-wrapper">
+    <summary class="group-title">⚠️ Debunking Targets</summary>
     <ul class="tag-list">
       {% for tagName, posts in collections %}
-        {% if tagName == "ex-vegans" or tagName == "carnivore-diet" or tagName == "media-bias" %}
+        {% if tagName == "ex-vegans" or tagName == "carnivore-diet" %}
         <li>
-          <a href="/Vegan-Archive/tags/{{ tagName | slugify }}/" class="tag-pill target-pill">
+          <a href="/Vegan-Archive/tags/{{ tagName | slugify }}/" class="tag-pill target-pill {% if tagName == tag %}active-pill{% endif %}">
             #{{ tagName }} <span class="pill-count">({{ posts | length }})</span>
           </a>
         </li>

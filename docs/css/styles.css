@@ -356,10 +356,19 @@ transition: transform 0.2s ease;
   color: #1e293b;
   cursor: pointer;
   user-select: none;
-  list-style: none; /* Hides default triangle arrow */
+  list-style: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.group-title::after {
+  content: '▼';
+  font-size: 0.7rem;
+  color: #64748b;
+  transition: transform 0.2s;
+}
+.filter-group-wrapper[open] .group-title::after {
+  transform: rotate(-180deg);
 }
 /* Custom CSS toggling indicator indicator */
 .group-title::after {
@@ -372,13 +381,22 @@ transition: transform 0.2s ease;
   transform: rotate(-180deg);
 }
 
+/* Horizontal display for pills inside the drawers */
+.filter-group-wrapper ul.tag-list {
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 0.5rem !important;
+}
+
 /* Dynamic Lists inside Drawers */
 .filter-group-wrapper ul {
   padding: 0 1rem 1rem 1rem;
   margin: 0;
   list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
-
 /* Inline flex alignment for text vs count numbers */
 .filter-link {
   display: flex;
@@ -409,7 +427,6 @@ transition: transform 0.2s ease;
   background: #fee2e2;
   color: #991b1b;
 }
-
 .filter-group h3 {
   font-size: 0.85rem;
   text-transform: uppercase;
