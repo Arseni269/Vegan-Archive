@@ -12,16 +12,16 @@ permalink: /archive/
       {% if post.data.title and post.url != '/archive/' and post.data.title != 'The Vegan Archive' %}
       <div class="post-card">
         <div class="post-thumbnail">
-          <a href="{{ post.url | url }}">
+          <a href="/Vegan-Archive{{ post.url }}">
             {% if post.data.thumbnail %}
-            <img src="{{ post.data.thumbnail | url }}" alt="{{ post.data.title }}"> 
+            <img src="/Vegan-Archive{{ post.data.thumbnail }}" alt="{{ post.data.title }}"> 
             {% else %}
             <div class="placeholder-thumb">No Image</div>
             {% endif %}
           </a>
         </div>
         <div class="post-details">
-          <h2 class="post-title"><a href="{{ post.url | url }}">{{ post.data.title }}</a></h2>
+          <h2 class="post-title"><a href="/Vegan-Archive{{ post.url }}">{{ post.data.title }}</a></h2>
           <h5 class="post-author">{{ post.data.author }}</h5>
           {% if post.data.instagram_url %}
           <div class="ig-link-container">
@@ -37,7 +37,7 @@ permalink: /archive/
 
   <aside class="sidebar">
     <div class="filter-group">
-      <a href="{{ '/archive/' | url }}" class="tag-pill active-pill">✨ All Archives</a>
+      <a href="/Vegan-Archive/archive/" class="tag-pill active-pill">✨ All Archives</a>
     </div>
 
     <hr class="sidebar-divider">
@@ -45,8 +45,8 @@ permalink: /archive/
     <div class="filter-group">
       <h3>Filter by Creator</h3>
       <ul class="filter-list">
-        <li><a href="{{ '/authors/uncompromised-liberation/' | url }}" class="filter-link">👤 Uncompromised Liberation</a></li>
-        <li><a href="{{ '/authors/vegangelic/' | url }}" class="filter-link">👤 Vegangelic</a></li>
+        <li><a href="/Vegan-Archive/authors/uncompromised-liberation/" class="filter-link">👤 Uncompromised Liberation</a></li>
+        <li><a href="/Vegan-Archive/authors/vegangelic/" class="filter-link">👤 Vegangelic</a></li>
       </ul>
     </div>
 
@@ -59,7 +59,7 @@ permalink: /archive/
         {% assign tagName = tagPair[0] %}
         {% if tagName != "all" and tagName != "posts" and tagName != "Uncompromised Liberation" and tagName != "Vegangelic" %}
         <li>
-          <a href="{{ '/tags/' | append: tagName | append: '/' | url }}" class="tag-pill">#{{ tagName }}</a>
+          <a href="/Vegan-Archive/tags/{{ tagName | slugify }}/" class="tag-pill">#{{ tagName }}</a>
         </li>
         {% endif %}
         {% endfor %}
