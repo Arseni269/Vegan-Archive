@@ -189,32 +189,37 @@ Understanding the history of animal exploitation and what we choose to support m
 
 <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const lightboxLinks = document.querySelectorAll(".carousel-grid a.glightbox");
+  document.addEventListener("DOMContentLoaded", () => {
+    // Select the post content containers
+    const contents = document.querySelectorAll(".post-content, .post-markdown-content, main, article");
     
-    lightboxLinks.forEach(link => {
-      // Safely target the image inside the responsive layout structures
-      const img = link.querySelector("img");
-      if (img) {
-        let currentSrc = img.currentSrc || img.getAttribute("src");
-        
-        if (currentSrc) {
-          // Normalize base path mappings
-          if (!currentSrc.startsWith("http") && !currentSrc.startsWith("/Vegan-Archive")) {
-            currentSrc = "/Vegan-Archive/" + currentSrc.replace(/^\//, "");
-          }
-          // Apply directly back to the activator link anchor
-          link.setAttribute("href", currentSrc);
+    contents.forEach(container => {
+      if (!container) return;
+      
+      // Regular expression to discover plain text links safely
+      const urlRegex = /(https?:\/\/[^\s<]+)/g;
+      
+      // Traverse text nodes to replace URLs with clickable hyperlinks safely
+      const walk = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
+      let node;
+      const nodesToReplace = [];
+      
+      while (node = walk.nextNode()) {
+        if (node.parentElement.tagName !== 'A' && urlRegex.test(node.nodeValue)) {
+          nodesToReplace.push(node);
         }
       }
-    });
-
-    // Fire GLightbox initialization
-    const lightbox = GLightbox({
-      selector: '.glightbox',
-      loop: true,
-      zoomable: true,
-      draggable: true
+      
+      nodesToReplace.forEach(textNode => {
+        const parent = textNode.parentElement;
+        const div = document.createElement('div');
+        div.innerHTML = textNode.nodeValue.replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+        
+        while (div.firstChild) {
+          parent.insertBefore(div.firstChild, textNode);
+        }
+        parent.removeChild(textNode);
+      });
     });
   });
 </script>

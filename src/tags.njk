@@ -22,26 +22,26 @@ layout: base.njk
     {% set postAuthorSlug = post.data.author | slugify %}
     {% set hasTag = false %}
     
-    {# Check if the post contains this tag slug #}
     {% for t in post.data.tags %}
       {% if t | slugify == tagSlug %}{% set hasTag = true %}{% endif %}
     {% endfor %}
 
-    {# Render the post card if it matches either the tag OR the author slug #}
     {% if hasTag or postAuthorSlug == tagSlug %}
       <div class="post-card">
         <div class="post-thumbnail">
-  <a href="/Vegan-Archive{{ post.url }}">
-    <img src="/Vegan-Archive{{ post.data.thumbnail }}" alt="{{ post.data.title }}">
-  </a>
-</div>
+          <a href="/Vegan-Archive{{ post.url }}">
+            <img src="/Vegan-Archive{{ post.data.thumbnail }}" alt="{{ post.data.title }}">
+          </a>
+        </div>
         <div class="post-details">
           <h2 class="post-title">
             <a href="/Vegan-Archive{{ post.url }}">{{ post.data.title }}</a>
           </h2>
-          {% if post.data.instagram_link %}
+          <h5 class="post-author">{{ post.data.author }}</h5>
+          
+          {% if post.data.instagram_url %}
           <div class="ig-link-container">
-            <a href="{{ post.data.instagram_link }}" target="_blank" class="instagram-link">Instagram Link</a>
+            <a href="{{ post.data.instagram_url }}" target="_blank" rel="noopener noreferrer" class="instagram-link">View on Instagram ↗</a>
           </div>
           {% endif %}
         </div>
