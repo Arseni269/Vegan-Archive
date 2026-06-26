@@ -31,10 +31,10 @@ layout: base.njk
     {% if hasTag or postAuthorSlug == tagSlug %}
       <div class="post-card">
         <div class="post-thumbnail">
-          <a href="/Vegan-Archive{{ post.url }}">
-            <img src="/Vegan-Archive{{ post.url }}{{ post.data.thumbnail }}" alt="{{ post.data.title }}">
-          </a>
-        </div>
+  <a href="/Vegan-Archive{{ post.url }}">
+    <img src="/Vegan-Archive{{ post.data.thumbnail }}" alt="{{ post.data.title }}">
+  </a>
+</div>
         <div class="post-details">
           <h2 class="post-title">
             <a href="/Vegan-Archive{{ post.url }}">{{ post.data.title }}</a>

@@ -80,6 +80,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/archive/**/*.mp4");
 
  /// CASE-INSENSITIVE DEDUPLICATED TAG COLLECTION (Safe CommonJS)
+  // 1. CASE-INSENSITIVE DEDUPLICATED TAG COLLECTION
   eleventyConfig.addCollection("uniqTags", function(collectionApi) {
     const uniqueSlugs = new Set();
     const cleanTags = [];
@@ -88,49 +89,18 @@ module.exports = function (eleventyConfig) {
       const tags = item.data.tags || [];
       tags.forEach(function(tag) {
         if (!tag || ["all", "posts", "tagList"].includes(tag)) return;
-        
-        // Safe URL slug conversion
         const slug = tag.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-        
+     
         if (!uniqueSlugs.has(slug)) {
           uniqueSlugs.add(slug);
           cleanTags.push(tag);
         }
       });
     });
-
-    // DYNAMIC CREATOR ARCHIVE COLLECTION
-  eleventyConfig.addCollection("creators", function(collectionApi) {
-    const creatorMap = {};
-    
-    collectionApi.getAll().forEach(function(item) {
-      const author = item.data.author;
-      if (!author) return;
-      
-      // Create a URL-safe slug for the author
-      const slug = author.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-      
-      if (!creatorMap[slug]) {
-        creatorMap[slug] = {
-          name: author,
-          count: 0
-        };
-      }
-      creatorMap[slug].count++;
-    });
-    
-    return creatorMap;
-  });
     return cleanTags;
   });
 
-  // Helper filter to convert Nunjucks collections into standard sortable arrays
-  eleventyConfig.addFilter("collectionsToArray", function(obj) {
-    if (!obj) return [];
-    return Object.keys(obj).map(key => ({ key: key, value: obj[key] }));
-  });
-
-  // 1. Pre-Sorted Dynamic Creators
+  // 2. Pre-Sorted Dynamic Creators
   eleventyConfig.addCollection("sortedCreators", function(collectionApi) {
     const creatorMap = {};
     
@@ -145,17 +115,14 @@ module.exports = function (eleventyConfig) {
       creatorMap[slug].count++;
     });
 
-    // Convert to array and sort by count descending
     return Object.values(creatorMap).sort((a, b) => b.count - a.count);
   });
 
-  // 2. Pre-Sorted Case-Insensitive Topics (Excludes Creators and Specific Targets)
+  // 3. Pre-Sorted Case-Insensitive Topics
   eleventyConfig.addCollection("sortedTopics", function(collectionApi) {
-    const uniqueSlugs = new Set();
     const topicMap = {};
-
-    // First, gather creator slugs to filter them out
     const creatorSlugs = new Set();
+
     collectionApi.getAll().forEach(function(item) {
       if (item.data.author) {
         creatorSlugs.add(item.data.author.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''));
@@ -168,7 +135,7 @@ module.exports = function (eleventyConfig) {
         if (!tag || ["all", "posts", "tagList", "uniqTags", "ex-vegans", "carnivore-diet"].includes(tag)) return;
         
         const slug = tag.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-        if (creatorSlugs.has(slug)) return; // Skip if it's a creator name
+        if (creatorSlugs.has(slug)) return; 
 
         if (!topicMap[slug]) {
           topicMap[slug] = { name: tag, slug: slug, count: 0 };
@@ -180,18 +147,16 @@ module.exports = function (eleventyConfig) {
     return Object.values(topicMap).sort((a, b) => b.count - a.count);
   });
 
-  // 3. MASTER FILTERS COLLECTION (Generates pages for both Creators and Topics)
+  // 4. MASTER FILTERS COLLECTION (For generating subpages)
   eleventyConfig.addCollection("allFilters", function(collectionApi) {
     const filterSet = new Set();
 
     collectionApi.getAll().forEach(function(item) {
-      // Add author slug if it exists
       if (item.data.author) {
         const authorSlug = item.data.author.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
         filterSet.add(authorSlug);
       }
       
-      // Add standard tag slugs
       const tags = item.data.tags || [];
       tags.forEach(function(tag) {
         if (!tag || ["all", "posts", "tagList", "uniqTags"].includes(tag)) return;
@@ -202,11 +167,17 @@ module.exports = function (eleventyConfig) {
 
     return Array.from(filterSet);
   });
-  // Look for your existing return statement at the bottom and make it look like this:
+
+  // 5. Helper filter to convert Nunjucks collections into arrays
+  eleventyConfig.addFilter("collectionsToArray", function(obj) {
+    if (!obj) return [];
+    return Object.keys(obj).map(key => ({ key: key, value: obj[key] }));
+  });
+
   return {
     dir: {
       input: "src",
-      output: "docs", // Make sure this says docs, not _site
+      output: "docs",
       includes: "_includes"
     },
     pathPrefix: "/Vegan-Archive/"
