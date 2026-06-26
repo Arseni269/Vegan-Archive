@@ -1,8 +1,9 @@
-/* Core Structural Layout Fix */
+/* ==========================================
+   1. CORE STRUCTURAL LAYOUT (ARCHIVE & GRID)
+   ========================================== */
 .archive-layout {
   display: grid;
   grid-template-columns: 1fr 320px;
-  /* Force the layout into explicit columns */
   gap: 2rem;
   align-items: start;
   max-width: 1200px;
@@ -14,58 +15,7 @@
   flex: 3;
 }
 
-main img,
-.post-content img,
-article img {
-  gap: 100px;
-  display: block;
-  size: 1000px;
-  /* Keeps carousel slides at a reasonable viewing size */
-  width: 100%;
-  /* Allows them to scale down cleanly on mobile screens */
-  height: auto;
-  /* Maintains original aspect ratios */
-  /*margin: 20px 0;         /* Spacing between carousel slides */
-  border-radius: 6px;
-  /* Gives them a clean look matching your grid */
-  border: 1px solid #eee;
-  /* Light boundary around bright slides */
-}
-
-/* Constrain the sidebar so tag rows don't push it wider */
-.sidebar {
-  width: 320px;
-  min-width: 320px;
-  max-width: 320px;
-  box-sizing: border-box;
-}
-
-.tag-list {
-  list-style: none;
-  padding: 0;
-}
-
-.tag-list li {
-  margin-bottom: 8px;
-}
-
-.tag-list a {
-  text-decoration: none;
-  color: #555;
-  font-size: 0.95rem;
-}
-
-.tag-list a:hover {
-  color: #0066cc;
-  text-decoration: underline;
-}
-
-.active-tag {
-  font-weight: bold;
-  color: #111 !important;
-}
-
-/* Grid styles */
+/* Imageboard Cards Grid Container */
 .imageboard-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 240px));
@@ -73,25 +23,30 @@ article img {
   justify-content: start;
 }
 
-/* Unshackle image grid cards from square constraints */
-.post-card .post-thumbnail {
-  width: 100% !important;
-  height: auto !important;
-  aspect-ratio: auto !important; /* Strips out any 1/1 square locks */
-  overflow: hidden;
-  border-radius: 6px;
+/* ==========================================
+   2. POST CARDS & NATURAL IMAGE PROPORTIONS
+   ========================================== */
+.post-card {
+  display: flex;
+  flex-direction: column;
 }
 
+.post-card .post-thumbnail {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 1px solid #eee;
+}
+
+/* Force the image to scale naturally without squishing or square crops */
 .post-card .post-thumbnail img {
   width: 100% !important;
   height: auto !important;
-  object-fit: contain !important; /* Prevents the top/bottom slicing */
+  max-height: none !important;
+  object-fit: contain !important;
+  aspect-ratio: auto !important;
   display: block;
-}
-
-.post-thumbnail img {
-  width: 100%;
-  height: 100%;
 }
 
 .post-details {
@@ -105,11 +60,16 @@ article img {
 .post-title {
   font-size: 1rem;
   margin: 0 0 2px 0;
+  font-weight: 600;
 }
 
 .post-title a {
   color: #111;
   text-decoration: none;
+}
+
+.post-title a:hover {
+  color: #0066cc;
 }
 
 .ig-link-container {
@@ -123,216 +83,19 @@ article img {
   font-weight: bold;
 }
 
-.tag-pill {
-  display: inline-block;
-  padding: 4px 10px;
-  background-color: #e0e0e0;
-  color: #333 !important;
-  text-decoration: none !important;
-  font-size: 0.85rem;
-  border-radius: 12px;
-  margin: 2px 0;
-  transition: all 0.2s ease;
+/* Hide old duplicated raw images inside markdown bodies */
+.post-markdown-content img {
+  display: none !important;
 }
 
-.tag-pill:hover {
-  background-color: #0066cc;
-  color: #fff !important;
-}
-
-.active-pill {
-  background-color: #333;
-  color: #fff !important;
-}
-
-/* 1. Main Grid Card Thumbnail Styles */
-.post-thumbnail img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* Full page wrapper constraint */
-.single-post-wrapper {
-  max-width: 1200px;
-  margin: 40px 40px;
-  padding: 0 20px;
-  font-family: sans-serif;
-}
-
-/* Header Up Top Setup */
-.post-header {
-  margin-bottom: 30px;
-  border-bottom: 1px solid #e2e8f0;
-  padding-bottom: 20px;
-}
-
-.post-header h1 {
-  font-size: 2.2rem;
-  color: #1e293b;
-  margin: 12px 0 6px 0;
-}
-
-/* Return Button Style */
-.back-button {
-  display: inline-block;
-  text-decoration: none;
-  color: #64748b;
-  font-size: 0.9rem;
-  font-weight: bold;
-  transition: color 0.2s ease;
-}
-
-.back-button:hover {
-  color: #0066cc;
-}
-
-.post-metadata {
-  color: #64748b;
-  font-size: 0.9rem;
-}
-
-/* Main Split Container Layout */
-.single-post-container {
-  display: flex;
-  gap: 40px;
-}
-
-.carousel {
-  flex: 3;
-  min-width: 0;
-}
-
-.sidebar-info-card {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  padding: 24px;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.meta-section {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.meta-label {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #64748b;
-  font-weight: 700;
-}
-
-.meta-value {
-  margin: 0;
-  font-size: 1.1rem;
-  color: #1e293b;
-  font-weight: 600;
-}
-
-.sidebar-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.tag-pill-sidebar {
-  font-size: 0.8rem;
-  background: #ffffff;
-  color: #475569;
-  padding: 4px 10px;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-}
-
-.instructions {
-  border-top: 1px dashed #cbd5e1;
-  padding-top: 16px;
-  margin-top: 4px;
-  color: #64748b;
-  font-size: 0.8rem;
-  line-height: 1.5;
-}
-
-.tag-list-top {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.tag-list-top .tag {
-  font-size: 0.85rem;
-  background: #f1f5f9;
-  color: #475569;
-  padding: 6px 12px;
-  border-radius: 16px;
-  font-weight: 500;
-}
-
-.carousel-grid {
-  display: grid;
-  /* Hard-locks the layout into exactly 2 equal columns */
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-
-/* Anchor wrapping container fixes overlap glitch */
-.carousel-grid a.glightbox {
-  display: block;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  /* Forces container to stay perfectly square */
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  position: relative;
-  /* Isolates image layout bounds */
-}
-
-/* Image element completely fills out the anchor layout box */
-.carousel-grid img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  /* Crops square cleanly without stretching */
-  display: block;
-  margin: 0 !important;
-}
-
-/* Turning 18 stacked images into an Image Grid */
-.carousel-grid a.glightbox {
-  display: block;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: 6px;
-  overflow: hidden;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-  transition: transform 0.2s ease;
-}
-
-.carousel-grid a.glightbox:hover {
-  transform: scale(1.02);
-  /* Slight hover pop effect to show it's clickable */
-}
-
-.carousel-grid img {
-  display: block;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover;
-  margin: 0 !important;
-}
-
-
-/* Sidebar Structural Improvements */
+/* ==========================================
+   3. SIDEBAR NAVIGATION & FILTER DRAWERS
+   ========================================== */
 .sidebar {
+  width: 320px;
+  min-width: 320px;
+  max-width: 320px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -351,13 +114,13 @@ article img {
   font-weight: 600;
 }
 
-/* Ensure tag list wraps neatly without expanding the sidebar width */
-.filter-group-wrapper ul.tag-list {
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: wrap !important;
-  gap: 0.4rem !important;
-  padding: 0 1rem 1rem 1rem;
+.filter-group-wrapper {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+  transition: all 0.2s ease;
 }
 
 .filter-group-wrapper[open] {
@@ -389,25 +152,6 @@ article img {
   transform: rotate(-180deg);
 }
 
-/* Custom CSS toggling indicator indicator */
-.group-title::after {
-  content: '▼';
-  font-size: 0.7rem;
-  color: #64748b;
-  transition: transform 0.2s;
-}
-
-.filter-group-wrapper[open] .group-title::after {
-  transform: rotate(-180deg);
-}
-
-/* Horizontal display for pills inside the drawers */
-.filter-group-wrapper ul.tag-list {
-  flex-direction: row !important;
-  flex-wrap: wrap !important;
-  gap: 0.5rem !important;
-}
-
 /* Dynamic Lists inside Drawers */
 .filter-group-wrapper ul {
   padding: 0 1rem 1rem 1rem;
@@ -418,7 +162,16 @@ article img {
   gap: 0.5rem;
 }
 
-/* Inline flex alignment for text vs count numbers */
+/* Horizontal display for tag pills inside drawers */
+.filter-group-wrapper ul.tag-list {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 0.4rem !important;
+  padding: 0 1rem 1rem 1rem;
+}
+
+/* Creator text alignments */
 .filter-link {
   display: flex;
   justify-content: space-between;
@@ -427,10 +180,11 @@ article img {
   color: #334155;
   text-decoration: none;
   font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .filter-link:hover {
-  color: #0f172a;
+  color: #0066cc;
 }
 
 .item-count,
@@ -443,9 +197,30 @@ article img {
   border-radius: 999px;
 }
 
-/* Red Accent styling for warnings/misinformers drawer */
+/* Tag Pills Layout */
+.tag-pill {
+  display: inline-block;
+  padding: 4px 10px;
+  background-color: #e2e8f0;
+  color: #475569 !important;
+  text-decoration: none !important;
+  font-size: 0.85rem;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.tag-pill:hover {
+  background-color: #0066cc;
+  color: #fff !important;
+}
+
+.active-pill {
+  background-color: #333;
+  color: #fff !important;
+}
+
 .target-pill {
-  border-color: #fee2e2 !important;
+  border: 1px solid #fee2e2 !important;
   color: #991b1b !important;
 }
 
@@ -454,89 +229,115 @@ article img {
   color: #991b1b;
 }
 
-.filter-group h3 {
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #64748b;
-  margin: 0 0 12px 0;
+/* ==========================================
+   4. SINGLE POST PAGE VIEW & CAROUSELS
+   ========================================== */
+.single-post-wrapper {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: sans-serif;
 }
 
-.filter-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.post-header {
+  margin-bottom: 30px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 20px;
 }
 
-.filter-link {
+.post-header h1 {
+  font-size: 2.2rem;
+  color: #1e293b;
+  margin: 12px 0 6px 0;
+}
+
+.back-button {
+  display: inline-block;
   text-decoration: none;
-  color: #334155;
+  color: #64748b;
   font-size: 0.9rem;
-  font-weight: 500;
-  display: block;
-  padding: 6px 8px;
-  border-radius: 6px;
-  transition: background 0.15s ease;
+  font-weight: bold;
+  transition: color 0.2s ease;
 }
 
-.filter-link:hover {
-  background: #f1f5f9;
+.back-button:hover {
   color: #0066cc;
 }
 
-/* ==========================================
-   GLIGHTBOX OVERRIDES (MAXIMIZE IMAGE SIZE)
-   ========================================== */
-
-/* 1. Hide the description box completely */
-.gslide-description.description-bottom {
-  display: none !important;
+.single-post-container {
+  display: flex;
+  gap: 40px;
 }
 
-/* 2. Remove the forced padding/margins from the inner media container */
-.gslide-media {
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
+.carousel {
+  flex: 3;
+  min-width: 0;
 }
 
-/* 3. Force the image container to utilize 100% available vertical window height */
-.ginner-container {
-  height: 100vh !important;
-  max-height: 100vh !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
+.carousel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
-.gslide-image {
-  max-height: 95vh !important;
-  /* Let the image scale up to 95% of screen height */
-}
-
-.gslide-image img {
-  max-height: 95vh !important;
-  object-fit: contain !important;
-  /* Prevents stretching or distortion */
-}
-
-/* Example styling for your MAIN archive grid images */
-.gallery-grid img {
+.carousel-grid a.glightbox {
+  display: block;
   width: 100%;
   aspect-ratio: 1 / 1;
-  /* Compels the browser to reserve a square box immediately */
-  object-fit: cover;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.carousel-grid a.glightbox:hover {
+  transform: scale(1.02);
+}
+
+.carousel-grid img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
   display: block;
+  margin: 0 !important;
 }
 
-/* Hide old duplicated images generated inside markdown content blocks */
-.post-markdown-content img {
-  display: none !important;
+.sidebar-info-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 24px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 320px;
 }
 
-/* Navigation Header Structure */
+.meta-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.meta-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.meta-value {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+/* ==========================================
+   5. NAVIGATION NAVBAR & MAIN HERO STYLES
+   ========================================== */
 .main-navbar {
   background-color: #ffffff;
   border-bottom: 1px solid #e2e8f0;
@@ -579,10 +380,8 @@ article img {
 .nav-links a:hover,
 .nav-links a.active {
   color: #10b981;
-  /* Accent Green */
 }
 
-/* Introduction Hero */
 .home-hero {
   background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
   padding: 4rem 2rem;
@@ -591,7 +390,6 @@ article img {
 
 .hero-content {
   max-width: 800px;
-  /* Kept safely inside the braces where it belongs! */
   margin: 0 auto;
 }
 
@@ -606,7 +404,6 @@ article img {
   color: #166534;
 }
 
-/* Text Content Wrapper */
 .home-main-content {
   max-width: 800px;
   margin: 3rem auto;
@@ -616,56 +413,48 @@ article img {
   font-size: 1.1rem;
 }
 
-.info-section h2 {
-  color: #1e293b;
-  margin-bottom: 1.5rem;
-}
-
-.cta-wrapper {
-  margin-top: 2.5rem;
-}
-
-.cta-button {
-  display: inline-block;
-  background-color: #10b981;
-  color: white;
-  text-decoration: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  font-weight: 600;
-  transition: background-color 0.2s;
-}
-
-.cta-button:hover {
-  background-color: #059669;
-}
-
-/* Responsive fix for smaller browser viewports */
+/* ==========================================
+   6. RESPONSIVE MEDIA BREAKPOINTS
+   ========================================== */
 @media (max-width: 900px) {
-  .archive-layout {
+  .archive-layout,
+  .single-post-container {
     grid-template-columns: 1fr;
+    flex-direction: column;
   }
-  .sidebar {
+  .sidebar,
+  .sidebar-info-card {
     width: 100%;
     min-width: 100%;
     max-width: 100%;
   }
 }
 
-/* Nuclear reset to eliminate square layouts */
-.imageboard-grid .post-card,
-.post-card,
-.post-thumbnail,
-.post-thumbnail a {
-  height: auto !important;
-  max-height: none !important;
-  aspect-ratio: auto !important;
+/* ==========================================
+   7. GLIGHTBOX LIGHTBOX MEDIA LIGHTBOXES
+   ========================================== */
+.gslide-description.description-bottom {
+  display: none !important;
 }
 
-.post-thumbnail img {
-  width: 100% !important;
-  height: auto !important;
-  max-height: none !important;
+.gslide-media {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.ginner-container {
+  height: 100vh !important;
+  max-height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+
+.gslide-image {
+  max-height: 95vh !important;
+}
+
+.gslide-image img {
+  max-height: 95vh !important;
   object-fit: contain !important;
-  aspect-ratio: auto !important;
 }
