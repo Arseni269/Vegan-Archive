@@ -49,7 +49,8 @@ templateEngineOverride: njk
     <details open class="filter-group-wrapper">
     <summary class="group-title">👤 Archived Creators</summary>
     <ul class="filter-list">
-      {% for slug, creator in collections.creators %}
+      {# Sort creators object by its internal count property, highest first #}
+      {% for slug, creator in collections.creators | dictsort(false, 'value.count') | reverse %}
       <li>
         <a href="/Vegan-Archive/tags/{{ slug }}/" class="filter-link {% if tag | slugify == slug %}active-link{% endif %}">
           <span>{{ creator.name }}</span> <span class="item-count">{{ creator.count }}</span>
@@ -62,7 +63,8 @@ templateEngineOverride: njk
     <details open class="filter-group-wrapper">
     <summary class="group-title">🌱 Core Concepts & Topics</summary>
     <ul class="tag-list">
-      {% for tagName, posts in collections %}
+      {# Sort collections by the number of items (posts) inside them, highest first #}
+      {% for tagName, posts in collections | dictsort(false, 'value.length') | reverse %}
         {% set tagSlug = tagName | slugify %}
         {% set isCreator = collections.creators[tagSlug] %}
         
