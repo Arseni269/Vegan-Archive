@@ -170,6 +170,29 @@ module.exports = function (eleventyConfig) {
 
     return Object.values(topicMap).sort((a, b) => b.count - a.count);
   });
+
+  // 3. MASTER FILTERS COLLECTION (Generates pages for both Creators and Topics)
+  eleventyConfig.addCollection("allFilters", function(collectionApi) {
+    const filterSet = new Set();
+
+    collectionApi.getAll().forEach(function(item) {
+      // Add author slug if it exists
+      if (item.data.author) {
+        const authorSlug = item.data.author.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        filterSet.add(authorSlug);
+      }
+      
+      // Add standard tag slugs
+      const tags = item.data.tags || [];
+      tags.forEach(function(tag) {
+        if (!tag || ["all", "posts", "tagList", "uniqTags"].includes(tag)) return;
+        const tagSlug = tag.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        filterSet.add(tagSlug);
+      });
+    });
+
+    return Array.from(filterSet);
+  });
   // Look for your existing return statement at the bottom and make it look like this:
   return {
     dir: {

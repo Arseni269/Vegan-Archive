@@ -1,11 +1,10 @@
 ---
-layout: base.njk
-templateEngineOverride: njk
 pagination:
-  data: collections.uniqTags
+  data: collections.allFilters
   size: 1
   alias: tag
-permalink: /tags/{{ tag | slugify }}/index.html
+permalink: /tags/{{ tag | slugify }}/
+layout: base.njk
 ---
 
 <link rel="stylesheet" href="/Vegan-Archive/css/styles.css?v=1.1">
@@ -18,29 +17,38 @@ permalink: /tags/{{ tag | slugify }}/index.html
     </p>
 
     <div class="imageboard-grid">
-      {% for post in collections[tag] %}
+  {% set tagSlug = tag | slugify %}
+  {% for post in collections.all %}
+    {% set postAuthorSlug = post.data.author | slugify %}
+    {% set hasTag = false %}
+    
+    {# Check if the post contains this tag slug #}
+    {% for t in post.data.tags %}
+      {% if t | slugify == tagSlug %}{% set hasTag = true %}{% endif %}
+    {% endfor %}
+
+    {# Render the post card if it matches either the tag OR the author slug #}
+    {% if hasTag or postAuthorSlug == tagSlug %}
       <div class="post-card">
         <div class="post-thumbnail">
           <a href="/Vegan-Archive{{ post.url }}">
-            {% if post.data.thumbnail %}
-              <img src="/Vegan-Archive{{ post.data.thumbnail }}" alt="{{ post.data.title }}" loading="lazy">
-            {% else %}
-              <div class="placeholder-thumb">No Image</div>
-            {% endif %}
+            <img src="/Vegan-Archive{{ post.url }}{{ post.data.thumbnail }}" alt="{{ post.data.title }}">
           </a>
         </div>
         <div class="post-details">
-          <h2 class="post-title"><a href="/Vegan-Archive{{ post.url }}">{{ post.data.title }}</a></h2>
-          <h5 class="post-author">{{ post.data.author }}</h5>
-          {% if post.data.instagram_url %}
+          <h2 class="post-title">
+            <a href="/Vegan-Archive{{ post.url }}">{{ post.data.title }}</a>
+          </h2>
+          {% if post.data.instagram_link %}
           <div class="ig-link-container">
-            <a href="{{ post.data.instagram_url }}" target="_blank" rel="noopener noreferrer" class="instagram-link">View on Instagram ↗</a>
+            <a href="{{ post.data.instagram_link }}" target="_blank" class="instagram-link">Instagram Link</a>
           </div>
           {% endif %}
         </div>
       </div>
-      {% endfor %}
-    </div>
+    {% endif %}
+  {% endfor %}
+</div>
   </main>
 
   <aside class="sidebar">
