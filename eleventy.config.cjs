@@ -1,8 +1,17 @@
 const path = require("path");
 const fs = require("fs");
 const Image = require("@11ty/eleventy-img");
+const markdownIt = require("markdown-it");
 
 module.exports = function (eleventyConfig) {
+
+  let markdownOptions = {
+    html: true,
+    breaks: true,
+    linkify: true // <-- THIS turned plain text URLs back into clickable hyperlinks!
+  };
+  
+  eleventyConfig.setLibrary("md", markdownIt(markdownOptions));
 
   // 1. SMART IMAGE SHORTCODE
   eleventyConfig.addNunjucksAsyncShortcode("image", async function(imagePath, alt) {
