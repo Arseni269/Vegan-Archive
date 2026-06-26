@@ -114,6 +114,12 @@ module.exports = function (eleventyConfig) {
   });
     return cleanTags;
   });
+
+  // Helper filter to convert Nunjucks collections into standard sortable arrays
+  eleventyConfig.addFilter("collectionsToArray", function(obj) {
+    if (!obj) return [];
+    return Object.keys(obj).map(key => ({ key: key, value: obj[key] }));
+  });
   // Look for your existing return statement at the bottom and make it look like this:
   return {
     dir: {

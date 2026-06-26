@@ -63,8 +63,11 @@ templateEngineOverride: njk
     <details open class="filter-group-wrapper">
     <summary class="group-title">🌱 Core Concepts & Topics</summary>
     <ul class="tag-list">
-      {# Sort collections by the number of items (posts) inside them, highest first #}
-      {% for tagName, posts in collections | dictsort(false, 'value.length') | reverse %}
+      {# Convert the collections object to an array and sort it safely by item count #}
+      {% set sortedCollections = collections | collectionsToArray | sort(true, false, 'value.length') %}
+      {% for item in sortedCollections %}
+        {% set tagName = item.key %}
+        {% set posts = item.value %}
         {% set tagSlug = tagName | slugify %}
         {% set isCreator = collections.creators[tagSlug] %}
         
