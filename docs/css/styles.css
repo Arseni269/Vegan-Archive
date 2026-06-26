@@ -92,7 +92,6 @@ article img {
 .post-thumbnail img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
 }
 
 .post-details {
@@ -651,4 +650,22 @@ article img {
     min-width: 100%;
     max-width: 100%;
   }
+}
+
+/* Nuclear reset to eliminate square layouts */
+.imageboard-grid .post-card,
+.post-card,
+.post-thumbnail,
+.post-thumbnail a {
+  height: auto !important;
+  max-height: none !important;
+  aspect-ratio: auto !important;
+}
+
+.post-thumbnail img {
+  width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  aspect-ratio: auto !important;
 }
