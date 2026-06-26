@@ -73,19 +73,20 @@ article img {
   justify-content: start;
 }
 
-.post-card {
-  border: 1px solid #ccc;
-  background: #f9f9f9;
-  border-radius: 4px;
+/* Unshackle image grid cards from square constraints */
+.post-card .post-thumbnail {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: auto !important; /* Strips out any 1/1 square locks */
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  border-radius: 6px;
 }
 
-.post-thumbnail {
-  width: 100%;
-  aspect-ratio: 1;
-  background: #eaeaea;
+.post-card .post-thumbnail img {
+  width: 100% !important;
+  height: auto !important;
+  object-fit: contain !important; /* Prevents the top/bottom slicing */
+  display: block;
 }
 
 .post-thumbnail img {
