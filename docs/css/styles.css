@@ -88,6 +88,13 @@
   display: none !important;
 }
 
+/* Force Markdown-it line breaks to act like true structural paragraph spaces */
+.post-markdown-content br {
+  content: "";
+  display: block;
+  margin-bottom: 1.25rem;
+}
+
 /* ==========================================
    3. SIDEBAR NAVIGATION & FILTER DRAWERS
    ========================================== */

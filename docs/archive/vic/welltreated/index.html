@@ -156,6 +156,28 @@ A more sophisticated form of enslavement is not a step toward justice. It is mer
       });
     });
   });
+
+  
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const postContent = document.getElementById("description-content");
+    if (!postContent) return;
+
+    // Split text cleanly by double or single line breaks if they got compressed
+    let html = postContent.innerHTML;
+    
+    // Clean up any weird consecutive break structures and wrap line chunks cleanly
+    if (!html.includes('<p>')) {
+      // If the engine output it as one single block, convert line breaks to clean spaces
+      html = html.split(/<br\s*\/?>\s*<br\s*\/?>/).map(paragraph => {
+        return paragraph.trim() ? `<p style="margin-bottom: 1.25rem; line-height: 1.65;">${paragraph}</p>` : '';
+      }).join('');
+      
+      postContent.innerHTML = html;
+    }
+  });
 </script>
 </body>
 </html>
