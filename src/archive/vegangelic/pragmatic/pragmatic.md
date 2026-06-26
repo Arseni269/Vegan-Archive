@@ -1,8 +1,8 @@
 ---
 layout: post.njk
-title: "Veganism is a privilege"
+title: "Reducetarianism and welfarism are more pragmatic to promote than veganism!"
 thumbnail: "/archive/vegangelic/pragmatic/1.webp"
-instagram_url: "https://www.instagram.com/p/DEhv6AKxSXp/" # Link to IG
+instagram_url: "https://www.instagram.com/p/DHY-q3tRiun/?img_index=1" # Link to IG
 author: "Vegangelic Activism"
 tags: ["pragmatic", "reducetarianism", "welfarism", "utilitarianism",]
 ---

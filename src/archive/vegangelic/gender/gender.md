@@ -1,8 +1,8 @@
 ---
 layout: post.njk
-title: "The problem with the term Animal Holocaust"
+title: "Stop trying to gender veganism and animal exploitation"
 thumbnail: "/archive/vegangelic/gender/1.webp"
-instagram_url: "https://www.instagram.com/p/DU0ozeEkS4k/?img_index=1" # Link to IG
+instagram_url: "https://www.instagram.com/p/DSR8GO7Ed7j/?img_index=1" # Link to IG
 author: "Vegangelic Activism"
 tags: ["intersectionality", "feminism",]
 ---
