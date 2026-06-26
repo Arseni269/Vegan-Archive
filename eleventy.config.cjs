@@ -120,6 +120,56 @@ module.exports = function (eleventyConfig) {
     if (!obj) return [];
     return Object.keys(obj).map(key => ({ key: key, value: obj[key] }));
   });
+
+  // 1. Pre-Sorted Dynamic Creators
+  eleventyConfig.addCollection("sortedCreators", function(collectionApi) {
+    const creatorMap = {};
+    
+    collectionApi.getAll().forEach(function(item) {
+      const author = item.data.author;
+      if (!author) return;
+      const slug = author.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+      
+      if (!creatorMap[slug]) {
+        creatorMap[slug] = { name: author, slug: slug, count: 0 };
+      }
+      creatorMap[slug].count++;
+    });
+
+    // Convert to array and sort by count descending
+    return Object.values(creatorMap).sort((a, b) => b.count - a.count);
+  });
+
+  // 2. Pre-Sorted Case-Insensitive Topics (Excludes Creators and Specific Targets)
+  eleventyConfig.addCollection("sortedTopics", function(collectionApi) {
+    const uniqueSlugs = new Set();
+    const topicMap = {};
+
+    // First, gather creator slugs to filter them out
+    const creatorSlugs = new Set();
+    collectionApi.getAll().forEach(function(item) {
+      if (item.data.author) {
+        creatorSlugs.add(item.data.author.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''));
+      }
+    });
+
+    collectionApi.getAll().forEach(function(item) {
+      const tags = item.data.tags || [];
+      tags.forEach(function(tag) {
+        if (!tag || ["all", "posts", "tagList", "uniqTags", "ex-vegans", "carnivore-diet"].includes(tag)) return;
+        
+        const slug = tag.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        if (creatorSlugs.has(slug)) return; // Skip if it's a creator name
+
+        if (!topicMap[slug]) {
+          topicMap[slug] = { name: tag, slug: slug, count: 0 };
+        }
+        topicMap[slug].count++;
+      });
+    });
+
+    return Object.values(topicMap).sort((a, b) => b.count - a.count);
+  });
   // Look for your existing return statement at the bottom and make it look like this:
   return {
     dir: {
