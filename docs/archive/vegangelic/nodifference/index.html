@@ -172,18 +172,26 @@ Morally obligatory means morally obligatory.
     const postContent = document.getElementById("description-content");
     if (!postContent) return;
 
-    // Split text cleanly by double or single line breaks if they got compressed
-    let html = postContent.innerHTML;
-    
-    // Clean up any weird consecutive break structures and wrap line chunks cleanly
-    if (!html.includes('<p>')) {
-      // If the engine output it as one single block, convert line breaks to clean spaces
-      html = html.split(/<br\s*\/?>\s*<br\s*\/?>/).map(paragraph => {
-        return paragraph.trim() ? `<p style="margin-bottom: 1.25rem; line-height: 1.65;">${paragraph}</p>` : '';
-      }).join('');
-      
-      postContent.innerHTML = html;
-    }
+    // Convert raw line breaks into separate paragraphs if bundled inside single blocks
+    const paragraphs = postContent.querySelectorAll("p");
+    paragraphs.forEach(p => {
+      // If a paragraph contains HTML line breaks, break it out into true structural paragraphs
+      if (p.innerHTML.includes("<br")) {
+        const structuralChunks = p.innerHTML.split(/<br\s*\/?>/);
+        const fragment = document.createDocumentFragment();
+        
+        structuralChunks.forEach(chunk => {
+          if (chunk.trim()) {
+            const newP = document.createElement("p");
+            newP.innerHTML = chunk.trim();
+            fragment.appendChild(newP);
+          }
+        });
+        
+        p.parentNode.insertBefore(fragment, p);
+        p.parentNode.removeChild(p);
+      }
+    });
   });
 </script>
 </body>
