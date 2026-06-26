@@ -92,7 +92,6 @@ article img {
 .post-thumbnail img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
 }
 
 .post-details {
