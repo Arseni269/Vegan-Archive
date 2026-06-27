@@ -7,7 +7,6 @@
   gap: 2rem;
   align-items: start;
   max-width: 1200px;
-  margin: 0 auto;
   padding: 20px;
 }
 
@@ -18,7 +17,7 @@
 /* Imageboard Cards Grid Container */
 .imageboard-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 240px));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 265px));
   gap: 20px;
   justify-content: start;
 }
