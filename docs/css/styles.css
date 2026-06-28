@@ -1,6 +1,7 @@
-/* ==========================================
-   1. CORE STRUCTURAL LAYOUT (ARCHIVE & GRID)
-   ========================================== */
+body {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 .archive-layout {
   display: grid;
   grid-template-columns: 1fr 320px;
@@ -25,9 +26,31 @@
 /* ==========================================
    2. POST CARDS & NATURAL IMAGE PROPORTIONS
    ========================================== */
+/* ==========================================
+   SMOOTH POST FILTER CARD TRANSITIONS
+   ========================================== */
 .post-card {
-  display: flex;
-  flex-direction: column;
+  opacity: 1;
+  transform: scale(1);
+  visibility: visible;
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
+}
+
+/* State when the card is filtered out */
+.post-card.is-hidden {
+  opacity: 0;
+  transform: scale(0.92);
+  visibility: hidden;
+  
+  /* These force the hidden cards to completely release their layout grid space */
+  position: absolute;
+  pointer-events: none;
+  overflow: hidden;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
 }
 
 .post-card .post-thumbnail {
@@ -91,7 +114,7 @@
 .post-markdown-content br {
   content: "";
   display: block;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.60rem;
 }
 
 /* ==========================================
@@ -242,7 +265,6 @@
   max-width: 1200px;
   margin: 40px auto;
   padding: 0 20px;
-  font-family: sans-serif;
 }
 
 .post-header {
@@ -286,18 +308,11 @@
   gap: 20px;
 }
 
-.carousel-grid a.glightbox {
-  display: block;
-  width: 100%;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease;
-}
-
-.carousel-grid a.glightbox:hover {
-  transform: scale(1.02);
+main .carousel .carousel-grid a.glightbox { 
+  flex: 1 1 calc(50% - 1.5rem) !important; 
+  min-width: 250px !important; 
+  display: block !important; 
+  text-decoration: none !important; 
 }
 
 .carousel-grid img {
@@ -484,4 +499,44 @@
   height: auto !important;
   max-height: none !important;
   aspect-ratio: auto !important;
+}
+
+/* Align custom functional lists inside sidebar facets */
+.filter-group-wrapper ul li {
+  padding: 0;
+  margin: 0;
+}
+
+.filter-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem; /* Clean distance from checkbox element */
+  cursor: pointer;
+  width: 100%;
+}
+
+.filter-link input[type="checkbox"] {
+  accent-color: #0066cc; /* Matches link styling colors seamlessly */
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+}
+
+.filter-link span {
+  font-size: 0.9rem;
+  color: #334155;
+  user-select: none;
+}
+
+.filter-link:hover span {
+  color: #0066cc;
+}
+
+/* Subtle style adjustment to item badges */
+.item-count {
+  margin-left: auto; /* Pushes numeric counter cleanly to the right boundary */
+  font-size: 0.75rem;
+  background-color: #f1f5f9;
+  padding: 2px 6px;
+  border-radius: 10px;
 }

@@ -4,97 +4,185 @@ title: Archive
 permalink: /archive/
 templateEngineOverride: njk
 ---
+
 <link rel="stylesheet" href="/Vegan-Archive/css/styles.css?v=1.1">
+
 <div class="archive-layout">
 
   <main class="main-content">
     <h1>Vegan Archive</h1>
-    <div class="imageboard-grid">
-      {% for post in collections.all %}
-      {% if post.data.title and post.url != '/archive/' and post.data.title != 'The Vegan Archive' %}
-      <div class="post-card">
-        <div class="post-thumbnail">
-          <a href="/Vegan-Archive{{ post.url }}">
-            {% if post.data.thumbnail %}
-            <img src="/Vegan-Archive{{ post.data.thumbnail }}" alt="{{ post.data.title }}">
-            {% else %}
-            <div class="placeholder-thumb">No Image</div>
+    <div class="imageboard-grid" id="archive-grid">
+      {% for post in collections.posts %}
+        {% if post.data.title and post.url != "/archive/" %}
+          
+          {# Generate clean comparative identifiers #}
+          {% set authorSlug = post.data.author | lower | replace(r/[^a-z0-9]+/g, '-') if post.data.author else '' %}
+          
+          {# Build a safe comma-separated string loop of tags #}
+          {% set tagSlugs = "" %}
+          {% for tag in post.data.tags %}
+            {% if tag %}
+              {% set cleanTag = tag | lower | replace(r/[^a-z0-9]+/g, '-') %}
+              {% set tagSlugs = tagSlugs + ("," if tagSlugs else "") + cleanTag %}
             {% endif %}
-          </a>
-        </div>
-        <div class="post-details">
-          <h2 class="post-title"><a href="/Vegan-Archive{{ post.url }}">{{ post.data.title }}</a></h2>
-          <h5 class="post-author">{{ post.data.author }}</h5>
-          {% if post.data.instagram_url %}
-          <div class="ig-link-container">
-            <a href="{{ post.data.instagram_url }}" target="_blank" rel="noopener noreferrer"
-              class="instagram-link">View on Instagram ↗</a>
+          {% endfor %}
+
+          <div class="post-card" 
+               data-creator="{{ authorSlug }}" 
+               data-tags="{{ tagSlugs }}">
+               
+               <div class="post-thumbnail">
+                 <a href="{{ post.url | url }}">
+                   {% if post.data.video_path %}
+                     <div style="background:#000; color:#fff; padding: 40px 10px; text-align:center; font-size:0.9rem; font-weight:bold; border-radius:6px;">▶ Watch Video</div>
+                   {% else %}
+                     {% set galleryData = post.inputPath | getImagesData %}
+                     {% if galleryData.files.length > 0 %}
+                       {% image galleryData.folder + "/" + galleryData.files[0], post.data.title %}
+                     {% else %}
+                       <div style="background:#e2e8f0; padding:40px 10px; text-align:center; color:#64748b; font-size:0.85rem;">No Image Available</div>
+                     {% endif %}
+                   {% endif %}
+                 </a>
+               </div>
+
+               <div class="post-details">
+                 <h2 class="post-title">
+                   <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+                 </h2>
+                 {% if post.data.instagram_url %}
+                   <div class="ig-link-container">
+                     <a href="{{ post.data.instagram_url }}" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a>
+                   </div>
+                 {% endif %}
+               </div>
           </div>
-          {% endif %}
-        </div>
-      </div>
-      {% endif %}
+        {% endif %}
       {% endfor %}
     </div>
   </main>
 
   <aside class="sidebar">
     <div class="sidebar-header">
-      <h2>🎯 Content Directory</h2>
-      <a href="/Vegan-Archive/archive/" class="clear-all-btn">✨ Show All</a>
+      <h3>Filters</h3>
+      <button id="clear-filters-btn" class="clear-all-btn">Clear All</button>
     </div>
 
-    <hr class="sidebar-divider">
+    <details class="filter-group-wrapper" open>
+      <summary class="group-title">Creators</summary>
+      <ul class="filter-list">
+        {% for creator in collections.sortedCreators %}
+          <li>
+            <label class="filter-link">
+              <input type="checkbox" name="creator" value="{{ creator.slug }}" class="filter-checkbox" />
+              <span>{{ creator.name }}</span>
+              <span class="item-count">{{ creator.count }}</span>
+            </label>
+          </li>
+        {% endfor %}
+      </ul>
+    </details>
 
-    <details open class="filter-group-wrapper">
-    <summary class="group-title">👤 Creators</summary>
-    <ul class="filter-list">
-      {% for creator in collections.sortedCreators %}
-      <li>
-        <a href="/Vegan-Archive/tags/{{ creator.slug }}/" class="filter-link {% if tag | slugify == creator.slug %}active-link{% endif %}">
-          <span>{{ creator.name }}</span> <span class="item-count">{{ creator.count }}</span>
-        </a>
-      </li>
-      {% endfor %}
-    </ul>
-  </details>
+    <details class="filter-group-wrapper" open>
+      <summary class="group-title">Topics</summary>
+      <ul class="filter-list">
+        {% for topic in collections.sortedTopics %}
+          <li>
+            <label class="filter-link">
+              <input type="checkbox" name="topic" value="{{ topic.slug }}" class="filter-checkbox" />
+              <span>{{ topic.name }}</span>
+              <span class="item-count">{{ topic.count }}</span>
+            </label>
+          </li>
+        {% endfor %}
+      </ul>
+    </details>
 
-  <details open class="filter-group-wrapper">
-    <summary class="group-title">🌱 Core Concepts & Topics</summary>
-    <ul class="tag-list">
-      {% for item in collections.sortedTopics %}
-        {% set tagName = item.name %}
-        {% set tagSlug = item.slug %}
-        {% set count = item.count %}
-        
-        <li>
-          <a href="/Vegan-Archive/tags/{{ tagSlug }}/" class="tag-pill {% if tagName == tag %}active-pill{% endif %}">
-            #{{ tagName }} <span class="pill-count">({{ count }})</span>
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
-  </details>
+    <details class="filter-group-wrapper" open>
+      <summary class="group-title">Languages</summary>
+      <ul class="filter-list">
+        {% for lang in collections.sortedLanguages %}
+          <li>
+            <label class="filter-link">
+              <input type="checkbox" name="language" value="{{ lang.slug }}" class="filter-checkbox" />
+              <span>{{ lang.name }}</span>
+              <span class="item-count">{{ lang.count }}</span>
+            </label>
+          </li>
+        {% endfor %}
+      </ul>
+    </details>
 
-  <details open class="filter-group-wrapper">
-    <summary class="group-title">⚠️ Misinformers</summary>
-    <ul class="tag-list">
-      {% for tagName, posts in collections %}
-        {% if tagName == "ex-vegans" or tagName == "carnivore-diet" %}
-        <li>
-          <a href="/Vegan-Archive/tags/{{ tagName | slugify }}/" class="tag-pill target-pill {% if tagName == tag %}active-pill{% endif %}">
-            #{{ tagName }} <span class="pill-count">({{ posts | length }})</span>
-          </a>
-        </li>
-        {% endif %}
-      {% endfor %}
-    </ul>
-  </details>
+    <details class="filter-group-wrapper" open>
+      <summary class="group-title">Misinformers</summary>
+      <ul class="filter-list">
+        {% for misinformer in collections.sortedMisinformers %}
+          <li>
+            <label class="filter-link">
+              <input type="checkbox" name="misinformer" value="{{ misinformer.slug }}" class="filter-checkbox" />
+              <span>{{ misinformer.name }}</span>
+              <span class="item-count">{{ misinformer.count }}</span>
+            </label>
+          </li>
+        {% endfor %}
+      </ul>
+    </details>
+  </aside>
 
 </div>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById("archive-grid");
+    if (!grid) return;
+
+    const postCards = Array.from(grid.querySelectorAll(".post-card"));
+    const checkboxes = document.querySelectorAll(".filter-checkbox");
+    const clearBtn = document.getElementById("clear-filters-btn");
+
+    function evaluateActiveFilters() {
+      // Build dynamic group states using native HTML input name tracking
+      const state = {
+        creator: Array.from(document.querySelectorAll('input[name="creator"]:checked')).map(el => el.value),
+        language: Array.from(document.querySelectorAll('input[name="language"]:checked')).map(el => el.value),
+        topic: Array.from(document.querySelectorAll('input[name="topic"]:checked')).map(el => el.value),
+        misinformer: Array.from(document.querySelectorAll('input[name="misinformer"]:checked')).map(el => el.value)
+      };
+
+      postCards.forEach(card => {
+        // 1. Validate Creator Filter Group
+        const cardCreator = card.getAttribute("data-creator") || "";
+        const creatorMatch = state.creator.length === 0 || state.creator.includes(cardCreator);
+
+        // 2. Validate Multi-Tag Groups
+        const rawCardTags = card.getAttribute("data-tags") || "";
+        const cardTagsList = rawCardTags.split(",").map(t => t.trim());
+
+        const languageMatch = state.language.length === 0 || state.language.some(lang => cardTagsList.includes(lang));
+        const topicMatch = state.topic.length === 0 || state.topic.some(topic => cardTagsList.includes(topic));
+        const misinformerMatch = state.misinformer.length === 0 || state.misinformer.some(m => cardTagsList.includes(m));
+
+        // Faceted Multi-Select Check: AND across groups, OR inside individual groups
+        if (creatorMatch && languageMatch && topicMatch && misinformerMatch) {
+          card.classList.remove("is-hidden");
+        } else {
+          card.classList.add("is-hidden");
+        }
+      });
+    }
+
+    // Attach filters listeners
+    checkboxes.forEach(box => box.addEventListener("change", evaluateActiveFilters));
+
+    // Clear filters action trigger
+    if (clearBtn) {
+      clearBtn.addEventListener("click", () => {
+        checkboxes.forEach(box => box.checked = false);
+        evaluateActiveFilters();
+      });
+    }
+
+    // Restore scroll memory position tracking smoothly
     const savedScrollPos = sessionStorage.getItem("archiveScrollPosition");
     if (savedScrollPos) {
       setTimeout(() => {
@@ -105,7 +193,7 @@ templateEngineOverride: njk
       }, 50);
     }
 
-    const postLinks = document.querySelectorAll(".post-card a, .gallery-grid a");
+    const postLinks = document.querySelectorAll(".post-card a");
     postLinks.forEach(link => {
       link.addEventListener("click", () => {
         sessionStorage.setItem("archiveScrollPosition", window.scrollY);

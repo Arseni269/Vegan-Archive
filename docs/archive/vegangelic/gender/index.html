@@ -11,173 +11,227 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
 
 <style>
-  .back-to-archive-nav { margin-bottom: 1.5rem; }
-  .back-link { display: inline-flex; align-items: center; gap: 0.4rem; color: #475569; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
-  .back-link:hover { color: #0f172a; }
-  .post-layout-grid { display: grid; grid-template-columns: 2.2fr 1fr; gap: 2.5rem; align-items: start; margin-top: 1.5rem; }
-  @media (max-width: 900px) { .post-layout-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
-  main .carousel .carousel-grid { display: flex !important; flex-wrap: wrap !important; gap: 1.5rem !important; }
-  main .carousel .carousel-grid a.glightbox { flex: 1 1 calc(50% - 1.5rem) !important; min-width: 250px !important; display: block !important; text-decoration: none !important; }
-  main .carousel .carousel-grid img { width: 100% !important; height: auto !important; border-radius: 8px !important; display: block !important; }
-  .video-post-container { width: 100%; max-width: 640px; }
-  .video-post-container video { width: 100% !important; height: auto !important; border-radius: 8px; background: #000; }
-  .full-width-description { grid-column: 1 / -1; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #e2e8f0; }
-  .post-markdown-content { line-height: 1.7; font-size: 1rem; color: #334155; max-width: 850px; }
-  .post-markdown-content p { margin-bottom: 1.25rem; }
-  .post-markdown-content a { color: #0066cc; text-decoration: underline; }
-  .post-markdown-content video, .post-markdown-content img { display: none !important; }
+  /* Isolated wrapper breaks away from global side-by-side flex rules */
+  .post-view-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: block !important; /* Forces vertical stacking for top elements */
+  }
+
+  .back-to-archive-nav { 
+    margin-bottom: 0.60rem; 
+    display: block;
+  }
+
+  .back-link { 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 0.4rem; 
+    color: #475569; 
+    text-decoration: none; 
+    font-size: 0.95rem; 
+    font-weight: 500; 
+  }
+  .back-link:hover { 
+    color: #0f172a; 
+  }
+  
+  /* Heading stays at the very top, taking up full width */
+  .post-main-title {
+    font-size: 2.2rem;
+    color: #0f172a;
+    margin: 0 0 2rem 0;
+    font-weight: 700;
+    line-height: 1.2;
+    display: block;
+    width: 100%;
+  }
+
+  /* Two-column grid layout ONLY starts here, under the title */
+  .post-layout-grid { 
+    display: grid !important; 
+    grid-template-columns: 2fr 1fr !important; 
+    gap: 2.5rem !important; 
+    align-items: start; 
+    width: 100%;
+  }
+
+  @media (max-width: 900px) { 
+    .post-layout-grid { 
+      grid-template-columns: 1fr !important; 
+      gap: 1.5rem !important; 
+    } 
+  }
+
+  /* Grid layout for images: exactly 2 per row */
+  .carousel-grid { 
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem !important; 
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .carousel-grid a.glightbox { 
+    display: block !important; 
+    text-decoration: none !important; 
+    width: 100% !important;
+  }
+
+  .carousel-grid img { 
+    width: 100% !important; 
+    height: auto !important; 
+    max-height: 450px !important;
+    object-fit: contain !important;
+    border-radius: 8px; 
+    display: block;
+    background: #f8fafc;
+  }
 </style>
 
-<main class="single-post-wrapper">
+<div class="post-view-wrapper">
+  
   <nav class="back-to-archive-nav">
-    <a href="/Vegan-Archive/archive/" class="back-link">← Back to Archive Nav</a>
+    <a href="/Vegan-Archive/archive/" class="back-link">
+      ← Back to Archive
+    </a>
   </nav>
 
-  <header class="post-header">
-    <h1>Stop trying to gender veganism and animal exploitation</h1>
-  </header>
+  <h1 class="post-main-title">Stop trying to gender veganism and animal exploitation</h1>
 
   <div class="post-layout-grid">
+    
+  <main style="margin: 0; padding: 0;">
+  
     <div class="carousel">
-      <div class="carousel-grid" id="post-gallery">
+      <div class="carousel-grid">
         
-          
-          
-
-          
-            
-              
-              <a href="#" class="glightbox" data-gallery="post-slides" data-title="Slide 1">
-                <img src="/Vegan-Archive/img/-Nm6G16Uiv-600.webp" alt="Slide 1" loading="lazy" decoding="async" width="600" height="600">
-              </a>
-            
-          
-            
-              
-              <a href="#" class="glightbox" data-gallery="post-slides" data-title="Slide 2">
-                <img src="/Vegan-Archive/img/ceAUNXBPQU-600.webp" alt="Slide 2" loading="lazy" decoding="async" width="600" height="600">
-              </a>
-            
-          
-            
-              
-              <a href="#" class="glightbox" data-gallery="post-slides" data-title="Slide 3">
-                <img src="/Vegan-Archive/img/mqlUyVeHcV-600.webp" alt="Slide 3" loading="lazy" decoding="async" width="600" height="600">
-              </a>
-            
-          
+        
+          <a href="#" class="glightbox">
+            <img src="/Vegan-Archive/img/-Nm6G16Uiv-600.webp" alt="Stop trying to gender veganism and animal exploitation" loading="lazy" decoding="async" width="600" height="600">
+          </a>
+        
+          <a href="#" class="glightbox">
+            <img src="/Vegan-Archive/img/ceAUNXBPQU-600.webp" alt="Stop trying to gender veganism and animal exploitation" loading="lazy" decoding="async" width="600" height="600">
+          </a>
+        
+          <a href="#" class="glightbox">
+            <img src="/Vegan-Archive/img/mqlUyVeHcV-600.webp" alt="Stop trying to gender veganism and animal exploitation" loading="lazy" decoding="async" width="600" height="600">
+          </a>
         
       </div>
     </div>
+  
+</main>
 
-    <aside class="post-sidebar">
-      <div class="sidebar-info-card" style="padding: 1.5rem; background: #f8fafc; border-radius: 8px;">
-        <div class="meta-section" style="margin-bottom: 1.2rem;">
-          <span class="meta-label" style="font-size: 0.8rem; color: #64748b; font-weight: 600;">Creator</span>
-          <h3 style="margin: 0.2rem 0 0 0;">Vegangelic Activism</h3>
+    <aside class="sidebar-info-card" style="background: #f8fafc; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0; margin: 0;">
+      
+        <div class="meta-section">
+          <h3 style="margin: 0 0 0.3rem 0; font-size: 1.1rem; color: #1e293b;">Creator</h3>
+          <p style="margin: 0; color: #475569; font-weight: 500;">Vegangelic Activism</p>
         </div>
+      
 
-        <div class="meta-section" style="margin-bottom: 1.2rem;">
-          <span class="meta-label" style="font-size: 0.8rem; color: #64748b; font-weight: 600;">Assigned Topics</span>
-          <div style="margin-top: 0.4rem; display: flex; flex-wrap: wrap; gap: 0.4rem;">
-            
-              
-            
-              
-                <span style="background: #e2e8f0; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.85rem;">#intersectionality</span>
-              
-            
-              
-                <span style="background: #e2e8f0; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.85rem;">#feminism</span>
-              
-            
-          </div>
+      
+        <div class="meta-section" style="margin-bottom: 1.5rem;">
+          <a href="https://www.instagram.com/p/DSR8GO7Ed7j/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link" style="display: inline-block; background: #e1306c; color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-size: 0.9rem; font-weight: 500;">View on Instagram</a>
         </div>
+      
 
-        
-        <div style="margin-top: 0.5rem; border-top: 1px dashed #e2e8f0; padding-top: 1.2rem;">
-          <a href="https://www.instagram.com/p/DSR8GO7Ed7j/?img_index=1" target="_blank" rel="noopener noreferrer" style="display: block; text-align: center; background: #dc2743; color: white; padding: 0.5rem; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: 600;">View on Instagram</a>
-        </div>
-        
-      </div>
-    </aside>
-
-    
-      <div class="full-width-description">
-        <span class="meta-label" style="display: block; margin-bottom: 1rem; font-weight: 600;">Description</span>
-        <div class="post-markdown-content" id="description-content">
+      <div class="meta-section">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: #1e293b;">Description</h3>
+        <div id="description-content" style="color: #334155; line-height: 1.6; font-size: 0.95rem;">
           
 TL;DR—Every group of humans, regardless of identity, is generally in favor of animal exploitation. Also, female animals, in relation to male animals, do not experience an amplified degree of victimhood.
         </div>
       </div>
-    
-  </div>
-</main>
+    </aside>
 
-<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    // Select the post content containers
-    const contents = document.querySelectorAll(".post-content, .post-markdown-content, main, article");
-    
-    contents.forEach(container => {
-      if (!container) return;
-      
-      // Regular expression to discover plain text links safely
-      const urlRegex = /(https?:\/\/[^\s<]+)/g;
-      
-      // Traverse text nodes to replace URLs with clickable hyperlinks safely
-      const walk = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
-      let node;
-      const nodesToReplace = [];
-      
-      while (node = walk.nextNode()) {
-        if (node.parentElement.tagName !== 'A' && urlRegex.test(node.nodeValue)) {
-          nodesToReplace.push(node);
+    // 1. Dynamic Path Fixer: Extract real generated image URLs before Lightbox fires
+    document.querySelectorAll('.carousel-grid a.glightbox').forEach(link => {
+      const internalImg = link.querySelector('img');
+      if (internalImg) {
+        const computedSrc = internalImg.getAttribute('src');
+        if (computedSrc) {
+          link.setAttribute('href', computedSrc);
         }
       }
-      
+    });
+
+    // 2. Initialize Lightbox
+    const lightbox = GLightbox({
+      selector: '.glightbox',
+      loop: true,
+      openEffect: 'zoom',
+      closeEffect: 'zoom',
+      closeOnOutsideClick: true
+    });
+
+    // FIXED WORKAROUND: Force lightbox closure when clicking on any background container asset
+document.addEventListener('click', function (e) {
+  // Check if the lightbox is currently active/open on screen
+  const isOpen = document.body.classList.contains('glightbox-open');
+  if (!isOpen) return;
+
+  // Track if the click lands directly on the image element or navigation controls
+  const clickedImage = e.target.closest('.gslide-image img, .gslide-video, .gslide-inline');
+  const clickedControl = e.target.closest('.gbtn, .gnext, .gprev, .gclose');
+
+  // If the user clicked the backdrop area (not the image, video, or navigation buttons), close it!
+  if (!clickedImage && !clickedControl && e.target.closest('.glightbox-container')) {
+    lightbox.close();
+  }
+}, false);
+    // Auto hyperlink strings check
+    const desc = document.getElementById("description-content");
+    if (desc) {
+      const urlRegex = /(https?:\/\/[^\s<]+)/g;
+      const walk = document.createTreeWalker(desc, NodeFilter.SHOW_TEXT, null, false);
+      const nodesToReplace = [];
+      let textNode;
+      while (textNode = walk.nextNode()) {
+        if (urlRegex.test(textNode.nodeValue)) {
+          nodesToReplace.push(textNode);
+        }
+      }
       nodesToReplace.forEach(textNode => {
         const parent = textNode.parentElement;
         const div = document.createElement('div');
         div.innerHTML = textNode.nodeValue.replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
-        
         while (div.firstChild) {
           parent.insertBefore(div.firstChild, textNode);
         }
         parent.removeChild(textNode);
       });
-    });
-  });
+    }
 
-  
-</script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const postContent = document.getElementById("description-content");
-    if (!postContent) return;
-
-    // Convert raw line breaks into separate paragraphs if bundled inside single blocks
-    const paragraphs = postContent.querySelectorAll("p");
-    paragraphs.forEach(p => {
-      // If a paragraph contains HTML line breaks, break it out into true structural paragraphs
-      if (p.innerHTML.includes("<br")) {
-        const structuralChunks = p.innerHTML.split(/<br\s*\/?>/);
-        const fragment = document.createDocumentFragment();
-        
-        structuralChunks.forEach(chunk => {
-          if (chunk.trim()) {
-            const newP = document.createElement("p");
-            newP.innerHTML = chunk.trim();
-            fragment.appendChild(newP);
-          }
-        });
-        
-        p.parentNode.insertBefore(fragment, p);
-        p.parentNode.removeChild(p);
-      }
-    });
+    // Convert line-breaks inside description containers 
+    if (desc) {
+      const paragraphs = desc.querySelectorAll("p");
+      paragraphs.forEach(p => {
+        if (p.innerHTML.includes("<br")) {
+          const structuralChunks = p.innerHTML.split(/<br\s*\/?>/);
+          const fragment = document.createDocumentFragment();
+          structuralChunks.forEach(chunk => {
+            if (chunk.trim()) {
+              const newP = document.createElement("p");
+              newP.innerHTML = chunk.trim();
+              fragment.appendChild(newP);
+            }
+          });
+          p.parentNode.insertBefore(fragment, p);
+          p.parentNode.removeChild(p);
+        }
+      });
+    }
   });
 </script>
 </body>

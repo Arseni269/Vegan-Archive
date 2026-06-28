@@ -51,6 +51,11 @@ module.exports = function (eleventyConfig) {
 
   // 2. AUTOMATIC IMAGE FINDER FILTER
   eleventyConfig.addFilter("getImagesData", function (inputPath) {
+    // Safety check: If inputPath is missing or undefined, fail gracefully instead of crashing
+    if (!inputPath) {
+      return { files: [], folder: "" };
+    }
+
     let relativeDirPath = inputPath.includes('.md') ? path.dirname(inputPath) : inputPath;
     relativeDirPath = relativeDirPath.replace(/^\.\//, "").replace(/^src\//, "");
 
@@ -71,15 +76,16 @@ module.exports = function (eleventyConfig) {
 
     return { files, folder: relativeDirPath };
   });
-
-// Keep whatever passthrough copies you already have, just add these if missing:
+  // Passthrough copies
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/archive/**/*.jpg");
   eleventyConfig.addPassthroughCopy("src/archive/**/*.png");
   eleventyConfig.addPassthroughCopy("src/archive/**/*.webp");
   eleventyConfig.addPassthroughCopy("src/archive/**/*.mp4");
 
- /// CASE-INSENSITIVE DEDUPLICATED TAG COLLECTION (Safe CommonJS)
+  // Helper to generate consistent safe slugs across your template files
+  const slugify = text => text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : '';
+
   // 1. CASE-INSENSITIVE DEDUPLICATED TAG COLLECTION
   eleventyConfig.addCollection("uniqTags", function(collectionApi) {
     const uniqueSlugs = new Set();
@@ -100,7 +106,7 @@ module.exports = function (eleventyConfig) {
     return cleanTags;
   });
 
-  // 2. Pre-Sorted Dynamic Creators
+  // 2. DYNAMIC CREATORS COLLECTION (Only one version kept)
   eleventyConfig.addCollection("sortedCreators", function(collectionApi) {
     const creatorMap = {};
     
@@ -118,24 +124,66 @@ module.exports = function (eleventyConfig) {
     return Object.values(creatorMap).sort((a, b) => b.count - a.count);
   });
 
-  // 3. Pre-Sorted Case-Insensitive Topics
+  // 3. DYNAMIC LANGUAGES COLLECTION
+  eleventyConfig.addCollection("sortedLanguages", function(collectionApi) {
+    const langMap = {};
+    const languageTerms = ["english", "russian", "spanish", "german", "french"];
+
+    collectionApi.getAll().forEach(function(item) {
+      const tags = item.data.tags || [];
+      tags.forEach(function(tag) {
+        if (!tag) return;
+        const slug = slugify(tag);
+        if (languageTerms.includes(slug)) {
+          if (!langMap[slug]) {
+            langMap[slug] = { name: tag, slug: slug, count: 0 };
+          }
+          langMap[slug].count++;
+        }
+      });
+    });
+    return Object.values(langMap).sort((a, b) => b.count - a.count);
+  });
+
+  // 4. DYNAMIC MISINFORMERS COLLECTION
+  eleventyConfig.addCollection("sortedMisinformers", function(collectionApi) {
+    const misinformerMap = {};
+    const misinformerTerms = ["niko", "peb", "roberto"];
+
+    collectionApi.getAll().forEach(function(item) {
+      const tags = item.data.tags || [];
+      tags.forEach(function(tag) {
+        if (!tag) return;
+        const slug = slugify(tag);
+        if (misinformerTerms.includes(slug)) {
+          if (!misinformerMap[slug]) {
+            misinformerMap[slug] = { name: tag, slug: slug, count: 0 };
+          }
+          misinformerMap[slug].count++;
+        }
+      });
+    });
+    return Object.values(misinformerMap).sort((a, b) => b.count - a.count);
+  });
+
+  // 5. DYNAMIC TOPICS COLLECTION
   eleventyConfig.addCollection("sortedTopics", function(collectionApi) {
     const topicMap = {};
     const creatorSlugs = new Set();
+    const reservedTerms = ["all", "posts", "taglist", "uniqtags", "english", "russian", "spanish", "german", "french", "niko", "peb", "roberto"];
 
     collectionApi.getAll().forEach(function(item) {
       if (item.data.author) {
-        creatorSlugs.add(item.data.author.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''));
+        creatorSlugs.add(slugify(item.data.author));
       }
     });
 
     collectionApi.getAll().forEach(function(item) {
       const tags = item.data.tags || [];
       tags.forEach(function(tag) {
-        if (!tag || ["all", "posts", "tagList", "uniqTags", "ex-vegans", "carnivore-diet"].includes(tag)) return;
-        
-        const slug = tag.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-        if (creatorSlugs.has(slug)) return; 
+        if (!tag) return;
+        const slug = slugify(tag);
+        if (reservedTerms.includes(slug) || creatorSlugs.has(slug)) return; 
 
         if (!topicMap[slug]) {
           topicMap[slug] = { name: tag, slug: slug, count: 0 };
@@ -143,35 +191,7 @@ module.exports = function (eleventyConfig) {
         topicMap[slug].count++;
       });
     });
-
     return Object.values(topicMap).sort((a, b) => b.count - a.count);
-  });
-
-  // 4. MASTER FILTERS COLLECTION (For generating subpages)
-  eleventyConfig.addCollection("allFilters", function(collectionApi) {
-    const filterSet = new Set();
-
-    collectionApi.getAll().forEach(function(item) {
-      if (item.data.author) {
-        const authorSlug = item.data.author.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-        filterSet.add(authorSlug);
-      }
-      
-      const tags = item.data.tags || [];
-      tags.forEach(function(tag) {
-        if (!tag || ["all", "posts", "tagList", "uniqTags"].includes(tag)) return;
-        const tagSlug = tag.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-        filterSet.add(tagSlug);
-      });
-    });
-
-    return Array.from(filterSet);
-  });
-
-  // 5. Helper filter to convert Nunjucks collections into arrays
-  eleventyConfig.addFilter("collectionsToArray", function(obj) {
-    if (!obj) return [];
-    return Object.keys(obj).map(key => ({ key: key, value: obj[key] }));
   });
 
   return {
