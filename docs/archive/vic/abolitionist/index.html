@@ -82,12 +82,41 @@
 
   .carousel-grid img { 
     width: 100% !important; 
-    height: auto !important; 
+    height: 100% !important;
     max-height: 450px !important;
     object-fit: contain !important;
     border-radius: 0px; 
     display: block;
     background: #f8fafc;
+  }
+
+  /* Grid layout for images: exactly 2 per row */
+  html body .carousel-grid { 
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px 0px !important; /* 10px vertical row gap, 0px horizontal column gap */
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Target the link container precisely and wipe out the min-width and flex properties */
+  html body main .carousel .carousel-grid a.glightbox { 
+    display: block !important; 
+    text-decoration: none !important; 
+    width: 100% !important;
+    min-width: 0px !important;     /* Kill the 250px gap instigator */
+    flex: none !important;         /* Stop flexbox collision */
+    margin: 0 !important;
+  }
+
+  /* Force the images to fill their grid column completely with no side gaps */
+  html body .carousel-grid img { 
+    width: 100% !important; 
+    height: auto !important; 
+    object-fit: cover !important; /* Prevents letterboxing gaps */
+    margin: 0 !important;
+    display: block !important;
   }
 </style>
 
