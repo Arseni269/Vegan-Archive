@@ -305,7 +305,7 @@ body {
 .carousel-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 10px 0rem !important;
 }
 
 main .carousel .carousel-grid a.glightbox { 
