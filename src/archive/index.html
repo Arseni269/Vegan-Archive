@@ -13,51 +13,62 @@ templateEngineOverride: njk
     <h1>Vegan Archive</h1>
     <div class="imageboard-grid" id="archive-grid">
       {% for post in collections.posts %}
-        {% if post.data.title and post.url != "/archive/" %}
-          
-          {# Generate clean comparative identifiers #}
-          {% set authorSlug = post.data.author | lower | replace(r/[^a-z0-9]+/g, '-') if post.data.author else '' %}
-          
-          {# Build a safe comma-separated string loop of tags #}
-          {% set tagSlugs = "" %}
-          {% for tag in post.data.tags %}
-            {% if tag %}
-              {% set cleanTag = tag | lower | replace(r/[^a-z0-9]+/g, '-') %}
-              {% set tagSlugs = tagSlugs + ("," if tagSlugs else "") + cleanTag %}
+      {% if post.data.title and post.url != "/archive/" %}
+
+      {# Generate clean comparative identifiers #}
+      {% set authorSlug = post.data.author | lower | replace(r/[^a-z0-9]+/g, '-') if post.data.author else '' %}
+
+      {# Build a safe comma-separated string loop of tags #}
+      {% set tagSlugs = "" %}
+      {% for tag in post.data.tags %}
+      {% if tag %}
+      {% set cleanTag = tag | lower | replace(r/[^a-z0-9]+/g, '-') %}
+      {% set tagSlugs = tagSlugs + ("," if tagSlugs else "") + cleanTag %}
+      {% endif %}
+      {% endfor %}
+
+      <div class="post-card" data-creator="{{ authorSlug }}" data-tags="{{ tagSlugs }}">
+
+        <div class="post-thumbnail">
+          <a href="{{ post.url | url }}">
+            {% if post.data.video_path %}
+            <div
+              style="background:#000; color:#fff; padding: 40px 10px; text-align:center; font-size:0.9rem; font-weight:bold; border-radius:6px;">
+              ▶ Watch Video</div>
+            {% else %}
+            {% set galleryData = post.inputPath | getImagesData %}
+            {% if galleryData.files.length > 0 %}
+            {% image galleryData.folder + "/" + galleryData.files[0], post.data.title %}
+            {% else %}
+            <div style="background:#e2e8f0; padding:40px 10px; text-align:center; color:#64748b; font-size:0.85rem;">No
+              Image Available</div>
             {% endif %}
-          {% endfor %}
+            {% endif %}
+          </a>
+        </div>
 
-          <div class="post-card" 
-               data-creator="{{ authorSlug }}" 
-               data-tags="{{ tagSlugs }}">
-               
-               <div class="post-thumbnail">
-                 <a href="{{ post.url | url }}">
-                   {% if post.data.video_path %}
-                     <div style="background:#000; color:#fff; padding: 40px 10px; text-align:center; font-size:0.9rem; font-weight:bold; border-radius:6px;">▶ Watch Video</div>
-                   {% else %}
-                     {% set galleryData = post.inputPath | getImagesData %}
-                     {% if galleryData.files.length > 0 %}
-                       {% image galleryData.folder + "/" + galleryData.files[0], post.data.title %}
-                     {% else %}
-                       <div style="background:#e2e8f0; padding:40px 10px; text-align:center; color:#64748b; font-size:0.85rem;">No Image Available</div>
-                     {% endif %}
-                   {% endif %}
-                 </a>
-               </div>
+        <div class="post-details">
+          <h2 class="post-title">
+            <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+          </h2>
 
-               <div class="post-details">
-                 <h2 class="post-title">
-                   <a href="{{ post.url | url }}">{{ post.data.title }}</a>
-                 </h2>
-                 {% if post.data.instagram_url %}
-                   <div class="ig-link-container">
-                     <a href="{{ post.data.instagram_url }}" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a>
-                   </div>
-                 {% endif %}
-               </div>
+          <!-- Bring back the Creator info line underneath the title -->
+          {% if post.data.author %}
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">
+            By {{ post.data.author }}
           </div>
-        {% endif %}
+          {% endif %}
+
+          {% if post.data.instagram_url %}
+          <div class="ig-link-container">
+            <a href="{{ post.data.instagram_url }}" target="_blank" rel="noopener noreferrer"
+              class="instagram-link">Instagram</a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
       {% endfor %}
     </div>
   </main>
@@ -72,13 +83,13 @@ templateEngineOverride: njk
       <summary class="group-title">Creators</summary>
       <ul class="filter-list">
         {% for creator in collections.sortedCreators %}
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="creator" value="{{ creator.slug }}" class="filter-checkbox" />
-              <span>{{ creator.name }}</span>
-              <span class="item-count">{{ creator.count }}</span>
-            </label>
-          </li>
+        <li>
+          <label class="filter-link">
+            <input type="checkbox" name="creator" value="{{ creator.slug }}" class="filter-checkbox" />
+            <span>{{ creator.name }}</span>
+            <span class="item-count">{{ creator.count }}</span>
+          </label>
+        </li>
         {% endfor %}
       </ul>
     </details>
@@ -87,13 +98,13 @@ templateEngineOverride: njk
       <summary class="group-title">Topics</summary>
       <ul class="filter-list">
         {% for topic in collections.sortedTopics %}
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="{{ topic.slug }}" class="filter-checkbox" />
-              <span>{{ topic.name }}</span>
-              <span class="item-count">{{ topic.count }}</span>
-            </label>
-          </li>
+        <li>
+          <label class="filter-link">
+            <input type="checkbox" name="topic" value="{{ topic.slug }}" class="filter-checkbox" />
+            <span>{{ topic.name }}</span>
+            <span class="item-count">{{ topic.count }}</span>
+          </label>
+        </li>
         {% endfor %}
       </ul>
     </details>
@@ -102,13 +113,13 @@ templateEngineOverride: njk
       <summary class="group-title">Languages</summary>
       <ul class="filter-list">
         {% for lang in collections.sortedLanguages %}
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="language" value="{{ lang.slug }}" class="filter-checkbox" />
-              <span>{{ lang.name }}</span>
-              <span class="item-count">{{ lang.count }}</span>
-            </label>
-          </li>
+        <li>
+          <label class="filter-link">
+            <input type="checkbox" name="language" value="{{ lang.slug }}" class="filter-checkbox" />
+            <span>{{ lang.name }}</span>
+            <span class="item-count">{{ lang.count }}</span>
+          </label>
+        </li>
         {% endfor %}
       </ul>
     </details>
@@ -117,13 +128,13 @@ templateEngineOverride: njk
       <summary class="group-title">Misinformers</summary>
       <ul class="filter-list">
         {% for misinformer in collections.sortedMisinformers %}
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="misinformer" value="{{ misinformer.slug }}" class="filter-checkbox" />
-              <span>{{ misinformer.name }}</span>
-              <span class="item-count">{{ misinformer.count }}</span>
-            </label>
-          </li>
+        <li>
+          <label class="filter-link">
+            <input type="checkbox" name="misinformer" value="{{ misinformer.slug }}" class="filter-checkbox" />
+            <span>{{ misinformer.name }}</span>
+            <span class="item-count">{{ misinformer.count }}</span>
+          </label>
+        </li>
         {% endfor %}
       </ul>
     </details>
