@@ -12,6 +12,36 @@
 <link rel="stylesheet" href="/Vegan-Archive/css/styles.css?v=1.1">
 
 <style>
+
+  /* FORCE FIXED WIDTHS INSIDE FILTER LISTS */
+.filter-list li {
+  margin-bottom: 4px;
+}
+
+.filter-list .filter-link {
+  display: grid !important;
+  grid-template-columns: auto 1fr auto !important;
+  align-items: center !important;
+  gap: 8px !important;
+  width: 100%;
+  cursor: pointer;
+}
+
+/* Force the text name column to occupy all available central room rigidly */
+.filter-list .filter-link > span:not(.filter-count) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+
+/* Force the count container to align right inside a fixed structural footprint */
+.filter-list .filter-count {
+  display: inline-block !important;
+  text-align: right !important;
+  font-variant-numeric: tabular-nums; /* Prevents number 1 vs 0 layout changes */
+  min-width: 32px !important; 
+}
   /* 1. Eliminate the sidebar structure and allow full screen spread */
   .archive-layout {
     display: block !important;
@@ -113,6 +143,14 @@
           
           <li>
             <label class="filter-link">
+              <input type="checkbox" name="creator" value="david-c-arenas" class="filter-checkbox">
+              <span>David C Arenas</span>
+              <span class="filter-count" data-count-target="david-c-arenas">(6)</span>
+            </label>
+          </li>
+          
+          <li>
+            <label class="filter-link">
               <input type="checkbox" name="creator" value="str8-vedge" class="filter-checkbox">
               <span>Str8 Vedge</span>
               <span class="filter-count" data-count-target="str8-vedge">(5)</span>
@@ -140,14 +178,6 @@
               <input type="checkbox" name="creator" value="luliwizard-vegan" class="filter-checkbox">
               <span>Luliwizard vegan</span>
               <span class="filter-count" data-count-target="luliwizard-vegan">(2)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="creator" value="david-c-arenas" class="filter-checkbox">
-              <span>David C Arenas</span>
-              <span class="filter-count" data-count-target="david-c-arenas">(1)</span>
             </label>
           </li>
           
@@ -186,7 +216,7 @@
             <label class="filter-link">
               <input type="checkbox" name="topic" value="utilitarianism" class="filter-checkbox">
               <span>utilitarianism</span>
-              <span class="filter-count" data-count-target="utilitarianism">(6)</span>
+              <span class="filter-count" data-count-target="utilitarianism">(10)</span>
             </label>
           </li>
           
@@ -194,7 +224,7 @@
             <label class="filter-link">
               <input type="checkbox" name="topic" value="welfarism" class="filter-checkbox">
               <span>welfarism</span>
-              <span class="filter-count" data-count-target="welfarism">(6)</span>
+              <span class="filter-count" data-count-target="welfarism">(9)</span>
             </label>
           </li>
           
@@ -224,6 +254,14 @@
           
           <li>
             <label class="filter-link">
+              <input type="checkbox" name="topic" value="misinformation" class="filter-checkbox">
+              <span>misinformation</span>
+              <span class="filter-count" data-count-target="misinformation">(3)</span>
+            </label>
+          </li>
+          
+          <li>
+            <label class="filter-link">
               <input type="checkbox" name="topic" value="hunting-ideology" class="filter-checkbox">
               <span>hunting ideology</span>
               <span class="filter-count" data-count-target="hunting-ideology">(3)</span>
@@ -240,9 +278,9 @@
           
           <li>
             <label class="filter-link">
-              <input type="checkbox" name="topic" value="misinformation" class="filter-checkbox">
-              <span>misinformation</span>
-              <span class="filter-count" data-count-target="misinformation">(2)</span>
+              <input type="checkbox" name="topic" value="lab-flesh" class="filter-checkbox">
+              <span>lab flesh</span>
+              <span class="filter-count" data-count-target="lab-flesh">(2)</span>
             </label>
           </li>
           
@@ -304,9 +342,9 @@
           
           <li>
             <label class="filter-link">
-              <input type="checkbox" name="topic" value="lab-flesh" class="filter-checkbox">
-              <span>lab flesh</span>
-              <span class="filter-count" data-count-target="lab-flesh">(1)</span>
+              <input type="checkbox" name="topic" value="single-issue-campaigns" class="filter-checkbox">
+              <span>single issue campaigns</span>
+              <span class="filter-count" data-count-target="single-issue-campaigns">(1)</span>
             </label>
           </li>
           
@@ -328,17 +366,17 @@
           
           <li>
             <label class="filter-link">
-              <input type="checkbox" name="topic" value="distortions" class="filter-checkbox">
-              <span>distortions</span>
-              <span class="filter-count" data-count-target="distortions">(1)</span>
+              <input type="checkbox" name="topic" value="sic" class="filter-checkbox">
+              <span>sic</span>
+              <span class="filter-count" data-count-target="sic">(1)</span>
             </label>
           </li>
           
           <li>
             <label class="filter-link">
-              <input type="checkbox" name="topic" value="sic" class="filter-checkbox">
-              <span>sic</span>
-              <span class="filter-count" data-count-target="sic">(1)</span>
+              <input type="checkbox" name="topic" value="distortions" class="filter-checkbox">
+              <span>distortions</span>
+              <span class="filter-count" data-count-target="distortions">(1)</span>
             </label>
           </li>
           
@@ -465,7 +503,7 @@
             <label class="filter-link">
               <input type="checkbox" name="language" value="english" class="filter-checkbox" />
               <span>english</span>
-              <span class="filter-count" data-count-target="english">(41)</span>
+              <span class="filter-count" data-count-target="english">(46)</span>
             </label>
           </li>
           
@@ -528,6 +566,202 @@
           
           
           <div class="ig-link-container"><a href="https://www.instagram.com/p/CoGuAtzuU9h/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          
+        </div>
+      </div>
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <div class="post-card" data-creator="david-c-arenas" data-tags="posts,english,utilitarianism,single-issue-campaigns,welfarism">
+        <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
+          <a href="/Vegan-Archive/archive/arenas/forefathers/" style="display: block; text-decoration: none;">
+            
+            <img src="/Vegan-Archive/archive/arenas/forefathers/1.webp" alt="If the vegan forefathers had been plant-based utilitarians" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            
+
+            
+          </a>
+        </div>
+
+        <div class="post-details">
+          <h2 class="post-title"><a href="/Vegan-Archive/archive/arenas/forefathers/">If the vegan forefathers had been plant-based utilitarians</a></h2>
+          
+          <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
+          
+          
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/C8VMaBRpEXU/" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          
+        </div>
+      </div>
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <div class="post-card" data-creator="david-c-arenas" data-tags="posts,english,utilitarianism">
+        <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
+          <a href="/Vegan-Archive/archive/arenas/ifathief/carnism/" style="display: block; text-decoration: none;">
+            
+            <img src="/Vegan-Archive/archive/arenas/ifathief/1.png" alt="If a thief only steals when..." class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            
+
+            
+          </a>
+        </div>
+
+        <div class="post-details">
+          <h2 class="post-title"><a href="/Vegan-Archive/archive/arenas/ifathief/carnism/">If a thief only steals when...</a></h2>
+          
+          <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
+          
+          
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DA6V6ahJ6XF/" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          
+        </div>
+      </div>
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <div class="post-card" data-creator="david-c-arenas" data-tags="posts,english,utilitarianism,lab-flesh">
+        <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
+          <a href="/Vegan-Archive/archive/arenas/labmeat/" style="display: block; text-decoration: none;">
+            
+            <img src="/Vegan-Archive/archive/arenas/labmeat/1.png" alt="If the vegan forefathers had been plant-based utilitarians" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            
+
+            
+          </a>
+        </div>
+
+        <div class="post-details">
+          <h2 class="post-title"><a href="/Vegan-Archive/archive/arenas/labmeat/">If the vegan forefathers had been plant-based utilitarians</a></h2>
+          
+          <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
+          
+          
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DCNNgYMx_6s/" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          
+        </div>
+      </div>
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <div class="post-card" data-creator="david-c-arenas" data-tags="posts,english,welfarism,misinformation">
+        <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
+          <a href="/Vegan-Archive/archive/arenas/effectivewelfarism/" style="display: block; text-decoration: none;">
+            
+            <img src="/Vegan-Archive/archive/arenas/effectivewelfarism/1.jpg" alt="If you think welfarism is more effective, you are a welfarist" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            
+
+            
+          </a>
+        </div>
+
+        <div class="post-details">
+          <h2 class="post-title"><a href="/Vegan-Archive/archive/arenas/effectivewelfarism/">If you think welfarism is more effective, you are a welfarist</a></h2>
+          
+          <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
+          
+          
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DCz9SBRRnXp/" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -929,6 +1163,55 @@
           
           
           <div class="ig-link-container"><a href="https://www.instagram.com/p/DSnqZMDkkT1/" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          
+        </div>
+      </div>
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <div class="post-card" data-creator="david-c-arenas" data-tags="posts,english,welfarism-,utilitarianism">
+        <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
+          <a href="/Vegan-Archive/archive/arenas/georgemartinwelfarism/" style="display: block; text-decoration: none;">
+            
+            <img src="/Vegan-Archive/archive/arenas/georgemartinwelfarism1.png" alt="George Martin - Welfarism Part 1" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            
+
+            
+          </a>
+        </div>
+
+        <div class="post-details">
+          <h2 class="post-title"><a href="/Vegan-Archive/archive/arenas/georgemartinwelfarism/">George Martin - Welfarism Part 1</a></h2>
+          
+          <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
+          
+          
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DTv8hUmkefT/" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -2426,13 +2709,15 @@
 
     const slugify = text => text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : '';
 
+    // Save scroll position when navigating away
     window.addEventListener("beforeunload", () => {
       sessionStorage.setItem("archiveScrollPosition", window.scrollY);
     });
+
     // =============================================================
-    // 1. CORE FILTERING FUNCTION
+    // CORE FILTERING & RECOUNTER FUNCTION
     // =============================================================
-    function filterPosts() {
+    function filterPosts(isInitial = false) {
       const activeFilters = {
         creator: [],
         topic: [],
@@ -2443,6 +2728,7 @@
       const chipsContainer = document.getElementById("active-chips-container");
       if (chipsContainer) chipsContainer.innerHTML = "";
 
+      // Group all currently checked inputs
       checkboxes.forEach(box => {
         if (box.checked) {
           const group = box.name;
@@ -2450,10 +2736,10 @@
             activeFilters[group].push(box.value);
           }
 
-          // Safely target the custom layout span text label descriptor next to input
           const labelSpan = box.parentNode.querySelector('span');
           const labelText = labelSpan ? labelSpan.textContent.trim() : box.value;
 
+          // Build active filter chip
           const chip = document.createElement("span");
           chip.className = "filter-chip";
           chip.innerHTML = `
@@ -2461,13 +2747,11 @@
             <button class="filter-chip-remove" data-target-id="${box.value}">×</button>
           `;
 
-          chip.querySelector(".filter-chip-remove").addEventListener("click", () => {
+          chip.querySelector(".filter-chip-remove").addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation(); // Prevents closing the dropdown details element
             box.checked = false;
             filterPosts();
-            if (window.innerWidth > 768) {
-              const mainLayout = document.querySelector(".archive-layout");
-              if (mainLayout) mainLayout.scrollIntoView({ behavior: "smooth", block: "start" });
-            }
           });
 
           chipsContainer.appendChild(chip);
@@ -2476,7 +2760,7 @@
 
       const hasActiveFilters = Object.values(activeFilters).some(arr => arr.length > 0);
 
-      // Hide or display your cards
+      // 1. Toggle Post Card Visibility
       postCards.forEach(card => {
         if (!hasActiveFilters) {
           card.style.display = "block";
@@ -2499,16 +2783,13 @@
         }
       });
 
-      // =============================================================
-      // 2. DYNAMIC FACETED SEARCH RECUNTER ENGINE
-      // =============================================================
+      // 2. RUN FACETED SEARCH DYNAMIC COUNT MATH
       const dynamicCounts = {};
-      
       checkboxes.forEach(input => {
         dynamicCounts[input.value] = 0;
       });
 
-      // Scan items that remain visible on screen
+      // Calculate how many visible posts match each checkbox item
       postCards.forEach(card => {
         if (card.style.display !== "none") {
           const creator = card.getAttribute('data-creator');
@@ -2528,77 +2809,36 @@
         }
       });
 
+      // Update counter bubbles UI
       document.querySelectorAll('.filter-count').forEach(span => {
-            const targetSlug = span.getAttribute('data-count-target');
-            if (targetSlug in temporaryCounts) {
-              const currentCount = temporaryCounts[targetSlug];
-              span.textContent = `(${currentCount})`;
-              const parentLabel = span.closest('label');
-              if (parentLabel) parentLabel.style.opacity = (currentCount === 0) ? "0.4" : "1";
-            }
-          });
-
-          return; 
+        const targetSlug = span.getAttribute('data-count-target');
+        if (targetSlug in dynamicCounts) {
+          const currentCount = dynamicCounts[targetSlug];
+          span.textContent = `(${currentCount})`;
+          
+          const parentLabel = span.closest('label');
+          if (parentLabel) {
+            parentLabel.style.opacity = (currentCount === 0) ? "0.3" : "1";
+          }
         }
+      });
+
+      // Restore scroll position only during the initial page entry load setup
+      if (isInitial) {
+        const savedPosition = sessionStorage.getItem("archiveScrollPosition");
+        if (savedPosition) {
+          window.scrollTo(0, parseInt(savedPosition, 10));
+          sessionStorage.removeItem("archiveScrollPosition");
+        }
+      }
+    }
 
     // =============================================================
-    // 3. REAL-TIME EVENT HOOKS FOR CHECKBOX INTERACTIONS
+    // REAL-TIME EVENT INTERACTION BINDINGS
     // =============================================================
     checkboxes.forEach(box => {
       box.addEventListener("change", () => {
-        // If the user is on mobile, ONLY calculate the counts immediately!
-        if (window.innerWidth <= 768) {
-          
-          // Temporary hidden simulation check: see what WOULD be matches
-          const activeFilters = { creator: [], topic: [], language: [], misinformer: [] };
-          checkboxes.forEach(b => {
-            if (b.checked) activeFilters[b.name].push(b.value);
-          });
-          const hasActiveFilters = Object.values(activeFilters).some(arr => arr.length > 0);
-
-          const temporaryCounts = {};
-          checkboxes.forEach(input => { temporaryCounts[input.value] = 0; });
-
-          // Calculate counts based on simulated filters
-          postCards.forEach(card => {
-            const cardCreator = card.getAttribute("data-creator") || "";
-            const cardTagsList = (card.getAttribute("data-tags") || "").split(",").filter(t => t);
-
-            const matchesCreator = activeFilters.creator.length === 0 || activeFilters.creator.includes(cardCreator);
-            const matchesLanguage = activeFilters.language.length === 0 || activeFilters.language.some(lang => cardTagsList.includes(lang));
-            const matchesMisinformer = activeFilters.misinformer.length === 0 || activeFilters.misinformer.some(mis => cardTagsList.includes(mis));
-            const matchesTopic = activeFilters.topic.length === 0 || activeFilters.topic.some(topic => cardTagsList.includes(topic));
-
-            if (!hasActiveFilters || (matchesCreator && matchesLanguage && matchesMisinformer && matchesTopic)) {
-              // Count this visible item combination
-              if (cardCreator && cardCreator in temporaryCounts) temporaryCounts[cardCreator]++;
-              cardTagsList.forEach(tag => {
-                const cleanTag = tag.trim();
-                if (cleanTag && cleanTag in temporaryCounts) temporaryCounts[cleanTag]++;
-              });
-            }
-          });
-
-          // Print counts dynamically to labels right away so they see totals shift live!
-          document.querySelectorAll('.filter-count').forEach(span => {
-            const targetSlug = span.getAttribute('data-count-target');
-            if (targetSlug in temporaryCounts) {
-              const currentCount = temporaryCounts[targetSlug];
-              span.textContent = `(${currentCount})`;
-              const parentLabel = span.closest('label');
-              if (parentLabel) parentLabel.style.opacity = (currentCount === 0) ? "0.4" : "1";
-            }
-          });
-
-          return; // Stop here! Do not close drawer, don't hide grid cards, don't scroll.
-        }
-
-        // On Desktop viewports, filter everything instantly as normal
         filterPosts();
-        const mainLayout = document.querySelector(".archive-layout");
-        if (mainLayout) {
-          mainLayout.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
       });
     });
 
@@ -2606,17 +2846,13 @@
       clearBtn.addEventListener("click", () => {
         checkboxes.forEach(box => box.checked = false);
         filterPosts();
-        const mainLayout = document.querySelector(".archive-layout");
-        if (mainLayout) {
-          mainLayout.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
       });
     }
 
-    // Run once at startup to correctly show accurate starting totals
-    filterPosts();
+    // Run math once at startup
+    filterPosts(true);
 
-    // URL tag routing listener
+    // Deep URL incoming parameter tag router
     const urlParams = new URLSearchParams(window.location.search);
     const tagFromUrl = urlParams.get('tag');
     if (tagFromUrl) {
@@ -2625,45 +2861,6 @@
       if (targetCheckbox) {
         targetCheckbox.checked = true;
         filterPosts();
-      }
-    }
-
-    // =============================================================
-    // 4. MOBILE DRAWER INTERACTION EVENT HANDLERS
-    // =============================================================
-    const mobileFilterBtn = document.getElementById("mobile-filter-trigger-btn");
-    const sidebarPanel = document.querySelector(".sidebar");
-    const sidebarOverlay = document.getElementById("sidebar-mobile-overlay");
-    const mobileApplyBtn = document.getElementById("mobile-apply-filters-btn");
-
-    if (mobileFilterBtn && sidebarPanel && sidebarOverlay) {
-      mobileFilterBtn.addEventListener("click", () => {
-        sidebarPanel.classList.add("mobile-open");
-        sidebarOverlay.classList.add("active");
-        mobileFilterBtn.style.setProperty("display", "none", "important");
-        if (mobileApplyBtn) mobileApplyBtn.style.display = "block";
-      });
-
-      sidebarOverlay.addEventListener("click", () => {
-        sidebarPanel.classList.remove("mobile-open");
-        sidebarOverlay.classList.remove("active");
-        if (mobileApplyBtn) mobileApplyBtn.style.display = "none";
-        mobileFilterBtn.style.setProperty("display", "inline-flex", "important");
-      });
-
-      if (mobileApplyBtn) {
-        mobileApplyBtn.addEventListener("click", () => {
-          filterPosts();
-          sidebarPanel.classList.remove("mobile-open");
-          sidebarOverlay.classList.remove("active");
-          mobileApplyBtn.style.display = "none";
-          mobileFilterBtn.style.setProperty("display", "inline-flex", "important");
-
-          const mainLayout = document.querySelector(".archive-layout");
-          if (mainLayout) {
-            mainLayout.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
-        });
       }
     }
   });
