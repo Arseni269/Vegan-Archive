@@ -4526,6 +4526,9 @@
       if (box.checked) activeFilters[box.name].push(box.value);
     });
 
+    const dynamicCounts = {};
+  checkboxes.forEach(input => dynamicCounts[input.value.trim()] = 0);
+
     postCards.forEach(card => {
       const creator = card.getAttribute('data-creator');
       const tagsAttr = card.getAttribute('data-tags') || "";
@@ -4538,14 +4541,26 @@
       const matchMisinformer = activeFilters.misinformer.length === 0 || activeFilters.misinformer.includes(misinformer);
       const matchTopics = activeFilters.topic.length === 0 || tags.some(t => activeFilters.topic.includes(t));
       const matchLang = activeFilters.language.length === 0 || tags.some(t => activeFilters.language.includes(t));
+const isMatch = matchSearch && matchCreator && matchMisinformer && matchTopics && matchLang;
+     if (isMatch) {
+      card.classList.remove("is-hidden");
+      card.style.display = "";
+    } else {
+      card.classList.add("is-hidden");
+      card.style.display = "none";
+    }
 
-      if (matchSearch && matchCreator && matchMisinformer && matchTopics && matchLang) {
-        card.classList.remove("is-hidden");
-        card.style.display = ""; 
-      } else {
-        card.classList.add("is-hidden");
-        card.style.display = "none"; 
-      }
+    if (matchSearch && matchCreator && matchMisinformer && 
+        (activeFilters.topic.length === 0 || tags.some(t => activeFilters.topic.includes(t))) &&
+        (activeFilters.language.length === 0 || tags.some(t => activeFilters.language.includes(t)))) {
+      
+      // Increment counts for all tags found on this matching card
+      [creator, ...tags, misinformer].forEach(val => {
+        if (val && dynamicCounts.hasOwnProperty(val)) {
+          dynamicCounts[val]++;
+        }
+      });
+    }
     });
 
       // Update counter bubbles UI
