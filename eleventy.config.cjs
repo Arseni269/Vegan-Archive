@@ -3,6 +3,20 @@ const fs = require("fs");
 const Image = require("@11ty/eleventy-img");
 const markdownIt = require("markdown-it");
 
+function slugify(text) {
+  // If it's an array, take the first item
+  if (Array.isArray(text)) {
+    text = text[0];
+  }
+  
+  // If it's not a string at this point (like null/undefined), return empty
+  if (typeof text !== 'string') {
+    return '';
+  }
+  
+  return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
 module.exports = function (eleventyConfig) {
 
   let markdownOptions = {
@@ -155,45 +169,64 @@ module.exports = function (eleventyConfig) {
     return Object.values(langMap).sort((a, b) => b.count - a.count);
   });
 
-  // 4. DYNAMIC MISINFORMERS COLLECTION
-  eleventyConfig.addCollection("sortedMisinformers", function(collectionApi) {
-    const misinformerMap = {};
-    const misinformerTerms = ["niko", "peb", "roberto"];
+// 4. DYNAMIC MISINFORMERS COLLECTION
+eleventyConfig.addCollection("sortedMisinformers", function(collectionApi) {
+  const misinformerMap = {};
 
-    collectionApi.getAll().forEach(function(item) {
-      const tags = item.data.tags || [];
-      tags.forEach(function(tag) {
-        if (!tag) return;
-        const slug = slugify(tag);
-        if (misinformerTerms.includes(slug)) {
-          if (!misinformerMap[slug]) {
-            misinformerMap[slug] = { name: tag, slug: slug, count: 0 };
-          }
-          misinformerMap[slug].count++;
-        }
-      });
+  collectionApi.getAll().forEach(function(item) {
+    if (!item.data.misinformer) return;
+
+    // Normalize: If it's a string, put it in an array. If it's already an array, keep it.
+    const names = Array.isArray(item.data.misinformer) 
+      ? item.data.misinformer 
+      : [item.data.misinformer];
+
+    names.forEach(name => {
+      const slug = slugify(name);
+      if (!slug) return;
+      
+      if (!misinformerMap[slug]) {
+        misinformerMap[slug] = { name: name, slug: slug, count: 0 };
+      }
+      misinformerMap[slug].count++;
     });
-    return Object.values(misinformerMap).sort((a, b) => b.count - a.count);
   });
-
+  return Object.values(misinformerMap).sort((a, b) => b.count - a.count);
+});
   // 5. DYNAMIC TOPICS COLLECTION
   eleventyConfig.addCollection("sortedTopics", function(collectionApi) {
     const topicMap = {};
     const creatorSlugs = new Set();
     const reservedTerms = ["all", "posts", "taglist", "uniqtags", "english", "russian", "spanish", "german", "french", "niko", "peb", "roberto"];
 
+    // First pass: collect creators
     collectionApi.getAll().forEach(function(item) {
       if (item.data.author) {
         creatorSlugs.add(slugify(item.data.author));
       }
     });
 
+    // Second pass: collect topics
     collectionApi.getAll().forEach(function(item) {
       const tags = item.data.tags || [];
-      tags.forEach(function(tag) {
-        if (!tag) return;
+      
+      // Safety: Ensure tags is an array
+      const tagsArray = Array.isArray(tags) ? tags : [tags];
+
+      tagsArray.forEach(function(tag) {
+        if (!tag) return; // Skip null/undefined tags
+        
         const slug = slugify(tag);
-        if (reservedTerms.includes(slug) || creatorSlugs.has(slug)) return; 
+        
+        // Safety: Handle item.data.misinformer safely
+        let misinformerSlug = "";
+        if (item.data.misinformer) {
+          // If it's an array, get the first one for comparison, otherwise slugify directly
+          const miData = Array.isArray(item.data.misinformer) ? item.data.misinformer[0] : item.data.misinformer;
+          misinformerSlug = slugify(miData);
+        }
+
+        if (reservedTerms.includes(slug) || creatorSlugs.has(slug) || (misinformerSlug && slug === misinformerSlug)) return; 
 
         if (!topicMap[slug]) {
           topicMap[slug] = { name: tag, slug: slug, count: 0 };
@@ -201,9 +234,9 @@ module.exports = function (eleventyConfig) {
         topicMap[slug].count++;
       });
     });
+    
     return Object.values(topicMap).sort((a, b) => b.count - a.count);
   });
-
   return {
     dir: {
       input: "src",

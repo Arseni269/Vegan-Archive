@@ -4,7 +4,8 @@ title: "The right-wing intersectionality problem"
 thumbnail: "/archive/vegangelic/rightwing/1.webp"
 instagram_url: "https://www.instagram.com/p/DTp_2IHESmA/?img_index=1" # Link to IG
 author: "Vegangelic Activism"
-tags: ["George Martin", "intersectionality",]
+misinformer: "George Martin"
+tags: ["intersectionality",]
 ---
 
 It's one thing to have certain political beliefs.

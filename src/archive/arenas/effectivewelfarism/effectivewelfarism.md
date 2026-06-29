@@ -4,7 +4,6 @@ title: "If you think welfarism is more effective, you are a welfarist"
 thumbnail: "/archive/arenas/effectivewelfarism/1.jpg"
 instagram_url: "https://www.instagram.com/p/DCz9SBRRnXp/" # Link to IG
 author: "David C Arenas"
-misinformer: 
 tags: ["welfarism", "misinformation"]
 date: 2024-11-25
 ---
