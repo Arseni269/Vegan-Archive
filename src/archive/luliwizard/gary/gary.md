@@ -1,10 +1,11 @@
 ---
 layout: post.njk
 title: "Gary Yourofsky = Fvck the lion"
-thumbnail: "/archive/vegangelic/gary/1.png"
+thumbnail: "/archive/luliwizard/gary/1.png"
 instagram_url: "https://www.instagram.com/p/DMor0e5OZx-/?img_index=1" # Link to IG
 author: "Luliwizard vegan"
 tags: ["Gary Yourofsky", "hunting ideology",]
+misinformer: "Gary Yourofsky"
 date: 2025-07-28
 ---
 
@@ -23,8 +24,8 @@ For example, with utilitarian George Martin on his YouTube channel Carnism Debun
 That happened around 2:14:58.</p>
 
 <p>He’s done other equally disastrous interviews with:
-<p>— Haz Vegan</p>
-<p>— Natalie Fulton</p>
+<br>— Haz Vegan</br>
+<br>— Natalie Fulton</br>
 <p>— Logical Consistency</p>
 <p>— Vegan Sign Guy</p>
 <p>— That Vegan Lawyer</p>

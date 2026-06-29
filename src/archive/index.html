@@ -29,21 +29,33 @@ templateEngineOverride: njk
 
       <div class="post-card" data-creator="{{ authorSlug }}" data-tags="{{ tagSlugs }}">
 
-        <div class="post-thumbnail">
-          <a href="{{ post.url | url }}">
-            {% if post.data.video_path %}
-            <div
-              style="background:#000; color:#fff; padding: 40px 10px; text-align:center; font-size:0.9rem; font-weight:bold; border-radius:6px;">
-              ▶ Watch Video</div>
+        <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
+          <a href="{{ post.url | url }}" style="display: block; text-decoration: none;">
+
+            {# 1. RENDER IMAGE: Prioritize front-matter thumbnail, fallback to first gallery image #}
+            {% if post.data.thumbnail %}
+            <img src="/Vegan-Archive{{ post.data.thumbnail }}" alt="{{ post.data.title }}" class="archive-thumbnail"
+              style="width: 100%; display: block; height: auto;">
             {% else %}
             {% set galleryData = post.inputPath | getImagesData %}
             {% if galleryData.files.length > 0 %}
-            {% image galleryData.folder + "/" + galleryData.files[0], post.data.title %}
+            {# FIX: Added .name here so the thumbnail finder doesn't crash on the object structure! #}
+            {% image galleryData.folder + "/" + galleryData.files[0].name, post.data.title %}
             {% else %}
-            <div style="background:#e2e8f0; padding:40px 10px; text-align:center; color:#64748b; font-size:0.85rem;">No
-              Image Available</div>
+            <div style="background:#e2e8f0; padding:40px 10px; text-align:center; color:#64748b; font-size:0.85rem;">
+              No Image Available
+            </div>
             {% endif %}
             {% endif %}
+
+            {# 2. VIDEO BADGE: If it's a video, float a clean, beautiful indicator overlay over the image #}
+            {% if post.data.video_path %}
+            <div class="video-badge"
+              style="position: absolute; bottom: 12px; right: 12px; background: rgba(15, 23, 42, 0.9); color: #fff; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; border-radius: 4px; display: inline-flex; align-items: center; gap: 5px; backdrop-filter: blur(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+              <span>▶</span> Watch Video
+            </div>
+            {% endif %}
+
           </a>
         </div>
 
@@ -73,10 +85,16 @@ templateEngineOverride: njk
     </div>
   </main>
 
-  <aside class="sidebar">
-    <div class="sidebar-header">
-      <h3>Filters</h3>
-      <button id="clear-filters-btn" class="clear-all-btn">Clear All</button>
+  <aside class="sidebar" style="position: relative;">
+    <div class="sidebar-header"
+      style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 0.5rem;">
+      <h2 style="margin:0; font-size:1.25rem;">Filters</h2>
+      <button id="clear-filters-btn" class="clear-btn">Clear All</button>
+    </div>
+
+    <div style="width: 100%; margin-bottom: 1rem;">
+      <div id="active-chips-container" style="display: flex; flex-wrap: wrap; gap: 6px; width: 100%;">
+      </div>
     </div>
 
     <details class="filter-group-wrapper" open>
@@ -85,9 +103,9 @@ templateEngineOverride: njk
         {% for creator in collections.sortedCreators %}
         <li>
           <label class="filter-link">
-            <input type="checkbox" name="creator" value="{{ creator.slug }}" class="filter-checkbox" />
+            <input type="checkbox" name="creator" value="{{ creator.slug }}" class="filter-checkbox">
             <span>{{ creator.name }}</span>
-            <span class="item-count">{{ creator.count }}</span>
+            <span class="filter-count" data-count-target="{{ creator.slug }}">({{ creator.count }})</span>
           </label>
         </li>
         {% endfor %}
@@ -100,9 +118,9 @@ templateEngineOverride: njk
         {% for topic in collections.sortedTopics %}
         <li>
           <label class="filter-link">
-            <input type="checkbox" name="topic" value="{{ topic.slug }}" class="filter-checkbox" />
+            <input type="checkbox" name="topic" value="{{ topic.slug }}" class="filter-checkbox">
             <span>{{ topic.name }}</span>
-            <span class="item-count">{{ topic.count }}</span>
+            <span class="filter-count" data-count-target="{{ topic.slug }}">({{ topic.count }})</span>
           </label>
         </li>
         {% endfor %}
@@ -117,7 +135,7 @@ templateEngineOverride: njk
           <label class="filter-link">
             <input type="checkbox" name="language" value="{{ lang.slug }}" class="filter-checkbox" />
             <span>{{ lang.name }}</span>
-            <span class="item-count">{{ lang.count }}</span>
+            <span class="filter-count" data-count-target="{{ lang.slug }}">({{ lang.count }})</span>
           </label>
         </li>
         {% endfor %}
@@ -132,83 +150,273 @@ templateEngineOverride: njk
           <label class="filter-link">
             <input type="checkbox" name="misinformer" value="{{ misinformer.slug }}" class="filter-checkbox" />
             <span>{{ misinformer.name }}</span>
-            <span class="item-count">{{ misinformer.count }}</span>
+            <span class="filter-count" data-count-target="{{ misinformer.slug }}">({{ misinformer.count }})</span>
           </label>
         </li>
         {% endfor %}
       </ul>
     </details>
+
+    <button id="mobile-apply-filters-btn"
+      style="display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: calc(100% - 40px); max-width: 280px; background: #10b981; color: white; border: none; padding: 14px; border-radius: 30px; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4); z-index: 10000; cursor: pointer; text-align: center;">
+      Apply Filters
+    </button>
   </aside>
 
 </div>
+<!-- Background dim shade overlay layer for mobile view -->
+<div class="sidebar-overlay" id="sidebar-mobile-overlay"></div>
 
+<!-- Sticky Floating mobile trigger target action button -->
+<button id="mobile-filter-trigger-btn">
+  <span>⚡</span> Filter Posts
+</button>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const grid = document.getElementById("archive-grid");
-    if (!grid) return;
-
-    const postCards = Array.from(grid.querySelectorAll(".post-card"));
     const checkboxes = document.querySelectorAll(".filter-checkbox");
+    const postCards = document.querySelectorAll(".post-card");
     const clearBtn = document.getElementById("clear-filters-btn");
 
-    function evaluateActiveFilters() {
-      // Build dynamic group states using native HTML input name tracking
-      const state = {
-        creator: Array.from(document.querySelectorAll('input[name="creator"]:checked')).map(el => el.value),
-        language: Array.from(document.querySelectorAll('input[name="language"]:checked')).map(el => el.value),
-        topic: Array.from(document.querySelectorAll('input[name="topic"]:checked')).map(el => el.value),
-        misinformer: Array.from(document.querySelectorAll('input[name="misinformer"]:checked')).map(el => el.value)
+    const slugify = text => text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : '';
+
+    // =============================================================
+    // 1. CORE FILTERING FUNCTION
+    // =============================================================
+    function filterPosts() {
+      const activeFilters = {
+        creator: [],
+        topic: [],
+        language: [],
+        misinformer: []
       };
 
+      const chipsContainer = document.getElementById("active-chips-container");
+      if (chipsContainer) chipsContainer.innerHTML = "";
+
+      checkboxes.forEach(box => {
+        if (box.checked) {
+          const group = box.name;
+          if (activeFilters[group]) {
+            activeFilters[group].push(box.value);
+          }
+
+          // Safely target the custom layout span text label descriptor next to input
+          const labelSpan = box.parentNode.querySelector('span');
+          const labelText = labelSpan ? labelSpan.textContent.trim() : box.value;
+
+          const chip = document.createElement("span");
+          chip.className = "filter-chip";
+          chip.innerHTML = `
+            ${labelText}
+            <button class="filter-chip-remove" data-target-id="${box.value}">×</button>
+          `;
+
+          chip.querySelector(".filter-chip-remove").addEventListener("click", () => {
+            box.checked = false;
+            filterPosts();
+            if (window.innerWidth > 768) {
+              const mainLayout = document.querySelector(".archive-layout");
+              if (mainLayout) mainLayout.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          });
+
+          chipsContainer.appendChild(chip);
+        }
+      });
+
+      const hasActiveFilters = Object.values(activeFilters).some(arr => arr.length > 0);
+
+      // Hide or display your cards
       postCards.forEach(card => {
-        // 1. Validate Creator Filter Group
+        if (!hasActiveFilters) {
+          card.style.display = "block";
+          return;
+        }
+
         const cardCreator = card.getAttribute("data-creator") || "";
-        const creatorMatch = state.creator.length === 0 || state.creator.includes(cardCreator);
+        const cardTagsString = card.getAttribute("data-tags") || "";
+        const cardTagsList = cardTagsString.split(",").filter(t => t);
 
-        // 2. Validate Multi-Tag Groups
-        const rawCardTags = card.getAttribute("data-tags") || "";
-        const cardTagsList = rawCardTags.split(",").map(t => t.trim());
+        const matchesCreator = activeFilters.creator.length === 0 || activeFilters.creator.includes(cardCreator);
+        const matchesLanguage = activeFilters.language.length === 0 || activeFilters.language.some(lang => cardTagsList.includes(lang));
+        const matchesMisinformer = activeFilters.misinformer.length === 0 || activeFilters.misinformer.some(mis => cardTagsList.includes(mis));
+        const matchesTopic = activeFilters.topic.length === 0 || activeFilters.topic.some(topic => cardTagsList.includes(topic));
 
-        const languageMatch = state.language.length === 0 || state.language.some(lang => cardTagsList.includes(lang));
-        const topicMatch = state.topic.length === 0 || state.topic.some(topic => cardTagsList.includes(topic));
-        const misinformerMatch = state.misinformer.length === 0 || state.misinformer.some(m => cardTagsList.includes(m));
-
-        // Faceted Multi-Select Check: AND across groups, OR inside individual groups
-        if (creatorMatch && languageMatch && topicMatch && misinformerMatch) {
-          card.classList.remove("is-hidden");
+        if (matchesCreator && matchesLanguage && matchesMisinformer && matchesTopic) {
+          card.style.display = "block";
         } else {
-          card.classList.add("is-hidden");
+          card.style.display = "none";
+        }
+      });
+
+      // =============================================================
+      // 2. DYNAMIC FACETED SEARCH RECUNTER ENGINE
+      // =============================================================
+      const dynamicCounts = {};
+      
+      checkboxes.forEach(input => {
+        dynamicCounts[input.value] = 0;
+      });
+
+      // Scan items that remain visible on screen
+      postCards.forEach(card => {
+        if (card.style.display !== "none") {
+          const creator = card.getAttribute('data-creator');
+          if (creator && creator in dynamicCounts) {
+            dynamicCounts[creator]++;
+          }
+
+          const tagsAttr = card.getAttribute('data-tags');
+          if (tagsAttr) {
+            tagsAttr.split(',').forEach(tag => {
+              const cleanTag = tag.trim();
+              if (cleanTag && cleanTag in dynamicCounts) {
+                dynamicCounts[cleanTag]++;
+              }
+            });
+          }
+        }
+      });
+
+      // Print numbers to spans
+      document.querySelectorAll('.filter-count').forEach(span => {
+        const targetSlug = span.getAttribute('data-count-target');
+        if (targetSlug in dynamicCounts) {
+          const currentCount = dynamicCounts[targetSlug];
+          span.textContent = `(${currentCount})`;
+          
+          const parentLabel = span.closest('label');
+          if (parentLabel) {
+            parentLabel.style.opacity = (currentCount === 0) ? "0.4" : "1";
+          }
         }
       });
     }
 
-    // Attach filters listeners
-    checkboxes.forEach(box => box.addEventListener("change", evaluateActiveFilters));
+    // =============================================================
+    // 3. REAL-TIME EVENT HOOKS FOR CHECKBOX INTERACTIONS
+    // =============================================================
+    checkboxes.forEach(box => {
+      box.addEventListener("change", () => {
+        // If the user is on mobile, ONLY calculate the counts immediately!
+        if (window.innerWidth <= 768) {
+          
+          // Temporary hidden simulation check: see what WOULD be matches
+          const activeFilters = { creator: [], topic: [], language: [], misinformer: [] };
+          checkboxes.forEach(b => {
+            if (b.checked) activeFilters[b.name].push(b.value);
+          });
+          const hasActiveFilters = Object.values(activeFilters).some(arr => arr.length > 0);
 
-    // Clear filters action trigger
+          const temporaryCounts = {};
+          checkboxes.forEach(input => { temporaryCounts[input.value] = 0; });
+
+          // Calculate counts based on simulated filters
+          postCards.forEach(card => {
+            const cardCreator = card.getAttribute("data-creator") || "";
+            const cardTagsList = (card.getAttribute("data-tags") || "").split(",").filter(t => t);
+
+            const matchesCreator = activeFilters.creator.length === 0 || activeFilters.creator.includes(cardCreator);
+            const matchesLanguage = activeFilters.language.length === 0 || activeFilters.language.some(lang => cardTagsList.includes(lang));
+            const matchesMisinformer = activeFilters.misinformer.length === 0 || activeFilters.misinformer.some(mis => cardTagsList.includes(mis));
+            const matchesTopic = activeFilters.topic.length === 0 || activeFilters.topic.some(topic => cardTagsList.includes(topic));
+
+            if (!hasActiveFilters || (matchesCreator && matchesLanguage && matchesMisinformer && matchesTopic)) {
+              // Count this visible item combination
+              if (cardCreator && cardCreator in temporaryCounts) temporaryCounts[cardCreator]++;
+              cardTagsList.forEach(tag => {
+                const cleanTag = tag.trim();
+                if (cleanTag && cleanTag in temporaryCounts) temporaryCounts[cleanTag]++;
+              });
+            }
+          });
+
+          // Print counts dynamically to labels right away so they see totals shift live!
+          document.querySelectorAll('.filter-count').forEach(span => {
+            const targetSlug = span.getAttribute('data-count-target');
+            if (targetSlug in temporaryCounts) {
+              const currentCount = temporaryCounts[targetSlug];
+              span.textContent = `(${currentCount})`;
+              const parentLabel = span.closest('label');
+              if (parentLabel) parentLabel.style.opacity = (currentCount === 0) ? "0.4" : "1";
+            }
+          });
+
+          return; // Stop here! Do not close drawer, don't hide grid cards, don't scroll.
+        }
+
+        // On Desktop viewports, filter everything instantly as normal
+        filterPosts();
+        const mainLayout = document.querySelector(".archive-layout");
+        if (mainLayout) {
+          mainLayout.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    });
+
     if (clearBtn) {
       clearBtn.addEventListener("click", () => {
         checkboxes.forEach(box => box.checked = false);
-        evaluateActiveFilters();
+        filterPosts();
+        const mainLayout = document.querySelector(".archive-layout");
+        if (mainLayout) {
+          mainLayout.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
       });
     }
 
-    // Restore scroll memory position tracking smoothly
-    const savedScrollPos = sessionStorage.getItem("archiveScrollPosition");
-    if (savedScrollPos) {
-      setTimeout(() => {
-        window.scrollTo({
-          top: parseInt(savedScrollPos, 10),
-          behavior: "instant"
+    // Run once at startup to correctly show accurate starting totals
+    filterPosts();
+
+    // URL tag routing listener
+    const urlParams = new URLSearchParams(window.location.search);
+    const tagFromUrl = urlParams.get('tag');
+    if (tagFromUrl) {
+      const targetSlug = slugify(tagFromUrl);
+      const targetCheckbox = document.querySelector(`input[value="${targetSlug}"]`);
+      if (targetCheckbox) {
+        targetCheckbox.checked = true;
+        filterPosts();
+      }
+    }
+
+    // =============================================================
+    // 4. MOBILE DRAWER INTERACTION EVENT HANDLERS
+    // =============================================================
+    const mobileFilterBtn = document.getElementById("mobile-filter-trigger-btn");
+    const sidebarPanel = document.querySelector(".sidebar");
+    const sidebarOverlay = document.getElementById("sidebar-mobile-overlay");
+    const mobileApplyBtn = document.getElementById("mobile-apply-filters-btn");
+
+    if (mobileFilterBtn && sidebarPanel && sidebarOverlay) {
+      mobileFilterBtn.addEventListener("click", () => {
+        sidebarPanel.classList.add("mobile-open");
+        sidebarOverlay.classList.add("active");
+        mobileFilterBtn.style.setProperty("display", "none", "important");
+        if (mobileApplyBtn) mobileApplyBtn.style.display = "block";
+      });
+
+      sidebarOverlay.addEventListener("click", () => {
+        sidebarPanel.classList.remove("mobile-open");
+        sidebarOverlay.classList.remove("active");
+        if (mobileApplyBtn) mobileApplyBtn.style.display = "none";
+        mobileFilterBtn.style.setProperty("display", "inline-flex", "important");
+      });
+
+      if (mobileApplyBtn) {
+        mobileApplyBtn.addEventListener("click", () => {
+          filterPosts();
+          sidebarPanel.classList.remove("mobile-open");
+          sidebarOverlay.classList.remove("active");
+          mobileApplyBtn.style.display = "none";
+          mobileFilterBtn.style.setProperty("display", "inline-flex", "important");
+
+          const mainLayout = document.querySelector(".archive-layout");
+          if (mainLayout) {
+            mainLayout.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
         });
-      }, 50);
+      }
     }
-
-    const postLinks = document.querySelectorAll(".post-card a");
-    postLinks.forEach(link => {
-      link.addEventListener("click", () => {
-        sessionStorage.setItem("archiveScrollPosition", window.scrollY);
-      });
-    });
   });
 </script>

@@ -542,3 +542,117 @@ main .carousel .carousel-grid a.glightbox {
   border-radius: 10px;
 }
 
+.post-inline-tag:hover {
+    background-color: #e2e8f0;
+    color: #0f172a;
+  }
+
+  .filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background-color: #e2e8f0;
+    color: #334155;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 4px;
+    text-transform: capitalize;
+  }
+
+  .filter-chip-remove {
+    background: none;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
+    padding: 0 2px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .filter-chip-remove:hover {
+    color: #ef4444; /* Turns red when hovering over the X */
+  }
+
+/* =============================================================
+   8. MOBILE FILTER DRAWER RESPONSIVE SYSTEM
+   ============================================================= */
+
+/* STEP 1: Define base rules for the button globally first (hidden on desktop screens) */
+#mobile-filter-trigger-btn {
+  display: none; /* Hidden by default on desktop */
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0f172a;
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  z-index: 999;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  /* Force layout columns to a single track stacking properly */
+  .archive-layout {
+    display: block !important;
+    padding-bottom: 70px; /* Leaves safety breathing room for sticky button */
+  }
+
+  /* Robust layout flow sizing boundaries to the drawer box */
+  .archive-layout .sidebar {
+    position: fixed !important;
+    top: 0;
+    right: -100%; /* Fully hidden off-screen to the right by default */
+    width: 85%;
+    max-width: 320px;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    background: #ffffff;
+    z-index: 9999;
+    box-shadow: -4px 0 25px rgba(0, 0, 0, 0.15);
+    transition: right 0.3s ease-in-out;
+   padding: 24px 20px 100px 20px !important;
+    
+    /* FIX 1: Use block instead of flex to stop child elements from squishing each other */
+    display: block !important; 
+    overflow-y: auto !important; /* Lets the drawer scroll beautifully */
+    box-sizing: border-box !important;
+  }
+
+  /* When active class is applied via JS, slide it gracefully into view */
+  .archive-layout .sidebar.mobile-open {
+    right: 0 !important;
+  }
+
+  /* Generate a dim overlay layer to block page clicks when drawer is open */
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(2px);
+    z-index: 9998;
+    display: none;
+  }
+  
+  .sidebar-overlay.active {
+    display: block;
+  }
+
+  /* Force the floating trigger button to display explicitly on mobile viewports */
+  #mobile-filter-trigger-btn {
+    display: inline-flex !important;
+  }
+}

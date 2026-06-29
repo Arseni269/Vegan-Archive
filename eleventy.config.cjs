@@ -51,7 +51,6 @@ module.exports = function (eleventyConfig) {
 
   // 2. AUTOMATIC IMAGE FINDER FILTER
   eleventyConfig.addFilter("getImagesData", function (inputPath) {
-    // Safety check: If inputPath is missing or undefined, fail gracefully instead of crashing
     if (!inputPath) {
       return { files: [], folder: "" };
     }
@@ -71,8 +70,19 @@ module.exports = function (eleventyConfig) {
         const fullFilePath = path.join(fullDirPath, file);
         return !file.startsWith('.') && !file.endsWith('.md') && fs.statSync(fullFilePath).isFile();
       })
-      .map(file => path.parse(file).name)
-      .sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
+      .sort((a, b) => parseInt(a, 10) - parseInt(b, 10))
+      .map(file => {
+        const parsed = path.parse(file);
+        const ext = parsed.ext.toLowerCase();
+        const isVid = [".mp4", ".mov", ".webm", ".m4v"].includes(ext);
+        
+        // Return explicit object bindings with default fallbacks
+        return {
+          name: parsed.name || "",
+          fullName: file || "",
+          isVideo: isVid ? true : false
+        };
+      });
 
     return { files, folder: relativeDirPath };
   });
