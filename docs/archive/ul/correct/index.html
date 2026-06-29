@@ -12,14 +12,6 @@
 
 <style>
 
-/* =============================================================
-   UNCONDITIONAL VIEWPORT LOCK (ELIMINATES ALL JUMPING)
-   ============================================================= */
-
-/* =============================================================
-   THE PERMANENT SCROLLBAR GUTTER LOCK
-   ============================================================= */
-
 /* Force the layout engine to keep a permanent structural track for the scrollbar */
 html {
   scrollbar-gutter: stable !important;
@@ -29,12 +21,35 @@ html {
 html, body, .post-view-wrapper, .archive-layout, main {
   padding-right: 0 !important;
   margin-right: auto !important;
+  margin-top: 10px;
 }
 
 
-  .back-to-archive-nav { 
+.back-to-archive-nav { 
     margin-bottom: 0.60rem; 
     display: block;
+    width: 100% !important;
+    max-width: 1400px !important;     /* Matches your expanded image wrapper width */
+    margin-left: auto !important;     /* Auto margins pull it into the same center grid line */
+    margin-right: auto !important;
+    padding-left: 0px !important;    /* Matches the 40px left-margin precisely */
+    box-sizing: border-box !important;
+  }
+
+  /* Heading stays at the very top, taking up full width */
+  .post-main-title {
+    font-size: 2.2rem;
+    color: #0f172a;
+    margin: 0 auto 2rem auto !important; /* Centers the heading text block */
+    font-weight: 700;
+    line-height: 1.2;
+    display: block;
+    
+    /* Adds safe padding to line up perfectly with the columns */
+    max-width: 1100px !important;
+    padding-left: 0px !important;
+    padding-right: 24px !important;
+    width: 100%;
   }
 
   .back-link { 
@@ -43,7 +58,7 @@ html, body, .post-view-wrapper, .archive-layout, main {
     gap: 0.4rem; 
     color: #475569; 
     text-decoration: none; 
-    font-size: 0.95rem; 
+    font-size: 1.25rem; 
     font-weight: 500; 
   }
   .back-link:hover { 
@@ -61,20 +76,53 @@ html, body, .post-view-wrapper, .archive-layout, main {
     width: 100%;
   }
 
-  /* Two-column grid layout ONLY starts here, under the title */
+  /* 1. WRAPPER: Expand the page boundaries and force an elegant margin from the screen edges */
+  .post-view-wrapper {
+    max-width: 1400px !important;     /* Opens up the page width so images can grow large */
+    margin-left: auto !important;     /* Symmetrically centers everything on the desktop screen */
+    margin-right: auto !important;
+    padding-left: 40px !important;    /* Creates a spacious, high-end margin away from the screen edge */
+    padding-right: 40px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 2. TITLE: Align the top heading perfectly with your expanded layout */
+  .post-main-title {
+    font-size: 2.4rem;
+    color: #0f172a;
+    margin: 1.5rem 0 2rem 0 !important;
+    font-weight: 700;
+    line-height: 1.2;
+    display: block;
+    width: 100%;
+  }
+
+  /* 3. GRID SPLIT: Allocate massive space to the images, and keep the sidebar locked */
   .post-layout-grid { 
-    display: grid !important; 
-    grid-template-columns: 2fr 1fr !important; 
-    gap: 2.5rem !important; 
+    display: grid !important;
+    /* Left column expands as much as possible; Sidebar stays locked at a crisp 340px */
+    grid-template-columns: 1fr 340px !important; 
+    gap: 5rem !important;             /* Generates a clean, distinct safety gutter between content and sidebar */
     align-items: start; 
     width: 100%;
   }
 
-  @media (max-width: 900px) { 
+  @media (max-width: 1000px) { 
     .post-layout-grid { 
-      grid-template-columns: 1fr !important; 
-      gap: 1.5rem !important; 
+      grid-template-columns: 1fr !important;
+      gap: 2rem !important; 
     } 
+  }
+
+  /* 4. IMAGES ROW: Restructure the two-per-row image layout to close visual gaps */
+  .post-view-wrapper .carousel-grid { 
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important; /* Strictly 2 images per row */
+    gap: 16px !important;            /* Adds uniform vertical and horizontal space between the image cards */
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   /* 1. GRID CONTAINER: Isolate the grid cleanly and set exactly 2 items per row */
@@ -248,13 +296,13 @@ body.glightbox-open {
     <aside class="sidebar-info-card" style="background: #f8fafc; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0; margin: 0;">
       
         <div class="meta-section">
-          <h3 style="margin: 0 0 0.3rem 0; font-size: 1.1rem; color: #1e293b;">Creator</h3>
-          <p style="margin: 0; color: #475569; font-weight: 500;">Uncompromised Liberation</p>
+          <h2 style="margin: 0 0 0.3rem 0; font-size: 1.1rem; font-weight: 500; color: #1e293b;">Creator</h3>
+          <p style="margin: 0; color: #475569; font-weight: 1000; font-size: 1.7rem;">Uncompromised Liberation</p>
         </div>
       
 
       
-        <div class="meta-section" style="margin-bottom: 1.5rem;">
+        <div class="meta-section" style="margin-bottom: 0.5rem;">
           <a href="https://www.instagram.com/p/DXNVOjfN90O/" target="_blank" rel="noopener noreferrer" class="instagram-link" style="display: inline-block; background: #e1306c; color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-size: 0.9rem; font-weight: 500;">View on Instagram</a>
         </div>
       

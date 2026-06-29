@@ -5,6 +5,7 @@ thumbnail: "/archive/str8 vedge/irrelevant/1.jpg"
 instagram_url: "https://www.instagram.com/p/DW4UExMDCrA/" # Link to IG
 author: "Str8 Vedge"
 tags: ["principle", "distortion"]
+date: 2026-04-08
 ---
 
 <p>🎓 Studies in psychology show that how an issue is framed determines how it's understood and which solutions seem acceptable.</p>

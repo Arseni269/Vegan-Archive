@@ -5,4 +5,5 @@ thumbnail: "/archive/ul/bovinetesting/1.jpg"
 instagram_url: "https://www.instagram.com/p/DXsEBbRDK-v/" # Link to IG
 author: "Uncompromised Liberation"
 tags: ["dog comparisons",]
+date: 2026-04-28
 ---
