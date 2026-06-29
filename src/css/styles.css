@@ -1,3 +1,4 @@
+/* Force the browser to always reserve space for a scrollbar, preventing layout jumps */
 body {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -540,3 +541,4 @@ main .carousel .carousel-grid a.glightbox {
   padding: 2px 6px;
   border-radius: 10px;
 }
+

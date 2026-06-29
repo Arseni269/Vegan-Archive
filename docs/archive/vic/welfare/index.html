@@ -11,13 +11,26 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
 
 <style>
-  /* Isolated wrapper breaks away from global side-by-side flex rules */
-  .post-view-wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    display: block !important; /* Forces vertical stacking for top elements */
-  }
+
+/* =============================================================
+   UNCONDITIONAL VIEWPORT LOCK (ELIMINATES ALL JUMPING)
+   ============================================================= */
+
+/* =============================================================
+   THE PERMANENT SCROLLBAR GUTTER LOCK
+   ============================================================= */
+
+/* Force the layout engine to keep a permanent structural track for the scrollbar */
+html {
+  scrollbar-gutter: stable !important;
+}
+
+/* Hard-kill any layout adjustments GLightbox tries to inject anywhere on the page */
+html, body, .post-view-wrapper, .archive-layout, main {
+  padding-right: 0 !important;
+  margin-right: auto !important;
+}
+
 
   .back-to-archive-nav { 
     margin-bottom: 0.60rem; 
@@ -64,60 +77,149 @@
     } 
   }
 
-  /* Grid layout for images: exactly 2 per row */
-  .carousel-grid { 
+  /* 1. GRID CONTAINER: Isolate the grid cleanly and set exactly 2 items per row */
+  .post-view-wrapper .carousel-grid { 
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 15px 0rem !important; 
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-
-  .carousel-grid a.glightbox { 
-    display: block !important; 
-    text-decoration: none !important; 
-    width: 100% !important;
-  }
-
-  .carousel-grid img { 
-    width: 100% !important; 
-    height: 100% !important;
-    max-height: 450px !important;
-    object-fit: contain !important;
-    border-radius: 0px; 
-    display: block;
-    background: #f8fafc;
-  }
-
-  /* Grid layout for images: exactly 2 per row */
-  html body .carousel-grid { 
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 10px 0px !important; /* 10px vertical row gap, 0px horizontal column gap */
+    gap: 10px 0px !important; /* Forces 10px row gaps, strictly 0px side gaps */
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
   }
 
-  /* Target the link container precisely and wipe out the min-width and flex properties */
-  html body main .carousel .carousel-grid a.glightbox { 
+  /* 2. GRID LINKS: Neutralize the flexbox / min-width styles causing the layout drift */
+  .post-view-wrapper main .carousel .carousel-grid a.glightbox { 
     display: block !important; 
     text-decoration: none !important; 
     width: 100% !important;
-    min-width: 0px !important;     /* Kill the 250px gap instigator */
-    flex: none !important;         /* Stop flexbox collision */
+    min-width: 0px !important; /* Overrides the 250px constraint */
+    flex: none !important;     /* Disables the flex-box stretch logic */
     margin: 0 !important;
   }
 
-  /* Force the images to fill their grid column completely with no side gaps */
-  html body .carousel-grid img { 
+  /* 3. IMAGES: Force them to anchor wall-to-wall inside their grid cells */
+  .post-view-wrapper .carousel-grid img { 
     width: 100% !important; 
     height: auto !important; 
-    object-fit: cover !important; /* Prevents letterboxing gaps */
+    object-fit: cover !important; /* Removes letterboxing whitespace holes */
     margin: 0 !important;
     display: block !important;
   }
+
+  /* =============================================================
+   GLIGHTBOX GHOST OVERRIDE CLEANUP
+   ============================================================= */
+
+/* Completely hide the zoom utility button */
+.gzoom {
+  display: none !important;
+}
+
+/* Force-reset structural styles inside the lightbox canvas container */
+.glightbox-container .ginner-container img,
+.glightbox-container .carousel-grid img,
+.glightbox-container img {
+  width: auto !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: 95vh !important;
+  min-height: 0 !important;
+  aspect-ratio: auto !important;
+  object-fit: contain !important; /* Preserves clear aspect integrity in view mode */
+  transform: none !important;
+}
+
+/* Strip structural wrapping grids if cloned by the animation scripts */
+.glightbox-container .carousel-grid,
+.glightbox-container .carousel {
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  gap: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.glightbox-container main .carousel .carousel-grid a.glightbox,
+.glightbox-container a.glightbox {
+  display: inline-block !important;
+  width: auto !important;
+  min-width: 0 !important;
+  flex: none !important;
+}
+
+/* =============================================================
+   ISOLATED GLIGHTBOX FIX (DOES NOT TOUCH POST CARD IMAGES)
+   ============================================================= */
+
+/* Force-kill the phantom layout box when GLightbox copies your elements */
+.glightbox-container .carousel-grid,
+.glightbox-container .carousel,
+.glightbox-container .post-view-wrapper main {
+  display: block !important;
+  grid-template-columns: none !important;
+  width: auto !important;
+  height: auto !important;
+  gap: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Ensure the temporary rendering link within the modal behaves normally */
+.glightbox-container .carousel-grid a.glightbox,
+.glightbox-container a.glightbox {
+  display: inline-block !important;
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  flex: none !important;
+}
+
+/* Ensure only the active preview image scales inside the viewport */
+.glightbox-container .gslide-image img {
+  width: auto !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: 95vh !important;
+  object-fit: contain !important;
+  aspect-ratio: auto !important;
+}
+
+/* =============================================================
+   PERFECT JUMP & PHANTOM BOX ELIMINATION
+   ============================================================= */
+
+/* Force the vertical scrollbar track to stay pinned to the screen at all times */
+html, 
+html.glightbox-open {
+  overflow-y: scroll !important;
+}
+
+/* Strip GLightbox's dynamic padding adjustments so the page remains rigid */
+body.glightbox-open {
+  overflow: hidden !important;
+  padding-right: 0px !important;
+  margin-right: 0px !important;
+}
+
+/* =============================================================
+   HORIZONTAL SCROLLBAR STABILIZER
+   ============================================================= */
+
+/* Strictly prevent any element on the page from overflowing horizontally */
+html, 
+body {
+  overflow-x: hidden !important;
+}
+
+/* Ensure the body remains rigid on the x-axis when GLightbox is open */
+body.glightbox-open {
+  overflow-x: hidden !important;
+} 
 </style>
 
 <div class="post-view-wrapper">
@@ -240,14 +342,19 @@ Understanding the history of animal exploitation and what we choose to support m
     });
 
     // 2. Initialize Lightbox
-    const lightbox = GLightbox({
-      selector: '.glightbox',
-      loop: true,
-      openEffect: 'zoom',
-      closeEffect: 'zoom',
-      closeOnOutsideClick: true
-    });
-
+   // Initialize GLightbox with safe transition tracking
+// Initialize GLightbox without allowing it to shift body widths
+// Initialize GLightbox without letting it lock or shift the page scrollbars
+// 2. Initialize Lightbox
+  const lightbox = GLightbox({
+  selector: '.glightbox',
+  loop: true,
+  openEffect: 'fade',
+  closeEffect: 'fade',
+  closeOnOutsideClick: true,
+  zoomable: false,   
+  draggable: true    
+});
     // FIXED WORKAROUND: Force lightbox closure when clicking on any background container asset
 document.addEventListener('click', function (e) {
   // Check if the lightbox is currently active/open on screen
