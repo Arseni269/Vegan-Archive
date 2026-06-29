@@ -4,7 +4,8 @@ title: "Why Vegans should reject the term Carnism"
 thumbnail: "/archive/vegangelic/carnism/1.jpg"
 instagram_url: "https://www.instagram.com/vegangelic_/p/DSImEl8gTYM/" # Link to IG
 author: "Vegangelic Activism"
-tags: ["carnism", "reducetarianism", "misinformation", "Melanie Joy"]
+misinformer: "Melanie Joy"
+tags: ["carnism", "reducetarianism", "misinformation",]
 date: 2025-12-11
 ---
 

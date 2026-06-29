@@ -9,36 +9,53 @@ templateEngineOverride: njk
 
 <style>
 
+  /* --- SMOOTH GRID ANIMATION CODES --- */
+
+/* Base state for all cards inside your grid layout */
+.post-card {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease !important;
+  visibility: visible;
+}
+
+/* The state when a card is filtered out by search or a checkbox */
+.post-card.is-hidden {
+  opacity: 0;
+  transform: scale(0.92); /* Micro-scale shrink effect while fading out */
+  visibility: hidden;
+}
   /* FORCE FIXED WIDTHS INSIDE FILTER LISTS */
-.filter-list li {
-  margin-bottom: 4px;
-}
+  .filter-list li {
+    margin-bottom: 4px;
+  }
 
-.filter-list .filter-link {
-  display: grid !important;
-  grid-template-columns: auto 1fr auto !important;
-  align-items: center !important;
-  gap: 8px !important;
-  width: 100%;
-  cursor: pointer;
-}
+  .filter-list .filter-link {
+    display: grid !important;
+    grid-template-columns: auto 1fr auto !important;
+    align-items: center !important;
+    gap: 8px !important;
+    width: 100%;
+    cursor: pointer;
+  }
 
-/* Force the text name column to occupy all available central room rigidly */
-.filter-list .filter-link > span:not(.filter-count) {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: inline-block;
-}
+  /* Force the text name column to occupy all available central room rigidly */
+  .filter-list .filter-link > span:not(.filter-count) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+  }
 
-/* Force the count container to align right inside a fixed structural footprint */
-.filter-list .filter-count {
-  display: inline-block !important;
-  text-align: right !important;
-  font-variant-numeric: tabular-nums; /* Prevents number 1 vs 0 layout changes */
-  min-width: 32px !important; 
-}
-  /* 1. Eliminate the sidebar structure and allow full screen spread */
+  /* Force the count container to align right inside a fixed structural footprint */
+  .filter-list .filter-count {
+    display: inline-block !important;
+    text-align: right !important;
+    font-variant-numeric: tabular-nums; 
+    min-width: 32px !important; 
+  }
+
+  /* Eliminate the sidebar structure and allow full screen spread */
   .archive-layout {
     display: block !important;
     width: 100%;
@@ -48,7 +65,7 @@ templateEngineOverride: njk
     box-sizing: border-box;
   }
 
-  /* 2. Style the top dropdown toggle wrapper */
+  /* Style the top dropdown toggle wrapper */
   .top-filter-dropdown {
     background: #f8fafc;
     border: 1px solid #e2e8f0;
@@ -69,7 +86,7 @@ templateEngineOverride: njk
     align-items: center;
   }
 
-  /* 3. Render categories in a clean row inside the open panel */
+  /* Render categories in a clean row inside the open panel */
   .dropdown-filter-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -84,7 +101,7 @@ templateEngineOverride: njk
     .dropdown-filter-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
-  /* 4. FORCE A BEAUTIFUL 5-COLUMN GRID */
+  /* FORCE A BEAUTIFUL 5-COLUMN GRID */
   .archive-layout .imageboard-grid {
     display: grid !important;
     grid-template-columns: repeat(5, 1fr) !important;
@@ -109,17 +126,21 @@ templateEngineOverride: njk
 
 <div class="archive-layout">
   
-  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 15px;">
     <h1 style="margin: 0;">Vegan Archive</h1>
-    <div style="display: flex; gap: 10px; align-items: center;">
-      <button id="clear-filters-btn" class="clear-btn">Clear All</button>
+    
+    <div style="display: flex; gap: 10px; align-items: center; flex-grow: 1; max-width: 500px;">
+      <input type="text" id="archive-search-input" placeholder="🔍 Search titles, creators, topics, or misinformers..." 
+             style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.95rem; outline: none; box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);">
+      <button id="clear-filters-btn" class="clear-btn" style="white-space: nowrap;">Clear All</button>
     </div>
   </div>
 
   <details id="archive-filter-dropdown" class="top-filter-dropdown">
     <summary>
-      <span>⚡ Filter Posts by Creator, Topic, or Language</span>
-      <div id="active-chips-container" style="display: inline-flex; flex-wrap: wrap; gap: 6px; margin-left: 20px;"></div>
+    <span>⚡ Filter Posts by Creator, Topic, or Language</span>
+    <div id="active-chips-container" style="display: inline-flex; flex-wrap: wrap; gap: 6px; margin-left: 20px;"></div>
+    
     </summary>
     
     <div class="dropdown-filter-grid">
@@ -192,25 +213,35 @@ templateEngineOverride: njk
 
       {% set authorSlug = post.data.author | lower | replace(r/[^a-z0-9]+/g, '-') if post.data.author else '' %}
       {% set tagSlugs = "" %}
+      
+      {# Build text blob for structural real-time text matching #}
+      {% set searchBlob = post.data.title | lower %}
+      {% if post.data.author %}{% set searchBlob = searchBlob + " " + (post.data.author | lower) %}{% endif %}
+      
       {% for tag in post.data.tags %}
-      {% if tag %}
-      {% set cleanTag = tag | lower | replace(r/[^a-z0-9]+/g, '-') %}
-      {% set tagSlugs = tagSlugs + ("," if tagSlugs else "") + cleanTag %}
-      {% endif %}
+        {% if tag %}
+          {% set cleanTag = tag | lower | replace(r/[^a-z0-9]+/g, '-') %}
+          {% set tagSlugs = tagSlugs + ("," if tagSlugs else "") + cleanTag %}
+          {% set searchBlob = searchBlob + " " + (tag | lower) %}
+        {% endif %}
       {% endfor %}
 
-      <div class="post-card" data-creator="{{ authorSlug }}" data-tags="{{ tagSlugs }}">
+      <div class="post-card" 
+     data-creator="{{ authorSlug }}" 
+     data-tags="{{ tagSlugs }}" 
+     data-misinformer="{{ post.data.misinformer | slugify }}" 
+     data-search-blob="{{ searchBlob }}">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="{{ post.url | url }}" style="display: block; text-decoration: none;">
             {% if post.data.thumbnail %}
-            <img src="/Vegan-Archive{{ post.data.thumbnail }}" alt="{{ post.data.title }}" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+              <img src="/Vegan-Archive{{ post.data.thumbnail }}" alt="{{ post.data.title }}" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
             {% else %}
-            {% set galleryData = post.inputPath | getImagesData %}
-            {% if galleryData.files.length > 0 %}
-            {% image galleryData.folder + "/" + galleryData.files[0].name, post.data.title %}
-            {% else %}
-            <div style="background:#e2e8f0; padding:40px 10px; text-align:center; color:#64748b; font-size:0.85rem;">No Image Available</div>
-            {% endif %}
+              {% set galleryData = post.inputPath | getImagesData %}
+              {% if galleryData.files.length > 0 %}
+                {% image galleryData.folder + "/" + galleryData.files[0].name, post.data.title %}
+              {% else %}
+                <div style="background:#e2e8f0; padding:40px 10px; text-align:center; color:#64748b; font-size:0.85rem;">No Image Available</div>
+              {% endif %}
             {% endif %}
 
             {% if post.data.video_path %}
@@ -222,12 +253,14 @@ templateEngineOverride: njk
         </div>
 
         <div class="post-details">
-          <h2 class="post-title"><a href="{{ post.url | url }}">{{ post.data.title }}</a></h2>
+          <h2 class="post-title"><a href="{{ post.url | url }}">
+    {% if post.data.useQuotes %}“{% endif %}{{ post.data.title }}{% if post.data.useQuotes %}”{% endif %}
+  </a></h2>
           {% if post.data.author %}
-          <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By {{ post.data.author }}</div>
+            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By {{ post.data.author }}</div>
           {% endif %}
           {% if post.data.instagram_url %}
-          <div class="ig-link-container"><a href="{{ post.data.instagram_url }}" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+            <div class="ig-link-container"><a href="{{ post.data.instagram_url }}" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           {% endif %}
         </div>
       </div>
@@ -236,6 +269,35 @@ templateEngineOverride: njk
     </div>
   </main>
 
+  <button id="back-to-top" class="back-to-top-btn" title="Go to top">
+  ↑
+</button>
+
+<style>
+  .back-to-top-btn {
+    position: fixed;
+    bottom: 80px; /* Sits just above your mobile FAB */
+    right: 24px;
+    background: #0f172a;
+    color: #ffffff;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    z-index: 9998;
+    display: none; /* Hidden by default */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  .back-to-top-btn.is-visible {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
 </div>
 
 <button id="mobile-filter-trigger-btn" class="mobile-only-filter-fab">
@@ -243,7 +305,6 @@ templateEngineOverride: njk
 </button>
 
 <style>
-  /* Fix layout rendering logic on small configurations directly */
   .mobile-only-filter-fab {
     position: fixed;
     bottom: 24px;
@@ -268,186 +329,271 @@ templateEngineOverride: njk
       display: inline-flex !important;
     }
   }
+
+  /* --- OVERALL GRID FADE STYLES --- */
+#archive-grid {
+  transition: opacity 0.2s ease-in-out !important;
+  opacity: 1;
+}
+
+/* When this class is active, the entire gallery vanishes smoothly */
+#archive-grid.grid-is-typing {
+  opacity: 0;
+}
+
+/* Arrow rotation logic */
+.top-filter-dropdown summary::after {
+  content: '▼';
+  font-size: 0.8rem;
+  margin-left: auto; /* Pushes the arrow to the right */
+  transition: transform 0.3s ease;
+  display: inline-block;
+  color: #64748b;
+}
+
+/* When the details element is open, rotate the arrow */
+.top-filter-dropdown[open] summary::after {
+  transform: rotate(180deg);
+}
+
+/* Update summary to ensure it flexes properly to hold the arrow at the far right */
+.top-filter-dropdown summary {
+  display: flex !important;
+  align-items: center !important;
+}
 </style>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const checkboxes = document.querySelectorAll(".filter-checkbox");
-    const postCards = document.querySelectorAll(".post-card");
-    const clearBtn = document.getElementById("clear-filters-btn");
-    const mobileFilterBtn = document.getElementById("mobile-filter-trigger-btn");
-    const filterDropdown = document.getElementById("archive-filter-dropdown");
+  const checkboxes = document.querySelectorAll(".filter-checkbox");
+  const postCards = document.querySelectorAll(".post-card");
+  const clearBtn = document.getElementById("clear-filters-btn");
+  const mobileFilterBtn = document.getElementById("mobile-filter-trigger-btn");
+  const filterDropdown = document.getElementById("archive-filter-dropdown");
+  const searchInput = document.getElementById("archive-search-input");
+  const archiveGrid = document.getElementById("archive-grid"); // Hook to the grid container
 
-    const slugify = text => text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : '';
+  const slugify = text => text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : '';
 
-    // Save scroll position when navigating away
-    window.addEventListener("beforeunload", () => {
-      sessionStorage.setItem("archiveScrollPosition", window.scrollY);
-    });
-
-    // =============================================================
-    // CORE FILTERING & RECOUNTER FUNCTION
-    // =============================================================
-    function filterPosts(isInitial = false) {
-      const activeFilters = {
-        creator: [],
-        topic: [],
-        language: [],
-        misinformer: []
-      };
-
-      const chipsContainer = document.getElementById("active-chips-container");
-      if (chipsContainer) chipsContainer.innerHTML = "";
-
-      // Group all currently checked inputs
-      checkboxes.forEach(box => {
-        if (box.checked) {
-          const group = box.name;
-          if (activeFilters[group]) {
-            activeFilters[group].push(box.value);
-          }
-
-          const labelSpan = box.parentNode.querySelector('span');
-          const labelText = labelSpan ? labelSpan.textContent.trim() : box.value;
-
-          // Build active filter chip
-          const chip = document.createElement("span");
-          chip.className = "filter-chip";
-          chip.innerHTML = `
-            ${labelText}
-            <button class="filter-chip-remove" data-target-id="${box.value}">×</button>
-          `;
-
-          chip.querySelector(".filter-chip-remove").addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation(); // Prevents closing the dropdown details element
-            box.checked = false;
-            filterPosts();
-          });
-
-          chipsContainer.appendChild(chip);
-        }
-      });
-
-      const hasActiveFilters = Object.values(activeFilters).some(arr => arr.length > 0);
-
-      // 1. Toggle Post Card Visibility
-      postCards.forEach(card => {
-        if (!hasActiveFilters) {
-          card.style.display = "block";
-          return;
-        }
-
-        const cardCreator = card.getAttribute("data-creator") || "";
-        const cardTagsString = card.getAttribute("data-tags") || "";
-        const cardTagsList = cardTagsString.split(",").filter(t => t);
-
-        const matchesCreator = activeFilters.creator.length === 0 || activeFilters.creator.includes(cardCreator);
-        const matchesLanguage = activeFilters.language.length === 0 || activeFilters.language.some(lang => cardTagsList.includes(lang));
-        const matchesMisinformer = activeFilters.misinformer.length === 0 || activeFilters.misinformer.some(mis => cardTagsList.includes(mis));
-        const matchesTopic = activeFilters.topic.length === 0 || activeFilters.topic.some(topic => cardTagsList.includes(topic));
-
-        if (matchesCreator && matchesLanguage && matchesMisinformer && matchesTopic) {
-          card.style.display = "block";
-        } else {
-          card.style.display = "none";
-        }
-      });
-
-      // 2. RUN FACETED SEARCH DYNAMIC COUNT MATH
-      const dynamicCounts = {};
-      checkboxes.forEach(input => {
-        dynamicCounts[input.value] = 0;
-      });
-
-      // Calculate how many visible posts match each checkbox item
-      postCards.forEach(card => {
-        if (card.style.display !== "none") {
-          const creator = card.getAttribute('data-creator');
-          if (creator && creator in dynamicCounts) {
-            dynamicCounts[creator]++;
-          }
-
-          const tagsAttr = card.getAttribute('data-tags');
-          if (tagsAttr) {
-            tagsAttr.split(',').forEach(tag => {
-              const cleanTag = tag.trim();
-              if (cleanTag && cleanTag in dynamicCounts) {
-                dynamicCounts[cleanTag]++;
-              }
-            });
-          }
-        }
-      });
-
-      // Update counter bubbles UI
-      document.querySelectorAll('.filter-count').forEach(span => {
-        const targetSlug = span.getAttribute('data-count-target');
-        if (targetSlug in dynamicCounts) {
-          const currentCount = dynamicCounts[targetSlug];
-          span.textContent = `(${currentCount})`;
-          
-          const parentLabel = span.closest('label');
-          if (parentLabel) {
-            parentLabel.style.opacity = (currentCount === 0) ? "0.3" : "1";
-          }
-        }
-      });
-
-      // Restore scroll position only during the initial page entry load setup
-      if (isInitial) {
-        const savedPosition = sessionStorage.getItem("archiveScrollPosition");
-        if (savedPosition) {
-          window.scrollTo(0, parseInt(savedPosition, 10));
-          sessionStorage.removeItem("archiveScrollPosition");
-        }
-      }
-    }
-
-    // =============================================================
-    // REAL-TIME EVENT INTERACTION BINDINGS
-    // =============================================================
-    checkboxes.forEach(box => {
-      box.addEventListener("change", () => {
-        filterPosts();
-      });
-    });
-
-    if (clearBtn) {
-      clearBtn.addEventListener("click", () => {
-        checkboxes.forEach(box => box.checked = false);
-        filterPosts();
-      });
-    }
-
-    // Run math once at startup
-    filterPosts(true);
-
-    // Deep URL incoming parameter tag router
-    const urlParams = new URLSearchParams(window.location.search);
-    const tagFromUrl = urlParams.get('tag');
-    if (tagFromUrl) {
-      const targetSlug = slugify(tagFromUrl);
-      const targetCheckbox = document.querySelector(`input[value="${targetSlug}"]`);
-      if (targetCheckbox) {
-        targetCheckbox.checked = true;
-        filterPosts();
-      }
-    }
-
-    // =============================================================
-    // MOBILE DRAWER INTERACTION HANDLERS (Inside scope block safely)
-    // =============================================================
-    if (mobileFilterBtn && filterDropdown) {
-      mobileFilterBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        if (filterDropdown.hasAttribute("open")) {
-          filterDropdown.removeAttribute("open");
-        } else {
-          filterDropdown.setAttribute("open", "");
-          filterDropdown.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      });
-    }
+  window.addEventListener("beforeunload", () => {
+    sessionStorage.setItem("archiveScrollPosition", window.scrollY);
   });
+
+  // Debounce timer variable to keep track of when a user pauses typing
+  let typingTimeout;
+
+  // =============================================================
+  // CLEAN, RELIABLE VISIBILITY CORE FUNCTION
+  // =============================================================
+  function filterPosts(isInitial = false) {
+    const searchQuery = searchInput ? searchInput.value.toLowerCase().trim() : "";
+
+    const activeFilters = {
+      creator: [],
+      topic: [],
+      language: [],
+      misinformer: []
+    };
+
+    const chipsContainer = document.getElementById("active-chips-container");
+    if (chipsContainer) chipsContainer.innerHTML = "";
+
+    checkboxes.forEach(box => {
+      if (box.checked) {
+        const group = box.name;
+        if (activeFilters[group]) {
+          activeFilters[group].push(box.value);
+        }
+
+        const labelSpan = box.parentNode.querySelector('span');
+        const labelText = labelSpan ? labelSpan.textContent.trim() : box.value;
+
+        const chip = document.createElement("span");
+        chip.className = "filter-chip";
+        chip.innerHTML = `
+          ${labelText}
+          <button class="filter-chip-remove" data-target-id="${box.value}">×</button>
+        `;
+
+        chip.querySelector(".filter-chip-remove").addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          box.checked = false;
+          filterPosts();
+        });
+
+        chipsContainer.appendChild(chip);
+      }
+    });
+
+    const hasActiveFilters = Object.values(activeFilters).some(arr => arr.length > 0);
+
+    // 1. Update display properties
+    postCards.forEach(card => {
+      // Check for visibility based on style.display
+      if (card.style.display !== "none") {
+        // Count Creator
+        const creator = card.getAttribute('data-creator');
+        if (creator && creator in dynamicCounts) {
+          dynamicCounts[creator]++;
+        }
+
+        // Count Tags (Topics & Languages)
+        const tagsAttr = card.getAttribute('data-tags');
+        if (tagsAttr) {
+          tagsAttr.split(',').forEach(tag => {
+            const cleanTag = tag.trim();
+            if (cleanTag && cleanTag in dynamicCounts) {
+              dynamicCounts[cleanTag]++;
+            }
+          });
+        }
+
+        // NEW: Explicitly count Misinformers
+        const misinformer = card.getAttribute('data-misinformer');
+        if (misinformer && misinformer in dynamicCounts) {
+          dynamicCounts[misinformer]++;
+        }
+      }
+    });
+
+    // 2. RUN FACETED SEARCH DYNAMIC COUNT MATH
+    // Declare dynamicCounts ONCE here
+    // 2. RUN FACETED SEARCH DYNAMIC COUNT MATH
+    const dynamicCounts = {};
+    checkboxes.forEach(input => {
+      // Normalize the checkbox value to ensure it matches the tag/slug format
+      dynamicCounts[input.value.trim()] = 0;
+    });
+
+    postCards.forEach(card => {
+      if (card.style.display !== "none") {
+        // Count Creator (slugified)
+        const creator = card.getAttribute('data-creator');
+        if (creator && dynamicCounts.hasOwnProperty(creator)) {
+          dynamicCounts[creator]++;
+        }
+
+        // Count Tags (Topics, Languages, AND Misinformers)
+        const tagsAttr = card.getAttribute('data-tags');
+        if (tagsAttr) {
+          tagsAttr.split(',').forEach(tag => {
+            const cleanTag = tag.trim().toLowerCase();
+            // Match against checkbox values
+            if (dynamicCounts.hasOwnProperty(cleanTag)) {
+              dynamicCounts[cleanTag]++;
+            }
+          });
+        }
+      }
+    });
+
+    // Update counter bubbles UI
+    document.querySelectorAll('.filter-count').forEach(span => {
+      const targetSlug = span.getAttribute('data-count-target');
+      if (targetSlug in dynamicCounts) {
+        const currentCount = dynamicCounts[targetSlug];
+        span.textContent = `(${currentCount})`;
+        
+        const parentLabel = span.closest('label');
+        if (parentLabel) {
+          parentLabel.style.opacity = (currentCount === 0) ? "0.3" : "1";
+        }
+      }
+    });
+
+    if (isInitial) {
+      const savedPosition = sessionStorage.getItem("archiveScrollPosition");
+      if (savedPosition) {
+        window.scrollTo(0, parseInt(savedPosition, 10));
+        sessionStorage.removeItem("archiveScrollPosition");
+      }
+    }
+  }
+
+  // =============================================================
+  // REAL-TIME EVENT INTERACTION BINDINGS
+  // =============================================================
+  if (searchInput) {
+    searchInput.addEventListener("input", () => {
+      // 1. Immediately fade the whole grid out as soon as a key is pressed
+      if (archiveGrid) {
+        archiveGrid.classList.add("grid-is-typing");
+      }
+
+      // 2. Clear any pending timeouts so typing continuously keeps the grid hidden
+      clearTimeout(typingTimeout);
+
+      // 3. Set a 250ms delay. The moment you stop typing for 1/4 of a second, the grid updates and fades in
+      typingTimeout = setTimeout(() => {
+        filterPosts();
+        if (archiveGrid) {
+          archiveGrid.classList.remove("grid-is-typing");
+        }
+      }, 250); 
+    });
+  }
+
+  checkboxes.forEach(box => {
+    box.addEventListener("change", () => {
+      filterPosts();
+    });
+  });
+
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      checkboxes.forEach(box => box.checked = false);
+      if (searchInput) searchInput.value = "";
+      filterPosts();
+    });
+  }
+
+  // Run math once at startup
+  filterPosts(true);
+
+  // Deep URL incoming parameter tag router
+  const urlParams = new URLSearchParams(window.location.search);
+  const tagFromUrl = urlParams.get('tag');
+  if (tagFromUrl) {
+    const targetSlug = slugify(tagFromUrl);
+    const targetCheckbox = document.querySelector(`input[value="${targetSlug}"]`);
+    if (targetCheckbox) {
+      targetCheckbox.checked = true;
+      filterPosts();
+    }
+  }
+
+  if (mobileFilterBtn && filterDropdown) {
+    mobileFilterBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (filterDropdown.hasAttribute("open")) {
+        filterDropdown.removeAttribute("open");
+      } else {
+        filterDropdown.setAttribute("open", "");
+        filterDropdown.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  }
+
+  // =============================================================
+// BACK TO TOP BUTTON LOGIC
+// =============================================================
+const backToTopBtn = document.getElementById("back-to-top");
+
+window.addEventListener("scroll", () => {
+  // Show button after user scrolls down 400px
+  if (window.scrollY > 400) {
+    backToTopBtn.classList.add("is-visible");
+  } else {
+    backToTopBtn.classList.remove("is-visible");
+  }
+});
+
+backToTopBtn.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
+});
 </script>

@@ -1,6 +1,6 @@
 ---
 layout: post.njk
-title: "Veganism is a privilege"
+title: '"Veganism is a privilege"'
 thumbnail: "/archive/vegangelic/privilege/1.jpg"
 instagram_url: "https://www.instagram.com/p/DEhv6AKxSXp/" # Link to IG
 author: "Vegangelic Activism"

@@ -4,7 +4,7 @@ title: "Gary Yourofsky = Fvck the lion"
 thumbnail: "/archive/luliwizard/gary/1.png"
 instagram_url: "https://www.instagram.com/p/DMor0e5OZx-/?img_index=1" # Link to IG
 author: "Luliwizard vegan"
-tags: ["Gary Yourofsky", "hunting ideology",]
+tags: ["hunting ideology", "utilitarianism", "misinformation"]
 misinformer: "Gary Yourofsky"
 date: 2025-07-28
 ---
