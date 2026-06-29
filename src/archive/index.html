@@ -83,9 +83,6 @@ templateEngineOverride: njk
   @media (max-width: 900px) {
     .dropdown-filter-grid { grid-template-columns: repeat(2, 1fr); }
   }
-  @media (max-width: 500px) {
-    .dropdown-filter-grid { grid-template-columns: 1fr; }
-  }
 
   /* 4. FORCE A BEAUTIFUL 5-COLUMN GRID */
   .archive-layout .imageboard-grid {
@@ -114,11 +111,12 @@ templateEngineOverride: njk
   
   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
     <h1 style="margin: 0;">Vegan Archive</h1>
-    <button id="clear-filters-btn" class="clear-btn">Clear All</button>
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <button id="clear-filters-btn" class="clear-btn">Clear All</button>
+    </div>
   </div>
 
-  <!-- THE DYNAMIC TOP DROPDOWN ACCORDION -->
-  <details class="top-filter-dropdown">
+  <details id="archive-filter-dropdown" class="top-filter-dropdown">
     <summary>
       <span>⚡ Filter Posts by Creator, Topic, or Language</span>
       <div id="active-chips-container" style="display: inline-flex; flex-wrap: wrap; gap: 6px; margin-left: 20px;"></div>
@@ -239,17 +237,46 @@ templateEngineOverride: njk
   </main>
 
 </div>
-<div class="sidebar-overlay" id="sidebar-mobile-overlay"></div>
 
-<!-- Sticky Floating mobile trigger target action button -->
-<button id="mobile-filter-trigger-btn">
+<button id="mobile-filter-trigger-btn" class="mobile-only-filter-fab">
   <span>⚡</span> Filter Posts
 </button>
+
+<style>
+  /* Fix layout rendering logic on small configurations directly */
+  .mobile-only-filter-fab {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #0f172a;
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 768px) {
+    .mobile-only-filter-fab {
+      display: inline-flex !important;
+    }
+  }
+</style>
+
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const checkboxes = document.querySelectorAll(".filter-checkbox");
     const postCards = document.querySelectorAll(".post-card");
     const clearBtn = document.getElementById("clear-filters-btn");
+    const mobileFilterBtn = document.getElementById("mobile-filter-trigger-btn");
+    const filterDropdown = document.getElementById("archive-filter-dropdown");
 
     const slugify = text => text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : '';
 
@@ -406,6 +433,21 @@ templateEngineOverride: njk
         targetCheckbox.checked = true;
         filterPosts();
       }
+    }
+
+    // =============================================================
+    // MOBILE DRAWER INTERACTION HANDLERS (Inside scope block safely)
+    // =============================================================
+    if (mobileFilterBtn && filterDropdown) {
+      mobileFilterBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (filterDropdown.hasAttribute("open")) {
+          filterDropdown.removeAttribute("open");
+        } else {
+          filterDropdown.setAttribute("open", "");
+          filterDropdown.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
     }
   });
 </script>

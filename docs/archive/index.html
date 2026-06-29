@@ -87,9 +87,6 @@
   @media (max-width: 900px) {
     .dropdown-filter-grid { grid-template-columns: repeat(2, 1fr); }
   }
-  @media (max-width: 500px) {
-    .dropdown-filter-grid { grid-template-columns: 1fr; }
-  }
 
   /* 4. FORCE A BEAUTIFUL 5-COLUMN GRID */
   .archive-layout .imageboard-grid {
@@ -118,11 +115,12 @@
   
   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
     <h1 style="margin: 0;">Vegan Archive</h1>
-    <button id="clear-filters-btn" class="clear-btn">Clear All</button>
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <button id="clear-filters-btn" class="clear-btn">Clear All</button>
+    </div>
   </div>
 
-  <!-- THE DYNAMIC TOP DROPDOWN ACCORDION -->
-  <details class="top-filter-dropdown">
+  <details id="archive-filter-dropdown" class="top-filter-dropdown">
     <summary>
       <span>⚡ Filter Posts by Creator, Topic, or Language</span>
       <div id="active-chips-container" style="display: inline-flex; flex-wrap: wrap; gap: 6px; margin-left: 20px;"></div>
@@ -145,7 +143,7 @@
             <label class="filter-link">
               <input type="checkbox" name="creator" value="david-c-arenas" class="filter-checkbox">
               <span>David C Arenas</span>
-              <span class="filter-count" data-count-target="david-c-arenas">(6)</span>
+              <span class="filter-count" data-count-target="david-c-arenas">(7)</span>
             </label>
           </li>
           
@@ -206,6 +204,14 @@
           
           <li>
             <label class="filter-link">
+              <input type="checkbox" name="topic" value="utilitarianism" class="filter-checkbox">
+              <span>utilitarianism</span>
+              <span class="filter-count" data-count-target="utilitarianism">(11)</span>
+            </label>
+          </li>
+          
+          <li>
+            <label class="filter-link">
               <input type="checkbox" name="topic" value="excuses" class="filter-checkbox">
               <span>excuses</span>
               <span class="filter-count" data-count-target="excuses">(11)</span>
@@ -214,17 +220,9 @@
           
           <li>
             <label class="filter-link">
-              <input type="checkbox" name="topic" value="utilitarianism" class="filter-checkbox">
-              <span>utilitarianism</span>
-              <span class="filter-count" data-count-target="utilitarianism">(10)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
               <input type="checkbox" name="topic" value="welfarism" class="filter-checkbox">
               <span>welfarism</span>
-              <span class="filter-count" data-count-target="welfarism">(9)</span>
+              <span class="filter-count" data-count-target="welfarism">(10)</span>
             </label>
           </li>
           
@@ -462,17 +460,17 @@
           
           <li>
             <label class="filter-link">
-              <input type="checkbox" name="topic" value="privilege" class="filter-checkbox">
-              <span>privilege</span>
-              <span class="filter-count" data-count-target="privilege">(1)</span>
+              <input type="checkbox" name="topic" value="george-martin" class="filter-checkbox">
+              <span>George Martin</span>
+              <span class="filter-count" data-count-target="george-martin">(1)</span>
             </label>
           </li>
           
           <li>
             <label class="filter-link">
-              <input type="checkbox" name="topic" value="george-martin" class="filter-checkbox">
-              <span>George Martin</span>
-              <span class="filter-count" data-count-target="george-martin">(1)</span>
+              <input type="checkbox" name="topic" value="privilege" class="filter-checkbox">
+              <span>privilege</span>
+              <span class="filter-count" data-count-target="privilege">(1)</span>
             </label>
           </li>
           
@@ -503,7 +501,7 @@
             <label class="filter-link">
               <input type="checkbox" name="language" value="english" class="filter-checkbox" />
               <span>english</span>
-              <span class="filter-count" data-count-target="english">(46)</span>
+              <span class="filter-count" data-count-target="english">(47)</span>
             </label>
           </li>
           
@@ -664,6 +662,55 @@
           
           
           <div class="ig-link-container"><a href="https://www.instagram.com/p/DA6V6ahJ6XF/" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          
+        </div>
+      </div>
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <div class="post-card" data-creator="david-c-arenas" data-tags="posts,english,utilitarianism,welfarism">
+        <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
+          <a href="/Vegan-Archive/archive/arenas/mvga/" style="display: block; text-decoration: none;">
+            
+            <img src="/Vegan-Archive/archive/arenas/mvga/1.png" alt="Let&#39;s make Veganism great again" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            
+
+            
+          </a>
+        </div>
+
+        <div class="post-details">
+          <h2 class="post-title"><a href="/Vegan-Archive/archive/arenas/mvga/">Let&#39;s make Veganism great again</a></h2>
+          
+          <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
+          
+          
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DCFadW1xBz2/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -2695,17 +2742,46 @@
   </main>
 
 </div>
-<div class="sidebar-overlay" id="sidebar-mobile-overlay"></div>
 
-<!-- Sticky Floating mobile trigger target action button -->
-<button id="mobile-filter-trigger-btn">
+<button id="mobile-filter-trigger-btn" class="mobile-only-filter-fab">
   <span>⚡</span> Filter Posts
 </button>
+
+<style>
+  /* Fix layout rendering logic on small configurations directly */
+  .mobile-only-filter-fab {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #0f172a;
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 768px) {
+    .mobile-only-filter-fab {
+      display: inline-flex !important;
+    }
+  }
+</style>
+
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const checkboxes = document.querySelectorAll(".filter-checkbox");
     const postCards = document.querySelectorAll(".post-card");
     const clearBtn = document.getElementById("clear-filters-btn");
+    const mobileFilterBtn = document.getElementById("mobile-filter-trigger-btn");
+    const filterDropdown = document.getElementById("archive-filter-dropdown");
 
     const slugify = text => text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : '';
 
@@ -2862,6 +2938,21 @@
         targetCheckbox.checked = true;
         filterPosts();
       }
+    }
+
+    // =============================================================
+    // MOBILE DRAWER INTERACTION HANDLERS (Inside scope block safely)
+    // =============================================================
+    if (mobileFilterBtn && filterDropdown) {
+      mobileFilterBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (filterDropdown.hasAttribute("open")) {
+          filterDropdown.removeAttribute("open");
+        } else {
+          filterDropdown.setAttribute("open", "");
+          filterDropdown.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
     }
   });
 </script>
