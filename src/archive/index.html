@@ -7,18 +7,162 @@ templateEngineOverride: njk
 
 <link rel="stylesheet" href="/Vegan-Archive/css/styles.css?v=1.1">
 
-<div class="archive-layout">
+<style>
+  /* 1. Eliminate the sidebar structure and allow full screen spread */
+  .archive-layout {
+    display: block !important;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+  }
 
-  <main class="main-content">
-    <h1>Vegan Archive</h1>
+  /* 2. Style the top dropdown toggle wrapper */
+  .top-filter-dropdown {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    width: 100%;
+  }
+
+  .top-filter-dropdown summary {
+    padding: 15px 20px;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #0f172a;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* 3. Render categories in a clean row inside the open panel */
+  .dropdown-filter-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    padding: 20px;
+    border-top: 1px solid #e2e8f0;
+    background: #ffffff;
+    border-radius: 0 0 8px 8px;
+  }
+
+  @media (max-width: 900px) {
+    .dropdown-filter-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 500px) {
+    .dropdown-filter-grid { grid-template-columns: 1fr; }
+  }
+
+  /* 4. FORCE A BEAUTIFUL 5-COLUMN GRID */
+  .archive-layout .imageboard-grid {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 20px !important;
+    width: 100% !important;
+  }
+
+  /* Responsive fallback steps */
+  @media (max-width: 1400px) {
+    .archive-layout .imageboard-grid { grid-template-columns: repeat(4, 1fr) !important; }
+  }
+  @media (max-width: 1100px) {
+    .archive-layout .imageboard-grid { grid-template-columns: repeat(3, 1fr) !important; }
+  }
+  @media (max-width: 750px) {
+    .archive-layout .imageboard-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  }
+  @media (max-width: 450px) {
+    .archive-layout .imageboard-grid { grid-template-columns: 1fr !important; }
+  }
+</style>
+
+<div class="archive-layout">
+  
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+    <h1 style="margin: 0;">Vegan Archive</h1>
+    <button id="clear-filters-btn" class="clear-btn">Clear All</button>
+  </div>
+
+  <!-- THE DYNAMIC TOP DROPDOWN ACCORDION -->
+  <details class="top-filter-dropdown">
+    <summary>
+      <span>⚡ Filter Posts by Creator, Topic, or Language</span>
+      <div id="active-chips-container" style="display: inline-flex; flex-wrap: wrap; gap: 6px; margin-left: 20px;"></div>
+    </summary>
+    
+    <div class="dropdown-filter-grid">
+      <div class="filter-group-inner">
+        <h3 style="margin-top: 0; font-size: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 5px;">Creators</h3>
+        <ul class="filter-list" style="list-style: none; padding: 0; margin: 0;">
+          {% for creator in collections.sortedCreators %}
+          <li>
+            <label class="filter-link">
+              <input type="checkbox" name="creator" value="{{ creator.slug }}" class="filter-checkbox">
+              <span>{{ creator.name }}</span>
+              <span class="filter-count" data-count-target="{{ creator.slug }}">({{ creator.count }})</span>
+            </label>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="filter-group-inner">
+        <h3 style="margin-top: 0; font-size: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 5px;">Topics</h3>
+        <ul class="filter-list" style="list-style: none; padding: 0; margin: 0;">
+          {% for topic in collections.sortedTopics %}
+          <li>
+            <label class="filter-link">
+              <input type="checkbox" name="topic" value="{{ topic.slug }}" class="filter-checkbox">
+              <span>{{ topic.name }}</span>
+              <span class="filter-count" data-count-target="{{ topic.slug }}">({{ topic.count }})</span>
+            </label>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="filter-group-inner">
+        <h3 style="margin-top: 0; font-size: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 5px;">Languages</h3>
+        <ul class="filter-list" style="list-style: none; padding: 0; margin: 0;">
+          {% for lang in collections.sortedLanguages %}
+          <li>
+            <label class="filter-link">
+              <input type="checkbox" name="language" value="{{ lang.slug }}" class="filter-checkbox" />
+              <span>{{ lang.name }}</span>
+              <span class="filter-count" data-count-target="{{ lang.slug }}">({{ lang.count }})</span>
+            </label>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="filter-group-inner">
+        <h3 style="margin-top: 0; font-size: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 5px;">Misinformers</h3>
+        <ul class="filter-list" style="list-style: none; padding: 0; margin: 0;">
+          {% for misinformer in collections.sortedMisinformers %}
+          <li>
+            <label class="filter-link">
+              <input type="checkbox" name="misinformer" value="{{ misinformer.slug }}" class="filter-checkbox" />
+              <span>{{ misinformer.name }}</span>
+              <span class="filter-count" data-count-target="{{ misinformer.slug }}">({{ misinformer.count }})</span>
+            </label>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </details>
+
+  <main class="main-content" style="width: 100%;">
     <div class="imageboard-grid" id="archive-grid">
       {% for post in collections.posts %}
       {% if post.data.title and post.url != "/archive/" %}
 
-      {# Generate clean comparative identifiers #}
       {% set authorSlug = post.data.author | lower | replace(r/[^a-z0-9]+/g, '-') if post.data.author else '' %}
-
-      {# Build a safe comma-separated string loop of tags #}
       {% set tagSlugs = "" %}
       {% for tag in post.data.tags %}
       {% if tag %}
@@ -28,55 +172,34 @@ templateEngineOverride: njk
       {% endfor %}
 
       <div class="post-card" data-creator="{{ authorSlug }}" data-tags="{{ tagSlugs }}">
-
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="{{ post.url | url }}" style="display: block; text-decoration: none;">
-
-            {# 1. RENDER IMAGE: Prioritize front-matter thumbnail, fallback to first gallery image #}
             {% if post.data.thumbnail %}
-            <img src="/Vegan-Archive{{ post.data.thumbnail }}" alt="{{ post.data.title }}" class="archive-thumbnail"
-              style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive{{ post.data.thumbnail }}" alt="{{ post.data.title }}" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
             {% else %}
             {% set galleryData = post.inputPath | getImagesData %}
             {% if galleryData.files.length > 0 %}
-            {# FIX: Added .name here so the thumbnail finder doesn't crash on the object structure! #}
             {% image galleryData.folder + "/" + galleryData.files[0].name, post.data.title %}
             {% else %}
-            <div style="background:#e2e8f0; padding:40px 10px; text-align:center; color:#64748b; font-size:0.85rem;">
-              No Image Available
-            </div>
+            <div style="background:#e2e8f0; padding:40px 10px; text-align:center; color:#64748b; font-size:0.85rem;">No Image Available</div>
             {% endif %}
             {% endif %}
 
-            {# 2. VIDEO BADGE: If it's a video, float a clean, beautiful indicator overlay over the image #}
             {% if post.data.video_path %}
-            <div class="video-badge"
-              style="position: absolute; bottom: 12px; right: 12px; background: rgba(15, 23, 42, 0.9); color: #fff; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; border-radius: 4px; display: inline-flex; align-items: center; gap: 5px; backdrop-filter: blur(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+            <div class="video-badge" style="position: absolute; bottom: 12px; right: 12px; background: rgba(15, 23, 42, 0.9); color: #fff; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; border-radius: 4px; display: inline-flex; align-items: center; gap: 5px; backdrop-filter: blur(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
               <span>▶</span> Watch Video
             </div>
             {% endif %}
-
           </a>
         </div>
 
         <div class="post-details">
-          <h2 class="post-title">
-            <a href="{{ post.url | url }}">{{ post.data.title }}</a>
-          </h2>
-
-          <!-- Bring back the Creator info line underneath the title -->
+          <h2 class="post-title"><a href="{{ post.url | url }}">{{ post.data.title }}</a></h2>
           {% if post.data.author %}
-          <div class="post-author"
-            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">
-            By {{ post.data.author }}
-          </div>
+          <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By {{ post.data.author }}</div>
           {% endif %}
-
           {% if post.data.instagram_url %}
-          <div class="ig-link-container">
-            <a href="{{ post.data.instagram_url }}" target="_blank" rel="noopener noreferrer"
-              class="instagram-link">Instagram</a>
-          </div>
+          <div class="ig-link-container"><a href="{{ post.data.instagram_url }}" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           {% endif %}
         </div>
       </div>
@@ -85,86 +208,7 @@ templateEngineOverride: njk
     </div>
   </main>
 
-  <aside class="sidebar" style="position: relative;">
-    <div class="sidebar-header"
-      style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 0.5rem;">
-      <h2 style="margin:0; font-size:1.25rem;">Filters</h2>
-      <button id="clear-filters-btn" class="clear-btn">Clear All</button>
-    </div>
-
-    <div style="width: 100%; margin-bottom: 1rem;">
-      <div id="active-chips-container" style="display: flex; flex-wrap: wrap; gap: 6px; width: 100%;">
-      </div>
-    </div>
-
-    <details class="filter-group-wrapper" open>
-      <summary class="group-title">Creators</summary>
-      <ul class="filter-list">
-        {% for creator in collections.sortedCreators %}
-        <li>
-          <label class="filter-link">
-            <input type="checkbox" name="creator" value="{{ creator.slug }}" class="filter-checkbox">
-            <span>{{ creator.name }}</span>
-            <span class="filter-count" data-count-target="{{ creator.slug }}">({{ creator.count }})</span>
-          </label>
-        </li>
-        {% endfor %}
-      </ul>
-    </details>
-
-    <details class="filter-group-wrapper" open>
-      <summary class="group-title">Topics</summary>
-      <ul class="filter-list">
-        {% for topic in collections.sortedTopics %}
-        <li>
-          <label class="filter-link">
-            <input type="checkbox" name="topic" value="{{ topic.slug }}" class="filter-checkbox">
-            <span>{{ topic.name }}</span>
-            <span class="filter-count" data-count-target="{{ topic.slug }}">({{ topic.count }})</span>
-          </label>
-        </li>
-        {% endfor %}
-      </ul>
-    </details>
-
-    <details class="filter-group-wrapper" open>
-      <summary class="group-title">Languages</summary>
-      <ul class="filter-list">
-        {% for lang in collections.sortedLanguages %}
-        <li>
-          <label class="filter-link">
-            <input type="checkbox" name="language" value="{{ lang.slug }}" class="filter-checkbox" />
-            <span>{{ lang.name }}</span>
-            <span class="filter-count" data-count-target="{{ lang.slug }}">({{ lang.count }})</span>
-          </label>
-        </li>
-        {% endfor %}
-      </ul>
-    </details>
-
-    <details class="filter-group-wrapper" open>
-      <summary class="group-title">Misinformers</summary>
-      <ul class="filter-list">
-        {% for misinformer in collections.sortedMisinformers %}
-        <li>
-          <label class="filter-link">
-            <input type="checkbox" name="misinformer" value="{{ misinformer.slug }}" class="filter-checkbox" />
-            <span>{{ misinformer.name }}</span>
-            <span class="filter-count" data-count-target="{{ misinformer.slug }}">({{ misinformer.count }})</span>
-          </label>
-        </li>
-        {% endfor %}
-      </ul>
-    </details>
-
-    <button id="mobile-apply-filters-btn"
-      style="display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: calc(100% - 40px); max-width: 280px; background: #10b981; color: white; border: none; padding: 14px; border-radius: 30px; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4); z-index: 10000; cursor: pointer; text-align: center;">
-      Apply Filters
-    </button>
-  </aside>
-
 </div>
-<!-- Background dim shade overlay layer for mobile view -->
 <div class="sidebar-overlay" id="sidebar-mobile-overlay"></div>
 
 <!-- Sticky Floating mobile trigger target action button -->
@@ -179,6 +223,9 @@ templateEngineOverride: njk
 
     const slugify = text => text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : '';
 
+    window.addEventListener("beforeunload", () => {
+      sessionStorage.setItem("archiveScrollPosition", window.scrollY);
+    });
     // =============================================================
     // 1. CORE FILTERING FUNCTION
     // =============================================================
@@ -278,20 +325,18 @@ templateEngineOverride: njk
         }
       });
 
-      // Print numbers to spans
       document.querySelectorAll('.filter-count').forEach(span => {
-        const targetSlug = span.getAttribute('data-count-target');
-        if (targetSlug in dynamicCounts) {
-          const currentCount = dynamicCounts[targetSlug];
-          span.textContent = `(${currentCount})`;
-          
-          const parentLabel = span.closest('label');
-          if (parentLabel) {
-            parentLabel.style.opacity = (currentCount === 0) ? "0.4" : "1";
-          }
+            const targetSlug = span.getAttribute('data-count-target');
+            if (targetSlug in temporaryCounts) {
+              const currentCount = temporaryCounts[targetSlug];
+              span.textContent = `(${currentCount})`;
+              const parentLabel = span.closest('label');
+              if (parentLabel) parentLabel.style.opacity = (currentCount === 0) ? "0.4" : "1";
+            }
+          });
+
+          return; 
         }
-      });
-    }
 
     // =============================================================
     // 3. REAL-TIME EVENT HOOKS FOR CHECKBOX INTERACTIONS

@@ -8,13 +8,21 @@ templateEngineOverride: njk
 
 /* Force the layout engine to keep a permanent structural track for the scrollbar */
 html {
-  scrollbar-gutter: stable !important;
+  scrollbar-gutter: stable both-edges !important;
 }
 
-/* Hard-kill layout adjustments GLightbox tries to inject, while keeping grids centered */
-html, body, .post-view-wrapper, .archive-layout, main {
-  padding-right: 0 !important;
-  margin-top: 10px;
+/* Ensure the layout remains rigid and centered without shifting left/right when modals trigger */
+html, body {
+  overflow-x: hidden !important;
+  margin: 0;
+  padding: 0;
+}
+
+/* Strip GLightbox's dynamic padding injections so the page layout remains completely locked */
+body.glightbox-open {
+  overflow: hidden !important;
+  padding-right: 0px !important;
+  margin-right: 0px !important;
 }
 
 /* Ensure the layout wraps center beautifully on desktop screens without pulling left */
@@ -138,9 +146,13 @@ html, body, .post-view-wrapper, .archive-layout, main {
   .post-tags-container {
     display: flex !important;
     flex-wrap: wrap;
-    gap: 0rem;
+    gap: 0.5rem; /* Restores a nice clean gap between tags */
     margin-bottom: 2rem; /* Creates breathing room between tags and the content grid */
     width: 100%;
+    
+    /* CRITICAL baselining space reservation to eliminate vertical content shifts */
+    min-height: 28px !important; 
+    align-items: center;
   }
 
   .post-inline-tag {
@@ -328,13 +340,10 @@ body.glightbox-open {
           {% set filePath = "/Vegan-Archive/" + galleryData.folder + "/" + fileFullName %}
 
           {% if fileIsVideo %}
-            {# VIDEO SLIDE: Use href for the video file and force type: video #}
-            <a href="{{ filePath }}" class="glightbox" data-type="video">
-              <div style="position: relative; width: 100%; height: 100%; min-height: 200px; max-height: 500px; background: #000; border-radius: 0px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-                <video src="{{ filePath }}" muted playsinline style="width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none;"></video>
-                <div style="position: absolute; background: rgba(15, 23, 42, 0.7); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; padding-left: 4px; box-sizing: border-box;">▶</div>
-              </div>
-            </a>
+            {# VIDEO ELEMENT: Rendered inline with native controls instead of a glightbox link #}
+            <div style="width: 100%; height: 100%; min-height: 200px; max-height: 500px; background: #000; border-radius: 4px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+              <video src="{{ filePath }}" controls playsinline style="width: 100%; height: 100%; object-fit: contain; display: block;"></video>
+            </div>
           {% else %}
             {# IMAGE SLIDE #}
             <a href="#" class="glightbox">
