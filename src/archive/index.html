@@ -8,23 +8,24 @@ templateEngineOverride: njk
 <link rel="stylesheet" href="/Vegan-Archive/css/styles.css?v=1.1">
 
 <style>
-
   /* --- SMOOTH GRID ANIMATION CODES --- */
 
-/* Base state for all cards inside your grid layout */
-.post-card {
-  opacity: 1;
-  transform: scale(1);
-  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease !important;
-  visibility: visible;
-}
+  /* Base state for all cards inside your grid layout */
+  .post-card {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease !important;
+    visibility: visible;
+  }
 
-/* The state when a card is filtered out by search or a checkbox */
-.post-card.is-hidden {
-  opacity: 0;
-  transform: scale(0.92); /* Micro-scale shrink effect while fading out */
-  visibility: hidden;
-}
+  /* The state when a card is filtered out by search or a checkbox */
+  .post-card.is-hidden {
+    opacity: 0;
+    transform: scale(0.92);
+    /* Micro-scale shrink effect while fading out */
+    visibility: hidden;
+  }
+
   /* FORCE FIXED WIDTHS INSIDE FILTER LISTS */
   .filter-list li {
     margin-bottom: 4px;
@@ -40,7 +41,7 @@ templateEngineOverride: njk
   }
 
   /* Force the text name column to occupy all available central room rigidly */
-  .filter-list .filter-link > span:not(.filter-count) {
+  .filter-list .filter-link>span:not(.filter-count) {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -51,8 +52,8 @@ templateEngineOverride: njk
   .filter-list .filter-count {
     display: inline-block !important;
     text-align: right !important;
-    font-variant-numeric: tabular-nums; 
-    min-width: 32px !important; 
+    font-variant-numeric: tabular-nums;
+    min-width: 32px !important;
   }
 
   /* Eliminate the sidebar structure and allow full screen spread */
@@ -98,7 +99,9 @@ templateEngineOverride: njk
   }
 
   @media (max-width: 900px) {
-    .dropdown-filter-grid { grid-template-columns: repeat(2, 1fr); }
+    .dropdown-filter-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   /* FORCE A BEAUTIFUL 5-COLUMN GRID */
@@ -111,38 +114,51 @@ templateEngineOverride: njk
 
   /* Responsive fallback steps */
   @media (max-width: 1400px) {
-    .archive-layout .imageboard-grid { grid-template-columns: repeat(4, 1fr) !important; }
+    .archive-layout .imageboard-grid {
+      grid-template-columns: repeat(4, 1fr) !important;
+    }
   }
+
   @media (max-width: 1100px) {
-    .archive-layout .imageboard-grid { grid-template-columns: repeat(3, 1fr) !important; }
+    .archive-layout .imageboard-grid {
+      grid-template-columns: repeat(3, 1fr) !important;
+    }
   }
+
   @media (max-width: 750px) {
-    .archive-layout .imageboard-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .archive-layout .imageboard-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
   }
+
   @media (max-width: 450px) {
-    .archive-layout .imageboard-grid { grid-template-columns: 1fr !important; }
+    .archive-layout .imageboard-grid {
+      grid-template-columns: 1fr !important;
+    }
   }
 </style>
 
 <div class="archive-layout">
-  
-  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 15px;">
+
+  <div
+    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 15px;">
     <h1 style="margin: 0;">Vegan Archive</h1>
-    
+
     <div style="display: flex; gap: 10px; align-items: center; flex-grow: 1; max-width: 500px;">
-      <input type="text" id="archive-search-input" placeholder="🔍 Search titles, creators, topics, or misinformers..." 
-             style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.95rem; outline: none; box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);">
+      <input type="text" id="archive-search-input" placeholder="🔍 Search titles, creators, topics, or misinformers..."
+        style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.95rem; outline: none; box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);">
       <button id="clear-filters-btn" class="clear-btn" style="white-space: nowrap;">Clear All</button>
     </div>
   </div>
 
   <details id="archive-filter-dropdown" class="top-filter-dropdown">
     <summary>
-    <span>⚡ Filter Posts by Creator, Topic, or Language</span>
-    <div id="active-chips-container" style="display: inline-flex; flex-wrap: wrap; gap: 6px; margin-left: 20px;"></div>
-    
+      <span>⚡ Filter Posts by Creator, Topic, or Language</span>
+      <div id="active-chips-container" style="display: inline-flex; flex-wrap: wrap; gap: 6px; margin-left: 20px;">
+      </div>
+
     </summary>
-    
+
     <div class="dropdown-filter-grid">
       <div class="filter-group-inner">
         <h3 style="margin-top: 0; font-size: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 5px;">Creators</h3>
@@ -175,7 +191,8 @@ templateEngineOverride: njk
       </div>
 
       <div class="filter-group-inner">
-        <h3 style="margin-top: 0; font-size: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 5px;">Languages</h3>
+        <h3 style="margin-top: 0; font-size: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 5px;">Languages
+        </h3>
         <ul class="filter-list" style="list-style: none; padding: 0; margin: 0;">
           {% for lang in collections.sortedLanguages %}
           <li>
@@ -190,7 +207,8 @@ templateEngineOverride: njk
       </div>
 
       <div class="filter-group-inner">
-        <h3 style="margin-top: 0; font-size: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 5px;">Misinformers</h3>
+        <h3 style="margin-top: 0; font-size: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 5px;">Misinformers
+        </h3>
         <ul class="filter-list" style="list-style: none; padding: 0; margin: 0;">
           {% for misinformer in collections.sortedMisinformers %}
           <li>
@@ -213,39 +231,41 @@ templateEngineOverride: njk
 
       {% set authorSlug = post.data.author | lower | replace(r/[^a-z0-9]+/g, '-') if post.data.author else '' %}
       {% set tagSlugs = "" %}
-      
+
       {# Build text blob for structural real-time text matching #}
       {% set searchBlob = post.data.title | lower %}
       {% if post.data.author %}{% set searchBlob = searchBlob + " " + (post.data.author | lower) %}{% endif %}
-      
+
       {% for tag in post.data.tags %}
-        {% if tag %}
-          {% set cleanTag = tag | lower | replace(r/[^a-z0-9]+/g, '-') %}
-          {% set tagSlugs = tagSlugs + ("," if tagSlugs else "") + cleanTag %}
-          {% set searchBlob = searchBlob + " " + (tag | lower) %}
-        {% endif %}
+      {% if tag %}
+      {% set cleanTag = tag | lower | replace(r/[^a-z0-9]+/g, '-') %}
+      {% set tagSlugs = tagSlugs + ("," if tagSlugs else "") + cleanTag %}
+      {% set searchBlob = searchBlob + " " + (tag | lower) %}
+      {% endif %}
       {% endfor %}
 
       <div class="post-card" 
-     data-creator="{{ authorSlug }}" 
-     data-tags="{{ tagSlugs }}" 
-     data-misinformer="{{ post.data.misinformer | slugify }}" 
-     data-search-blob="{{ searchBlob }}">
+     data-creator="{{ post.data.author | slugify }}" 
+     data-tags="{% for tag in post.data.tags %}{{ tag | slugify }}{% if not loop.last %},{% endif %}{% endfor %}" 
+     data-misinformer="{{ post.data.misinformer | slugify }}">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="{{ post.url | url }}" style="display: block; text-decoration: none;">
             {% if post.data.thumbnail %}
-              <img src="/Vegan-Archive{{ post.data.thumbnail }}" alt="{{ post.data.title }}" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="{{ post.data.thumbnail | url }}" alt="{{ post.data.title }}" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             {% else %}
-              {% set galleryData = post.inputPath | getImagesData %}
-              {% if galleryData.files.length > 0 %}
-                {% image galleryData.folder + "/" + galleryData.files[0].name, post.data.title %}
-              {% else %}
-                <div style="background:#e2e8f0; padding:40px 10px; text-align:center; color:#64748b; font-size:0.85rem;">No Image Available</div>
-              {% endif %}
+            {% set galleryData = post.inputPath | getImagesData %}
+            {% if galleryData.files.length > 0 %}
+            {% image galleryData.folder + "/" + galleryData.files[0].name, post.data.title %}
+            {% else %}
+            <div style="background:#e2e8f0; padding:40px 10px; text-align:center; color:#64748b; font-size:0.85rem;">No
+              Image Available</div>
+            {% endif %}
             {% endif %}
 
             {% if post.data.video_path %}
-            <div class="video-badge" style="position: absolute; bottom: 12px; right: 12px; background: rgba(15, 23, 42, 0.9); color: #fff; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; border-radius: 4px; display: inline-flex; align-items: center; gap: 5px; backdrop-filter: blur(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+            <div class="video-badge"
+              style="position: absolute; bottom: 12px; right: 12px; background: rgba(15, 23, 42, 0.9); color: #fff; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; border-radius: 4px; display: inline-flex; align-items: center; gap: 5px; backdrop-filter: blur(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
               <span>▶</span> Watch Video
             </div>
             {% endif %}
@@ -254,13 +274,16 @@ templateEngineOverride: njk
 
         <div class="post-details">
           <h2 class="post-title"><a href="{{ post.url | url }}">
-    {% if post.data.useQuotes %}“{% endif %}{{ post.data.title }}{% if post.data.useQuotes %}”{% endif %}
-  </a></h2>
+              {% if post.data.useQuotes %}“{% endif %}{{ post.data.title }}{% if post.data.useQuotes %}”{% endif %}
+            </a></h2>
           {% if post.data.author %}
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By {{ post.data.author }}</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By {{
+            post.data.author }}</div>
           {% endif %}
           {% if post.data.instagram_url %}
-            <div class="ig-link-container"><a href="{{ post.data.instagram_url }}" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="{{ post.data.instagram_url }}" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           {% endif %}
         </div>
       </div>
@@ -270,34 +293,36 @@ templateEngineOverride: njk
   </main>
 
   <button id="back-to-top" class="back-to-top-btn" title="Go to top">
-  ↑
-</button>
+    ↑
+  </button>
 
-<style>
-  .back-to-top-btn {
-    position: fixed;
-    bottom: 80px; /* Sits just above your mobile FAB */
-    right: 24px;
-    background: #0f172a;
-    color: #ffffff;
-    border: none;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    font-size: 1.2rem;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    z-index: 9998;
-    display: none; /* Hidden by default */
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-  }
-  
-  .back-to-top-btn.is-visible {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-</style>
+  <style>
+    .back-to-top-btn {
+      position: fixed;
+      bottom: 80px;
+      /* Sits just above your mobile FAB */
+      right: 24px;
+      background: #0f172a;
+      color: #ffffff;
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      z-index: 9998;
+      display: none;
+      /* Hidden by default */
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .back-to-top-btn.is-visible {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
 </div>
 
 <button id="mobile-filter-trigger-btn" class="mobile-only-filter-fab">
@@ -316,14 +341,14 @@ templateEngineOverride: njk
     border-radius: 50px;
     font-weight: 600;
     font-size: 1rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     z-index: 9999;
     display: none;
     align-items: center;
     gap: 8px;
     cursor: pointer;
   }
-  
+
   @media (max-width: 768px) {
     .mobile-only-filter-fab {
       display: inline-flex !important;
@@ -331,61 +356,65 @@ templateEngineOverride: njk
   }
 
   /* --- OVERALL GRID FADE STYLES --- */
-#archive-grid {
-  transition: opacity 0.2s ease-in-out !important;
-  opacity: 1;
-}
+  #archive-grid {
+    transition: opacity 0.2s ease-in-out !important;
+    opacity: 1;
+  }
 
-/* When this class is active, the entire gallery vanishes smoothly */
-#archive-grid.grid-is-typing {
-  opacity: 0;
-}
+  /* When this class is active, the entire gallery vanishes smoothly */
+  #archive-grid.grid-is-typing {
+    opacity: 0;
+  }
 
-/* Arrow rotation logic */
-.top-filter-dropdown summary::after {
-  content: '▼';
-  font-size: 0.8rem;
-  margin-left: auto; /* Pushes the arrow to the right */
-  transition: transform 0.3s ease;
-  display: inline-block;
-  color: #64748b;
-}
+  /* Arrow rotation logic */
+  .top-filter-dropdown summary::after {
+    content: '▼';
+    font-size: 0.8rem;
+    margin-left: auto;
+    /* Pushes the arrow to the right */
+    transition: transform 0.3s ease;
+    display: inline-block;
+    color: #64748b;
+  }
 
-/* When the details element is open, rotate the arrow */
-.top-filter-dropdown[open] summary::after {
-  transform: rotate(180deg);
-}
+  /* When the details element is open, rotate the arrow */
+  .top-filter-dropdown[open] summary::after {
+    transform: rotate(180deg);
+  }
 
-/* Update summary to ensure it flexes properly to hold the arrow at the far right */
-.top-filter-dropdown summary {
-  display: flex !important;
-  align-items: center !important;
-}
+  /* Update summary to ensure it flexes properly to hold the arrow at the far right */
+  .top-filter-dropdown summary {
+    display: flex !important;
+    align-items: center !important;
+  }
 </style>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-  const checkboxes = document.querySelectorAll(".filter-checkbox");
-  const postCards = document.querySelectorAll(".post-card");
-  const clearBtn = document.getElementById("clear-filters-btn");
-  const mobileFilterBtn = document.getElementById("mobile-filter-trigger-btn");
-  const filterDropdown = document.getElementById("archive-filter-dropdown");
-  const searchInput = document.getElementById("archive-search-input");
-  const archiveGrid = document.getElementById("archive-grid"); // Hook to the grid container
+    const checkboxes = document.querySelectorAll(".filter-checkbox");
+    const postCards = document.querySelectorAll(".post-card");
+    const clearBtn = document.getElementById("clear-filters-btn");
+    const mobileFilterBtn = document.getElementById("mobile-filter-trigger-btn");
+    const filterDropdown = document.getElementById("archive-filter-dropdown");
+    const searchInput = document.getElementById("archive-search-input");
+    const archiveGrid = document.getElementById("archive-grid"); // Hook to the grid container
 
-  const slugify = text => text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : '';
+    const slugify = text => text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : '';
 
-  window.addEventListener("beforeunload", () => {
-    sessionStorage.setItem("archiveScrollPosition", window.scrollY);
-  });
+    window.addEventListener("beforeunload", () => {
+      sessionStorage.setItem("archiveScrollPosition", window.scrollY);
+    });
 
-  // Debounce timer variable to keep track of when a user pauses typing
-  let typingTimeout;
+    // Debounce timer variable to keep track of when a user pauses typing
+    let typingTimeout;
 
-  // =============================================================
-  // CLEAN, RELIABLE VISIBILITY CORE FUNCTION
-  // =============================================================
-  function filterPosts(isInitial = false) {
+    // =============================================================
+    // CLEAN, RELIABLE VISIBILITY CORE FUNCTION
+    // =============================================================
+    function filterPosts(isInitial = false) {
+    const searchInput = document.getElementById("archive-search-input");
+    const checkboxes = document.querySelectorAll(".filter-checkbox");
+    const postCards = document.querySelectorAll(".post-card");
     const searchQuery = searchInput ? searchInput.value.toLowerCase().trim() : "";
 
     const activeFilters = {
@@ -395,205 +424,138 @@ templateEngineOverride: njk
       misinformer: []
     };
 
-    const chipsContainer = document.getElementById("active-chips-container");
-    if (chipsContainer) chipsContainer.innerHTML = "";
+    checkboxes.forEach(box => {
+      if (box.checked) activeFilters[box.name].push(box.value);
+    });
+
+    postCards.forEach(card => {
+      const creator = card.getAttribute('data-creator');
+      const tagsAttr = card.getAttribute('data-tags') || "";
+      const tags = tagsAttr.split(',');
+      const misinformer = card.getAttribute('data-misinformer');
+      const textContent = card.innerText.toLowerCase();
+
+      const matchSearch = textContent.includes(searchQuery);
+      const matchCreator = activeFilters.creator.length === 0 || activeFilters.creator.includes(creator);
+      const matchMisinformer = activeFilters.misinformer.length === 0 || activeFilters.misinformer.includes(misinformer);
+      const matchTopics = activeFilters.topic.length === 0 || tags.some(t => activeFilters.topic.includes(t));
+      const matchLang = activeFilters.language.length === 0 || tags.some(t => activeFilters.language.includes(t));
+
+      if (matchSearch && matchCreator && matchMisinformer && matchTopics && matchLang) {
+        card.classList.remove("is-hidden");
+        card.style.display = ""; 
+      } else {
+        card.classList.add("is-hidden");
+        card.style.display = "none"; 
+      }
+    });
+
+      // Update counter bubbles UI
+      document.querySelectorAll('.filter-count').forEach(span => {
+        const targetSlug = span.getAttribute('data-count-target');
+        if (targetSlug in dynamicCounts) {
+          const currentCount = dynamicCounts[targetSlug];
+          span.textContent = `(${currentCount})`;
+
+          const parentLabel = span.closest('label');
+          if (parentLabel) {
+            parentLabel.style.opacity = (currentCount === 0) ? "0.3" : "1";
+          }
+        }
+      });
+
+      if (isInitial) {
+        const savedPosition = sessionStorage.getItem("archiveScrollPosition");
+        if (savedPosition) {
+          window.scrollTo(0, parseInt(savedPosition, 10));
+          sessionStorage.removeItem("archiveScrollPosition");
+        }
+      }
+    }
+
+    // =============================================================
+    // REAL-TIME EVENT INTERACTION BINDINGS
+    // =============================================================
+    if (searchInput) {
+      searchInput.addEventListener("input", () => {
+        // 1. Immediately fade the whole grid out as soon as a key is pressed
+        if (archiveGrid) {
+          archiveGrid.classList.add("grid-is-typing");
+        }
+
+        // 2. Clear any pending timeouts so typing continuously keeps the grid hidden
+        clearTimeout(typingTimeout);
+
+        // 3. Set a 250ms delay. The moment you stop typing for 1/4 of a second, the grid updates and fades in
+        typingTimeout = setTimeout(() => {
+          filterPosts();
+          if (archiveGrid) {
+            archiveGrid.classList.remove("grid-is-typing");
+          }
+        }, 250);
+      });
+    }
 
     checkboxes.forEach(box => {
-      if (box.checked) {
-        const group = box.name;
-        if (activeFilters[group]) {
-          activeFilters[group].push(box.value);
-        }
-
-        const labelSpan = box.parentNode.querySelector('span');
-        const labelText = labelSpan ? labelSpan.textContent.trim() : box.value;
-
-        const chip = document.createElement("span");
-        chip.className = "filter-chip";
-        chip.innerHTML = `
-          ${labelText}
-          <button class="filter-chip-remove" data-target-id="${box.value}">×</button>
-        `;
-
-        chip.querySelector(".filter-chip-remove").addEventListener("click", (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          box.checked = false;
-          filterPosts();
-        });
-
-        chipsContainer.appendChild(chip);
-      }
-    });
-
-    const hasActiveFilters = Object.values(activeFilters).some(arr => arr.length > 0);
-
-    // 1. Update display properties
-    postCards.forEach(card => {
-      // Check for visibility based on style.display
-      if (card.style.display !== "none") {
-        // Count Creator
-        const creator = card.getAttribute('data-creator');
-        if (creator && creator in dynamicCounts) {
-          dynamicCounts[creator]++;
-        }
-
-        // Count Tags (Topics & Languages)
-        const tagsAttr = card.getAttribute('data-tags');
-        if (tagsAttr) {
-          tagsAttr.split(',').forEach(tag => {
-            const cleanTag = tag.trim();
-            if (cleanTag && cleanTag in dynamicCounts) {
-              dynamicCounts[cleanTag]++;
-            }
-          });
-        }
-
-        // NEW: Explicitly count Misinformers
-        const misinformer = card.getAttribute('data-misinformer');
-        if (misinformer && misinformer in dynamicCounts) {
-          dynamicCounts[misinformer]++;
-        }
-      }
-    });
-
-    // 2. RUN FACETED SEARCH DYNAMIC COUNT MATH
-    // Declare dynamicCounts ONCE here
-    // 2. RUN FACETED SEARCH DYNAMIC COUNT MATH
-    const dynamicCounts = {};
-    checkboxes.forEach(input => {
-      // Normalize the checkbox value to ensure it matches the tag/slug format
-      dynamicCounts[input.value.trim()] = 0;
-    });
-
-    postCards.forEach(card => {
-      if (card.style.display !== "none") {
-        // Count Creator (slugified)
-        const creator = card.getAttribute('data-creator');
-        if (creator && dynamicCounts.hasOwnProperty(creator)) {
-          dynamicCounts[creator]++;
-        }
-
-        // Count Tags (Topics, Languages, AND Misinformers)
-        const tagsAttr = card.getAttribute('data-tags');
-        if (tagsAttr) {
-          tagsAttr.split(',').forEach(tag => {
-            const cleanTag = tag.trim().toLowerCase();
-            // Match against checkbox values
-            if (dynamicCounts.hasOwnProperty(cleanTag)) {
-              dynamicCounts[cleanTag]++;
-            }
-          });
-        }
-      }
-    });
-
-    // Update counter bubbles UI
-    document.querySelectorAll('.filter-count').forEach(span => {
-      const targetSlug = span.getAttribute('data-count-target');
-      if (targetSlug in dynamicCounts) {
-        const currentCount = dynamicCounts[targetSlug];
-        span.textContent = `(${currentCount})`;
-        
-        const parentLabel = span.closest('label');
-        if (parentLabel) {
-          parentLabel.style.opacity = (currentCount === 0) ? "0.3" : "1";
-        }
-      }
-    });
-
-    if (isInitial) {
-      const savedPosition = sessionStorage.getItem("archiveScrollPosition");
-      if (savedPosition) {
-        window.scrollTo(0, parseInt(savedPosition, 10));
-        sessionStorage.removeItem("archiveScrollPosition");
-      }
-    }
-  }
-
-  // =============================================================
-  // REAL-TIME EVENT INTERACTION BINDINGS
-  // =============================================================
-  if (searchInput) {
-    searchInput.addEventListener("input", () => {
-      // 1. Immediately fade the whole grid out as soon as a key is pressed
-      if (archiveGrid) {
-        archiveGrid.classList.add("grid-is-typing");
-      }
-
-      // 2. Clear any pending timeouts so typing continuously keeps the grid hidden
-      clearTimeout(typingTimeout);
-
-      // 3. Set a 250ms delay. The moment you stop typing for 1/4 of a second, the grid updates and fades in
-      typingTimeout = setTimeout(() => {
+      box.addEventListener("change", () => {
         filterPosts();
-        if (archiveGrid) {
-          archiveGrid.classList.remove("grid-is-typing");
-        }
-      }, 250); 
+      });
     });
-  }
 
-  checkboxes.forEach(box => {
-    box.addEventListener("change", () => {
-      filterPosts();
-    });
-  });
-
-  if (clearBtn) {
-    clearBtn.addEventListener("click", () => {
-      checkboxes.forEach(box => box.checked = false);
-      if (searchInput) searchInput.value = "";
-      filterPosts();
-    });
-  }
-
-  // Run math once at startup
-  filterPosts(true);
-
-  // Deep URL incoming parameter tag router
-  const urlParams = new URLSearchParams(window.location.search);
-  const tagFromUrl = urlParams.get('tag');
-  if (tagFromUrl) {
-    const targetSlug = slugify(tagFromUrl);
-    const targetCheckbox = document.querySelector(`input[value="${targetSlug}"]`);
-    if (targetCheckbox) {
-      targetCheckbox.checked = true;
-      filterPosts();
+    if (clearBtn) {
+      clearBtn.addEventListener("click", () => {
+        checkboxes.forEach(box => box.checked = false);
+        if (searchInput) searchInput.value = "";
+        filterPosts();
+      });
     }
-  }
 
-  if (mobileFilterBtn && filterDropdown) {
-    mobileFilterBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      if (filterDropdown.hasAttribute("open")) {
-        filterDropdown.removeAttribute("open");
+    // Run math once at startup
+    filterPosts(true);
+
+    // Deep URL incoming parameter tag router
+    const urlParams = new URLSearchParams(window.location.search);
+    const tagFromUrl = urlParams.get('tag');
+    if (tagFromUrl) {
+      const targetSlug = slugify(tagFromUrl);
+      const targetCheckbox = document.querySelector(`input[value="${targetSlug}"]`);
+      if (targetCheckbox) {
+        targetCheckbox.checked = true;
+        filterPosts();
+      }
+    }
+
+    if (mobileFilterBtn && filterDropdown) {
+      mobileFilterBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (filterDropdown.hasAttribute("open")) {
+          filterDropdown.removeAttribute("open");
+        } else {
+          filterDropdown.setAttribute("open", "");
+          filterDropdown.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    }
+
+    // =============================================================
+    // BACK TO TOP BUTTON LOGIC
+    // =============================================================
+    const backToTopBtn = document.getElementById("back-to-top");
+
+    window.addEventListener("scroll", () => {
+      // Show button after user scrolls down 400px
+      if (window.scrollY > 400) {
+        backToTopBtn.classList.add("is-visible");
       } else {
-        filterDropdown.setAttribute("open", "");
-        filterDropdown.scrollIntoView({ behavior: "smooth", block: "start" });
+        backToTopBtn.classList.remove("is-visible");
       }
     });
-  }
 
-  // =============================================================
-// BACK TO TOP BUTTON LOGIC
-// =============================================================
-const backToTopBtn = document.getElementById("back-to-top");
-
-window.addEventListener("scroll", () => {
-  // Show button after user scrolls down 400px
-  if (window.scrollY > 400) {
-    backToTopBtn.classList.add("is-visible");
-  } else {
-    backToTopBtn.classList.remove("is-visible");
-  }
-});
-
-backToTopBtn.addEventListener("click", () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
   });
-});
-});
 </script>

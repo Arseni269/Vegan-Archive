@@ -12,23 +12,24 @@
 <link rel="stylesheet" href="/Vegan-Archive/css/styles.css?v=1.1">
 
 <style>
-
   /* --- SMOOTH GRID ANIMATION CODES --- */
 
-/* Base state for all cards inside your grid layout */
-.post-card {
-  opacity: 1;
-  transform: scale(1);
-  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease !important;
-  visibility: visible;
-}
+  /* Base state for all cards inside your grid layout */
+  .post-card {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease !important;
+    visibility: visible;
+  }
 
-/* The state when a card is filtered out by search or a checkbox */
-.post-card.is-hidden {
-  opacity: 0;
-  transform: scale(0.92); /* Micro-scale shrink effect while fading out */
-  visibility: hidden;
-}
+  /* The state when a card is filtered out by search or a checkbox */
+  .post-card.is-hidden {
+    opacity: 0;
+    transform: scale(0.92);
+    /* Micro-scale shrink effect while fading out */
+    visibility: hidden;
+  }
+
   /* FORCE FIXED WIDTHS INSIDE FILTER LISTS */
   .filter-list li {
     margin-bottom: 4px;
@@ -44,7 +45,7 @@
   }
 
   /* Force the text name column to occupy all available central room rigidly */
-  .filter-list .filter-link > span:not(.filter-count) {
+  .filter-list .filter-link>span:not(.filter-count) {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -55,8 +56,8 @@
   .filter-list .filter-count {
     display: inline-block !important;
     text-align: right !important;
-    font-variant-numeric: tabular-nums; 
-    min-width: 32px !important; 
+    font-variant-numeric: tabular-nums;
+    min-width: 32px !important;
   }
 
   /* Eliminate the sidebar structure and allow full screen spread */
@@ -102,7 +103,9 @@
   }
 
   @media (max-width: 900px) {
-    .dropdown-filter-grid { grid-template-columns: repeat(2, 1fr); }
+    .dropdown-filter-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   /* FORCE A BEAUTIFUL 5-COLUMN GRID */
@@ -115,38 +118,51 @@
 
   /* Responsive fallback steps */
   @media (max-width: 1400px) {
-    .archive-layout .imageboard-grid { grid-template-columns: repeat(4, 1fr) !important; }
+    .archive-layout .imageboard-grid {
+      grid-template-columns: repeat(4, 1fr) !important;
+    }
   }
+
   @media (max-width: 1100px) {
-    .archive-layout .imageboard-grid { grid-template-columns: repeat(3, 1fr) !important; }
+    .archive-layout .imageboard-grid {
+      grid-template-columns: repeat(3, 1fr) !important;
+    }
   }
+
   @media (max-width: 750px) {
-    .archive-layout .imageboard-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .archive-layout .imageboard-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
   }
+
   @media (max-width: 450px) {
-    .archive-layout .imageboard-grid { grid-template-columns: 1fr !important; }
+    .archive-layout .imageboard-grid {
+      grid-template-columns: 1fr !important;
+    }
   }
 </style>
 
 <div class="archive-layout">
-  
-  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 15px;">
+
+  <div
+    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 15px;">
     <h1 style="margin: 0;">Vegan Archive</h1>
-    
+
     <div style="display: flex; gap: 10px; align-items: center; flex-grow: 1; max-width: 500px;">
-      <input type="text" id="archive-search-input" placeholder="🔍 Search titles, creators, topics, or misinformers..." 
-             style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.95rem; outline: none; box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);">
+      <input type="text" id="archive-search-input" placeholder="🔍 Search titles, creators, topics, or misinformers..."
+        style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.95rem; outline: none; box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);">
       <button id="clear-filters-btn" class="clear-btn" style="white-space: nowrap;">Clear All</button>
     </div>
   </div>
 
   <details id="archive-filter-dropdown" class="top-filter-dropdown">
     <summary>
-    <span>⚡ Filter Posts by Creator, Topic, or Language</span>
-    <div id="active-chips-container" style="display: inline-flex; flex-wrap: wrap; gap: 6px; margin-left: 20px;"></div>
-    
+      <span>⚡ Filter Posts by Creator, Topic, or Language</span>
+      <div id="active-chips-container" style="display: inline-flex; flex-wrap: wrap; gap: 6px; margin-left: 20px;">
+      </div>
+
     </summary>
-    
+
     <div class="dropdown-filter-grid">
       <div class="filter-group-inner">
         <h3 style="margin-top: 0; font-size: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 5px;">Creators</h3>
@@ -164,7 +180,7 @@
             <label class="filter-link">
               <input type="checkbox" name="creator" value="david-c-arenas" class="filter-checkbox">
               <span>David C Arenas</span>
-              <span class="filter-count" data-count-target="david-c-arenas">(11)</span>
+              <span class="filter-count" data-count-target="david-c-arenas">(19)</span>
             </label>
           </li>
           
@@ -227,7 +243,15 @@
             <label class="filter-link">
               <input type="checkbox" name="topic" value="utilitarianism" class="filter-checkbox">
               <span>utilitarianism</span>
-              <span class="filter-count" data-count-target="utilitarianism">(16)</span>
+              <span class="filter-count" data-count-target="utilitarianism">(19)</span>
+            </label>
+          </li>
+          
+          <li>
+            <label class="filter-link">
+              <input type="checkbox" name="topic" value="welfarism" class="filter-checkbox">
+              <span>welfarism</span>
+              <span class="filter-count" data-count-target="welfarism">(13)</span>
             </label>
           </li>
           
@@ -236,14 +260,6 @@
               <input type="checkbox" name="topic" value="excuses" class="filter-checkbox">
               <span>excuses</span>
               <span class="filter-count" data-count-target="excuses">(11)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="welfarism" class="filter-checkbox">
-              <span>welfarism</span>
-              <span class="filter-count" data-count-target="welfarism">(10)</span>
             </label>
           </li>
           
@@ -297,9 +313,33 @@
           
           <li>
             <label class="filter-link">
+              <input type="checkbox" name="topic" value="reducetarianism" class="filter-checkbox">
+              <span>reducetarianism</span>
+              <span class="filter-count" data-count-target="reducetarianism">(3)</span>
+            </label>
+          </li>
+          
+          <li>
+            <label class="filter-link">
+              <input type="checkbox" name="topic" value="animal-rights" class="filter-checkbox">
+              <span>animal rights</span>
+              <span class="filter-count" data-count-target="animal-rights">(2)</span>
+            </label>
+          </li>
+          
+          <li>
+            <label class="filter-link">
               <input type="checkbox" name="topic" value="carnism" class="filter-checkbox">
               <span>carnism</span>
               <span class="filter-count" data-count-target="carnism">(2)</span>
+            </label>
+          </li>
+          
+          <li>
+            <label class="filter-link">
+              <input type="checkbox" name="topic" value="crop-deaths" class="filter-checkbox">
+              <span>crop deaths</span>
+              <span class="filter-count" data-count-target="crop-deaths">(2)</span>
             </label>
           </li>
           
@@ -321,6 +361,22 @@
           
           <li>
             <label class="filter-link">
+              <input type="checkbox" name="topic" value="advocacy" class="filter-checkbox">
+              <span>advocacy</span>
+              <span class="filter-count" data-count-target="advocacy">(2)</span>
+            </label>
+          </li>
+          
+          <li>
+            <label class="filter-link">
+              <input type="checkbox" name="topic" value="abolition" class="filter-checkbox">
+              <span>abolition</span>
+              <span class="filter-count" data-count-target="abolition">(2)</span>
+            </label>
+          </li>
+          
+          <li>
+            <label class="filter-link">
               <input type="checkbox" name="topic" value="principle" class="filter-checkbox">
               <span>principle</span>
               <span class="filter-count" data-count-target="principle">(2)</span>
@@ -332,14 +388,6 @@
               <input type="checkbox" name="topic" value="distortion" class="filter-checkbox">
               <span>distortion</span>
               <span class="filter-count" data-count-target="distortion">(2)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="reducetarianism" class="filter-checkbox">
-              <span>reducetarianism</span>
-              <span class="filter-count" data-count-target="reducetarianism">(2)</span>
             </label>
           </li>
           
@@ -364,6 +412,14 @@
               <input type="checkbox" name="topic" value="speciesism" class="filter-checkbox">
               <span>speciesism</span>
               <span class="filter-count" data-count-target="speciesism">(1)</span>
+            </label>
+          </li>
+          
+          <li>
+            <label class="filter-link">
+              <input type="checkbox" name="topic" value="meme" class="filter-checkbox">
+              <span>meme</span>
+              <span class="filter-count" data-count-target="meme">(1)</span>
             </label>
           </li>
           
@@ -433,25 +489,9 @@
           
           <li>
             <label class="filter-link">
-              <input type="checkbox" name="topic" value="anti-capitalism" class="filter-checkbox">
-              <span>anti-capitalism</span>
-              <span class="filter-count" data-count-target="anti-capitalism">(1)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
               <input type="checkbox" name="topic" value="futility" class="filter-checkbox">
               <span>futility</span>
               <span class="filter-count" data-count-target="futility">(1)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="privilege" class="filter-checkbox">
-              <span>privilege</span>
-              <span class="filter-count" data-count-target="privilege">(1)</span>
             </label>
           </li>
           
@@ -465,32 +505,49 @@
           
           <li>
             <label class="filter-link">
+              <input type="checkbox" name="topic" value="anti-capitalism" class="filter-checkbox">
+              <span>anti-capitalism</span>
+              <span class="filter-count" data-count-target="anti-capitalism">(1)</span>
+            </label>
+          </li>
+          
+          <li>
+            <label class="filter-link">
+              <input type="checkbox" name="topic" value="privilege" class="filter-checkbox">
+              <span>privilege</span>
+              <span class="filter-count" data-count-target="privilege">(1)</span>
+            </label>
+          </li>
+          
+          <li>
+            <label class="filter-link">
               <input type="checkbox" name="topic" value="hypocrisy" class="filter-checkbox">
               <span>hypocrisy</span>
               <span class="filter-count" data-count-target="hypocrisy">(1)</span>
             </label>
           </li>
           
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="abolition" class="filter-checkbox">
-              <span>abolition</span>
-              <span class="filter-count" data-count-target="abolition">(1)</span>
-            </label>
-          </li>
-          
         </ul>
       </div>
 
       <div class="filter-group-inner">
-        <h3 style="margin-top: 0; font-size: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 5px;">Languages</h3>
+        <h3 style="margin-top: 0; font-size: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 5px;">Languages
+        </h3>
         <ul class="filter-list" style="list-style: none; padding: 0; margin: 0;">
           
           <li>
             <label class="filter-link">
               <input type="checkbox" name="language" value="english" class="filter-checkbox" />
               <span>english</span>
-              <span class="filter-count" data-count-target="english">(51)</span>
+              <span class="filter-count" data-count-target="english">(57)</span>
+            </label>
+          </li>
+          
+          <li>
+            <label class="filter-link">
+              <input type="checkbox" name="language" value="spanish" class="filter-checkbox" />
+              <span>spanish</span>
+              <span class="filter-count" data-count-target="spanish">(2)</span>
             </label>
           </li>
           
@@ -498,7 +555,8 @@
       </div>
 
       <div class="filter-group-inner">
-        <h3 style="margin-top: 0; font-size: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 5px;">Misinformers</h3>
+        <h3 style="margin-top: 0; font-size: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 5px;">Misinformers
+        </h3>
         <ul class="filter-list" style="list-style: none; padding: 0; margin: 0;">
           
           <li>
@@ -561,46 +619,568 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <div class="post-card" 
+     data-creator="david-c-arenas" 
+     data-tags="posts,english,utilitarianism,reducetarianism,meme" 
+     data-misinformer="undefined">
+        <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
+          <a href="/Vegan-Archive/archive/arenas/memedoge/labmeat/" style="display: block; text-decoration: none;">
+            
+            <img src="/Vegan-Archive/archive/arenas/labmeat/1.png" alt="Vegans 1944 vs &quot;Vegans&quot; 202X1" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
+            
+
+            
+          </a>
+        </div>
+
+        <div class="post-details">
+          <h2 class="post-title"><a href="/Vegan-Archive/archive/arenas/memedoge/labmeat/">
+              Vegans 1944 vs &quot;Vegans&quot; 202X1
+            </a></h2>
+          
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
           
           
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/CEjErEKp0p7/" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
-        
+        </div>
+      </div>
+      
+      
+      
+
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <div class="post-card" 
+     data-creator="david-c-arenas" 
+     data-tags="posts,english,welfarism,abolition" 
+     data-misinformer="undefined">
+        <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
+          <a href="/Vegan-Archive/archive/arenas/veganismabolish/abolish/" style="display: block; text-decoration: none;">
+            
+            <img src="/Vegan-Archive/archive/arenas/veganismabolish/1.png" alt="Veganism seeks to abolish their property status" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
+            
+
+            
+          </a>
+        </div>
+
+        <div class="post-details">
+          <h2 class="post-title"><a href="/Vegan-Archive/archive/arenas/veganismabolish/abolish/">
+              Veganism seeks to abolish their property status
+            </a></h2>
+          
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
+          
+          
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/CEw8cN1JUiT/" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          
+        </div>
+      </div>
+      
+      
+      
+
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <div class="post-card" 
+     data-creator="david-c-arenas" 
+     data-tags="posts,english,advocacy" 
+     data-misinformer="undefined">
+        <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
+          <a href="/Vegan-Archive/archive/arenas/stopeatinganimals/stopeating/" style="display: block; text-decoration: none;">
+            
+            <img src="/Vegan-Archive/archive/arenas/stopeatinganimals/1.jpg" alt="What&#39;s wrong with the message Stop eating animals?" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
+            
+
+            
+          </a>
+        </div>
+
+        <div class="post-details">
+          <h2 class="post-title"><a href="/Vegan-Archive/archive/arenas/stopeatinganimals/stopeating/">
+              What&#39;s wrong with the message Stop eating animals?
+            </a></h2>
+          
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
+          
+          
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/CQ_i4rqJBNv/" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          
+        </div>
+      </div>
+      
+      
+      
+
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <div class="post-card" 
+     data-creator="david-c-arenas" 
+     data-tags="posts,english,advocacy" 
+     data-misinformer="undefined">
+        <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
+          <a href="/Vegan-Archive/archive/arenas/notwelfarism/" style="display: block; text-decoration: none;">
+            
+            <img src="/Vegan-Archive/archive/arenas/notwelfarism/1.jpg" alt="Veganism is not welfarism" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
+            
+
+            
+          </a>
+        </div>
+
+        <div class="post-details">
+          <h2 class="post-title"><a href="/Vegan-Archive/archive/arenas/notwelfarism/">
+              Veganism is not welfarism
+            </a></h2>
+          
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
+          
+          
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/CRjIiUhJr26/" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          
+        </div>
+      </div>
+      
+      
+      
+
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <div class="post-card" 
+     data-creator="david-c-arenas" 
+     data-tags="posts,english,crop-deaths,utilitarianism" 
+     data-misinformer="undefined">
+        <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
+          <a href="/Vegan-Archive/archive/arenas/cropdeaths/" style="display: block; text-decoration: none;">
+            
+            <img src="/Vegan-Archive/archive/arenas/cropdeaths/1.webp" alt="Are crop deaths a valid excuse against veganism?" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
+            
+
+            
+          </a>
+        </div>
+
+        <div class="post-details">
+          <h2 class="post-title"><a href="/Vegan-Archive/archive/arenas/cropdeaths/">
+              Are crop deaths a valid excuse against veganism?
+            </a></h2>
+          
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
+          
+          
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/CnqISw_JHuA/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          
+        </div>
+      </div>
+      
+      
+      
+
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <div class="post-card" 
+     data-creator="david-c-arenas" 
+     data-tags="posts,spanish,crop-deaths,utilitarianism" 
+     data-misinformer="undefined">
+        <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
+          <a href="/Vegan-Archive/spanish/arenas/cropdeaths/" style="display: block; text-decoration: none;">
+            
+            <img src="/Vegan-Archive/spanish/arenas/cropdeaths/1.webp" alt="¿Son las muertes de animales en cultivos una excusa valida contra el Veganismo?" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
+            
+
+            
+          </a>
+        </div>
+
+        <div class="post-details">
+          <h2 class="post-title"><a href="/Vegan-Archive/spanish/arenas/cropdeaths/">
+              ¿Son las muertes de animales en cultivos una excusa valida contra el Veganismo?
+            </a></h2>
+          
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
+          
+          
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/Cn7QNBhJJ-z/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          
+        </div>
+      </div>
+      
+      
+      
+
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <div class="post-card" 
+     data-creator="david-c-arenas" 
+     data-tags="posts,english,welfarism,animal-rights" 
+     data-misinformer="undefined">
+        <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
+          <a href="/Vegan-Archive/archive/arenas/ar/" style="display: block; text-decoration: none;">
+            
+            <img src="/Vegan-Archive/archive/arenas/ar/1.webp" alt="How the concept of animal rights is getting diluted" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
+            
+
+            
+          </a>
+        </div>
+
+        <div class="post-details">
+          <h2 class="post-title"><a href="/Vegan-Archive/archive/arenas/ar/">
+              How the concept of animal rights is getting diluted
+            </a></h2>
+          
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
+          
+          
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/CoDsihup29_/?img_index=1 " target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          
+        </div>
+      </div>
+      
+      
+      
+
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <div class="post-card" 
+     data-creator="david-c-arenas" 
+     data-tags="posts,spanish,welfarism,animal-rights" 
+     data-misinformer="undefined">
+        <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
+          <a href="/Vegan-Archive/spanish/arenas/ar/" style="display: block; text-decoration: none;">
+            
+            <img src="/Vegan-Archive/spanish/arenas/ar/1.webp" alt="Cómo se ha ido banalizando el concepto de derechos animales" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
+            
+
+            
+          </a>
+        </div>
+
+        <div class="post-details">
+          <h2 class="post-title"><a href="/Vegan-Archive/spanish/arenas/ar/">
+              Cómo se ha ido banalizando el concepto de derechos animales
+            </a></h2>
+          
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
+          
+          
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/CoFq-7yJ8OC/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          
+        </div>
+      </div>
+      
+      
+      
+
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="david-c-arenas" 
      data-tags="posts,english,carnism,misinformation" 
-     data-misinformer="melanie-joy" 
-     data-search-blob="my beef with the term carnism david c arenas posts english carnism misinformation">
+     data-misinformer="melanie-joy">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/arenas/carnism/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/arenas/carnism/1.jpg" alt="My beef with the term Carnism" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/arenas/carnism/1.jpg" alt="My beef with the term Carnism" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -609,13 +1189,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/arenas/carnism/">
-    My beef with the term Carnism
-  </a></h2>
+              My beef with the term Carnism
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/CoGuAtzuU9h/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/CoGuAtzuU9h/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -625,46 +1207,46 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="david-c-arenas" 
      data-tags="posts,english,hunting-ideology,utilitarianism" 
-     data-misinformer="dr-avi" 
-     data-search-blob="should &quot;vegans&quot; have murdered cecil the lion? david c arenas posts english hunting ideology utilitarianism">
+     data-misinformer="dr-avi">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/arenas/cecil/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/arenas/cecil/1.png" alt="Should &quot;Vegans&quot; have murdered cecil the lion?" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/arenas/cecil/1.png" alt="Should &quot;Vegans&quot; have murdered cecil the lion?" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -673,13 +1255,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/arenas/cecil/">
-    Should &quot;Vegans&quot; have murdered cecil the lion?
-  </a></h2>
+              Should &quot;Vegans&quot; have murdered cecil the lion?
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/C7kfTapp5t9/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/C7kfTapp5t9/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -689,52 +1273,52 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="david-c-arenas" 
      data-tags="posts,english,utilitarianism,intersectionality,misinformation" 
-     data-misinformer="undefined" 
-     data-search-blob="infighting within the &quot;vegan&quot; movement? david c arenas posts english utilitarianism intersectionality misinformation">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/arenas/infighting/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/arenas/infighting/1.png" alt="Infighting within the &quot;Vegan&quot; movement?" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/arenas/infighting/1.png" alt="Infighting within the &quot;Vegan&quot; movement?" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -743,13 +1327,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/arenas/infighting/">
-    Infighting within the &quot;Vegan&quot; movement?
-  </a></h2>
+              Infighting within the &quot;Vegan&quot; movement?
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/C72d7tQpCQ0/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/C72d7tQpCQ0/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -759,52 +1345,52 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="david-c-arenas" 
      data-tags="posts,english,utilitarianism,single-issue-campaigns,welfarism" 
-     data-misinformer="undefined" 
-     data-search-blob="if the vegan forefathers had been plant-based utilitarians david c arenas posts english utilitarianism single issue campaigns welfarism">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/arenas/forefathers/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/arenas/forefathers/1.webp" alt="If the vegan forefathers had been plant-based utilitarians" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/arenas/forefathers/1.webp" alt="If the vegan forefathers had been plant-based utilitarians" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -813,13 +1399,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/arenas/forefathers/">
-    If the vegan forefathers had been plant-based utilitarians
-  </a></h2>
+              If the vegan forefathers had been plant-based utilitarians
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/C8VMaBRpEXU/" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/C8VMaBRpEXU/" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -829,40 +1417,40 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="david-c-arenas" 
      data-tags="posts,english,utilitarianism" 
-     data-misinformer="undefined" 
-     data-search-blob="if a thief only steals when... david c arenas posts english utilitarianism">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/arenas/ifathief/carnism/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/arenas/ifathief/1.png" alt="If a thief only steals when..." class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/arenas/ifathief/1.png" alt="If a thief only steals when..." class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -871,13 +1459,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/arenas/ifathief/carnism/">
-    If a thief only steals when...
-  </a></h2>
+              If a thief only steals when...
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DA6V6ahJ6XF/" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DA6V6ahJ6XF/" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -887,46 +1477,46 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="david-c-arenas" 
      data-tags="posts,english,utilitarianism,welfarism" 
-     data-misinformer="george-martin-melanie-joy-danny-ishay" 
-     data-search-blob="let&#39;s make veganism great again david c arenas posts english utilitarianism welfarism">
+     data-misinformer="george-martin-melanie-joy-danny-ishay">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/arenas/mvga/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/arenas/mvga/1.png" alt="Let&#39;s make Veganism great again" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/arenas/mvga/1.png" alt="Let&#39;s make Veganism great again" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -935,13 +1525,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/arenas/mvga/">
-    Let&#39;s make Veganism great again
-  </a></h2>
+              Let&#39;s make Veganism great again
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DCFadW1xBz2/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DCFadW1xBz2/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -951,46 +1543,46 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="david-c-arenas" 
      data-tags="posts,english,utilitarianism,lab-flesh" 
-     data-misinformer="undefined" 
-     data-search-blob="if the vegan forefathers had been plant-based utilitarians david c arenas posts english utilitarianism lab flesh">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/arenas/labmeat/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/arenas/labmeat/1.png" alt="If the vegan forefathers had been plant-based utilitarians" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/arenas/labmeat/1.png" alt="Lab-grown flesg goes against the vegan goal" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -999,13 +1591,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/arenas/labmeat/">
-    If the vegan forefathers had been plant-based utilitarians
-  </a></h2>
+              Lab-grown flesg goes against the vegan goal
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DCNNgYMx_6s/" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DCNNgYMx_6s/" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -1015,46 +1609,46 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="david-c-arenas" 
      data-tags="posts,english,welfarism,misinformation" 
-     data-misinformer="undefined" 
-     data-search-blob="if you think welfarism is more effective, you are a welfarist david c arenas posts english welfarism misinformation">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/arenas/effectivewelfarism/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/arenas/effectivewelfarism/1.jpg" alt="If you think welfarism is more effective, you are a welfarist" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/arenas/effectivewelfarism/1.jpg" alt="If you think welfarism is more effective, you are a welfarist" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -1063,13 +1657,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/arenas/effectivewelfarism/">
-    If you think welfarism is more effective, you are a welfarist
-  </a></h2>
+              If you think welfarism is more effective, you are a welfarist
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DCz9SBRRnXp/" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DCz9SBRRnXp/" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -1079,40 +1675,40 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="str8-vedge" 
      data-tags="posts,english,excuses" 
-     data-misinformer="undefined" 
-     data-search-blob="but they&#39;re animals, not humans str8 vedge posts english excuses">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/str8 vedge/but they are animals/theyareanimals/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/str8 vedge/but they are animals/1.webp" alt="But they&#39;re animals, not humans" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/str8 vedge/but they are animals/1.webp" alt="But they&#39;re animals, not humans" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -1121,13 +1717,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/str8 vedge/but they are animals/theyareanimals/">
-    But they&#39;re animals, not humans
-  </a></h2>
+              But they&#39;re animals, not humans
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Str8 Vedge</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Str8 Vedge</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DLagOYXsm29/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DLagOYXsm29/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -1137,52 +1735,52 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="str8-vedge" 
      data-tags="posts,english,lab-flesh,utilitarianism,welfarism" 
-     data-misinformer="undefined" 
-     data-search-blob="lab grown flesh is animal exploitation str8 vedge posts english lab flesh utilitarianism welfarism">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/str8 vedge/lab flesh/labflesh/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/str8 vedge/lab flesh/1.webp" alt="Lab grown flesh is animal exploitation" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/str8 vedge/lab flesh/1.webp" alt="Lab grown flesh is animal exploitation" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -1191,13 +1789,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/str8 vedge/lab flesh/labflesh/">
-    Lab grown flesh is animal exploitation
-  </a></h2>
+              Lab grown flesh is animal exploitation
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Str8 Vedge</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Str8 Vedge</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DLu4GpwsX0n/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DLu4GpwsX0n/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -1207,50 +1807,51 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="str8-vedge" 
      data-tags="posts,english,excuses,religion" 
-     data-misinformer="undefined" 
-     data-search-blob="religious excuse for animal exploitation str8 vedge posts english excuses religion">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/str8 vedge/religion/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/str8 vedge/religion.png" alt="Religious excuse for animal exploitation" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/str8 vedge/religion.png" alt="Religious excuse for animal exploitation" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
-            <div class="video-badge" style="position: absolute; bottom: 12px; right: 12px; background: rgba(15, 23, 42, 0.9); color: #fff; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; border-radius: 4px; display: inline-flex; align-items: center; gap: 5px; backdrop-filter: blur(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+            <div class="video-badge"
+              style="position: absolute; bottom: 12px; right: 12px; background: rgba(15, 23, 42, 0.9); color: #fff; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; border-radius: 4px; display: inline-flex; align-items: center; gap: 5px; backdrop-filter: blur(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
               <span>▶</span> Watch Video
             </div>
             
@@ -1259,13 +1860,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/str8 vedge/religion/">
-    Religious excuse for animal exploitation
-  </a></h2>
+              Religious excuse for animal exploitation
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Str8 Vedge</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Str8 Vedge</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DYFns4_saOy/" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DYFns4_saOy/" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -1275,46 +1878,46 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="str8-vedge" 
      data-tags="posts,english,hunting-ideology,utilitarianism" 
-     data-misinformer="undefined" 
-     data-search-blob="a vegan world isn&#39;t a zoo str8 vedge posts english hunting ideology utilitarianism">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/str8 vedge/not a zoo/notazoo/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/str8 vedge/not a zoo/1.png" alt="A Vegan world isn&#39;t a ZOO" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/str8 vedge/not a zoo/1.png" alt="A Vegan world isn&#39;t a ZOO" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -1323,13 +1926,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/str8 vedge/not a zoo/notazoo/">
-    A Vegan world isn&#39;t a ZOO
-  </a></h2>
+              A Vegan world isn&#39;t a ZOO
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Str8 Vedge</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Str8 Vedge</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DMODy5PMlbl/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DMODy5PMlbl/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -1339,52 +1944,52 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="luliwizard-vegan" 
      data-tags="posts,english,hunting-ideology,utilitarianism,misinformation" 
-     data-misinformer="gary-yourofsky" 
-     data-search-blob="gary yourofsky = fvck the lion luliwizard vegan posts english hunting ideology utilitarianism misinformation">
+     data-misinformer="gary-yourofsky">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/luliwizard/gary/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/luliwizard/gary/1.png" alt="Gary Yourofsky = Fvck the lion" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/luliwizard/gary/1.png" alt="Gary Yourofsky = Fvck the lion" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -1393,13 +1998,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/luliwizard/gary/">
-    Gary Yourofsky = Fvck the lion
-  </a></h2>
+              Gary Yourofsky = Fvck the lion
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Luliwizard vegan</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Luliwizard vegan</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DMor0e5OZx-/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DMor0e5OZx-/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -1409,40 +2016,40 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="luliwizard-vegan" 
      data-tags="posts,english,hunting-ideology" 
-     data-misinformer="gary-yourofsky" 
-     data-search-blob="the root of today&#39;s so-called vegan activism luliwizard vegan posts english hunting ideology">
+     data-misinformer="gary-yourofsky">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/luliwizard/root of todays activism/gary/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/luliwizard/root of todays activism/1.jpg" alt="The root of today&#39;s so-called Vegan activism" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/luliwizard/root of todays activism/1.jpg" alt="The root of today&#39;s so-called Vegan activism" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -1451,13 +2058,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/luliwizard/root of todays activism/gary/">
-    The root of today&#39;s so-called Vegan activism
-  </a></h2>
+              The root of today&#39;s so-called Vegan activism
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Luliwizard vegan</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Luliwizard vegan</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DSjW7PHjtDx/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DSjW7PHjtDx/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -1467,46 +2076,46 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="david-c-arenas" 
      data-tags="posts,english,utilitarianism,speciesism" 
-     data-misinformer="peter-singer" 
-     data-search-blob="is veganism about equality? not in the way you might think david c arenas posts english utilitarianism speciesism">
+     data-misinformer="peter-singer">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/arenas/equality/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/arenas/equality/1.png" alt="Is Veganism about equality? Not in the way you might think" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/arenas/equality/1.png" alt="Is Veganism about equality? Not in the way you might think" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -1515,13 +2124,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/arenas/equality/">
-    Is Veganism about equality? Not in the way you might think
-  </a></h2>
+              Is Veganism about equality? Not in the way you might think
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DQBTsI-jWky/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DQBTsI-jWky/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -1531,46 +2142,46 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="david-c-arenas" 
      data-tags="posts,english,utilitarianism,misinformation" 
-     data-misinformer="danny-ishay-gary-yourofsky-melanie-joy" 
-     data-search-blob="agencies of reaction david c arenas posts english utilitarianism misinformation">
+     data-misinformer="danny-ishay-gary-yourofsky-melanie-joy">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/arenas/agencies/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/arenas/agencies/1.png" alt="Agencies of reaction" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/arenas/agencies/1.png" alt="Agencies of reaction" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -1579,13 +2190,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/arenas/agencies/">
-    Agencies of reaction
-  </a></h2>
+              Agencies of reaction
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DR-CmMQEbWS/?img_index=1 " target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DR-CmMQEbWS/?img_index=1 " target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -1595,52 +2208,52 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="vegangelic-activism" 
      data-tags="posts,english,carnism,reducetarianism,misinformation" 
-     data-misinformer="melanie-joy" 
-     data-search-blob="why vegans should reject the term carnism vegangelic activism posts english carnism reducetarianism misinformation">
+     data-misinformer="melanie-joy">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/vegangelic/carnism/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/vegangelic/carnism/1.jpg" alt="Why Vegans should reject the term Carnism" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/vegangelic/carnism/1.jpg" alt="Why Vegans should reject the term Carnism" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -1649,13 +2262,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/vegangelic/carnism/">
-    Why Vegans should reject the term Carnism
-  </a></h2>
+              Why Vegans should reject the term Carnism
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/vegangelic_/p/DSImEl8gTYM/" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/vegangelic_/p/DSImEl8gTYM/" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -1665,46 +2280,46 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="vegangelic-activism" 
      data-tags="posts,english,culture,excuses" 
-     data-misinformer="undefined" 
-     data-search-blob="culture is not an excuse for injustice vegangelic activism posts english culture excuses">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/vegangelic/culture/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/vegangelic/culture/1.jpg" alt="Culture is not an excuse for injustice" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/vegangelic/culture/1.jpg" alt="Culture is not an excuse for injustice" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -1713,13 +2328,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/vegangelic/culture/">
-    Culture is not an excuse for injustice
-  </a></h2>
+              Culture is not an excuse for injustice
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DSnqZMDkkT1/" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DSnqZMDkkT1/" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -1729,46 +2346,46 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="david-c-arenas" 
-     data-tags="posts,english,welfarism-,utilitarianism" 
-     data-misinformer="george-martin" 
-     data-search-blob="george martin - welfarism part 1 david c arenas posts english welfarism&quot; utilitarianism">
+     data-tags="posts,english,welfarism,utilitarianism" 
+     data-misinformer="george-martin">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/arenas/georgemartinwelfarism/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/arenas/georgemartinwelfarism1.png" alt="George Martin - Welfarism Part 1" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/arenas/georgemartinwelfarism1.png" alt="George Martin - Welfarism Part 1" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -1777,13 +2394,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/arenas/georgemartinwelfarism/">
-    George Martin - Welfarism Part 1
-  </a></h2>
+              George Martin - Welfarism Part 1
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DTv8hUmkefT/" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DTv8hUmkefT/" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -1793,44 +2412,45 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="uncompromised-liberation" 
      data-tags="posts,english,dog-comparisons" 
-     data-misinformer="undefined" 
-     data-search-blob="problem in the way people talk about dogs in this movement uncompromised liberation posts english dog comparisons">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/ul/whylovebuteat3/whyloveone/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/ul/whylovebuteat3/1.png" alt="Problem in the way people talk about dogs in this movement" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/ul/whylovebuteat3/1.png" alt="Problem in the way people talk about dogs in this movement" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
-            <div class="video-badge" style="position: absolute; bottom: 12px; right: 12px; background: rgba(15, 23, 42, 0.9); color: #fff; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; border-radius: 4px; display: inline-flex; align-items: center; gap: 5px; backdrop-filter: blur(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+            <div class="video-badge"
+              style="position: absolute; bottom: 12px; right: 12px; background: rgba(15, 23, 42, 0.9); color: #fff; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; border-radius: 4px; display: inline-flex; align-items: center; gap: 5px; backdrop-filter: blur(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
               <span>▶</span> Watch Video
             </div>
             
@@ -1839,13 +2459,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/ul/whylovebuteat3/whyloveone/">
-    Problem in the way people talk about dogs in this movement
-  </a></h2>
+              Problem in the way people talk about dogs in this movement
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Uncompromised Liberation</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Uncompromised Liberation</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DT87CJpAnmm/" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DT87CJpAnmm/" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -1855,46 +2477,46 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="str8-vedge" 
      data-tags="posts,english,principle,distortion" 
-     data-misinformer="undefined" 
-     data-search-blob="how irrelevant discussions hault the progress of veganism str8 vedge posts english principle distortion">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/str8 vedge/irrelevant/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/str8 vedge/irrelevant/1.jpg" alt="How irrelevant discussions hault the progress of Veganism" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/str8 vedge/irrelevant/1.jpg" alt="How irrelevant discussions hault the progress of Veganism" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -1903,13 +2525,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/str8 vedge/irrelevant/">
-    How irrelevant discussions hault the progress of Veganism
-  </a></h2>
+              How irrelevant discussions hault the progress of Veganism
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Str8 Vedge</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Str8 Vedge</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DW4UExMDCrA/" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DW4UExMDCrA/" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -1919,50 +2543,51 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="uncompromised-liberation" 
-     data-tags="posts,english,what-is-veganism-,outreach" 
-     data-misinformer="undefined" 
-     data-search-blob="correct the relationship between humans and other animals uncompromised liberation posts english what is veganism? outreach">
+     data-tags="posts,english,what-is-veganism,outreach" 
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/ul/correct/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/ul/correct.png" alt="Correct the relationship between humans and other animals" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/ul/correct.png" alt="Correct the relationship between humans and other animals" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
-            <div class="video-badge" style="position: absolute; bottom: 12px; right: 12px; background: rgba(15, 23, 42, 0.9); color: #fff; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; border-radius: 4px; display: inline-flex; align-items: center; gap: 5px; backdrop-filter: blur(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+            <div class="video-badge"
+              style="position: absolute; bottom: 12px; right: 12px; background: rgba(15, 23, 42, 0.9); color: #fff; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; border-radius: 4px; display: inline-flex; align-items: center; gap: 5px; backdrop-filter: blur(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
               <span>▶</span> Watch Video
             </div>
             
@@ -1971,13 +2596,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/ul/correct/">
-    Correct the relationship between humans and other animals
-  </a></h2>
+              Correct the relationship between humans and other animals
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Uncompromised Liberation</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Uncompromised Liberation</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DXNVOjfN90O/" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DXNVOjfN90O/" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -1987,40 +2614,40 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="uncompromised-liberation" 
      data-tags="posts,english,dog-comparisons" 
-     data-misinformer="undefined" 
-     data-search-blob="melwood&#39;s bovine testing solutions uncompromised liberation posts english dog comparisons">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/ul/bovinetesting/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/ul/bovinetesting/1.jpg" alt="Melwood&#39;s bovine testing solutions" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/ul/bovinetesting/1.jpg" alt="Melwood&#39;s bovine testing solutions" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -2029,13 +2656,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/ul/bovinetesting/">
-    Melwood&#39;s bovine testing solutions
-  </a></h2>
+              Melwood&#39;s bovine testing solutions
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Uncompromised Liberation</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Uncompromised Liberation</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DXsEBbRDK-v/" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DXsEBbRDK-v/" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -2045,58 +2674,58 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="uncompromised-liberation" 
      data-tags="posts,english,utilitarianism,welfarism,single-issue-campaigns,dog-comparisons" 
-     data-misinformer="undefined" 
-     data-search-blob="the &quot;overton window&quot; of animal exploitation uncompromised liberation posts english utilitarianism welfarism single issue campaigns dog comparisons">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/ul/overton/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/ul/overton/1.jpg" alt="The &quot;Overton Window&quot; of animal exploitation" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/ul/overton/1.jpg" alt="The &quot;Overton Window&quot; of animal exploitation" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -2105,13 +2734,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/ul/overton/">
-    The &quot;Overton Window&quot; of animal exploitation
-  </a></h2>
+              The &quot;Overton Window&quot; of animal exploitation
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Uncompromised Liberation</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Uncompromised Liberation</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DZLaTxjjZFL/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DZLaTxjjZFL/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -2123,40 +2754,40 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="uncompromised-liberation" 
      data-tags="posts,english,misinformation" 
-     data-misinformer="undefined" 
-     data-search-blob="all distortions of veganism ignore,justify, or encourage animal exploitation uncompromised liberation posts english misinformation">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/ul/distortions/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/ul/distortions/1.jpg" alt="All distortions of veganism ignore,justify, or encourage animal exploitation" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/ul/distortions/1.jpg" alt="All distortions of veganism ignore,justify, or encourage animal exploitation" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -2165,13 +2796,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/ul/distortions/">
-    All distortions of veganism ignore,justify, or encourage animal exploitation
-  </a></h2>
+              All distortions of veganism ignore,justify, or encourage animal exploitation
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Uncompromised Liberation</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Uncompromised Liberation</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DZ_tfo3jbxC/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DZ_tfo3jbxC/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -2181,40 +2814,40 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="soul-hush" 
      data-tags="posts,english,dog-comparisons" 
-     data-misinformer="undefined" 
-     data-search-blob="why dog-pig comparisons fail soul hush posts english dog comparisons">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/steadibrooks/dog comparison/dogcomparisons/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/steadibrooks/dog comparison/1.jpg" alt="Why dog-pig comparisons fail" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/steadibrooks/dog comparison/1.jpg" alt="Why dog-pig comparisons fail" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -2223,13 +2856,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/steadibrooks/dog comparison/dogcomparisons/">
-    Why dog-pig comparisons fail
-  </a></h2>
+              Why dog-pig comparisons fail
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Soul Hush</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Soul Hush</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DZrrXAvAP8y/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DZrrXAvAP8y/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -2239,40 +2874,40 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="vegangelic-activism" 
      data-tags="posts,english,dog-comparisons" 
-     data-misinformer="undefined" 
-     data-search-blob="dogs and cats are also victims of human supremacy vegangelic activism posts english dog comparisons">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/vegangelic/dog comparisons/dogcomparisons/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/vegangelic/dog comparisons/1.webp" alt="Dogs and cats are also victims of human supremacy" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/vegangelic/dog comparisons/1.webp" alt="Dogs and cats are also victims of human supremacy" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -2281,13 +2916,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/vegangelic/dog comparisons/dogcomparisons/">
-    Dogs and cats are also victims of human supremacy
-  </a></h2>
+              Dogs and cats are also victims of human supremacy
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DGyJ1f0Rxfx/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DGyJ1f0Rxfx/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -2297,44 +2934,45 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="vegangelic-activism" 
      data-tags="posts,english,moral-agency" 
-     data-misinformer="gary-yourofsky" 
-     data-search-blob="gary has no fucking idea what moral agent means vegangelic activism posts english moral agency">
+     data-misinformer="gary-yourofsky">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/vegangelic/garynoidea/gary/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/vegangelic/garynoidea/1.png" alt="Gary has no fucking idea what moral agent means" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/vegangelic/garynoidea/1.png" alt="Gary has no fucking idea what moral agent means" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
-            <div class="video-badge" style="position: absolute; bottom: 12px; right: 12px; background: rgba(15, 23, 42, 0.9); color: #fff; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; border-radius: 4px; display: inline-flex; align-items: center; gap: 5px; backdrop-filter: blur(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+            <div class="video-badge"
+              style="position: absolute; bottom: 12px; right: 12px; background: rgba(15, 23, 42, 0.9); color: #fff; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; border-radius: 4px; display: inline-flex; align-items: center; gap: 5px; backdrop-filter: blur(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
               <span>▶</span> Watch Video
             </div>
             
@@ -2343,13 +2981,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/vegangelic/garynoidea/gary/">
-    Gary has no fucking idea what moral agent means
-  </a></h2>
+              Gary has no fucking idea what moral agent means
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DU0ozeEkS4k/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DU0ozeEkS4k/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -2359,46 +2999,46 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="vegangelic-activism" 
      data-tags="posts,english,intersectionality,feminism" 
-     data-misinformer="undefined" 
-     data-search-blob="stop trying to gender veganism and animal exploitation vegangelic activism posts english intersectionality feminism">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/vegangelic/gender/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/vegangelic/gender/1.webp" alt="Stop trying to gender veganism and animal exploitation" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/vegangelic/gender/1.webp" alt="Stop trying to gender veganism and animal exploitation" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -2407,13 +3047,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/vegangelic/gender/">
-    Stop trying to gender veganism and animal exploitation
-  </a></h2>
+              Stop trying to gender veganism and animal exploitation
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DSR8GO7Ed7j/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DSR8GO7Ed7j/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -2423,46 +3065,46 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="vegangelic-activism" 
      data-tags="posts,english,holocaust,utilitarianism" 
-     data-misinformer="undefined" 
-     data-search-blob="the problem with the term &quot;animal holocaust&quot; vegangelic activism posts english holocaust utilitarianism">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/vegangelic/holocaust/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/vegangelic/holocaust/1.webp" alt="The problem with the term &quot;Animal Holocaust&quot;" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/vegangelic/holocaust/1.webp" alt="The problem with the term &quot;Animal Holocaust&quot;" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -2471,13 +3113,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/vegangelic/holocaust/">
-    The problem with the term &quot;Animal Holocaust&quot;
-  </a></h2>
+              The problem with the term &quot;Animal Holocaust&quot;
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DU0ozeEkS4k/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DU0ozeEkS4k/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -2487,40 +3131,40 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="vegangelic-activism" 
      data-tags="posts,english,principle" 
-     data-misinformer="undefined" 
-     data-search-blob="how people think it is vs how it actually is vegangelic activism posts english principle">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/vegangelic/howtheythinkitis/howtheythink/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/vegangelic/howtheythinkitis/1.jpg" alt="How people think it is vs how it actually is" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/vegangelic/howtheythinkitis/1.jpg" alt="How people think it is vs how it actually is" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -2529,13 +3173,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/vegangelic/howtheythinkitis/howtheythink/">
-    How people think it is vs how it actually is
-  </a></h2>
+              How people think it is vs how it actually is
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DGyJ1f0Rxfx/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DGyJ1f0Rxfx/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -2545,52 +3191,52 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="vegangelic-activism" 
      data-tags="posts,english,distortion,utilitarianism,imperfect" 
-     data-misinformer="undefined" 
-     data-search-blob="imperfect veganism? vegangelic activism posts english distortion utilitarianism imperfect">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/vegangelic/imperfect/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/vegangelic/imperfect/1.webp" alt="Imperfect veganism?" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/vegangelic/imperfect/1.webp" alt="Imperfect veganism?" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -2599,13 +3245,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/vegangelic/imperfect/">
-    Imperfect veganism?
-  </a></h2>
+              Imperfect veganism?
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DS3ROJCkstu/" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DS3ROJCkstu/" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -2615,46 +3263,46 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="vegangelic-activism" 
      data-tags="posts,english,leftist-anti-veganism,excuses" 
-     data-misinformer="undefined" 
-     data-search-blob="a takedown of leftist anti-veganism - part 1 vegangelic activism posts english leftist-anti-veganism excuses">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/vegangelic/leftist-anti-veganism-part1/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/vegangelic/leftist-anti-veganism-part1/1.webp" alt="A takedown of leftist anti-veganism - part 1" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/vegangelic/leftist-anti-veganism-part1/1.webp" alt="A takedown of leftist anti-veganism - part 1" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -2663,13 +3311,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/vegangelic/leftist-anti-veganism-part1/">
-    A takedown of leftist anti-veganism - part 1
-  </a></h2>
+              A takedown of leftist anti-veganism - part 1
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DHPPS7Fyp_0/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DHPPS7Fyp_0/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -2679,46 +3329,46 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="vegangelic-activism" 
      data-tags="posts,english,leftist-anti-veganism,excuses" 
-     data-misinformer="undefined" 
-     data-search-blob="a takedown of leftist anti-veganism - part 2 vegangelic activism posts english leftist-anti-veganism excuses">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/vegangelic/leftist-anti-veganism-part2/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/vegangelic/leftist-anti-veganism-part2/1.jpg" alt="A takedown of leftist anti-veganism - part 2" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/vegangelic/leftist-anti-veganism-part2/1.jpg" alt="A takedown of leftist anti-veganism - part 2" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -2727,13 +3377,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/vegangelic/leftist-anti-veganism-part2/">
-    A takedown of leftist anti-veganism - part 2
-  </a></h2>
+              A takedown of leftist anti-veganism - part 2
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DIW98DfSYCJ/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DIW98DfSYCJ/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -2743,46 +3395,46 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="vegangelic-activism" 
      data-tags="posts,english,leftist-anti-veganism,excuses" 
-     data-misinformer="undefined" 
-     data-search-blob="a takedown of leftist anti-veganism - part 3 vegangelic activism posts english leftist-anti-veganism excuses">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/vegangelic/leftist-anti-veganism-part3/lanvpt3/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/vegangelic/leftist-anti-veganism-part3/1.jpg" alt="A takedown of leftist anti-veganism - part 3" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/vegangelic/leftist-anti-veganism-part3/1.jpg" alt="A takedown of leftist anti-veganism - part 3" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -2791,13 +3443,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/vegangelic/leftist-anti-veganism-part3/lanvpt3/">
-    A takedown of leftist anti-veganism - part 3
-  </a></h2>
+              A takedown of leftist anti-veganism - part 3
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DKH-pDhRyqV/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DKH-pDhRyqV/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -2807,58 +3461,58 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="vegangelic-activism" 
      data-tags="posts,english,leftist-anti-veganism,excuses,anti-capitalism,english" 
-     data-misinformer="undefined" 
-     data-search-blob="a takedown of leftist anti-veganism - part 4 vegangelic activism posts english leftist-anti-veganism excuses anti-capitalism english">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/vegangelic/leftist-anti-veganism-part4/lanvpt4/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/vegangelic/leftist-anti-veganism-part4/1.jpg" alt="A takedown of leftist anti-veganism - part 4" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/vegangelic/leftist-anti-veganism-part4/1.jpg" alt="A takedown of leftist anti-veganism - part 4" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -2867,13 +3521,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/vegangelic/leftist-anti-veganism-part4/lanvpt4/">
-    A takedown of leftist anti-veganism - part 4
-  </a></h2>
+              A takedown of leftist anti-veganism - part 4
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DLUXsKDuV5R/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DLUXsKDuV5R/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -2883,46 +3539,46 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="vegangelic-activism" 
      data-tags="posts,english,futility,excuses" 
-     data-misinformer="undefined" 
-     data-search-blob="me going vegan makes no difference vegangelic activism posts english futility excuses">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/vegangelic/nodifference/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/vegangelic/nodifference/1.jpg" alt="Me going vegan makes no difference" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/vegangelic/nodifference/1.jpg" alt="Me going vegan makes no difference" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -2931,13 +3587,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/vegangelic/nodifference/">
-    Me going vegan makes no difference
-  </a></h2>
+              Me going vegan makes no difference
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DDU8SxWyMJW/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DDU8SxWyMJW/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -2947,46 +3605,46 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="vegangelic-activism" 
      data-tags="posts,english,dog-comparisons,vegetarianism" 
-     data-misinformer="undefined" 
-     data-search-blob="the pet problem vegangelic activism posts english dog comparisons vegetarianism">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/vegangelic/petproblem/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/vegangelic/petproblem/1.webp" alt="The Pet problem" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/vegangelic/petproblem/1.webp" alt="The Pet problem" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -2995,13 +3653,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/vegangelic/petproblem/">
-    The Pet problem
-  </a></h2>
+              The Pet problem
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DR9caZFkbWx/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DR9caZFkbWx/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -3011,58 +3671,58 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="vegangelic-activism" 
      data-tags="posts,english,pragmatic,reducetarianism,welfarism,utilitarianism" 
-     data-misinformer="undefined" 
-     data-search-blob="&quot;reducetarianism and welfarism are more pragmatic to promote than veganism!&quot; vegangelic activism posts english pragmatic reducetarianism welfarism utilitarianism">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/vegangelic/pragmatic/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/vegangelic/pragmatic/1.webp" alt="&quot;Reducetarianism and welfarism are more pragmatic to promote than veganism!&quot;" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/vegangelic/pragmatic/1.webp" alt="&quot;Reducetarianism and welfarism are more pragmatic to promote than veganism!&quot;" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -3071,13 +3731,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/vegangelic/pragmatic/">
-    &quot;Reducetarianism and welfarism are more pragmatic to promote than veganism!&quot;
-  </a></h2>
+              &quot;Reducetarianism and welfarism are more pragmatic to promote than veganism!&quot;
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DHY-q3tRiun/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DHY-q3tRiun/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -3087,46 +3749,46 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="vegangelic-activism" 
      data-tags="posts,english,privilege,excuses" 
-     data-misinformer="undefined" 
-     data-search-blob="&quot;veganism is a privilege&quot; vegangelic activism posts english privilege excuses">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/vegangelic/privilege/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/vegangelic/privilege/1.jpg" alt="&quot;Veganism is a privilege&quot;" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/vegangelic/privilege/1.jpg" alt="&quot;Veganism is a privilege&quot;" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -3135,13 +3797,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/vegangelic/privilege/">
-    &quot;Veganism is a privilege&quot;
-  </a></h2>
+              &quot;Veganism is a privilege&quot;
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DEhv6AKxSXp/" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DEhv6AKxSXp/" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -3151,40 +3815,40 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="vegangelic-activism" 
      data-tags="posts,english,intersectionality" 
-     data-misinformer="george-martin" 
-     data-search-blob="the right-wing intersectionality problem vegangelic activism posts english intersectionality">
+     data-misinformer="george-martin">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/vegangelic/rightwing/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/vegangelic/rightwing/1.webp" alt="The right-wing intersectionality problem" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/vegangelic/rightwing/1.webp" alt="The right-wing intersectionality problem" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -3193,13 +3857,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/vegangelic/rightwing/">
-    The right-wing intersectionality problem
-  </a></h2>
+              The right-wing intersectionality problem
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DTp_2IHESmA/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DTp_2IHESmA/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -3209,52 +3875,52 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="vegangelic-activism" 
      data-tags="posts,english,hypocrisy,apologists,excuses" 
-     data-misinformer="undefined" 
-     data-search-blob="you can&#39;t judge non-vegans because you used to be a non-vegan too vegangelic activism posts english hypocrisy apologists excuses">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/vegangelic/usedtobeanonvegantoo/usedtobe/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/vegangelic/usedtobeanonvegantoo/1.jpg" alt="You can&#39;t judge non-vegans because you used to be a non-vegan too" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/vegangelic/usedtobeanonvegantoo/1.jpg" alt="You can&#39;t judge non-vegans because you used to be a non-vegan too" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -3263,13 +3929,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/vegangelic/usedtobeanonvegantoo/usedtobe/">
-    “You can&#39;t judge non-vegans because you used to be a non-vegan too”
-  </a></h2>
+              “You can&#39;t judge non-vegans because you used to be a non-vegan too”
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DD8Zj9uxhTY/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DD8Zj9uxhTY/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -3279,52 +3947,52 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="vegangelic-activism" 
      data-tags="posts,english,vegetarianism,apologists,excuses" 
-     data-misinformer="undefined" 
-     data-search-blob="condemn vegetarianism vegangelic activism posts english vegetarianism apologists excuses">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/vegangelic/vegetarianism/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/vegangelic/vegetarianism/1.jpg" alt="Condemn Vegetarianism" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/vegangelic/vegetarianism/1.jpg" alt="Condemn Vegetarianism" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -3333,13 +4001,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/vegangelic/vegetarianism/">
-    Condemn Vegetarianism
-  </a></h2>
+              Condemn Vegetarianism
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DEvXZq7yys5/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DEvXZq7yys5/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -3349,40 +4019,40 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="vegangelic-activism" 
      data-tags="posts,english,what-is-veganism" 
-     data-misinformer="undefined" 
-     data-search-blob="why it&#39;s important to remember what veganism actually is vegangelic activism posts english what is veganism">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/vegangelic/whatisveganism/whatis/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/vegangelic/whatisveganism/1.webp" alt="Why it&#39;s important to remember what veganism actually is" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/vegangelic/whatisveganism/1.webp" alt="Why it&#39;s important to remember what veganism actually is" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -3391,13 +4061,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/vegangelic/whatisveganism/whatis/">
-    Why it&#39;s important to remember what veganism actually is
-  </a></h2>
+              Why it&#39;s important to remember what veganism actually is
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vegangelic Activism</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DNBlZl4yJM5/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DNBlZl4yJM5/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -3407,46 +4079,46 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="vic-valente" 
      data-tags="posts,english,what-is-veganism,abolition" 
-     data-misinformer="undefined" 
-     data-search-blob="why is veganism an abolitionist cause? vic valente posts english what is veganism abolition">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/vic/abolitionist/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/vic/abolitionist/1.jpg" alt="Why is veganism an abolitionist cause?" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/vic/abolitionist/1.jpg" alt="Why is veganism an abolitionist cause?" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -3455,13 +4127,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/vic/abolitionist/">
-    Why is veganism an abolitionist cause?
-  </a></h2>
+              Why is veganism an abolitionist cause?
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vic Valente</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vic Valente</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DYXjJyIFHdC/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DYXjJyIFHdC/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -3471,40 +4145,40 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="vic-valente" 
      data-tags="posts,english,welfarism" 
-     data-misinformer="undefined" 
-     data-search-blob="if veganism is abolitionist, how is it still not political? vic valente posts english welfarism">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/vic/political/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/vic/political/1.jpg" alt="If veganism is abolitionist, how is it still not political?" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/vic/political/1.jpg" alt="If veganism is abolitionist, how is it still not political?" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -3513,13 +4187,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/vic/political/">
-    If veganism is abolitionist, how is it still not political?
-  </a></h2>
+              If veganism is abolitionist, how is it still not political?
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vic Valente</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vic Valente</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DYZrXOkFQLV/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DYZrXOkFQLV/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -3529,40 +4205,40 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="vic-valente" 
      data-tags="posts,english,welfarism" 
-     data-misinformer="undefined" 
-     data-search-blob="animal welfare measures vic valente posts english welfarism">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/vic/welfare/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/vic/welfare/1.jpg" alt="Animal welfare measures" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/vic/welfare/1.jpg" alt="Animal welfare measures" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -3571,13 +4247,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/vic/welfare/">
-    Animal welfare measures
-  </a></h2>
+              Animal welfare measures
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vic Valente</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vic Valente</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DX2-j_-FW2V/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DX2-j_-FW2V/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -3587,40 +4265,40 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="vic-valente" 
      data-tags="posts,english,welfarism" 
-     data-misinformer="undefined" 
-     data-search-blob="but they are well treated vic valente posts english welfarism">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/vic/welltreated/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/vic/welltreated/1.jpg" alt="But they are well treated" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/vic/welltreated/1.jpg" alt="But they are well treated" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -3629,13 +4307,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/vic/welltreated/">
-    But they are well treated
-  </a></h2>
+              But they are well treated
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vic Valente</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Vic Valente</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DZPmZDtleid/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DZPmZDtleid/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -3645,46 +4325,46 @@
 
       
       
+
+      
+      
+      
+
       
       
       
       
       
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
       
-        
-          
-          
-          
-        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 
       <div class="post-card" 
      data-creator="heymerac" 
      data-tags="posts,english,education,what-is-veganism" 
-     data-misinformer="undefined" 
-     data-search-blob="veganism exists exclusively to end animal use heymerac posts english education what is veganism">
+     data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/Vegan-Archive/archive/heymerac/endanimaluse/" style="display: block; text-decoration: none;">
             
-              <img src="/Vegan-Archive/archive/heymerac/endanimaluse/1.jpg" alt="Veganism exists exclusively to end animal use" class="archive-thumbnail" style="width: 100%; display: block; height: auto;">
+            <img src="/Vegan-Archive/archive/heymerac/endanimaluse/1.jpg" alt="Veganism exists exclusively to end animal use" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
             
 
             
@@ -3693,13 +4373,15 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/Vegan-Archive/archive/heymerac/endanimaluse/">
-    Veganism exists exclusively to end animal use
-  </a></h2>
+              Veganism exists exclusively to end animal use
+            </a></h2>
           
-            <div class="post-author" style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Heymerac</div>
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Heymerac</div>
           
           
-            <div class="ig-link-container"><a href="https://www.instagram.com/p/DaAfcweDQq3/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DaAfcweDQq3/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
       </div>
@@ -3709,34 +4391,36 @@
   </main>
 
   <button id="back-to-top" class="back-to-top-btn" title="Go to top">
-  ↑
-</button>
+    ↑
+  </button>
 
-<style>
-  .back-to-top-btn {
-    position: fixed;
-    bottom: 80px; /* Sits just above your mobile FAB */
-    right: 24px;
-    background: #0f172a;
-    color: #ffffff;
-    border: none;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    font-size: 1.2rem;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    z-index: 9998;
-    display: none; /* Hidden by default */
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-  }
-  
-  .back-to-top-btn.is-visible {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-</style>
+  <style>
+    .back-to-top-btn {
+      position: fixed;
+      bottom: 80px;
+      /* Sits just above your mobile FAB */
+      right: 24px;
+      background: #0f172a;
+      color: #ffffff;
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      z-index: 9998;
+      display: none;
+      /* Hidden by default */
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .back-to-top-btn.is-visible {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
 </div>
 
 <button id="mobile-filter-trigger-btn" class="mobile-only-filter-fab">
@@ -3755,14 +4439,14 @@
     border-radius: 50px;
     font-weight: 600;
     font-size: 1rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     z-index: 9999;
     display: none;
     align-items: center;
     gap: 8px;
     cursor: pointer;
   }
-  
+
   @media (max-width: 768px) {
     .mobile-only-filter-fab {
       display: inline-flex !important;
@@ -3770,61 +4454,65 @@
   }
 
   /* --- OVERALL GRID FADE STYLES --- */
-#archive-grid {
-  transition: opacity 0.2s ease-in-out !important;
-  opacity: 1;
-}
+  #archive-grid {
+    transition: opacity 0.2s ease-in-out !important;
+    opacity: 1;
+  }
 
-/* When this class is active, the entire gallery vanishes smoothly */
-#archive-grid.grid-is-typing {
-  opacity: 0;
-}
+  /* When this class is active, the entire gallery vanishes smoothly */
+  #archive-grid.grid-is-typing {
+    opacity: 0;
+  }
 
-/* Arrow rotation logic */
-.top-filter-dropdown summary::after {
-  content: '▼';
-  font-size: 0.8rem;
-  margin-left: auto; /* Pushes the arrow to the right */
-  transition: transform 0.3s ease;
-  display: inline-block;
-  color: #64748b;
-}
+  /* Arrow rotation logic */
+  .top-filter-dropdown summary::after {
+    content: '▼';
+    font-size: 0.8rem;
+    margin-left: auto;
+    /* Pushes the arrow to the right */
+    transition: transform 0.3s ease;
+    display: inline-block;
+    color: #64748b;
+  }
 
-/* When the details element is open, rotate the arrow */
-.top-filter-dropdown[open] summary::after {
-  transform: rotate(180deg);
-}
+  /* When the details element is open, rotate the arrow */
+  .top-filter-dropdown[open] summary::after {
+    transform: rotate(180deg);
+  }
 
-/* Update summary to ensure it flexes properly to hold the arrow at the far right */
-.top-filter-dropdown summary {
-  display: flex !important;
-  align-items: center !important;
-}
+  /* Update summary to ensure it flexes properly to hold the arrow at the far right */
+  .top-filter-dropdown summary {
+    display: flex !important;
+    align-items: center !important;
+  }
 </style>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-  const checkboxes = document.querySelectorAll(".filter-checkbox");
-  const postCards = document.querySelectorAll(".post-card");
-  const clearBtn = document.getElementById("clear-filters-btn");
-  const mobileFilterBtn = document.getElementById("mobile-filter-trigger-btn");
-  const filterDropdown = document.getElementById("archive-filter-dropdown");
-  const searchInput = document.getElementById("archive-search-input");
-  const archiveGrid = document.getElementById("archive-grid"); // Hook to the grid container
+    const checkboxes = document.querySelectorAll(".filter-checkbox");
+    const postCards = document.querySelectorAll(".post-card");
+    const clearBtn = document.getElementById("clear-filters-btn");
+    const mobileFilterBtn = document.getElementById("mobile-filter-trigger-btn");
+    const filterDropdown = document.getElementById("archive-filter-dropdown");
+    const searchInput = document.getElementById("archive-search-input");
+    const archiveGrid = document.getElementById("archive-grid"); // Hook to the grid container
 
-  const slugify = text => text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : '';
+    const slugify = text => text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : '';
 
-  window.addEventListener("beforeunload", () => {
-    sessionStorage.setItem("archiveScrollPosition", window.scrollY);
-  });
+    window.addEventListener("beforeunload", () => {
+      sessionStorage.setItem("archiveScrollPosition", window.scrollY);
+    });
 
-  // Debounce timer variable to keep track of when a user pauses typing
-  let typingTimeout;
+    // Debounce timer variable to keep track of when a user pauses typing
+    let typingTimeout;
 
-  // =============================================================
-  // CLEAN, RELIABLE VISIBILITY CORE FUNCTION
-  // =============================================================
-  function filterPosts(isInitial = false) {
+    // =============================================================
+    // CLEAN, RELIABLE VISIBILITY CORE FUNCTION
+    // =============================================================
+    function filterPosts(isInitial = false) {
+    const searchInput = document.getElementById("archive-search-input");
+    const checkboxes = document.querySelectorAll(".filter-checkbox");
+    const postCards = document.querySelectorAll(".post-card");
     const searchQuery = searchInput ? searchInput.value.toLowerCase().trim() : "";
 
     const activeFilters = {
@@ -3834,207 +4522,140 @@
       misinformer: []
     };
 
-    const chipsContainer = document.getElementById("active-chips-container");
-    if (chipsContainer) chipsContainer.innerHTML = "";
+    checkboxes.forEach(box => {
+      if (box.checked) activeFilters[box.name].push(box.value);
+    });
+
+    postCards.forEach(card => {
+      const creator = card.getAttribute('data-creator');
+      const tagsAttr = card.getAttribute('data-tags') || "";
+      const tags = tagsAttr.split(',');
+      const misinformer = card.getAttribute('data-misinformer');
+      const textContent = card.innerText.toLowerCase();
+
+      const matchSearch = textContent.includes(searchQuery);
+      const matchCreator = activeFilters.creator.length === 0 || activeFilters.creator.includes(creator);
+      const matchMisinformer = activeFilters.misinformer.length === 0 || activeFilters.misinformer.includes(misinformer);
+      const matchTopics = activeFilters.topic.length === 0 || tags.some(t => activeFilters.topic.includes(t));
+      const matchLang = activeFilters.language.length === 0 || tags.some(t => activeFilters.language.includes(t));
+
+      if (matchSearch && matchCreator && matchMisinformer && matchTopics && matchLang) {
+        card.classList.remove("is-hidden");
+        card.style.display = ""; 
+      } else {
+        card.classList.add("is-hidden");
+        card.style.display = "none"; 
+      }
+    });
+
+      // Update counter bubbles UI
+      document.querySelectorAll('.filter-count').forEach(span => {
+        const targetSlug = span.getAttribute('data-count-target');
+        if (targetSlug in dynamicCounts) {
+          const currentCount = dynamicCounts[targetSlug];
+          span.textContent = `(${currentCount})`;
+
+          const parentLabel = span.closest('label');
+          if (parentLabel) {
+            parentLabel.style.opacity = (currentCount === 0) ? "0.3" : "1";
+          }
+        }
+      });
+
+      if (isInitial) {
+        const savedPosition = sessionStorage.getItem("archiveScrollPosition");
+        if (savedPosition) {
+          window.scrollTo(0, parseInt(savedPosition, 10));
+          sessionStorage.removeItem("archiveScrollPosition");
+        }
+      }
+    }
+
+    // =============================================================
+    // REAL-TIME EVENT INTERACTION BINDINGS
+    // =============================================================
+    if (searchInput) {
+      searchInput.addEventListener("input", () => {
+        // 1. Immediately fade the whole grid out as soon as a key is pressed
+        if (archiveGrid) {
+          archiveGrid.classList.add("grid-is-typing");
+        }
+
+        // 2. Clear any pending timeouts so typing continuously keeps the grid hidden
+        clearTimeout(typingTimeout);
+
+        // 3. Set a 250ms delay. The moment you stop typing for 1/4 of a second, the grid updates and fades in
+        typingTimeout = setTimeout(() => {
+          filterPosts();
+          if (archiveGrid) {
+            archiveGrid.classList.remove("grid-is-typing");
+          }
+        }, 250);
+      });
+    }
 
     checkboxes.forEach(box => {
-      if (box.checked) {
-        const group = box.name;
-        if (activeFilters[group]) {
-          activeFilters[group].push(box.value);
-        }
-
-        const labelSpan = box.parentNode.querySelector('span');
-        const labelText = labelSpan ? labelSpan.textContent.trim() : box.value;
-
-        const chip = document.createElement("span");
-        chip.className = "filter-chip";
-        chip.innerHTML = `
-          ${labelText}
-          <button class="filter-chip-remove" data-target-id="${box.value}">×</button>
-        `;
-
-        chip.querySelector(".filter-chip-remove").addEventListener("click", (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          box.checked = false;
-          filterPosts();
-        });
-
-        chipsContainer.appendChild(chip);
-      }
-    });
-
-    const hasActiveFilters = Object.values(activeFilters).some(arr => arr.length > 0);
-
-    // 1. Update display properties
-    postCards.forEach(card => {
-      // Check for visibility based on style.display
-      if (card.style.display !== "none") {
-        // Count Creator
-        const creator = card.getAttribute('data-creator');
-        if (creator && creator in dynamicCounts) {
-          dynamicCounts[creator]++;
-        }
-
-        // Count Tags (Topics & Languages)
-        const tagsAttr = card.getAttribute('data-tags');
-        if (tagsAttr) {
-          tagsAttr.split(',').forEach(tag => {
-            const cleanTag = tag.trim();
-            if (cleanTag && cleanTag in dynamicCounts) {
-              dynamicCounts[cleanTag]++;
-            }
-          });
-        }
-
-        // NEW: Explicitly count Misinformers
-        const misinformer = card.getAttribute('data-misinformer');
-        if (misinformer && misinformer in dynamicCounts) {
-          dynamicCounts[misinformer]++;
-        }
-      }
-    });
-
-    // 2. RUN FACETED SEARCH DYNAMIC COUNT MATH
-    // Declare dynamicCounts ONCE here
-    // 2. RUN FACETED SEARCH DYNAMIC COUNT MATH
-    const dynamicCounts = {};
-    checkboxes.forEach(input => {
-      // Normalize the checkbox value to ensure it matches the tag/slug format
-      dynamicCounts[input.value.trim()] = 0;
-    });
-
-    postCards.forEach(card => {
-      if (card.style.display !== "none") {
-        // Count Creator (slugified)
-        const creator = card.getAttribute('data-creator');
-        if (creator && dynamicCounts.hasOwnProperty(creator)) {
-          dynamicCounts[creator]++;
-        }
-
-        // Count Tags (Topics, Languages, AND Misinformers)
-        const tagsAttr = card.getAttribute('data-tags');
-        if (tagsAttr) {
-          tagsAttr.split(',').forEach(tag => {
-            const cleanTag = tag.trim().toLowerCase();
-            // Match against checkbox values
-            if (dynamicCounts.hasOwnProperty(cleanTag)) {
-              dynamicCounts[cleanTag]++;
-            }
-          });
-        }
-      }
-    });
-
-    // Update counter bubbles UI
-    document.querySelectorAll('.filter-count').forEach(span => {
-      const targetSlug = span.getAttribute('data-count-target');
-      if (targetSlug in dynamicCounts) {
-        const currentCount = dynamicCounts[targetSlug];
-        span.textContent = `(${currentCount})`;
-        
-        const parentLabel = span.closest('label');
-        if (parentLabel) {
-          parentLabel.style.opacity = (currentCount === 0) ? "0.3" : "1";
-        }
-      }
-    });
-
-    if (isInitial) {
-      const savedPosition = sessionStorage.getItem("archiveScrollPosition");
-      if (savedPosition) {
-        window.scrollTo(0, parseInt(savedPosition, 10));
-        sessionStorage.removeItem("archiveScrollPosition");
-      }
-    }
-  }
-
-  // =============================================================
-  // REAL-TIME EVENT INTERACTION BINDINGS
-  // =============================================================
-  if (searchInput) {
-    searchInput.addEventListener("input", () => {
-      // 1. Immediately fade the whole grid out as soon as a key is pressed
-      if (archiveGrid) {
-        archiveGrid.classList.add("grid-is-typing");
-      }
-
-      // 2. Clear any pending timeouts so typing continuously keeps the grid hidden
-      clearTimeout(typingTimeout);
-
-      // 3. Set a 250ms delay. The moment you stop typing for 1/4 of a second, the grid updates and fades in
-      typingTimeout = setTimeout(() => {
+      box.addEventListener("change", () => {
         filterPosts();
-        if (archiveGrid) {
-          archiveGrid.classList.remove("grid-is-typing");
-        }
-      }, 250); 
+      });
     });
-  }
 
-  checkboxes.forEach(box => {
-    box.addEventListener("change", () => {
-      filterPosts();
-    });
-  });
-
-  if (clearBtn) {
-    clearBtn.addEventListener("click", () => {
-      checkboxes.forEach(box => box.checked = false);
-      if (searchInput) searchInput.value = "";
-      filterPosts();
-    });
-  }
-
-  // Run math once at startup
-  filterPosts(true);
-
-  // Deep URL incoming parameter tag router
-  const urlParams = new URLSearchParams(window.location.search);
-  const tagFromUrl = urlParams.get('tag');
-  if (tagFromUrl) {
-    const targetSlug = slugify(tagFromUrl);
-    const targetCheckbox = document.querySelector(`input[value="${targetSlug}"]`);
-    if (targetCheckbox) {
-      targetCheckbox.checked = true;
-      filterPosts();
+    if (clearBtn) {
+      clearBtn.addEventListener("click", () => {
+        checkboxes.forEach(box => box.checked = false);
+        if (searchInput) searchInput.value = "";
+        filterPosts();
+      });
     }
-  }
 
-  if (mobileFilterBtn && filterDropdown) {
-    mobileFilterBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      if (filterDropdown.hasAttribute("open")) {
-        filterDropdown.removeAttribute("open");
+    // Run math once at startup
+    filterPosts(true);
+
+    // Deep URL incoming parameter tag router
+    const urlParams = new URLSearchParams(window.location.search);
+    const tagFromUrl = urlParams.get('tag');
+    if (tagFromUrl) {
+      const targetSlug = slugify(tagFromUrl);
+      const targetCheckbox = document.querySelector(`input[value="${targetSlug}"]`);
+      if (targetCheckbox) {
+        targetCheckbox.checked = true;
+        filterPosts();
+      }
+    }
+
+    if (mobileFilterBtn && filterDropdown) {
+      mobileFilterBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (filterDropdown.hasAttribute("open")) {
+          filterDropdown.removeAttribute("open");
+        } else {
+          filterDropdown.setAttribute("open", "");
+          filterDropdown.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    }
+
+    // =============================================================
+    // BACK TO TOP BUTTON LOGIC
+    // =============================================================
+    const backToTopBtn = document.getElementById("back-to-top");
+
+    window.addEventListener("scroll", () => {
+      // Show button after user scrolls down 400px
+      if (window.scrollY > 400) {
+        backToTopBtn.classList.add("is-visible");
       } else {
-        filterDropdown.setAttribute("open", "");
-        filterDropdown.scrollIntoView({ behavior: "smooth", block: "start" });
+        backToTopBtn.classList.remove("is-visible");
       }
     });
-  }
 
-  // =============================================================
-// BACK TO TOP BUTTON LOGIC
-// =============================================================
-const backToTopBtn = document.getElementById("back-to-top");
-
-window.addEventListener("scroll", () => {
-  // Show button after user scrolls down 400px
-  if (window.scrollY > 400) {
-    backToTopBtn.classList.add("is-visible");
-  } else {
-    backToTopBtn.classList.remove("is-visible");
-  }
-});
-
-backToTopBtn.addEventListener("click", () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
   });
-});
-});
 </script>
 </body>
 </html>

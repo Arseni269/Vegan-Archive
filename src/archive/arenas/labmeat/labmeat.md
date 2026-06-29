@@ -1,6 +1,6 @@
 ---
 layout: post.njk
-title: "If the vegan forefathers had been plant-based utilitarians"
+title: "Lab-grown flesg goes against the vegan goal"
 thumbnail: "/archive/arenas/labmeat/1.png"
 instagram_url: "https://www.instagram.com/p/DCNNgYMx_6s/" # Link to IG
 author: "David C Arenas"
