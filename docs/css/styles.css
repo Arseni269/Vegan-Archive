@@ -1,0 +1,649 @@
+/* Force the browser to always reserve space for a scrollbar, preventing layout jumps */
+body {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.archive-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 2rem;
+  align-items: start;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+.main-content {
+  flex: 3;
+}
+
+.imageboard-grid {
+  display: grid;
+  gap: 20px; 
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  padding: 20px; /* Optional: adds space around the entire grid */
+}
+
+.post-card {
+  opacity: 1;
+  transform: scale(1);
+  visibility: visible;
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
+}
+
+/* State when the card is filtered out */
+.post-card.is-hidden {
+  opacity: 0;
+  transform: scale(0.92);
+  visibility: hidden;
+  
+  /* These force the hidden cards to completely release their layout grid space */
+  position: absolute;
+  pointer-events: none;
+  overflow: hidden;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.post-card .post-thumbnail {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 1px solid #eee;
+}
+
+/* Force the image to scale naturally without squishing or square crops */
+.post-card .post-thumbnail img {
+  width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  aspect-ratio: auto !important;
+  display: block;
+}
+
+.post-details {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin: 5px;
+}
+
+.post-title {
+  font-size: 1rem;
+  margin: 0 0 2px 0;
+  font-weight: 600;
+}
+
+.post-title a {
+  color: #111;
+  text-decoration: none;
+}
+
+.post-title a:hover {
+  color: #0066cc;
+}
+
+.ig-link-container {
+  margin-top: auto;
+}
+
+.instagram-link {
+  font-size: 0.8rem;
+  color: #d62976;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Hide old duplicated raw images inside markdown bodies */
+.post-markdown-content img {
+  display: none !important;
+}
+
+/* Force Markdown-it line breaks to act like true structural paragraph spaces */
+.post-markdown-content br {
+  content: "";
+  display: block;
+  margin-bottom: 0.60rem;
+}
+
+/* ==========================================
+   3. SIDEBAR NAVIGATION & FILTER DRAWERS
+   ========================================== */
+.sidebar {
+  width: 320px;
+  min-width: 320px;
+  max-width: 320px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.clear-all-btn {
+  font-size: 0.85rem;
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.filter-group-wrapper {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.filter-group-wrapper[open] {
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.group-title {
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #1e293b;
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.group-title::after {
+  content: '▼';
+  font-size: 0.7rem;
+  color: #64748b;
+  transition: transform 0.2s;
+}
+
+.filter-group-wrapper[open] .group-title::after {
+  transform: rotate(-180deg);
+}
+
+/* Dynamic Lists inside Drawers */
+.filter-group-wrapper ul {
+  padding: 0 1rem 1rem 1rem;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Horizontal display for tag pills inside drawers */
+.filter-group-wrapper ul.tag-list {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 0.4rem !important;
+  padding: 0 1rem 1rem 1rem;
+}
+
+/* Creator text alignments */
+.filter-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0;
+  color: #334155;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.filter-link:hover {
+  color: #0066cc;
+}
+
+.item-count,
+.pill-count {
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: #e2e8f0;
+  color: #475569;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+}
+
+/* Tag Pills Layout */
+.tag-pill {
+  display: inline-block;
+  padding: 4px 10px;
+  background-color: #e2e8f0;
+  color: #475569 !important;
+  text-decoration: none !important;
+  font-size: 0.85rem;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.tag-pill:hover {
+  background-color: #0066cc;
+  color: #fff !important;
+}
+
+.active-pill {
+  background-color: #333;
+  color: #fff !important;
+}
+
+.target-pill {
+  border: 1px solid #fee2e2 !important;
+  color: #991b1b !important;
+}
+
+.target-pill .pill-count {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* ==========================================
+   4. SINGLE POST PAGE VIEW & CAROUSELS
+   ========================================== */
+.single-post-wrapper {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.post-header {
+  margin-bottom: 30px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 20px;
+}
+
+.post-header h1 {
+  font-size: 2.2rem;
+  color: #1e293b;
+  margin: 12px 0 6px 0;
+}
+
+.back-button {
+  display: inline-block;
+  text-decoration: none;
+  color: #64748b;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+
+.back-button:hover {
+  color: #0066cc;
+}
+
+.single-post-container {
+  display: flex;
+  gap: 40px;
+}
+
+.carousel {
+  flex: 3;
+  min-width: 0;
+}
+
+.carousel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 0rem !important;
+}
+
+main .carousel .carousel-grid a.glightbox { 
+  flex: 1 1 calc(50% - 1.5rem) !important; 
+  min-width: 250px !important; 
+  display: block !important; 
+  text-decoration: none !important; 
+}
+
+.carousel-grid img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block;
+  margin: 0 !important;
+}
+
+.sidebar-info-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.meta-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.meta-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.meta-value {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+/* ==========================================
+   5. NAVIGATION NAVBAR & MAIN HERO STYLES
+   ========================================== */
+.main-navbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-logo {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #1e293b;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #64748b;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #10b981;
+}
+
+.home-hero {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-content h1 {
+  font-size: 2.5rem;
+  color: #14532d;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: #166534;
+}
+
+.home-main-content {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 0 2rem;
+  line-height: 1.75;
+  color: #334155;
+  font-size: 1.1rem;
+}
+
+/* ==========================================
+   6. RESPONSIVE MEDIA BREAKPOINTS
+   ========================================== */
+@media (max-width: 900px) {
+  .archive-layout,
+  .single-post-container {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+  .sidebar,
+  .sidebar-info-card {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* ==========================================
+   7. GLIGHTBOX LIGHTBOX MEDIA LIGHTBOXES
+   ========================================== */
+.gslide-description.description-bottom {
+  display: none !important;
+}
+
+.gslide-media {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.ginner-container {
+  height: 100vh !important;
+  max-height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+
+.gslide-image {
+  max-height: 95vh !important;
+}
+
+.gslide-image img {
+  max-height: 95vh !important;
+  object-fit: contain !important;
+}
+
+/* ==========================================
+   FORCE UN-CROPPED NATURAL POST CARD IMAGES
+   ========================================== */
+.imageboard-grid img,
+.gallery-grid img,
+.post-card img,
+.post-thumbnail img {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  aspect-ratio: auto !important; /* Destroys any 1/1 square locks */
+  object-fit: contain !important; /* Shows the full uncropped image */
+}
+
+.post-thumbnail, 
+.post-thumbnail a {
+  height: auto !important;
+  max-height: none !important;
+  aspect-ratio: auto !important;
+}
+
+/* Align custom functional lists inside sidebar facets */
+.filter-group-wrapper ul li {
+  padding: 0;
+  margin: 0;
+}
+
+.filter-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem; /* Clean distance from checkbox element */
+  cursor: pointer;
+  width: 100%;
+}
+
+.filter-link input[type="checkbox"] {
+  accent-color: #0066cc; /* Matches link styling colors seamlessly */
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+}
+
+.filter-link span {
+  font-size: 0.9rem;
+  color: #334155;
+  user-select: none;
+}
+
+.filter-link:hover span {
+  color: #0066cc;
+}
+
+/* Subtle style adjustment to item badges */
+.item-count {
+  margin-left: auto; /* Pushes numeric counter cleanly to the right boundary */
+  font-size: 0.75rem;
+  background-color: #f1f5f9;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+.post-inline-tag:hover {
+    background-color: #e2e8f0;
+    color: #0f172a;
+  }
+
+  .filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background-color: #e2e8f0;
+    color: #334155;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 4px;
+    text-transform: capitalize;
+  }
+
+  .filter-chip-remove {
+    background: none;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
+    padding: 0 2px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .filter-chip-remove:hover {
+    color: #ef4444; /* Turns red when hovering over the X */
+  }
+
+/* =============================================================
+   8. MOBILE FILTER DRAWER RESPONSIVE SYSTEM
+   ============================================================= */
+
+/* STEP 1: Define base rules for the button globally first (hidden on desktop screens) */
+#mobile-filter-trigger-btn {
+  display: none; /* Hidden by default on desktop */
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0f172a;
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  z-index: 999;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  /* Force layout columns to a single track stacking properly */
+  .archive-layout {
+    display: block !important;
+    padding-bottom: 70px; /* Leaves safety breathing room for sticky button */
+  }
+
+  /* Robust layout flow sizing boundaries to the drawer box */
+  .archive-layout .sidebar {
+    position: fixed !important;
+    top: 0;
+    right: -100%; /* Fully hidden off-screen to the right by default */
+    width: 85%;
+    max-width: 320px;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    background: #ffffff;
+    z-index: 9999;
+    box-shadow: -4px 0 25px rgba(0, 0, 0, 0.15);
+    transition: right 0.3s ease-in-out;
+   padding: 24px 20px 100px 20px !important;
+    
+    /* FIX 1: Use block instead of flex to stop child elements from squishing each other */
+    display: block !important; 
+    overflow-y: auto !important; /* Lets the drawer scroll beautifully */
+    box-sizing: border-box !important;
+  }
+
+  /* When active class is applied via JS, slide it gracefully into view */
+  .archive-layout .sidebar.mobile-open {
+    right: 0 !important;
+  }
+
+  /* Generate a dim overlay layer to block page clicks when drawer is open */
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(2px);
+    z-index: 9998;
+    display: none;
+  }
+  
+  .sidebar-overlay.active {
+    display: block;
+  }
+
+  /* Force the floating trigger button to display explicitly on mobile viewports */
+  #mobile-filter-trigger-btn {
+    display: inline-flex !important;
+  }
+}
