@@ -18,18 +18,11 @@ body {
 
 .imageboard-grid {
   display: grid;
-  /* Adjust '20px' to whatever size you prefer for your margins */
   gap: 20px; 
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   padding: 20px; /* Optional: adds space around the entire grid */
 }
 
-/* ==========================================
-   2. POST CARDS & NATURAL IMAGE PROPORTIONS
-   ========================================== */
-/* ==========================================
-   SMOOTH POST FILTER CARD TRANSITIONS
-   ========================================== */
 .post-card {
   opacity: 1;
   transform: scale(1);
