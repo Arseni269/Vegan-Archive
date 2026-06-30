@@ -135,11 +135,18 @@
     }
   }
 
-  @media (max-width: 450px) {
+  @media (max-width: 600px) {
     .archive-layout .imageboard-grid {
       grid-template-columns: 1fr !important;
+      gap: 15px !important;
+      padding: 0px;
     }
+  
+  /* Optional: Ensure individual cards don't have side margins on mobile */
+  .post-card {
+    margin: 5px 0 !important;
   }
+}
 </style>
 
 <div class="archive-layout">
@@ -218,6 +225,14 @@
           
           <li>
             <label class="filter-link">
+              <input type="checkbox" name="creator" value="little-vegan-artist" class="filter-checkbox">
+              <span>Little vegan artist</span>
+              <span class="filter-count" data-count-target="little-vegan-artist">(1)</span>
+            </label>
+          </li>
+          
+          <li>
+            <label class="filter-link">
               <input type="checkbox" name="creator" value="heymerac" class="filter-checkbox">
               <span>Heymerac</span>
               <span class="filter-count" data-count-target="heymerac">(1)</span>
@@ -275,7 +290,7 @@
             <label class="filter-link">
               <input type="checkbox" name="topic" value="dog-comparisons" class="filter-checkbox">
               <span>dog comparisons</span>
-              <span class="filter-count" data-count-target="dog-comparisons">(6)</span>
+              <span class="filter-count" data-count-target="dog-comparisons">(7)</span>
             </label>
           </li>
           
@@ -425,6 +440,14 @@
           
           <li>
             <label class="filter-link">
+              <input type="checkbox" name="topic" value="art" class="filter-checkbox">
+              <span>art</span>
+              <span class="filter-count" data-count-target="art">(1)</span>
+            </label>
+          </li>
+          
+          <li>
+            <label class="filter-link">
               <input type="checkbox" name="topic" value="religion" class="filter-checkbox">
               <span>religion</span>
               <span class="filter-count" data-count-target="religion">(1)</span>
@@ -465,9 +488,9 @@
           
           <li>
             <label class="filter-link">
-              <input type="checkbox" name="topic" value="feminism" class="filter-checkbox">
-              <span>feminism</span>
-              <span class="filter-count" data-count-target="feminism">(1)</span>
+              <input type="checkbox" name="topic" value="holocaust" class="filter-checkbox">
+              <span>holocaust</span>
+              <span class="filter-count" data-count-target="holocaust">(1)</span>
             </label>
           </li>
           
@@ -481,9 +504,9 @@
           
           <li>
             <label class="filter-link">
-              <input type="checkbox" name="topic" value="holocaust" class="filter-checkbox">
-              <span>holocaust</span>
-              <span class="filter-count" data-count-target="holocaust">(1)</span>
+              <input type="checkbox" name="topic" value="feminism" class="filter-checkbox">
+              <span>feminism</span>
+              <span class="filter-count" data-count-target="feminism">(1)</span>
             </label>
           </li>
           
@@ -539,7 +562,7 @@
             <label class="filter-link">
               <input type="checkbox" name="language" value="english" class="filter-checkbox" />
               <span>english</span>
-              <span class="filter-count" data-count-target="english">(58)</span>
+              <span class="filter-count" data-count-target="english">(59)</span>
             </label>
           </li>
           
@@ -1665,6 +1688,72 @@
           
           
           <div class="ig-link-container"><a href="https://www.instagram.com/p/DCz9SBRRnXp/" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          
+        </div>
+      </div>
+      
+      
+      
+
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <div class="post-card" 
+     data-creator="little-vegan-artist" 
+     data-tags="posts,english,art,dog-comparisons" 
+     data-misinformer="undefined">
+        <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
+          <a href="/Vegan-Archive/archive/littleveganartist/you wouldnt eat a dog/wouldnteatadog/" style="display: block; text-decoration: none;">
+            
+            <img src="/Vegan-Archive/archive/littleveganartist/you wouldnt eat a dog/1.webp" alt="&quot;You wouldn`t eat a dog&quot; - Doesn`t mean they are free" class="archive-thumbnail"
+  style="width: 100%; display: block; height: auto;">
+            
+
+            
+          </a>
+        </div>
+
+        <div class="post-details">
+          <h2 class="post-title"><a href="/Vegan-Archive/archive/littleveganartist/you wouldnt eat a dog/wouldnteatadog/">
+              &quot;You wouldn`t eat a dog&quot; - Doesn`t mean they are free
+            </a></h2>
+          
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Little vegan artist</div>
+          
+          
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DLagOYXsm29/?img_index=1" target="_blank"
               rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>

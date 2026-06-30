@@ -131,11 +131,18 @@ templateEngineOverride: njk
     }
   }
 
-  @media (max-width: 450px) {
+  @media (max-width: 600px) {
     .archive-layout .imageboard-grid {
       grid-template-columns: 1fr !important;
+      gap: 15px !important;
+      padding: 0px;
     }
+  
+  /* Optional: Ensure individual cards don't have side margins on mobile */
+  .post-card {
+    margin: 5px 0 !important;
   }
+}
 </style>
 
 <div class="archive-layout">

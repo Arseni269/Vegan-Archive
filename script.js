@@ -15,3 +15,22 @@ tags.forEach(tag => {
     });
   });
 });
+
+
+const backToTopBtn = document.getElementById("back-to-top");
+
+    window.addEventListener("scroll", () => {
+      // Show button after user scrolls down 400px
+      if (window.scrollY > 400) {
+        backToTopBtn.classList.add("is-visible");
+      } else {
+        backToTopBtn.classList.remove("is-visible");
+      }
+    });
+
+backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    })

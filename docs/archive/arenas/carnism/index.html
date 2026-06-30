@@ -465,6 +465,38 @@ Are vegan activists unintentionally adding to the misconceptions around veganism
     </aside>
 
   </div>
+
+  <button id="back-to-top" class="back-to-top-btn" title="Go to top">
+    ↑
+  </button>
+
+  <style>
+    .back-to-top-btn {
+      position: fixed;
+      bottom: 80px;
+      /* Sits just above your mobile FAB */
+      right: 24px;
+      background: #0f172a;
+      color: #ffffff;
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      z-index: 9998;
+      display: none;
+      /* Hidden by default */
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .back-to-top-btn.is-visible {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
 </div>
 
 <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
@@ -558,7 +590,23 @@ document.addEventListener('click', function (e) {
     }
   });
 
-  
+  const backToTopBtn = document.getElementById("back-to-top");
+
+    window.addEventListener("scroll", () => {
+      // Show button after user scrolls down 400px
+      if (window.scrollY > 400) {
+        backToTopBtn.classList.add("is-visible");
+      } else {
+        backToTopBtn.classList.remove("is-visible");
+      }
+    });
+
+backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    })
 </script>
 </body>
 </html>
