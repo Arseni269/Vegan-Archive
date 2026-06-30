@@ -151,7 +151,7 @@ templateEngineOverride: njk
     <h1 style="margin: 0;">Vegan Archive</h1>
 
     <div style="display: flex; gap: 10px; align-items: center; flex-grow: 1; max-width: 500px;">
-      <input type="text" id="archive-search-input" placeholder="🔍 Search titles, creators, topics, or misinformers..."
+      <input type="text" id="archive-search-input" placeholder="🔍 Search titles, creators, topics, or personalities..."
         style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.95rem; outline: none; box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);">
       <button id="clear-filters-btn" class="clear-btn" style="white-space: nowrap;">Clear All</button>
     </div>
@@ -213,7 +213,7 @@ templateEngineOverride: njk
       </div>
 
       <div class="filter-group-inner">
-        <h3 style="margin-top: 0; font-size: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 5px;">Misinformers
+        <h3 style="margin-top: 0; font-size: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 5px;">Personalities and orgs
         </h3>
         <ul class="filter-list" style="list-style: none; padding: 0; margin: 0;">
           {% for misinformer in collections.sortedMisinformers %}
