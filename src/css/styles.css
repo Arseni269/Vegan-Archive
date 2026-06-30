@@ -16,12 +16,12 @@ body {
   flex: 3;
 }
 
-/* Imageboard Cards Grid Container */
 .imageboard-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 265px));
-  gap: 20px;
-  justify-content: start;
+  /* Adjust '20px' to whatever size you prefer for your margins */
+  gap: 20px; 
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  padding: 20px; /* Optional: adds space around the entire grid */
 }
 
 /* ==========================================
@@ -327,12 +327,10 @@ main .carousel .carousel-grid a.glightbox {
 .sidebar-info-card {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
-  padding: 24px;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 320px;
 }
 
 .meta-section {
