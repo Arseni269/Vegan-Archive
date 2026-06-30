@@ -362,14 +362,6 @@ body.glightbox-open {
   .post-page-container { flex-direction: column !important; }
 }
 
-#thumbnail-strip {
-  display: flex;         /* Use flexbox */
-  flex-wrap: wrap;       /* CRITICAL: Allows thumbnails to move to next row */
-  gap: 10px;             /* Keeps spacing consistent */
-  margin-top: 10px;
-  max-width: 100%;       /* Ensures it doesn't exceed parent width */
-  overflow-x: hidden;    /* Prevents horizontal overflow */
-}
 
 /* Ensure individual thumbnails don't shrink when there are many */
 .thumb {
@@ -383,6 +375,27 @@ body.glightbox-open {
 #description-content p {
   margin-top: 0;         /* Removes extra space at the top */
   margin-bottom: 0.8rem; /* You can make this smaller (e.g., 0.5rem) to tighten the layout */
+}
+
+#media-container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* This ensures the container itself doesn't overflow */
+    overflow: hidden; 
+}
+
+#media-container img, 
+#media-container video {
+    /* This forces the media to never be wider than the container */
+    max-width: 100% !important; 
+    /* This limits the height so it doesn't push the page too far */
+    max-height: 70vh !important; 
+    /* This maintains the aspect ratio while fitting the box */
+    object-fit: contain !important; 
+    display: block;
 }
 </style>
 
@@ -426,70 +439,108 @@ body.glightbox-open {
 
   <div class="post-page-container" style="display: flex; flex-direction: column; gap: 30px; max-width: 900px; margin: 0 auto; width: 100%;">
 
-  <div class="gallery-column" style="width: 100%;">
-    <div id="main-display" style="display: flex; justify-content: center;">
-      <a id="featured-link" href="#" class="glightbox">
-         <img id="featured-image" src="" style="max-width: 100%; max-height: 70vh; height: auto; border-radius: 8px; display: block;">
-      </a>
-    </div>
+<div class="gallery-column" style="width: 100%;">
+    <div id="media-container"></div>
+    
+    <p style="text-align: center; color: #64748b; font-size: 0.85rem; margin-top: 15px; margin-bottom: 15px; width: 100%;">
+        Click thumbnails or use arrow keys to navigate
+    </p>
 
-    <div id="thumbnail-strip" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 15px;">
-         
-         
+    <div id="thumbnail-strip" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; width: 100%;">
+        
+        
             
-            <img src="/Vegan-Archive/archive/ul/overton/1.jpg" class="thumb" onclick="updateMainImage(0)" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer; border-radius: 4px;">
-         
             
-            <img src="/Vegan-Archive/archive/ul/overton/2.jpg" class="thumb" onclick="updateMainImage(1)" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer; border-radius: 4px;">
-         
+                <img src="/Vegan-Archive/archive/ul/overton/1.jpg" class="thumb" onclick="updateMainImage('/Vegan-Archive/archive/ul/overton/1.jpg', false, 0)">
             
-            <img src="/Vegan-Archive/archive/ul/overton/3.jpg" class="thumb" onclick="updateMainImage(2)" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer; border-radius: 4px;">
-         
+        
             
-            <img src="/Vegan-Archive/archive/ul/overton/4.jpg" class="thumb" onclick="updateMainImage(3)" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer; border-radius: 4px;">
-         
             
-            <img src="/Vegan-Archive/archive/ul/overton/5.jpg" class="thumb" onclick="updateMainImage(4)" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer; border-radius: 4px;">
-         
+                <img src="/Vegan-Archive/archive/ul/overton/2.jpg" class="thumb" onclick="updateMainImage('/Vegan-Archive/archive/ul/overton/2.jpg', false, 1)">
             
-            <img src="/Vegan-Archive/archive/ul/overton/6.jpg" class="thumb" onclick="updateMainImage(5)" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer; border-radius: 4px;">
-         
+        
             
-            <img src="/Vegan-Archive/archive/ul/overton/7.jpg" class="thumb" onclick="updateMainImage(6)" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer; border-radius: 4px;">
-         
             
-            <img src="/Vegan-Archive/archive/ul/overton/8.jpg" class="thumb" onclick="updateMainImage(7)" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer; border-radius: 4px;">
-         
+                <img src="/Vegan-Archive/archive/ul/overton/3.jpg" class="thumb" onclick="updateMainImage('/Vegan-Archive/archive/ul/overton/3.jpg', false, 2)">
             
-            <img src="/Vegan-Archive/archive/ul/overton/9.jpg" class="thumb" onclick="updateMainImage(8)" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer; border-radius: 4px;">
-         
+        
             
-            <img src="/Vegan-Archive/archive/ul/overton/10.jpg" class="thumb" onclick="updateMainImage(9)" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer; border-radius: 4px;">
-         
             
-            <img src="/Vegan-Archive/archive/ul/overton/11.jpg" class="thumb" onclick="updateMainImage(10)" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer; border-radius: 4px;">
-         
+                <img src="/Vegan-Archive/archive/ul/overton/4.jpg" class="thumb" onclick="updateMainImage('/Vegan-Archive/archive/ul/overton/4.jpg', false, 3)">
             
-            <img src="/Vegan-Archive/archive/ul/overton/12.jpg" class="thumb" onclick="updateMainImage(11)" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer; border-radius: 4px;">
-         
+        
             
-            <img src="/Vegan-Archive/archive/ul/overton/13.jpg" class="thumb" onclick="updateMainImage(12)" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer; border-radius: 4px;">
-         
             
-            <img src="/Vegan-Archive/archive/ul/overton/14.jpg" class="thumb" onclick="updateMainImage(13)" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer; border-radius: 4px;">
-         
+                <img src="/Vegan-Archive/archive/ul/overton/5.jpg" class="thumb" onclick="updateMainImage('/Vegan-Archive/archive/ul/overton/5.jpg', false, 4)">
             
-            <img src="/Vegan-Archive/archive/ul/overton/15.jpg" class="thumb" onclick="updateMainImage(14)" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer; border-radius: 4px;">
-         
+        
             
-            <img src="/Vegan-Archive/archive/ul/overton/16.jpg" class="thumb" onclick="updateMainImage(15)" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer; border-radius: 4px;">
-         
             
-            <img src="/Vegan-Archive/archive/ul/overton/17.jpg" class="thumb" onclick="updateMainImage(16)" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer; border-radius: 4px;">
-         
+                <img src="/Vegan-Archive/archive/ul/overton/6.jpg" class="thumb" onclick="updateMainImage('/Vegan-Archive/archive/ul/overton/6.jpg', false, 5)">
             
-            <img src="/Vegan-Archive/archive/ul/overton/18.jpg" class="thumb" onclick="updateMainImage(17)" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer; border-radius: 4px;">
-         
+        
+            
+            
+                <img src="/Vegan-Archive/archive/ul/overton/7.jpg" class="thumb" onclick="updateMainImage('/Vegan-Archive/archive/ul/overton/7.jpg', false, 6)">
+            
+        
+            
+            
+                <img src="/Vegan-Archive/archive/ul/overton/8.jpg" class="thumb" onclick="updateMainImage('/Vegan-Archive/archive/ul/overton/8.jpg', false, 7)">
+            
+        
+            
+            
+                <img src="/Vegan-Archive/archive/ul/overton/9.jpg" class="thumb" onclick="updateMainImage('/Vegan-Archive/archive/ul/overton/9.jpg', false, 8)">
+            
+        
+            
+            
+                <img src="/Vegan-Archive/archive/ul/overton/10.jpg" class="thumb" onclick="updateMainImage('/Vegan-Archive/archive/ul/overton/10.jpg', false, 9)">
+            
+        
+            
+            
+                <img src="/Vegan-Archive/archive/ul/overton/11.jpg" class="thumb" onclick="updateMainImage('/Vegan-Archive/archive/ul/overton/11.jpg', false, 10)">
+            
+        
+            
+            
+                <img src="/Vegan-Archive/archive/ul/overton/12.jpg" class="thumb" onclick="updateMainImage('/Vegan-Archive/archive/ul/overton/12.jpg', false, 11)">
+            
+        
+            
+            
+                <img src="/Vegan-Archive/archive/ul/overton/13.jpg" class="thumb" onclick="updateMainImage('/Vegan-Archive/archive/ul/overton/13.jpg', false, 12)">
+            
+        
+            
+            
+                <img src="/Vegan-Archive/archive/ul/overton/14.jpg" class="thumb" onclick="updateMainImage('/Vegan-Archive/archive/ul/overton/14.jpg', false, 13)">
+            
+        
+            
+            
+                <img src="/Vegan-Archive/archive/ul/overton/15.jpg" class="thumb" onclick="updateMainImage('/Vegan-Archive/archive/ul/overton/15.jpg', false, 14)">
+            
+        
+            
+            
+                <img src="/Vegan-Archive/archive/ul/overton/16.jpg" class="thumb" onclick="updateMainImage('/Vegan-Archive/archive/ul/overton/16.jpg', false, 15)">
+            
+        
+            
+            
+                <img src="/Vegan-Archive/archive/ul/overton/17.jpg" class="thumb" onclick="updateMainImage('/Vegan-Archive/archive/ul/overton/17.jpg', false, 16)">
+            
+        
+            
+            
+                <img src="/Vegan-Archive/archive/ul/overton/18.jpg" class="thumb" onclick="updateMainImage('/Vegan-Archive/archive/ul/overton/18.jpg', false, 17)">
+            
+        
+    </div>
+</div>
     </div>
   </div>
 
@@ -517,13 +568,13 @@ I know this is a long post, there’s a lot more I could have added as well, but
 </div>
 
   <button id="back-to-top" class="back-to-top-btn" title="Go to top">
-    ↑
+    ⇧
   </button>
 
   <style>
     .back-to-top-btn {
       position: fixed;
-      bottom: 80px;
+      bottom: 40px;
       /* Sits just above your mobile FAB */
       right: 24px;
       background: #0f172a;
@@ -586,163 +637,74 @@ I know this is a long post, there’s a lot more I could have added as well, but
     margin-top: 20px;
   }
   </style>
+
+  
 </div>
 
 <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-    // 1. Dynamic Path Fixer: Extract real generated image URLs safely
-    document.querySelectorAll('.carousel-grid a.glightbox').forEach(link => {
-      // If it's explicitly marked as a video or its attributes point to a video, skip it entirely!
-      if (link.getAttribute('data-type') === 'video' || (link.getAttribute('href') && link.getAttribute('href').match(/\.(mp4|mov|webm|m4v)$/i))) {
-        return;
-      }
-
-      const internalImg = link.querySelector('img');
-      if (internalImg) {
-        const computedSrc = internalImg.getAttribute('src');
-        if (computedSrc) {
-          link.setAttribute('href', computedSrc);
-        }
-      }
-    });
-
-    // 2. Initialize Lightbox
-    const lightbox = GLightbox({
-      selector: '.glightbox',
-      loop: true,
-      openEffect: 'fade',
-      closeEffect: 'fade',
-      closeOnOutsideClick: true,
-      zoomable: false,   
-      draggable: true,
-      autoplayVideos: true
-    });
-
-    // Keep your backdrop close workaround and auto-hyperlink scripts exactly as they are below...
-    // FIXED WORKAROUND: Force lightbox closure when clicking on any background container asset
-document.addEventListener('click', function (e) {
-  // Check if the lightbox is currently active/open on screen
-  const isOpen = document.body.classList.contains('glightbox-open');
-  if (!isOpen) return;
-
-  // Track if the click lands directly on the image element or navigation controls
-  const clickedImage = e.target.closest('.gslide-image img, .gslide-video, .gslide-inline');
-  const clickedControl = e.target.closest('.gbtn, .gnext, .gprev, .gclose');
-
-  // If the user clicked the backdrop area (not the image, video, or navigation buttons), close it!
-  if (!clickedImage && !clickedControl && e.target.closest('.glightbox-container')) {
-    lightbox.close();
-  }
-}, false);
-    // Auto hyperlink strings check
-    const desc = document.getElementById("description-content");
-    if (desc) {
-      const urlRegex = /(https?:\/\/[^\s<]+)/g;
-      const walk = document.createTreeWalker(desc, NodeFilter.SHOW_TEXT, null, false);
-      const nodesToReplace = [];
-      let textNode;
-      while (textNode = walk.nextNode()) {
-        if (urlRegex.test(textNode.nodeValue)) {
-          nodesToReplace.push(textNode);
-        }
-      }
-      nodesToReplace.forEach(textNode => {
-        const parent = textNode.parentElement;
-        const div = document.createElement('div');
-        div.innerHTML = textNode.nodeValue.replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
-        while (div.firstChild) {
-          parent.insertBefore(div.firstChild, textNode);
-        }
-        parent.removeChild(textNode);
-      });
-    }
-
-    // Convert line-breaks inside description containers 
-    if (desc) {
-      const paragraphs = desc.querySelectorAll("p");
-      paragraphs.forEach(p => {
-        if (p.innerHTML.includes("<br")) {
-          const structuralChunks = p.innerHTML.split(/<br\s*\/?>/);
-          const fragment = document.createDocumentFragment();
-          structuralChunks.forEach(chunk => {
-            if (chunk.trim()) {
-              const newP = document.createElement("p");
-              newP.innerHTML = chunk.trim();
-              fragment.appendChild(newP);
-            }
-          });
-          p.parentNode.insertBefore(fragment, p);
-          p.parentNode.removeChild(p);
-        }
-      });
-    }
-  });
-
-  const backToTopBtn = document.getElementById("back-to-top");
-
-    window.addEventListener("scroll", () => {
-      // Show button after user scrolls down 400px
-      if (window.scrollY > 400) {
-        backToTopBtn.classList.add("is-visible");
-      } else {
-        backToTopBtn.classList.remove("is-visible");
-      }
-    });
-
-backToTopBtn.addEventListener("click", () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    })
-
-    document.addEventListener("DOMContentLoaded", () => {
-  const firstThumb = document.querySelector('.thumb');
-  if (firstThumb) {
-    document.getElementById('featured-image').src = firstThumb.src;
-  }
-});
-
-// 1. Get all thumbnails and the featured image
-const thumbs = document.querySelectorAll('.thumb'); // Ensure your loop adds class 'thumb'
-const featured = document.getElementById('featured-image');
+// --- GLOBAL STATE ---
 let currentIndex = 0;
 
-function updateMainImage(index) {
+// --- CORE FUNCTION ---
+function updateMainImage(src, isVideo, index) {
+    const container = document.getElementById('media-container');
     const thumbs = document.querySelectorAll('.thumb');
-    const featuredLink = document.getElementById('featured-link');
+    
+    // Clear and update index
+    container.innerHTML = '';
+    currentIndex = index;
 
-    if (index >= 0 && index < thumbs.length) {
-        // Update the image src on the page
-        document.getElementById('featured-image').src = thumbs[index].src;
-        
-        // Update the link for Lightbox
-        featuredLink.href = thumbs[index].src;
-        
-        currentIndex = index;
+    // Create and configure new element
+    const media = isVideo ? document.createElement('video') : document.createElement('img');
+    media.src = src;
+    media.style.maxWidth = '100%';
+    media.style.maxHeight = '70vh';
+    media.style.objectFit = 'contain';
+    if (isVideo) media.controls = true;
+    
+    container.appendChild(media);
 
-        // 2. THIS IS THE FIX: Tell GLightbox to update its current slide
-        if (lightbox.getActiveSlide()) {
-            lightbox.goToSlide(index);
-        }
-        
-        // Highlight active thumbnail
-        thumbs.forEach(t => t.style.borderColor = 'transparent');
+    // Update active thumbnail highlight
+    thumbs.forEach(t => t.style.borderColor = 'transparent');
+    if (thumbs[index]) {
         thumbs[index].style.borderColor = '#3b82f6';
     }
 }
-// 2. Add Keyboard Listener
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight') {
-        updateMainImage(currentIndex + 1);
-    } else if (e.key === 'ArrowLeft') {
-        updateMainImage(currentIndex - 1);
-    }
-});
 
-// Initialize the first image on load
-if (thumbs.length > 0) updateMainImage(0);
+// --- INITIALIZATION ---
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Initialize Lightbox
+    const lightbox = GLightbox({
+        selector: '.glightbox',
+        loop: true,
+        zoomable: false,
+        draggable: true,
+        autoplayVideos: true
+    });
+
+    // 2. Load first image
+    const thumbs = document.querySelectorAll('.thumb');
+    if (thumbs.length > 0) {
+        const isVideo = thumbs[0].tagName.toLowerCase() === 'video';
+        updateMainImage(thumbs[0].src, isVideo, 0);
+    }
+
+    // 3. Setup Navigation Listener
+    document.addEventListener('keydown', (e) => {
+        const currentThumbs = document.querySelectorAll('.thumb');
+        if (e.key === 'ArrowRight') {
+            const nextIndex = Math.min(currentIndex + 1, currentThumbs.length - 1);
+            updateMainImage(currentThumbs[nextIndex].src, currentThumbs[nextIndex].tagName.toLowerCase() === 'video', nextIndex);
+        } else if (e.key === 'ArrowLeft') {
+            const prevIndex = Math.max(currentIndex - 1, 0);
+            updateMainImage(currentThumbs[prevIndex].src, currentThumbs[prevIndex].tagName.toLowerCase() === 'video', prevIndex);
+        }
+    });
+
+    // 4. Keep your existing helper functions (Back-to-top, URL linkers, etc.) below this line...
+    // ... (Keep your backToTop, auto-hyperlink, and linebreak logic here)
+});
 </script>
 </body>
 </html>
