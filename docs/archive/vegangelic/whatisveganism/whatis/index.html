@@ -60,15 +60,15 @@ body.glightbox-open {
 
   /* Heading stays at the very top, taking up full width */
   .post-main-title {
-    font-size: 2.2rem;
-    color: #0f172a;
-    margin: 0 auto 2rem auto !important; /* Centers the heading text block */
-    font-weight: 700;
-    line-height: 1.2;
-    display: block;
+   display: flex;
+  flex-direction: column;
+  align-items: center;    /* Centers horizontally */
+  justify-content: center;
+  text-align: center;     /* Ensures text inside stays centered */
+  width: 100%;
+  margin-top: 2rem;
     
     /* Adds safe padding to line up perfectly with the columns */
-    max-width: 1100px !important;
     padding-left: 0px !important;
     padding-right: 24px !important;
     width: 100%;
@@ -119,15 +119,64 @@ body.glightbox-open {
     width: 100%;
   }
 
-  /* 3. GRID SPLIT: Allocate massive space to the images, and keep the sidebar locked */
-  .post-layout-grid { 
-    display: grid !important;
-    /* Left column expands as much as possible; Sidebar stays locked at a crisp 340px */
-    grid-template-columns: 1fr 340px !important; 
-    gap: 5rem !important;             /* Generates a clean, distinct safety gutter between content and sidebar */
-    align-items: start; 
-    width: 100%;
+.post-layout-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 350px !important; /* Image Gallery vs Sidebar */
+  gap: 20px;
+}
+
+.gallery-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* This centers both children horizontally */
+  justify-content: center;
+  width: 100%;
+}
+
+#thumbnail-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Ensures thumbnails group in the middle */
+  gap: 10px;
+  max-width: 100%;
+}
+.thumb {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.thumb:hover { border-color: #3b82f6; }
+
+/* Mobile Stack */
+@media (max-width: 768px) {
+  .post-layout-grid { grid-template-columns: 1fr !important; }
+}
+
+.sticky-gallery-container {
+  position: sticky;
+  top: 20px; /* Pins the gallery 20px from the top of the screen */
+  height: calc(100vh - 40px); /* Keeps it within the viewport */
+  display: flex;
+  flex-direction: column;
+}
+
+.scrollable-description {
+  overflow-y: auto; /* Description scrolls independently */
+  max-height: 90vh;
+}
+
+@media (max-width: 1000px) {
+  .post-layout-grid {
+    grid-template-columns: 1fr !important; /* Stacks on mobile */
   }
+  .sticky-gallery-container {
+    position: relative; /* Disables sticky for mobile */
+    height: auto;
+  }
+}
 
   @media (max-width: 1000px) { 
     .post-layout-grid { 
@@ -149,11 +198,11 @@ body.glightbox-open {
 
   /* INLINE TAGS CONTAINER */
   .post-tags-container {
-    display: flex !important;
-    flex-wrap: wrap;
-    gap: 0.5rem; /* Restores a nice clean gap between tags */
-    margin-bottom: 2rem; /* Creates breathing room between tags and the content grid */
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px;
     
     /* CRITICAL baselining space reservation to eliminate vertical content shifts */
     min-height: 28px !important; 
@@ -308,6 +357,33 @@ body {
 body.glightbox-open {
   overflow-x: hidden !important;
 } 
+
+@media (max-width: 768px) {
+  .post-page-container { flex-direction: column !important; }
+}
+
+#thumbnail-strip {
+  display: flex;         /* Use flexbox */
+  flex-wrap: wrap;       /* CRITICAL: Allows thumbnails to move to next row */
+  gap: 10px;             /* Keeps spacing consistent */
+  margin-top: 10px;
+  max-width: 100%;       /* Ensures it doesn't exceed parent width */
+  overflow-x: hidden;    /* Prevents horizontal overflow */
+}
+
+/* Ensure individual thumbnails don't shrink when there are many */
+.thumb {
+  flex: 0 0 80px;        /* Forces them to stay 80px wide */
+  height: 80px;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#description-content p {
+  margin-top: 0;         /* Removes extra space at the top */
+  margin-bottom: 0.8rem; /* You can make this smaller (e.g., 0.5rem) to tighten the layout */
+}
 </style>
 
 <div class="post-view-wrapper">
@@ -336,73 +412,51 @@ body.glightbox-open {
     </div>
   
 
-  <div class="post-layout-grid">
-    
-<main style="margin: 0; padding: 0;">
-    <div class="carousel">
-      <div class="carousel-grid">
-        
-        
-          
-          
-          
-          
-          
-          
+  <div class="post-page-container" style="display: flex; flex-direction: column; gap: 30px; max-width: 900px; margin: 0 auto; width: 100%;">
 
-          
-            
-            <a href="#" class="glightbox">
-              <img src="/Vegan-Archive/img/EGnR66iZrM-600.webp" alt="Why it's important to remember what veganism actually is" loading="lazy" decoding="async" width="600" height="600">
-            </a>
-          
-
-        
-          
-          
-          
-          
-          
-          
-
-          
-            
-            <a href="#" class="glightbox">
-              <img src="/Vegan-Archive/img/htQtCBgtw1-600.webp" alt="Why it's important to remember what veganism actually is" loading="lazy" decoding="async" width="600" height="600">
-            </a>
-          
-
-        
-      </div>
+  <div class="gallery-column" style="width: 100%;">
+    <div id="main-display" style="display: flex; justify-content: center;">
+      <a id="featured-link" href="#" class="glightbox">
+         <img id="featured-image" src="" style="max-width: 100%; max-height: 70vh; height: auto; border-radius: 8px; display: block;">
+      </a>
     </div>
-  </main>
 
-    <aside class="sidebar-info-card" style="background: #f8fafc; padding: 20px; 8px; border: 1px solid #e2e8f0; margin: 0;">
-      
-        <div class="meta-section">
-          <h2 style="margin: 0 0 0.3rem 0; font-size: 1.1rem; font-weight: 500; color: #1e293b;">Creator</h3>
-          <p style="margin: 0; color: #475569; font-weight: 1000; font-size: 1.7rem;">Vegangelic Activism</p>
-        </div>
-      
+    <div id="thumbnail-strip" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 15px;">
+         
+         
+            
+            <img src="/Vegan-Archive/archive/vegangelic/whatisveganism/1.webp" class="thumb" onclick="updateMainImage(0)" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer; border-radius: 4px;">
+         
+            
+            <img src="/Vegan-Archive/archive/vegangelic/whatisveganism/2.webp" class="thumb" onclick="updateMainImage(1)" style="width: 80px; height: 80px; object-fit: cover; cursor: pointer; border-radius: 4px;">
+         
+    </div>
+  </div>
 
-      
-        <div class="meta-section" style="margin-bottom: 0.5rem;">
-          <a href="https://www.instagram.com/p/DNBlZl4yJM5/?img_index=1" target="_blank" rel="noopener noreferrer" class="instagram-link" style="display: inline-block; background: #e1306c; color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-size: 0.9rem; font-weight: 500;">View on Instagram</a>
-        </div>
-      
+  
 
-      <div class="meta-section">
-        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: #1e293b;">Description</h3>
-        <div id="description-content" style="color: #334155; line-height: 1.6; font-size: 0.95rem;">
-          
+    <div class="description-column" style="width: 100%; background: #f8fafc; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;">
+  <div class="meta-section" style="margin-bottom: 1.5rem;">
+    <h2 style="margin: 0 0 0.3rem 0; font-size: 1.1rem; color: #1e293b;">Creator</h2>
+    <p style="margin: 0; color: #475569; font-size: 1.5rem; font-weight: 700;">Vegangelic Activism</p>
+  </div>
+
+  
+    <div class="meta-section" style="margin-bottom: 1.5rem;">
+      <a href="https://www.instagram.com/p/DNBlZl4yJM5/?img_index=1" target="_blank" rel="noopener noreferrer" style="background: #e1306c; color: white; padding: 0.6rem 1rem; border-radius: 6px; text-decoration: none; display: inline-block;">View on Instagram</a>
+    </div>
+  
+
+  <div class="meta-section">
+    <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: #1e293b;">Description</h3>
+    <div id="description-content" style="color: #334155; line-height: 1.6; font-size: 0.95rem;">
+      
 “Veganism is the doctrine that man should live without exploiting animals.”
 
 - Leslie Cross (1951)
-        </div>
-      </div>
-    </aside>
-
+    </div>
   </div>
+</div>
 
   <button id="back-to-top" class="back-to-top-btn" title="Go to top">
     ↑
@@ -434,6 +488,45 @@ body.glightbox-open {
       align-items: center;
       justify-content: center;
     }
+
+  /* Container for the whole layout */
+  .post-page-container {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* The column holding the gallery */
+  .gallery-column {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers horizontal axis */
+    justify-content: center; /* Centers vertical axis */
+  }
+
+  /* The wrapper for the big image */
+  #main-display {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centers the image inside the wrapper */
+    margin-bottom: 20px;
+  }
+
+  /* The image itself */
+  #featured-image {
+    max-height: 70vh;
+    width: auto;         /* Forces the image to keep aspect ratio */
+    height: auto;
+    object-fit: contain;
+    display: block;      /* Removes extra spacing below image */
+    border-radius: 8px;
+    margin-top: 20px;
+  }
   </style>
 </div>
 
@@ -545,6 +638,53 @@ backToTopBtn.addEventListener("click", () => {
         behavior: "smooth"
       });
     })
+
+    document.addEventListener("DOMContentLoaded", () => {
+  const firstThumb = document.querySelector('.thumb');
+  if (firstThumb) {
+    document.getElementById('featured-image').src = firstThumb.src;
+  }
+});
+
+// 1. Get all thumbnails and the featured image
+const thumbs = document.querySelectorAll('.thumb'); // Ensure your loop adds class 'thumb'
+const featured = document.getElementById('featured-image');
+let currentIndex = 0;
+
+function updateMainImage(index) {
+    const thumbs = document.querySelectorAll('.thumb');
+    const featuredLink = document.getElementById('featured-link');
+
+    if (index >= 0 && index < thumbs.length) {
+        // Update the image src on the page
+        document.getElementById('featured-image').src = thumbs[index].src;
+        
+        // Update the link for Lightbox
+        featuredLink.href = thumbs[index].src;
+        
+        currentIndex = index;
+
+        // 2. THIS IS THE FIX: Tell GLightbox to update its current slide
+        if (lightbox.getActiveSlide()) {
+            lightbox.goToSlide(index);
+        }
+        
+        // Highlight active thumbnail
+        thumbs.forEach(t => t.style.borderColor = 'transparent');
+        thumbs[index].style.borderColor = '#3b82f6';
+    }
+}
+// 2. Add Keyboard Listener
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') {
+        updateMainImage(currentIndex + 1);
+    } else if (e.key === 'ArrowLeft') {
+        updateMainImage(currentIndex - 1);
+    }
+});
+
+// Initialize the first image on load
+if (thumbs.length > 0) updateMainImage(0);
 </script>
 </body>
 </html>
