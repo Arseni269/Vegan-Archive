@@ -7,17 +7,17 @@ author: "Heymerac"
 tags: ["education", "what is veganism"]
 ---
 
-Accept the reality that animals are not resources but individuals who should never be used.
+<p>Accept the reality that animals are not resources but individuals who should never be used.</p>
 .
-Recognize all animals as the individuals they are and end your objectification and use of animals.
+<p>Recognize all animals as the individuals they are and end your objectification and use of animals.</p>
 .
-Have the basic honesty to accept animals exist for themselves and not for you to use them.
+<p>Have the basic honesty to accept animals exist for themselves and not for you to use them.</p>
 .
-The moment to end all objectification and use of animals is now.
+<p>The moment to end all objectification and use of animals is now.</p>
 
-⭐️Veganism: The ethical principle that humans should live without exploiting animals.
+<p>⭐️Veganism: The ethical principle that humans should live without exploiting animals.</p>
 
-⭐️To be vegan: To recognize all animals as the individuals they are and end our objectification and use of animals.
+<p>⭐️To be vegan: To recognize all animals as the individuals they are and end our objectification and use of animals.</p>
 .
 .
-Lettering and art by: @merac.artist
+<p>Lettering and art by: @merac.artist</p>

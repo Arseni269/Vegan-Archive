@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exploitative mindset</title>
+  <!-- This links EVERY PAGE to your stylesheet safely from the root directory -->
+  <link rel="stylesheet" href="/Vegan-Archive/css/styles.css">
+</head>
+<body>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+
+<style>
+
+/* Force the layout engine to keep a permanent structural track for the scrollbar */
+html {
+  scrollbar-gutter: stable both-edges !important;
+}
+
+/* Ensure the layout remains rigid and centered without shifting left/right when modals trigger */
+html, body {
+  overflow-x: hidden !important;
+  margin: 0;
+  padding: 0;
+}
+
+/* Strip GLightbox's dynamic padding injections so the page layout remains completely locked */
+body.glightbox-open {
+  overflow: hidden !important;
+  padding-right: 0px !important;
+  margin-right: 0px !important;
+}
+
+/* Ensure the layout wraps center beautifully on desktop screens without pulling left */
+.post-view-wrapper, .archive-layout {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Force Lightbox's internal video container wrapper to remain absolutely centered */
+.glightbox-container .gvideo-container {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+}
+
+
+.back-to-archive-nav { 
+    margin-bottom: 0.60rem; 
+    display: block;
+    width: 100% !important;
+    max-width: 1400px !important;     /* Matches your expanded image wrapper width */
+    margin-left: auto !important;     /* Auto margins pull it into the same center grid line */
+    margin-right: auto !important;
+    padding-left: 0px !important;    /* Matches the 40px left-margin precisely */
+    box-sizing: border-box !important;
+  }
+
+  /* Heading stays at the very top, taking up full width */
+  .post-main-title {
+    font-size: 2.2rem;
+    color: #0f172a;
+    margin: 0 auto 2rem auto !important; /* Centers the heading text block */
+    font-weight: 700;
+    line-height: 1.2;
+    display: block;
+    
+    /* Adds safe padding to line up perfectly with the columns */
+    max-width: 1100px !important;
+    padding-left: 0px !important;
+    padding-right: 24px !important;
+    width: 100%;
+  }
+
+  .back-link { 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 0.4rem; 
+    color: #475569; 
+    text-decoration: none; 
+    font-size: 1.25rem; 
+    font-weight: 500; 
+  }
+  .back-link:hover { 
+    color: #0f172a; 
+  }
+  
+  /* Heading stays at the very top, taking up full width */
+  .post-main-title {
+    font-size: 2.2rem;
+    color: #0f172a;
+    margin: 0 0 2rem 0;
+    font-weight: 700;
+    line-height: 1.2;
+    display: block;
+    width: 100%;
+  }
+
+  /* 1. WRAPPER: Expand the page boundaries and force an elegant margin from the screen edges */
+  .post-view-wrapper {
+    max-width: 1400px !important;     /* Opens up the page width so images can grow large */
+    margin: 20px auto !important;     /* Symmetrically centers everything on the desktop screen */
+    padding-left: 40px !important;    /* Creates a spacious, high-end margin away from the screen edge */
+    padding-right: 40px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 2. TITLE: Align the top heading perfectly with your expanded layout */
+  .post-main-title {
+    font-size: 2.4rem;
+    color: #0f172a;
+    margin: 1.5rem 0 2rem 0 !important;
+    font-weight: 700;
+    line-height: 1.2;
+    display: block;
+    width: 100%;
+  }
+
+  /* 3. GRID SPLIT: Allocate massive space to the images, and keep the sidebar locked */
+  .post-layout-grid { 
+    display: grid !important;
+    /* Left column expands as much as possible; Sidebar stays locked at a crisp 340px */
+    grid-template-columns: 1fr 340px !important; 
+    gap: 5rem !important;             /* Generates a clean, distinct safety gutter between content and sidebar */
+    align-items: start; 
+    width: 100%;
+  }
+
+  @media (max-width: 1000px) { 
+    .post-layout-grid { 
+      grid-template-columns: 1fr !important;
+      gap: 2rem !important; 
+    } 
+  }
+
+  /* TITLE COMPONENT */
+  .post-main-title {
+    font-size: 2.2rem;
+    color: #0f172a;
+    margin: 0 0 0.5rem 0 !important; /* Reduced bottom margin to bring tags closer */
+    font-weight: 700;
+    line-height: 1.2;
+    display: block;
+    width: 100%;
+  }
+
+  /* INLINE TAGS CONTAINER */
+  .post-tags-container {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 0.5rem; /* Restores a nice clean gap between tags */
+    margin-bottom: 2rem; /* Creates breathing room between tags and the content grid */
+    width: 100%;
+    
+    /* CRITICAL baselining space reservation to eliminate vertical content shifts */
+    min-height: 28px !important; 
+    align-items: center;
+  }
+
+  .post-inline-tag {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background-color: #f1f5f9;
+    color: #475569;
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+
+  /* CAROUSEL GRID CENTER ADJUSTMENT */
+  .post-view-wrapper .carousel-grid { 
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    
+    /* FIX: Restores your original tight gap (10px between rows, 0px between columns) */
+    gap: 10px 0px !important; 
+    
+    /* If there's only one image asset, center it within the main column workspace */
+    justify-content: center !important; 
+    justify-items: center !important;
+  }
+
+  /* When there is only 1 image link in the grid parent container, span full or center gracefully */
+  .post-view-wrapper .carousel-grid a.glightbox:only-child {
+    grid-column: 1 / -1 !important; /* Spans across columns to prevent snapping to the left */
+    max-width: 500px;               /* Limits massive blown up sizing layout */
+    width: 100% !important;
+  }
+  /* =============================================================
+   GLIGHTBOX GHOST OVERRIDE CLEANUP
+   ============================================================= */
+
+/* Completely hide the zoom utility button */
+.gzoom {
+  display: none !important;
+}
+
+/* Force-reset structural styles inside the lightbox canvas container */
+.glightbox-container .ginner-container img,
+.glightbox-container .carousel-grid img,
+.glightbox-container img {
+  width: auto !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: 95vh !important;
+  min-height: 0 !important;
+  aspect-ratio: auto !important;
+  object-fit: contain !important; /* Preserves clear aspect integrity in view mode */
+  transform: none !important;
+}
+
+/* Strip structural wrapping grids if cloned by the animation scripts */
+.glightbox-container .carousel-grid,
+.glightbox-container .carousel {
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  gap: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.glightbox-container main .carousel .carousel-grid a.glightbox,
+.glightbox-container a.glightbox {
+  display: inline-block !important;
+  width: auto !important;
+  min-width: 0 !important;
+  flex: none !important;
+}
+
+/* =============================================================
+   ISOLATED GLIGHTBOX FIX (DOES NOT TOUCH POST CARD IMAGES)
+   ============================================================= */
+
+/* Force-kill the phantom layout box when GLightbox copies your elements */
+.glightbox-container .carousel-grid,
+.glightbox-container .carousel,
+.glightbox-container .post-view-wrapper main {
+  display: block !important;
+  grid-template-columns: none !important;
+  width: auto !important;
+  height: auto !important;
+  gap: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Ensure the temporary rendering link within the modal behaves normally */
+.glightbox-container .carousel-grid a.glightbox,
+.glightbox-container a.glightbox {
+  display: inline-block !important;
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  flex: none !important;
+}
+
+/* Ensure only the active preview image scales inside the viewport */
+.glightbox-container .gslide-image img {
+  width: auto !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: 95vh !important;
+  object-fit: contain !important;
+  aspect-ratio: auto !important;
+}
+
+/* =============================================================
+   PERFECT JUMP & PHANTOM BOX ELIMINATION
+   ============================================================= */
+
+/* Force the vertical scrollbar track to stay pinned to the screen at all times */
+html, 
+html.glightbox-open {
+  overflow-y: scroll !important;
+}
+
+/* Strip GLightbox's dynamic padding adjustments so the page remains rigid */
+body.glightbox-open {
+  overflow: hidden !important;
+  padding-right: 0px !important;
+  margin-right: 0px !important;
+}
+
+/* =============================================================
+   HORIZONTAL SCROLLBAR STABILIZER
+   ============================================================= */
+
+/* Strictly prevent any element on the page from overflowing horizontally */
+html, 
+body {
+  overflow-x: hidden !important;
+}
+
+/* Ensure the body remains rigid on the x-axis when GLightbox is open */
+body.glightbox-open {
+  overflow-x: hidden !important;
+} 
+</style>
+
+<div class="post-view-wrapper">
+  
+  <nav class="back-to-archive-nav">
+    <a href="/Vegan-Archive/archive/" class="back-link">
+      ← Back to Archive
+    </a>
+  </nav>
+
+  <h1 class="post-main-title">Exploitative mindset</h1>
+
+  
+    <div class="post-tags-container">
+      
+        
+      
+        
+          <a href="/Vegan-Archive/archive/?tag=english" class="post-inline-tag" style="text-decoration: none;">#english</a>
+        
+      
+        
+          <a href="/Vegan-Archive/archive/?tag=principle" class="post-inline-tag" style="text-decoration: none;">#principle</a>
+        
+      
+        
+          <a href="/Vegan-Archive/archive/?tag=art" class="post-inline-tag" style="text-decoration: none;">#art</a>
+        
+      
+    </div>
+  
+
+  <div class="post-layout-grid">
+    
+<main style="margin: 0; padding: 0;">
+    <div class="carousel">
+      <div class="carousel-grid">
+        
+        
+          
+          
+          
+          
+          
+          
+
+          
+            
+            <a href="#" class="glightbox">
+              <img src="/Vegan-Archive/img/s-SF-CVT4k-600.webp" alt="Exploitative mindset" loading="lazy" decoding="async" width="600" height="689">
+            </a>
+          
+
+        
+      </div>
+    </div>
+  </main>
+
+    <aside class="sidebar-info-card" style="background: #f8fafc; padding: 20px; 8px; border: 1px solid #e2e8f0; margin: 0;">
+      
+        <div class="meta-section">
+          <h2 style="margin: 0 0 0.3rem 0; font-size: 1.1rem; font-weight: 500; color: #1e293b;">Creator</h3>
+          <p style="margin: 0; color: #475569; font-weight: 1000; font-size: 1.7rem;">Little vegan artist</p>
+        </div>
+      
+
+      
+        <div class="meta-section" style="margin-bottom: 0.5rem;">
+          <a href="https://www.instagram.com/p/DIPgVHozEEo/" target="_blank" rel="noopener noreferrer" class="instagram-link" style="display: inline-block; background: #e1306c; color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; font-size: 0.9rem; font-weight: 500;">View on Instagram</a>
+        </div>
+      
+
+      <div class="meta-section">
+        <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: #1e293b;">Description</h3>
+        <div id="description-content" style="color: #334155; line-height: 1.6; font-size: 0.95rem;">
+          
+<p>Animal exploitation is rooted in human's exploitative mindset.</p>
+<p>What these victims need is for us to rid ourselves of the exploitative mindset that animals are here to be our resources, objects, or slaves.</p>
+<p>In our outreach, it is vital to tackle the root of the problem.
+"Veganism is the doctrine that man should live without exploiting animals"Leslie Cross 1951</p>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <button id="back-to-top" class="back-to-top-btn" title="Go to top">
+    ↑
+  </button>
+
+  <style>
+    .back-to-top-btn {
+      position: fixed;
+      bottom: 80px;
+      /* Sits just above your mobile FAB */
+      right: 24px;
+      background: #0f172a;
+      color: #ffffff;
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      z-index: 9998;
+      display: none;
+      /* Hidden by default */
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .back-to-top-btn.is-visible {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Dynamic Path Fixer: Extract real generated image URLs safely
+    document.querySelectorAll('.carousel-grid a.glightbox').forEach(link => {
+      // If it's explicitly marked as a video or its attributes point to a video, skip it entirely!
+      if (link.getAttribute('data-type') === 'video' || (link.getAttribute('href') && link.getAttribute('href').match(/\.(mp4|mov|webm|m4v)$/i))) {
+        return;
+      }
+
+      const internalImg = link.querySelector('img');
+      if (internalImg) {
+        const computedSrc = internalImg.getAttribute('src');
+        if (computedSrc) {
+          link.setAttribute('href', computedSrc);
+        }
+      }
+    });
+
+    // 2. Initialize Lightbox
+    const lightbox = GLightbox({
+      selector: '.glightbox',
+      loop: true,
+      openEffect: 'fade',
+      closeEffect: 'fade',
+      closeOnOutsideClick: true,
+      zoomable: false,   
+      draggable: true,
+      autoplayVideos: true
+    });
+
+    // Keep your backdrop close workaround and auto-hyperlink scripts exactly as they are below...
+    // FIXED WORKAROUND: Force lightbox closure when clicking on any background container asset
+document.addEventListener('click', function (e) {
+  // Check if the lightbox is currently active/open on screen
+  const isOpen = document.body.classList.contains('glightbox-open');
+  if (!isOpen) return;
+
+  // Track if the click lands directly on the image element or navigation controls
+  const clickedImage = e.target.closest('.gslide-image img, .gslide-video, .gslide-inline');
+  const clickedControl = e.target.closest('.gbtn, .gnext, .gprev, .gclose');
+
+  // If the user clicked the backdrop area (not the image, video, or navigation buttons), close it!
+  if (!clickedImage && !clickedControl && e.target.closest('.glightbox-container')) {
+    lightbox.close();
+  }
+}, false);
+    // Auto hyperlink strings check
+    const desc = document.getElementById("description-content");
+    if (desc) {
+      const urlRegex = /(https?:\/\/[^\s<]+)/g;
+      const walk = document.createTreeWalker(desc, NodeFilter.SHOW_TEXT, null, false);
+      const nodesToReplace = [];
+      let textNode;
+      while (textNode = walk.nextNode()) {
+        if (urlRegex.test(textNode.nodeValue)) {
+          nodesToReplace.push(textNode);
+        }
+      }
+      nodesToReplace.forEach(textNode => {
+        const parent = textNode.parentElement;
+        const div = document.createElement('div');
+        div.innerHTML = textNode.nodeValue.replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+        while (div.firstChild) {
+          parent.insertBefore(div.firstChild, textNode);
+        }
+        parent.removeChild(textNode);
+      });
+    }
+
+    // Convert line-breaks inside description containers 
+    if (desc) {
+      const paragraphs = desc.querySelectorAll("p");
+      paragraphs.forEach(p => {
+        if (p.innerHTML.includes("<br")) {
+          const structuralChunks = p.innerHTML.split(/<br\s*\/?>/);
+          const fragment = document.createDocumentFragment();
+          structuralChunks.forEach(chunk => {
+            if (chunk.trim()) {
+              const newP = document.createElement("p");
+              newP.innerHTML = chunk.trim();
+              fragment.appendChild(newP);
+            }
+          });
+          p.parentNode.insertBefore(fragment, p);
+          p.parentNode.removeChild(p);
+        }
+      });
+    }
+  });
+
+  const backToTopBtn = document.getElementById("back-to-top");
+
+    window.addEventListener("scroll", () => {
+      // Show button after user scrolls down 400px
+      if (window.scrollY > 400) {
+        backToTopBtn.classList.add("is-visible");
+      } else {
+        backToTopBtn.classList.remove("is-visible");
+      }
+    });
+
+backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    })
+</script>
+</body>
+</html>
