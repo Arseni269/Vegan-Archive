@@ -336,7 +336,7 @@ body.glightbox-open {
           {% set fileFullName = item.fullName %}
           {% set fileName = item.name %}
           {% set fileIsVideo = item.isVideo %}
-          {% set filePath = "/Vegan-Archive/" + galleryData.folder + "/" + fileFullName %}
+          {% set filePath = "/" + galleryData.folder + "/" + fileFullName %}
 
           {% if fileIsVideo %}
             {# VIDEO ELEMENT: Rendered inline with native controls instead of a glightbox link #}

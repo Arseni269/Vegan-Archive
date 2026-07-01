@@ -52,7 +52,7 @@ module.exports = function (eleventyConfig) {
       widths: [600],
       formats: ["webp"],
       outputDir: "./docs/img/",
-      urlPath: "/Vegan-Archive/img/" 
+      urlPath: "/img/" 
     });
 
     let imageAttributes = {

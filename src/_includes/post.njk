@@ -425,7 +425,7 @@ body.glightbox-open {
     <div id="thumbnail-strip" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; width: 100%;">
         {% set galleryData = page.inputPath | getImagesData %}
         {% for item in galleryData.files %}
-           {% set filePath = "/archive/" + galleryData.folder + "/" + item.fullName %}
+           {% set filePath = "/archive/" + languageFolder + "/" + galleryData.folder + "/" + item.fullName %}
             {% if item.isVideo %}
                 <video src="{{ filePath }}" class="thumb" onclick="updateMainImage('{{ filePath }}', true, {{ loop.index0 }})"></video>
             {% else %}
