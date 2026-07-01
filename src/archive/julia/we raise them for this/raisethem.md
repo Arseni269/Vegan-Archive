@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: 'But we raise them for this?'
-thumbnail: "/archive/julia/environment/1.jpg"
+thumbnail: "/archive/julia/we raise them for this/1.jpg"
 instagram_url: "https://www.instagram.com/p/DSNv_EIjp0z/?img_index=1" # Link to IG
 author: "Julia vegan"
 tags: ["excuses", "education", "outreach"]
