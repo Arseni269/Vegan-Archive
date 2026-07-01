@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>It is time to leave the empty words and stop being an animal exploiter.</title>
+  <!-- This links EVERY PAGE to your stylesheet safely from the root directory -->
+  <link rel="stylesheet" href="/"/css/styles.css">
+</head>
+<body>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+
+<style>
+
+/* Force the layout engine to keep a permanent structural track for the scrollbar */
+html {
+  scrollbar-gutter: stable both-edges !important;
+}
+
+/* Ensure the layout remains rigid and centered without shifting left/right when modals trigger */
+html, body {
+  overflow-x: hidden !important;
+  margin: 0;
+  padding: 0;
+}
+
+/* Strip GLightbox's dynamic padding injections so the page layout remains completely locked */
+body.glightbox-open {
+  overflow: hidden !important;
+  padding-right: 0px !important;
+  margin-right: 0px !important;
+}
+
+/* Ensure the layout wraps center beautifully on desktop screens without pulling left */
+.post-view-wrapper, .archive-layout {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Force Lightbox's internal video container wrapper to remain absolutely centered */
+.glightbox-container .gvideo-container {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+}
+
+
+.back-to-archive-nav { 
+    margin-bottom: 0.60rem; 
+    display: block;
+    width: 100% !important;
+    max-width: 1400px !important;     /* Matches your expanded image wrapper width */
+    margin-left: auto !important;     /* Auto margins pull it into the same center grid line */
+    margin-right: auto !important;
+    padding-left: 0px !important;    /* Matches the 40px left-margin precisely */
+    box-sizing: border-box !important;
+  }
+
+  /* Heading stays at the very top, taking up full width */
+  .post-main-title {
+   display: flex;
+  flex-direction: column;
+  align-items: center;    /* Centers horizontally */
+  justify-content: center;
+  text-align: center;     /* Ensures text inside stays centered */
+  width: 100%;
+  margin-top: 2rem;
+    
+    /* Adds safe padding to line up perfectly with the columns */
+    padding-left: 0px !important;
+    padding-right: 24px !important;
+    width: 100%;
+  }
+
+  .back-link { 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 0.4rem; 
+    color: #475569; 
+    text-decoration: none; 
+    font-size: 1.25rem; 
+    font-weight: 500; 
+  }
+  .back-link:hover { 
+    color: #0f172a; 
+  }
+  
+  /* Heading stays at the very top, taking up full width */
+  .post-main-title {
+    font-size: 2.2rem;
+    color: #0f172a;
+    margin: 0 0 2rem 0;
+    font-weight: 700;
+    line-height: 1.2;
+    display: block;
+    width: 100%;
+  }
+
+  /* 1. WRAPPER: Expand the page boundaries and force an elegant margin from the screen edges */
+  .post-view-wrapper {
+    max-width: 1400px !important;     /* Opens up the page width so images can grow large */
+    margin: 20px auto !important;     /* Symmetrically centers everything on the desktop screen */
+    padding-left: 40px !important;    /* Creates a spacious, high-end margin away from the screen edge */
+    padding-right: 40px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 2. TITLE: Align the top heading perfectly with your expanded layout */
+  .post-main-title {
+    font-size: 2.4rem;
+    color: #0f172a;
+    margin: 1.5rem 0 2rem 0 !important;
+    font-weight: 700;
+    line-height: 1.2;
+    display: block;
+    width: 100%;
+  }
+
+.post-layout-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 350px !important; /* Image Gallery vs Sidebar */
+  gap: 20px;
+}
+
+.gallery-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* This centers both children horizontally */
+  justify-content: center;
+  width: 100%;
+}
+
+#thumbnail-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Ensures thumbnails group in the middle */
+  gap: 10px;
+  max-width: 100%;
+}
+.thumb {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.thumb:hover { border-color: #3b82f6; }
+
+/* Mobile Stack */
+@media (max-width: 768px) {
+  .post-layout-grid { grid-template-columns: 1fr !important; }
+}
+
+.sticky-gallery-container {
+  position: sticky;
+  top: 20px; /* Pins the gallery 20px from the top of the screen */
+  height: calc(100vh - 40px); /* Keeps it within the viewport */
+  display: flex;
+  flex-direction: column;
+}
+
+.scrollable-description {
+  overflow-y: auto; /* Description scrolls independently */
+  max-height: 90vh;
+}
+
+@media (max-width: 1000px) {
+  .post-layout-grid {
+    grid-template-columns: 1fr !important; /* Stacks on mobile */
+  }
+  .sticky-gallery-container {
+    position: relative; /* Disables sticky for mobile */
+    height: auto;
+  }
+}
+
+  @media (max-width: 1000px) { 
+    .post-layout-grid { 
+      grid-template-columns: 1fr !important;
+      gap: 2rem !important; 
+    } 
+  }
+
+  /* TITLE COMPONENT */
+  .post-main-title {
+    font-size: 2.2rem;
+    color: #0f172a;
+    margin: 0 0 0.5rem 0 !important; /* Reduced bottom margin to bring tags closer */
+    font-weight: 700;
+    line-height: 1.2;
+    display: block;
+    width: 100%;
+  }
+
+  /* INLINE TAGS CONTAINER */
+  .post-tags-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px;
+    
+    /* CRITICAL baselining space reservation to eliminate vertical content shifts */
+    min-height: 28px !important; 
+    align-items: center;
+  }
+
+  .post-inline-tag {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background-color: #f1f5f9;
+    color: #475569;
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+
+  /* CAROUSEL GRID CENTER ADJUSTMENT */
+  .post-view-wrapper .carousel-grid { 
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    
+    /* FIX: Restores your original tight gap (10px between rows, 0px between columns) */
+    gap: 10px 0px !important; 
+    
+    /* If there's only one image asset, center it within the main column workspace */
+    justify-content: center !important; 
+    justify-items: center !important;
+  }
+
+  /* When there is only 1 image link in the grid parent container, span full or center gracefully */
+  .post-view-wrapper .carousel-grid a.glightbox:only-child {
+    grid-column: 1 / -1 !important; /* Spans across columns to prevent snapping to the left */
+    max-width: 500px;               /* Limits massive blown up sizing layout */
+    width: 100% !important;
+  }
+  /* =============================================================
+   GLIGHTBOX GHOST OVERRIDE CLEANUP
+   ============================================================= */
+
+/* Completely hide the zoom utility button */
+.gzoom {
+  display: none !important;
+}
+
+/* Force-reset structural styles inside the lightbox canvas container */
+.glightbox-container .ginner-container img,
+.glightbox-container .carousel-grid img,
+.glightbox-container img {
+  width: auto !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: 95vh !important;
+  min-height: 0 !important;
+  aspect-ratio: auto !important;
+  object-fit: contain !important; /* Preserves clear aspect integrity in view mode */
+  transform: none !important;
+}
+
+/* Strip structural wrapping grids if cloned by the animation scripts */
+.glightbox-container .carousel-grid,
+.glightbox-container .carousel {
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  gap: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.glightbox-container main .carousel .carousel-grid a.glightbox,
+.glightbox-container a.glightbox {
+  display: inline-block !important;
+  width: auto !important;
+  min-width: 0 !important;
+  flex: none !important;
+}
+
+/* =============================================================
+   ISOLATED GLIGHTBOX FIX (DOES NOT TOUCH POST CARD IMAGES)
+   ============================================================= */
+
+/* Force-kill the phantom layout box when GLightbox copies your elements */
+.glightbox-container .carousel-grid,
+.glightbox-container .carousel,
+.glightbox-container .post-view-wrapper main {
+  display: block !important;
+  grid-template-columns: none !important;
+  width: auto !important;
+  height: auto !important;
+  gap: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Ensure the temporary rendering link within the modal behaves normally */
+.glightbox-container .carousel-grid a.glightbox,
+.glightbox-container a.glightbox {
+  display: inline-block !important;
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  flex: none !important;
+}
+
+/* Ensure only the active preview image scales inside the viewport */
+.glightbox-container .gslide-image img {
+  width: auto !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: 95vh !important;
+  object-fit: contain !important;
+  aspect-ratio: auto !important;
+}
+
+/* =============================================================
+   PERFECT JUMP & PHANTOM BOX ELIMINATION
+   ============================================================= */
+
+/* Force the vertical scrollbar track to stay pinned to the screen at all times */
+html, 
+html.glightbox-open {
+  overflow-y: scroll !important;
+}
+
+/* Strip GLightbox's dynamic padding adjustments so the page remains rigid */
+body.glightbox-open {
+  overflow: hidden !important;
+  padding-right: 0px !important;
+  margin-right: 0px !important;
+}
+
+/* =============================================================
+   HORIZONTAL SCROLLBAR STABILIZER
+   ============================================================= */
+
+/* Strictly prevent any element on the page from overflowing horizontally */
+html, 
+body {
+  overflow-x: hidden !important;
+}
+
+/* Ensure the body remains rigid on the x-axis when GLightbox is open */
+body.glightbox-open {
+  overflow-x: hidden !important;
+} 
+
+@media (max-width: 768px) {
+  .post-page-container { flex-direction: column !important; }
+}
+
+
+/* Ensure individual thumbnails don't shrink when there are many */
+.thumb {
+  flex: 0 0 80px;        /* Forces them to stay 80px wide */
+  height: 80px;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#description-content p {
+  margin-top: 0;         /* Removes extra space at the top */
+  margin-bottom: 0.8rem; /* You can make this smaller (e.g., 0.5rem) to tighten the layout */
+}
+
+#media-container {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* This ensures the container itself doesn't overflow */
+    overflow: hidden; 
+}
+
+#media-container img, 
+#media-container video {
+    /* This forces the media to never be wider than the container */
+    max-width: 100% !important; 
+    /* This limits the height so it doesn't push the page too far */
+    max-height: 70vh !important; 
+    /* This maintains the aspect ratio while fitting the box */
+    object-fit: contain !important; 
+    display: block;
+}
+</style>
+
+<div class="post-view-wrapper">
+  
+  <nav class="back-to-archive-nav">
+    <a href="/archive/" class="back-link">
+      ← Back to Archive
+    </a>
+  </nav>
+
+  <h1 class="post-main-title">It is time to leave the empty words and stop being an animal exploiter.</h1>
+
+  
+    <div class="post-tags-container">
+      
+        
+      
+        
+          <a href="/archive/?tag=english" class="post-inline-tag" style="text-decoration: none;">#english</a>
+        
+      
+        
+          <a href="/archive/?tag=education" class="post-inline-tag" style="text-decoration: none;">#education</a>
+        
+      
+        
+          <a href="/archive/?tag=what%20is%20veganism" class="post-inline-tag" style="text-decoration: none;">#what is veganism</a>
+        
+      
+        
+          <a href="/archive/?tag=outreach" class="post-inline-tag" style="text-decoration: none;">#outreach</a>
+        
+      
+    </div>
+  
+
+  <div class="post-page-container" style="display: flex; flex-direction: column; gap: 30px; max-width: 900px; margin: 0 auto; width: 100%;">
+
+<div class="gallery-column" style="width: 100%;">
+    <div id="media-container"></div>
+    
+    <p style="text-align: center; color: #64748b; font-size: 0.85rem; margin-top: 15px; margin-bottom: 15px; width: 100%;">
+        Click thumbnails or use arrow keys to navigate
+    </p>
+
+    <div id="thumbnail-strip" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; width: 100%;">
+    
+    
+    
+    
+     
+    
+    
+    
+        
+    
+        <img src="/archive/english/heymerac/endanimaluse1/end animal use.png" class="thumb" onclick="updateMainImage('/archive/english/heymerac/endanimaluse1/end animal use.png', false, 0)">
+    
+
+</div>
+</div>
+    </div>
+  </div>
+
+  
+
+    <div class="description-column" style="margin: 20px; background: #f8fafc; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;">
+  <div class="meta-section" style="margin-bottom: 1.5rem;">
+    <h2 style="margin: 0 0 0.3rem 0; font-size: 1.1rem; color: #1e293b;">Creator</h2>
+    <p style="margin: 0; color: #475569; font-size: 1.5rem; font-weight: 700;">Heymerac</p>
+  </div>
+
+ 
+  <div class="meta-section" style="margin-bottom: 1.5rem;">
+    <a href="https://www.instagram.com/p/DZX42RkOX3q/" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       style="background: #000000; color: white; padding: 0.4rem 0.8rem; border-radius: 6px; text-decoration: none; display: inline-flex; width: fit-content;">
+       View on Instagram
+    </a>
+  </div>
+
+
+  <div class="meta-section">
+    <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: #1e293b;">Description</h3>
+    <div id="description-content" style="color: #334155; line-height: 1.6; font-size: 0.95rem;">
+      
+          
+<p>It is time to leave the empty words and stop being an animal exploiter.</p>
+<p>No need to talk about love, kindness, or compassion. This is not about virtues but about a basic moral obligation: to recognize animals as the individuals they are and to live without objectifying or using them.</p>
+<p>Realize your exploitative perception towards animals. See yourself as who you really are in regard to animals: Their exploiter. The one who objectifies and uses them for your purposes.</p>
+<p>The reality is that individuals should never be used. This undoubtedly applies for all animals, because each one of them is in truth a unique individual.</p>
+<p>The injustice remains as long as you refuse to recognize an individual as an individual.</p>
+<p>Your comfortable and complicit denial of animals as individuals perpetuates animal use.</p>
+<p>Only you can end the injustice that originates from within yourself. Animals do not exist for you. This is all you must internalize.</p>
+<p>No effort is required from you to be fair towards others. Being fair to animals by not objectifying or using them is the only possibility when you recognize them as the individuals they are</p>
+<p>When you acknowledge someone as an individual you cannot think of them as resources, you cannot use them in any way. The thought doesn’t cross your mind.</p>
+<p>So this is the moment for you to dismantle your exploitative perception towards animals, which translates in ending your use of animals.</p>
+<p>Do not confuse this with a welfarist or utilitarian ideology. Objectifying and using animals is wrong regardless of the means, harm or impact it causes.</p>
+<p>Have the basic honesty to accept that animals are individuals and not resources.</p>
+<p>All animals exist for themselves and not for you to use them.</p>
+<p>This is not an opportunity to virtue signal or a chance to claim hero-like qualities. This is a basic duty of yours; one that you have failed to fulfill until now. Animals are the victims of your exploitative perception and actions.</p>
+<p>Put an end to the false belief that animals are resources that exist for you to use them.
+</p>
+<p>Have the basic honesty and integrity to end your objectification and use of animals.
+</p>
+<p>End animal use.
+</p>
+      
+    </div>
+</div>
+</div>
+
+  <button id="back-to-top" class="back-to-top-btn" title="Go to top">
+    ⇧
+  </button>
+
+  <style>
+    .back-to-top-btn {
+      position: fixed;
+      bottom: 40px;
+      /* Sits just above your mobile FAB */
+      right: 24px;
+      background: #0f172a;
+      color: #ffffff;
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      z-index: 9998;
+      display: none;
+      /* Hidden by default */
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .back-to-top-btn.is-visible {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+  /* Container for the whole layout */
+  .post-page-container {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* The column holding the gallery */
+  .gallery-column {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers horizontal axis */
+    justify-content: center; /* Centers vertical axis */
+  }
+
+  /* The wrapper for the big image */
+  #main-display {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centers the image inside the wrapper */
+    margin-bottom: 20px;
+  }
+
+  /* The image itself */
+  #featured-image {
+    max-height: 70vh;
+    width: auto;         /* Forces the image to keep aspect ratio */
+    height: auto;
+    object-fit: contain;
+    display: block;      /* Removes extra spacing below image */
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+  </style>
+
+  
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+<script>
+// --- GLOBAL STATE ---
+let currentIndex = 0;
+
+// --- CORE FUNCTION ---
+function updateMainImage(src, isVideo, index) {
+    const container = document.getElementById('media-container');
+    const thumbs = document.querySelectorAll('.thumb');
+    
+    // Clear and update index
+    container.innerHTML = '';
+    currentIndex = index;
+
+    // Create and configure new element
+    const media = isVideo ? document.createElement('video') : document.createElement('img');
+    media.src = src;
+    media.style.maxWidth = '100%';
+    media.style.maxHeight = '70vh';
+    media.style.objectFit = 'contain';
+    if (isVideo) media.controls = true;
+    
+    container.appendChild(media);
+
+    // Update active thumbnail highlight
+    thumbs.forEach(t => t.style.borderColor = 'transparent');
+    if (thumbs[index]) {
+        thumbs[index].style.borderColor = '#000000';
+    }
+}
+
+// --- INITIALIZATION ---
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Initialize Lightbox
+    const lightbox = GLightbox({
+        selector: '.glightbox',
+        loop: true,
+        zoomable: false,
+        draggable: true,
+        autoplayVideos: true
+    });
+
+    // 2. Load first image
+    const thumbs = document.querySelectorAll('.thumb');
+    if (thumbs.length > 0) {
+        const isVideo = thumbs[0].tagName.toLowerCase() === 'video';
+        updateMainImage(thumbs[0].src, isVideo, 0);
+    }
+
+    // 3. Setup Navigation Listener
+    document.addEventListener('keydown', (e) => {
+        const currentThumbs = document.querySelectorAll('.thumb');
+        if (e.key === 'ArrowRight') {
+            const nextIndex = Math.min(currentIndex + 1, currentThumbs.length - 1);
+            updateMainImage(currentThumbs[nextIndex].src, currentThumbs[nextIndex].tagName.toLowerCase() === 'video', nextIndex);
+        } else if (e.key === 'ArrowLeft') {
+            const prevIndex = Math.max(currentIndex - 1, 0);
+            updateMainImage(currentThumbs[prevIndex].src, currentThumbs[prevIndex].tagName.toLowerCase() === 'video', prevIndex);
+        }
+    });
+
+    // 4. Keep your existing helper functions (Back-to-top, URL linkers, etc.) below this line...
+    // ... (Keep your backToTop, auto-hyperlink, and linebreak logic here)
+});
+</script>
+</body>
+</html>

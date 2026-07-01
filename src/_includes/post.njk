@@ -396,7 +396,7 @@ body.glightbox-open {
 <div class="post-view-wrapper">
   
   <nav class="back-to-archive-nav">
-    <a href="{{ '/' | url }}"archive/" class="back-link">
+    <a href="{{ '/archive/' | url }}" class="back-link">
       ← Back to Archive
     </a>
   </nav>
@@ -423,16 +423,26 @@ body.glightbox-open {
     </p>
 
     <div id="thumbnail-strip" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; width: 100%;">
-        {% set galleryData = page.inputPath | getImagesData %}
-        {% for item in galleryData.files %}
-           {% set filePath = "/archive/" + languageFolder + "/" + galleryData.folder + "/" + item.fullName %}
-            {% if item.isVideo %}
-                <video src="{{ filePath }}" class="thumb" onclick="updateMainImage('{{ filePath }}', true, {{ loop.index0 }})"></video>
-            {% else %}
-                <img src="{{ filePath }}" class="thumb" onclick="updateMainImage('{{ filePath }}', false, {{ loop.index0 }})">
-            {% endif %}
-        {% endfor %}
-    </div>
+    {% set galleryData = page.inputPath | getImagesData %}
+    
+    {% set pathParts = page.filePathStem.split('/') %}
+    {# 
+       If your path is /archive/english/arenas/postname
+       pathParts[1] is 'archive'
+       pathParts[2] is 'english'
+    #}
+    {% set lang = pathParts[2] %} 
+    {% for item in galleryData.files %}
+    {# Hardcode the base from the project root #}
+    {% set filePath = "/" + galleryData.folder + "/" + item.fullName %}
+        
+    {% if item.isVideo %}
+        <video src="{{ filePath }}" class="thumb" onclick="updateMainImage('{{ filePath }}', true, {{ loop.index0 }})"></video>
+    {% else %}
+        <img src="{{ filePath }}" class="thumb" onclick="updateMainImage('{{ filePath }}', false, {{ loop.index0 }})">
+    {% endif %}
+{% endfor %}
+</div>
 </div>
     </div>
   </div>
