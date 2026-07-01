@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>If the vegan forefathers had been plant-based utilitarians</title>
   <!-- This links EVERY PAGE to your stylesheet safely from the root directory -->
-  <link rel="stylesheet" href="/Vegan-Archive/css/styles.css">
+  <link rel="stylesheet" href="{{ '/' | url }}"Vegan-Archive/css/styles.css">
 </head>
 <body>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
@@ -402,7 +402,7 @@ body.glightbox-open {
 <div class="post-view-wrapper">
   
   <nav class="back-to-archive-nav">
-    <a href="/Vegan-Archive/archive/" class="back-link">
+    <a href="{{ '/' | url }}"Vegan-Archive/archive/" class="back-link">
       ← Back to Archive
     </a>
   </nav>
@@ -415,19 +415,19 @@ body.glightbox-open {
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=english" class="post-inline-tag" style="text-decoration: none;">#english</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=english" class="post-inline-tag" style="text-decoration: none;">#english</a>
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=utilitarianism" class="post-inline-tag" style="text-decoration: none;">#utilitarianism</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=utilitarianism" class="post-inline-tag" style="text-decoration: none;">#utilitarianism</a>
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=single%20issue%20campaigns" class="post-inline-tag" style="text-decoration: none;">#single issue campaigns</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=single%20issue%20campaigns" class="post-inline-tag" style="text-decoration: none;">#single issue campaigns</a>
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=welfarism" class="post-inline-tag" style="text-decoration: none;">#welfarism</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=welfarism" class="post-inline-tag" style="text-decoration: none;">#welfarism</a>
         
       
     </div>
@@ -478,9 +478,11 @@ body.glightbox-open {
     <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: #1e293b;">Description</h3>
     <div id="description-content" style="color: #334155; line-height: 1.6; font-size: 0.95rem;">
       
+          
 If Donald Watson (left) and Leslie J Cross (right) had been utilitarians they would NOT have come up with the blueprint for animal emancipation which is veganism. None of us would've even heard of veganism at this point. NONE of us would be vegan if they had focused on single-issue stuff. Veganism was NOT about cruel practices but about the mindset that other animals are ends in themselves and not a means to human ends. It was not about animal cruelty. It was not about suffering. Veganism acknowledged that animal cruelty and animal suffering caused by exploitative practices were mere manifestations, mere results of the mentality that other sentient species should be USED by humans for our own benefit; that the path to animal emancipation was to spread a PRINCIPLE against ALL animal USE for human purposes i.e., the rejection of the idea that other animals are here for humans to exploit.
+      
     </div>
-  </div>
+</div>
 </div>
 
   <button id="back-to-top" class="back-to-top-btn" title="Go to top">
@@ -584,7 +586,7 @@ function updateMainImage(src, isVideo, index) {
     // Update active thumbnail highlight
     thumbs.forEach(t => t.style.borderColor = 'transparent');
     if (thumbs[index]) {
-        thumbs[index].style.borderColor = '#3b82f6';
+        thumbs[index].style.borderColor = '#000000';
     }
 }
 

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>No longer vegan 🤡</title>
   <!-- This links EVERY PAGE to your stylesheet safely from the root directory -->
-  <link rel="stylesheet" href="/Vegan-Archive/css/styles.css">
+  <link rel="stylesheet" href="{{ '/' | url }}"Vegan-Archive/css/styles.css">
 </head>
 <body>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
@@ -402,7 +402,7 @@ body.glightbox-open {
 <div class="post-view-wrapper">
   
   <nav class="back-to-archive-nav">
-    <a href="/Vegan-Archive/archive/" class="back-link">
+    <a href="{{ '/' | url }}"Vegan-Archive/archive/" class="back-link">
       ← Back to Archive
     </a>
   </nav>
@@ -415,19 +415,19 @@ body.glightbox-open {
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=english" class="post-inline-tag" style="text-decoration: none;">#english</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=english" class="post-inline-tag" style="text-decoration: none;">#english</a>
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=education" class="post-inline-tag" style="text-decoration: none;">#education</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=education" class="post-inline-tag" style="text-decoration: none;">#education</a>
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=exvegan" class="post-inline-tag" style="text-decoration: none;">#exvegan</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=exvegan" class="post-inline-tag" style="text-decoration: none;">#exvegan</a>
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=art" class="post-inline-tag" style="text-decoration: none;">#art</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=art" class="post-inline-tag" style="text-decoration: none;">#art</a>
         
       
     </div>
@@ -503,6 +503,7 @@ body.glightbox-open {
     <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: #1e293b;">Description</h3>
     <div id="description-content" style="color: #334155; line-height: 1.6; font-size: 0.95rem;">
       
+          
 <p>Due to the massive misinformation that utilitarian activists currently share, distorting the principle of veganism and communicating it as a diet, a lifestyle and an utilitarian idea against animal suffering, most of the people who become 'vegan' are not really adopting the vegan principle, but simply changing their diet to oppose animal suffering, and not animal use in its innumerable forms.</p>
 <p>This is very problematic because veganism is not a diet, a lifestyle, or an utilitarian idea against animal suffering.</p>
 <p>In reality veganism is: The ethical principle that humans should live without exploiting animals.</p>
@@ -514,8 +515,9 @@ body.glightbox-open {
 <p>Once you recognize the lives of animals and understand you must not use them, there is not going back to seeing them as resources to use.</p>
 <p>This is why veganism is not a tag, that you can cut off when it starts to bother you, nor a choice, that it's up to your preference to pick. Veganism is an ethical principle for the emancipation of all animals from use by humans. </p>
 <p>Designed and Hand-drawn by Daniel Merac.</p>
+      
     </div>
-  </div>
+</div>
 </div>
 
   <button id="back-to-top" class="back-to-top-btn" title="Go to top">
@@ -619,7 +621,7 @@ function updateMainImage(src, isVideo, index) {
     // Update active thumbnail highlight
     thumbs.forEach(t => t.style.borderColor = 'transparent');
     if (thumbs[index]) {
-        thumbs[index].style.borderColor = '#3b82f6';
+        thumbs[index].style.borderColor = '#000000';
     }
 }
 

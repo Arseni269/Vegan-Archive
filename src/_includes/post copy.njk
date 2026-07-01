@@ -307,7 +307,7 @@ body.glightbox-open {
 <div class="post-view-wrapper">
   
   <nav class="back-to-archive-nav">
-    <a href="/Vegan-Archive/archive/" class="back-link">
+    <a href="{{ '/' | url }}"Vegan-Archive/archive/" class="back-link">
       ← Back to Archive
     </a>
   </nav>
@@ -318,7 +318,7 @@ body.glightbox-open {
     <div class="post-tags-container">
       {% for tag in tags %}
         {% if tag != "posts" and tag != "all" %}
-          <a href="/Vegan-Archive/archive/?tag={{ tag | urlencode }}" class="post-inline-tag" style="text-decoration: none;">#{{ tag }}</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag={{ tag | urlencode }}" class="post-inline-tag" style="text-decoration: none;">#{{ tag }}</a>
         {% endif %}
       {% endfor %}
     </div>

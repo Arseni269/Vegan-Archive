@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>If veganism is abolitionist, how is it still not political?</title>
   <!-- This links EVERY PAGE to your stylesheet safely from the root directory -->
-  <link rel="stylesheet" href="/Vegan-Archive/css/styles.css">
+  <link rel="stylesheet" href="{{ '/' | url }}"Vegan-Archive/css/styles.css">
 </head>
 <body>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
@@ -402,7 +402,7 @@ body.glightbox-open {
 <div class="post-view-wrapper">
   
   <nav class="back-to-archive-nav">
-    <a href="/Vegan-Archive/archive/" class="back-link">
+    <a href="{{ '/' | url }}"Vegan-Archive/archive/" class="back-link">
       ← Back to Archive
     </a>
   </nav>
@@ -415,11 +415,11 @@ body.glightbox-open {
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=english" class="post-inline-tag" style="text-decoration: none;">#english</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=english" class="post-inline-tag" style="text-decoration: none;">#english</a>
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=Welfarism" class="post-inline-tag" style="text-decoration: none;">#Welfarism</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=Welfarism" class="post-inline-tag" style="text-decoration: none;">#Welfarism</a>
         
       
     </div>
@@ -485,6 +485,7 @@ body.glightbox-open {
     <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: #1e293b;">Description</h3>
     <div id="description-content" style="color: #334155; line-height: 1.6; font-size: 0.95rem;">
       
+          
 When anything we think or do becomes a “political act”, politics stops meaning anything concrete. In fact, if everything is political, as so many people say… then is politics God? 🙃 sorry, couldn’t resist.
 
 Being against a structure of exploitation does not automatically mean being part of any real political force against it, especially when almost all of society, the market, institutions, and more than 99.9% of the population still sustain that structure.
@@ -493,8 +494,9 @@ It is essential to recognize, and be very careful with, our anxiety for satisfac
 
 With animals, it will probably be no different: we need many more people who see them as individuals (vegans), which becomes much harder when vegan education itself continues to be distorted, trivialized, and erased.
 
+      
     </div>
-  </div>
+</div>
 </div>
 
   <button id="back-to-top" class="back-to-top-btn" title="Go to top">
@@ -598,7 +600,7 @@ function updateMainImage(src, isVideo, index) {
     // Update active thumbnail highlight
     thumbs.forEach(t => t.style.borderColor = 'transparent');
     if (thumbs[index]) {
-        thumbs[index].style.borderColor = '#3b82f6';
+        thumbs[index].style.borderColor = '#000000';
     }
 }
 

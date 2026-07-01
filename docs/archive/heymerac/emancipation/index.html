@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The emancipation of animals will come in spite of utilitarian humanity&#39;s exploitative interests</title>
   <!-- This links EVERY PAGE to your stylesheet safely from the root directory -->
-  <link rel="stylesheet" href="/Vegan-Archive/css/styles.css">
+  <link rel="stylesheet" href="{{ '/' | url }}"Vegan-Archive/css/styles.css">
 </head>
 <body>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
@@ -402,7 +402,7 @@ body.glightbox-open {
 <div class="post-view-wrapper">
   
   <nav class="back-to-archive-nav">
-    <a href="/Vegan-Archive/archive/" class="back-link">
+    <a href="{{ '/' | url }}"Vegan-Archive/archive/" class="back-link">
       ← Back to Archive
     </a>
   </nav>
@@ -415,15 +415,15 @@ body.glightbox-open {
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=english" class="post-inline-tag" style="text-decoration: none;">#english</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=english" class="post-inline-tag" style="text-decoration: none;">#english</a>
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=education" class="post-inline-tag" style="text-decoration: none;">#education</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=education" class="post-inline-tag" style="text-decoration: none;">#education</a>
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=outreach" class="post-inline-tag" style="text-decoration: none;">#outreach</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=outreach" class="post-inline-tag" style="text-decoration: none;">#outreach</a>
         
       
     </div>
@@ -474,6 +474,7 @@ body.glightbox-open {
     <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: #1e293b;">Description</h3>
     <div id="description-content" style="color: #334155; line-height: 1.6; font-size: 0.95rem;">
       
+          
 <p>As long as the exploitative perception towards animals exists in the mind of humans, even in the faintest form or disguised by veils of culture, the animals will continue to be deemed as resources and used as such; the injustice towards them, no matter how embellished or regulated their exploitation may be, will remain intact, present, and validated indefinitely by a collective delusion of human entitlement and supremacy.</p>
 
 <p>The parasitic relationship that humans have over animals must be entirely dismantled before the thought about the emancipation of animals can become a reality that actually takes place on this planet. In the meantime, such emancipation only occurs in the daydreams of ex animal exploiters (actual vegans); and, imaginary worlds make no difference to the animals if not brought into reality through determined and collective education and action.</p>
@@ -503,8 +504,9 @@ body.glightbox-open {
 <p>The time to dismantle your exploitative perception towards animals is now</p>
 
 <p>The time to end your objectification and use of animals is now.</p>
+      
     </div>
-  </div>
+</div>
 </div>
 
   <button id="back-to-top" class="back-to-top-btn" title="Go to top">
@@ -608,7 +610,7 @@ function updateMainImage(src, isVideo, index) {
     // Update active thumbnail highlight
     thumbs.forEach(t => t.style.borderColor = 'transparent');
     if (thumbs[index]) {
-        thumbs[index].style.borderColor = '#3b82f6';
+        thumbs[index].style.borderColor = '#000000';
     }
 }
 

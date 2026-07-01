@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Should &quot;Vegans&quot; have murdered cecil the lion?</title>
   <!-- This links EVERY PAGE to your stylesheet safely from the root directory -->
-  <link rel="stylesheet" href="/Vegan-Archive/css/styles.css">
+  <link rel="stylesheet" href="{{ '/' | url }}"Vegan-Archive/css/styles.css">
 </head>
 <body>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
@@ -402,7 +402,7 @@ body.glightbox-open {
 <div class="post-view-wrapper">
   
   <nav class="back-to-archive-nav">
-    <a href="/Vegan-Archive/archive/" class="back-link">
+    <a href="{{ '/' | url }}"Vegan-Archive/archive/" class="back-link">
       ← Back to Archive
     </a>
   </nav>
@@ -415,15 +415,15 @@ body.glightbox-open {
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=english" class="post-inline-tag" style="text-decoration: none;">#english</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=english" class="post-inline-tag" style="text-decoration: none;">#english</a>
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=hunting%20ideology" class="post-inline-tag" style="text-decoration: none;">#hunting ideology</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=hunting%20ideology" class="post-inline-tag" style="text-decoration: none;">#hunting ideology</a>
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=utilitarianism" class="post-inline-tag" style="text-decoration: none;">#utilitarianism</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=utilitarianism" class="post-inline-tag" style="text-decoration: none;">#utilitarianism</a>
         
       
     </div>
@@ -519,14 +519,16 @@ body.glightbox-open {
     <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: #1e293b;">Description</h3>
     <div id="description-content" style="color: #334155; line-height: 1.6; font-size: 0.95rem;">
       
+          
 <p>Writing this was the perfect example of how Brandolini's law is real.</p>
 
 <p>"Brandolini's law, also known as the bullshit asymmetry principle, is an internet adage coined in 2013 by Alberto Brandolini, an Italian programmer, that emphasizes the effort of debunking misinformation, in comparison to the relative ease of creating it in the first place. The law states:</p>
 <p>The amount of energy needed to refute bullshit is an order of magnitude bigger than that needed to produce it.</p>
 <p>The rise of easily popularized ideas through the internet has greatly increased the relevant examples, but the asymmetry principle itself has long been recognized.</p>
 <p>I only hope this is helpful to animals because it surely was time-consuming AF writing it.</p>
+      
     </div>
-  </div>
+</div>
 </div>
 
   <button id="back-to-top" class="back-to-top-btn" title="Go to top">
@@ -630,7 +632,7 @@ function updateMainImage(src, isVideo, index) {
     // Update active thumbnail highlight
     thumbs.forEach(t => t.style.borderColor = 'transparent');
     if (thumbs[index]) {
-        thumbs[index].style.borderColor = '#3b82f6';
+        thumbs[index].style.borderColor = '#000000';
     }
 }
 

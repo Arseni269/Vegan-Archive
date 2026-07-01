@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>¿Son las muertes de animales en cultivos una excusa valida contra el Veganismo?</title>
   <!-- This links EVERY PAGE to your stylesheet safely from the root directory -->
-  <link rel="stylesheet" href="/Vegan-Archive/css/styles.css">
+  <link rel="stylesheet" href="{{ '/' | url }}"Vegan-Archive/css/styles.css">
 </head>
 <body>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
@@ -402,7 +402,7 @@ body.glightbox-open {
 <div class="post-view-wrapper">
   
   <nav class="back-to-archive-nav">
-    <a href="/Vegan-Archive/archive/" class="back-link">
+    <a href="{{ '/' | url }}"Vegan-Archive/archive/" class="back-link">
       ← Back to Archive
     </a>
   </nav>
@@ -415,15 +415,15 @@ body.glightbox-open {
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=spanish" class="post-inline-tag" style="text-decoration: none;">#spanish</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=spanish" class="post-inline-tag" style="text-decoration: none;">#spanish</a>
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=crop%20deaths" class="post-inline-tag" style="text-decoration: none;">#crop deaths</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=crop%20deaths" class="post-inline-tag" style="text-decoration: none;">#crop deaths</a>
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=utilitarianism" class="post-inline-tag" style="text-decoration: none;">#utilitarianism</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=utilitarianism" class="post-inline-tag" style="text-decoration: none;">#utilitarianism</a>
         
       
     </div>
@@ -479,9 +479,11 @@ body.glightbox-open {
     <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: #1e293b;">Description</h3>
     <div id="description-content" style="color: #334155; line-height: 1.6; font-size: 0.95rem;">
       
+          
 Tal vez en un mundo vegano todos podríamos idear una forma menos dañina de cultivar alimentos para 8 mil millones de humanos y corregir otras prácticas perjudiciales hasta ahora inevitables, pero causar "el menor daño posible" es una tarea interminable e imposible que el veganismo nunca planteó como propósito. Sin embargo, nuestra percepción de otros animales SÍ PUEDE cambiar, así como cualquier otra causa pretende lograr ese mismo cambio para el grupo de víctimas que defiende.
+      
     </div>
-  </div>
+</div>
 </div>
 
   <button id="back-to-top" class="back-to-top-btn" title="Go to top">
@@ -585,7 +587,7 @@ function updateMainImage(src, isVideo, index) {
     // Update active thumbnail highlight
     thumbs.forEach(t => t.style.borderColor = 'transparent');
     if (thumbs[index]) {
-        thumbs[index].style.borderColor = '#3b82f6';
+        thumbs[index].style.borderColor = '#000000';
     }
 }
 

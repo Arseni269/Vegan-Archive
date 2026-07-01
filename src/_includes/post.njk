@@ -396,7 +396,7 @@ body.glightbox-open {
 <div class="post-view-wrapper">
   
   <nav class="back-to-archive-nav">
-    <a href="/Vegan-Archive/archive/" class="back-link">
+    <a href="{{ '/' | url }}"archive/" class="back-link">
       ← Back to Archive
     </a>
   </nav>
@@ -407,7 +407,7 @@ body.glightbox-open {
     <div class="post-tags-container">
       {% for tag in tags %}
         {% if tag != "posts" and tag != "all" %}
-          <a href="/Vegan-Archive/archive/?tag={{ tag | urlencode }}" class="post-inline-tag" style="text-decoration: none;">#{{ tag }}</a>
+          <a href="{{ '/archive/?tag=' + tag | urlencode | url }}" class="post-inline-tag" style="text-decoration: none;">#{{ tag }}</a>
         {% endif %}
       {% endfor %}
     </div>
@@ -425,7 +425,7 @@ body.glightbox-open {
     <div id="thumbnail-strip" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; width: 100%;">
         {% set galleryData = page.inputPath | getImagesData %}
         {% for item in galleryData.files %}
-            {% set filePath = "/Vegan-Archive/" + galleryData.folder + "/" + item.fullName %}
+           {% set filePath = "/" + galleryData.folder + "/" + item.fullName %}
             {% if item.isVideo %}
                 <video src="{{ filePath }}" class="thumb" onclick="updateMainImage('{{ filePath }}', true, {{ loop.index0 }})"></video>
             {% else %}
@@ -459,9 +459,13 @@ body.glightbox-open {
   <div class="meta-section">
     <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: #1e293b;">Description</h3>
     <div id="description-content" style="color: #334155; line-height: 1.6; font-size: 0.95rem;">
-      {{ content | safe }}
+      {% if content and content.trim().length > 0 %}
+          {{ content | safe }}
+      {% else %}
+          <p>No description</p>
+      {% endif %}
     </div>
-  </div>
+</div>
 </div>
 
   <button id="back-to-top" class="back-to-top-btn" title="Go to top">
@@ -565,7 +569,7 @@ function updateMainImage(src, isVideo, index) {
     // Update active thumbnail highlight
     thumbs.forEach(t => t.style.borderColor = 'transparent');
     if (thumbs[index]) {
-        thumbs[index].style.borderColor = '#3b82f6';
+        thumbs[index].style.borderColor = '#000000';
     }
 }
 

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Is Veganism about equality? Not in the way you might think</title>
   <!-- This links EVERY PAGE to your stylesheet safely from the root directory -->
-  <link rel="stylesheet" href="/Vegan-Archive/css/styles.css">
+  <link rel="stylesheet" href="{{ '/' | url }}"Vegan-Archive/css/styles.css">
 </head>
 <body>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
@@ -402,7 +402,7 @@ body.glightbox-open {
 <div class="post-view-wrapper">
   
   <nav class="back-to-archive-nav">
-    <a href="/Vegan-Archive/archive/" class="back-link">
+    <a href="{{ '/' | url }}"Vegan-Archive/archive/" class="back-link">
       ← Back to Archive
     </a>
   </nav>
@@ -415,15 +415,15 @@ body.glightbox-open {
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=english" class="post-inline-tag" style="text-decoration: none;">#english</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=english" class="post-inline-tag" style="text-decoration: none;">#english</a>
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=utilitarianism" class="post-inline-tag" style="text-decoration: none;">#utilitarianism</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=utilitarianism" class="post-inline-tag" style="text-decoration: none;">#utilitarianism</a>
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=speciesism" class="post-inline-tag" style="text-decoration: none;">#speciesism</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=speciesism" class="post-inline-tag" style="text-decoration: none;">#speciesism</a>
         
       
     </div>
@@ -494,9 +494,11 @@ body.glightbox-open {
     <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: #1e293b;">Description</h3>
     <div id="description-content" style="color: #334155; line-height: 1.6; font-size: 0.95rem;">
       
+          
 I ended up watching a debate on a certain channel of a girl who should drop the vegan label, (as her friend who changed the vegan for "virtue" did), but this time she was the moderator and the debate was basically a debate-me bro trying to have his gotcha moment by using the NTT argument against a vegetarian, and, quite frankly, I was fed-up with how the distortion of the vegan concept, all the twisting and tweaking of the vegan principle to misrepresent it leads to the most absurd and useless conversations about far-fetched, or even impossible "hypotheticals", instead of focusing on discussing the moral imperative of veganism. The debate-me bros keep reproducing like bacteria in a jar, and they all use the same NON-VEGAN, utilitarian speech with virtue-signaling terms like "speciesism", "trait-equalized rights", "principle of equal consideration", and so on, with which they only validate the anti-vegan criticism about a supposed "vegan" inconsistency, which is nothing but a rebuttal to UTILITARIAN claims of reducing "as far as possible and practicable" harm and death to other sentient beings, which can be stretched to very absurd limits and it's NEVER the case of the very same people claiming to live in such an ascetic, virtuous way, anyway. Singer's utilitarian concepts are not only not within the vegan theoretical framework, but, on top of that, catalyzers of the neverending excuses against UTILITARIANISM, only that the ones using them think they're "debunking" veganism and not the self-righteousness of the utilitarian claims. Anyway, I truly hope I can elucidate the huge problem with the use of such terms for the proper understanding and, consequently, advancement of veganism as the only path to animal emancipation.
+      
     </div>
-  </div>
+</div>
 </div>
 
   <button id="back-to-top" class="back-to-top-btn" title="Go to top">
@@ -600,7 +602,7 @@ function updateMainImage(src, isVideo, index) {
     // Update active thumbnail highlight
     thumbs.forEach(t => t.style.borderColor = 'transparent');
     if (thumbs[index]) {
-        thumbs[index].style.borderColor = '#3b82f6';
+        thumbs[index].style.borderColor = '#000000';
     }
 }
 

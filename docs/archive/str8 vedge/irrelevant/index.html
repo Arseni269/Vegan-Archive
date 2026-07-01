@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>How irrelevant discussions hault the progress of Veganism</title>
   <!-- This links EVERY PAGE to your stylesheet safely from the root directory -->
-  <link rel="stylesheet" href="/Vegan-Archive/css/styles.css">
+  <link rel="stylesheet" href="{{ '/' | url }}"Vegan-Archive/css/styles.css">
 </head>
 <body>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
@@ -402,7 +402,7 @@ body.glightbox-open {
 <div class="post-view-wrapper">
   
   <nav class="back-to-archive-nav">
-    <a href="/Vegan-Archive/archive/" class="back-link">
+    <a href="{{ '/' | url }}"Vegan-Archive/archive/" class="back-link">
       ← Back to Archive
     </a>
   </nav>
@@ -415,15 +415,15 @@ body.glightbox-open {
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=english" class="post-inline-tag" style="text-decoration: none;">#english</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=english" class="post-inline-tag" style="text-decoration: none;">#english</a>
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=principle" class="post-inline-tag" style="text-decoration: none;">#principle</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=principle" class="post-inline-tag" style="text-decoration: none;">#principle</a>
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=distortion" class="post-inline-tag" style="text-decoration: none;">#distortion</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=distortion" class="post-inline-tag" style="text-decoration: none;">#distortion</a>
         
       
     </div>
@@ -524,6 +524,7 @@ body.glightbox-open {
     <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: #1e293b;">Description</h3>
     <div id="description-content" style="color: #334155; line-height: 1.6; font-size: 0.95rem;">
       
+          
 <p>🎓 Studies in psychology show that how an issue is framed determines how it's understood and which solutions seem acceptable.</p>
 
 <p>☝️ If veganism is framed as consumption—a lifestyle or a set of practices—it will never be seen as a rejection of exploitation. It doesn't have to be explicitly described as consumption to be understood that way. The focus on practices, diets, recipes, lifestyles, and products under the term “vegan” does this on its own. Research in framing theory, moral framing, and moral disengagement shows that how an issue is presented determines how it's understood. Over time, this becomes a socially constructed reality. This is exactly how veganism has turned into a "diet", "a diet against cruelty", "a lifestyle to reduce harm" – and other detrimental distractions known as "veganism" in society.</p>
@@ -544,8 +545,9 @@ body.glightbox-open {
 <p><a href="https://www.researchgate.net/publication/228198044_Framing_Theory" target="_blank" rel="noopener noreferrer">ResearchGate: Framing Theory</a></p>
 
 <p><a href="https://www.researchgate.net/publication/311159896_Investigating_the_Framing_Effect_in_Social_and_Behavioral_Science_Research_Potential_Influences_on_Behavior_Cognition_and_Emotion" target="_blank" rel="noopener noreferrer">ResearchGate: Investigating the Framing Effect</a></p>
+      
     </div>
-  </div>
+</div>
 </div>
 
   <button id="back-to-top" class="back-to-top-btn" title="Go to top">
@@ -649,7 +651,7 @@ function updateMainImage(src, isVideo, index) {
     // Update active thumbnail highlight
     thumbs.forEach(t => t.style.borderColor = 'transparent');
     if (thumbs[index]) {
-        thumbs[index].style.borderColor = '#3b82f6';
+        thumbs[index].style.borderColor = '#000000';
     }
 }
 

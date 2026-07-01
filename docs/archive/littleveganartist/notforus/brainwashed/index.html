@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Animals are here with us, not for us</title>
   <!-- This links EVERY PAGE to your stylesheet safely from the root directory -->
-  <link rel="stylesheet" href="/Vegan-Archive/css/styles.css">
+  <link rel="stylesheet" href="{{ '/' | url }}"Vegan-Archive/css/styles.css">
 </head>
 <body>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
@@ -402,7 +402,7 @@ body.glightbox-open {
 <div class="post-view-wrapper">
   
   <nav class="back-to-archive-nav">
-    <a href="/Vegan-Archive/archive/" class="back-link">
+    <a href="{{ '/' | url }}"Vegan-Archive/archive/" class="back-link">
       ← Back to Archive
     </a>
   </nav>
@@ -415,15 +415,15 @@ body.glightbox-open {
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=english" class="post-inline-tag" style="text-decoration: none;">#english</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=english" class="post-inline-tag" style="text-decoration: none;">#english</a>
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=principle" class="post-inline-tag" style="text-decoration: none;">#principle</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=principle" class="post-inline-tag" style="text-decoration: none;">#principle</a>
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=art" class="post-inline-tag" style="text-decoration: none;">#art</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=art" class="post-inline-tag" style="text-decoration: none;">#art</a>
         
       
     </div>
@@ -474,12 +474,14 @@ body.glightbox-open {
     <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: #1e293b;">Description</h3>
     <div id="description-content" style="color: #334155; line-height: 1.6; font-size: 0.95rem;">
       
+          
 <p>"Animals are here with us, not for us"
 I have always loved this quote, it is so simple yet so clear on what veganism is. Veganism is not a set of practices, but an ethical principle where the practices follow, it is about NOT viewing animals as commodities. We have no right to use animals for our selfish gain.</p>
 
 <p>"Veganism is the doctrine that man should live without exploiting animals." - The Vegan Story (1955) by Leslie Cross</p>
+      
     </div>
-  </div>
+</div>
 </div>
 
   <button id="back-to-top" class="back-to-top-btn" title="Go to top">
@@ -583,7 +585,7 @@ function updateMainImage(src, isVideo, index) {
     // Update active thumbnail highlight
     thumbs.forEach(t => t.style.borderColor = 'transparent');
     if (thumbs[index]) {
-        thumbs[index].style.borderColor = '#3b82f6';
+        thumbs[index].style.borderColor = '#000000';
     }
 }
 

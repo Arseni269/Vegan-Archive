@@ -232,6 +232,6 @@ eleventyConfig.addCollection("sortedMisinformers", function(collectionApi) {
       output: "docs",
       includes: "_includes"
     },
-    pathPrefix: "/Vegan-Archive/"
+    pathPrefix: "/",
   };
 };

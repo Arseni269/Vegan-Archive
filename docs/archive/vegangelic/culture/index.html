@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Culture is not an excuse for injustice</title>
   <!-- This links EVERY PAGE to your stylesheet safely from the root directory -->
-  <link rel="stylesheet" href="/Vegan-Archive/css/styles.css">
+  <link rel="stylesheet" href="{{ '/' | url }}"Vegan-Archive/css/styles.css">
 </head>
 <body>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
@@ -402,7 +402,7 @@ body.glightbox-open {
 <div class="post-view-wrapper">
   
   <nav class="back-to-archive-nav">
-    <a href="/Vegan-Archive/archive/" class="back-link">
+    <a href="{{ '/' | url }}"Vegan-Archive/archive/" class="back-link">
       ← Back to Archive
     </a>
   </nav>
@@ -415,15 +415,15 @@ body.glightbox-open {
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=english" class="post-inline-tag" style="text-decoration: none;">#english</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=english" class="post-inline-tag" style="text-decoration: none;">#english</a>
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=culture" class="post-inline-tag" style="text-decoration: none;">#culture</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=culture" class="post-inline-tag" style="text-decoration: none;">#culture</a>
         
       
         
-          <a href="/Vegan-Archive/archive/?tag=excuses" class="post-inline-tag" style="text-decoration: none;">#excuses</a>
+          <a href="{{ '/' | url }}"Vegan-Archive/archive/?tag=excuses" class="post-inline-tag" style="text-decoration: none;">#excuses</a>
         
       
     </div>
@@ -473,7 +473,8 @@ body.glightbox-open {
   <div class="meta-section">
     <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: #1e293b;">Description</h3>
     <div id="description-content" style="color: #334155; line-height: 1.6; font-size: 0.95rem;">
-      <p>A reminder: Culture is not an excuse for injustice.</p>
+      
+          <p>A reminder: Culture is not an excuse for injustice.</p>
 
 
 <p>I have recently interacted with many non-vegans, even some of whom claim to be vegan, who are arguing with much fervor that vegans should not condemn Indigenous practices of animal exploitation. Whenever vegans respond with the claim that culture is not a valid excuse to engage in immoral acts, we are labeled as racist, colonialist, and anti-Indigenous.</p>
@@ -483,8 +484,9 @@ body.glightbox-open {
 <p>Let me make it clear: culture is not an excuse for injustice. This should not be something controversial to state. Though it is possible for someone to hide behind a deceptive sense of being “pro-justice” as a cudgel for discriminating against other peoples, acknowledging the flaws of cultural relativism does not inherently entail doing this. In most cases, vegans only have to specifically address Indigenous culture in a defensive manner because, as a subject, the livelihoods of Indigenous peoples are so frequently exploited as a popular deflection for non-vegans.</p>
 
 <p>Vegans are opposed to all animal use, regardless of the cultural context or methods behind said use.</p>
+      
     </div>
-  </div>
+</div>
 </div>
 
   <button id="back-to-top" class="back-to-top-btn" title="Go to top">
@@ -588,7 +590,7 @@ function updateMainImage(src, isVideo, index) {
     // Update active thumbnail highlight
     thumbs.forEach(t => t.style.borderColor = 'transparent');
     if (thumbs[index]) {
-        thumbs[index].style.borderColor = '#3b82f6';
+        thumbs[index].style.borderColor = '#000000';
     }
 }
 
