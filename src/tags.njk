@@ -7,13 +7,13 @@ permalink: /tags/{{ tag | slugify }}/
 layout: base.njk
 ---
 
-<link rel="stylesheet" href="{{ '/' | url }}"Vegan-Archive/css/styles.css?v=1.1">
+<link rel="stylesheet" href="{{ '/css/styles.css' | url }}">
 <div class="archive-layout">
   
   <main class="main-content">
     <h1>Posts tagged with <span style="color: #0066cc;">#{{ tag }}</span></h1>
     <p style="margin-bottom: 20px;">
-      <a href="{{ '/' | url }}"Vegan-Archive/archive/" style="text-decoration: none; color: #666; font-weight: bold;">← View All Posts</a>
+      <a href="{{ '/css/styles.css' | url }}" style="text-decoration: none; color: #666; font-weight: bold;">← View All Posts</a>
     </p>
 
     <div class="imageboard-grid">
@@ -29,13 +29,13 @@ layout: base.njk
     {% if hasTag or postAuthorSlug == tagSlug %}
       <div class="post-card">
         <div class="post-thumbnail">
-          <a href="{{ '/' | url }}"Vegan-Archive{{ post.url }}">
-            <img src="/Vegan-Archive{{ post.data.thumbnail }}" alt="{{ post.data.title }}">
+          <a href="{{ '/css/styles.css' | url }}">
+            <img src="{{ post.data.thumbnail | url }}" alt="{{ post.data.title }}">
           </a>
         </div>
         <div class="post-details">
           <h2 class="post-title">
-            <a href="{{ '/' | url }}"Vegan-Archive{{ post.url }}">{{ post.data.title }}</a>
+            <a href="{{ '/css/styles.css' | url }}">{{ post.data.title }}</a>
           </h2>
           <h5 class="post-author">{{ post.data.author }}</h5>
           
@@ -54,7 +54,7 @@ layout: base.njk
   <aside class="sidebar">
     <div class="sidebar-header">
       <h2>🎯 Content Directory</h2>
-      <a href="{{ '/' | url }}"Vegan-Archive/archive/" class="clear-all-btn">✨ Show All</a>
+      <a href="{{ '/archive/' | url }}" class="clear-all-btn">✨ Show All</a>
     </div>
 
     <hr class="sidebar-divider">
@@ -64,7 +64,7 @@ layout: base.njk
     <ul class="filter-list">
       {% for slug, creator in collections.creators %}
       <li>
-        <a href="{{ '/' | url }}"Vegan-Archive/tags/{{ slug }}/" class="filter-link {% if tag | slugify == slug %}active-link{% endif %}">
+        <a href="{{ '/tags/' + slug + '/' | url }}" class="filter-link {% if tag | slugify == slug %}active-link{% endif %}">
           <span>{{ creator.name }}</span> <span class="item-count">{{ creator.count }}</span>
         </a>
       </li>
@@ -78,7 +78,7 @@ layout: base.njk
       {% for tagName, posts in collections %}
         {% if tagName == "ex-vegans" or tagName == "carnivore-diet" %}
         <li>
-          <a href="{{ '/' | url }}"Vegan-Archive/tags/{{ tagName | slugify }}/" class="tag-pill target-pill {% if tagName == tag %}active-pill{% endif %}">
+          <a href="{{ '/tags/' + tagName | slugify + '/' | url }}" class="tag-pill target-pill {% if tagName == tag %}active-pill{% endif %}">
             #{{ tagName }} <span class="pill-count">({{ posts | length }})</span>
           </a>
         </li>
@@ -93,7 +93,7 @@ layout: base.njk
         {% for tagName, posts in collections %}
           {% if tagName == "ex-vegans" or tagName == "carnivore-diet" or tagName == "media-bias" %}
           <li>
-            <a href="{{ '/' | url }}"Vegan-Archive/tags/{{ tagName | slugify }}/" class="tag-pill target-pill {% if tagName == tag %}active-pill{% endif %}">
+            <a href="{{ '/tags/' + tagName | slugify + '/' | url }}" class="tag-pill target-pill {% if tagName == tag %}active-pill{% endif %}">
               #{{ tagName }} <span class="pill-count">({{ posts | length }})</span>
             </a>
           </li>
