@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "Veganism exists exclusively to end animal use"
-thumbnail: "/archive/heymerac/endanimaluse/1.jpg"
+thumbnail: "english/heymerac/endanimaluse/1.jpg"
 instagram_url: "https://www.instagram.com/p/DaAfcweDQq3/?img_index=1" # Link to IG
 author: "Heymerac"
 tags: ["education", "what is veganism"]

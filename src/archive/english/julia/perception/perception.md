@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: 'When will you finally completely change your perception of them? '
-thumbnail: "/archive/julia/perception.png"
+thumbnail: "english/julia/perception.png"
 instagram_url: "https://www.instagram.com/p/DKALUVrMShI/" # Link to IG
 author: "Julia vegan"
 tags: ["outreach", "misinformation", "ecology",]

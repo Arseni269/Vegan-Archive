@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: 'The "Overton Window" of animal exploitation'
-thumbnail: "/archive/ul/overton/1.jpg"
+thumbnail: "english/ul/overton/1.jpg"
 instagram_url: "https://www.instagram.com/p/DZLaTxjjZFL/?img_index=1" # Link to IG
 author: "Uncompromised Liberation"
 tags: ["utilitarianism", "welfarism", "single issue campaigns", "dog comparisons"]

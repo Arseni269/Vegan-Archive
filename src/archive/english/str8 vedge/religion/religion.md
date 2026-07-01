@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "Religious excuse for animal exploitation"
-thumbnail: "/archive/str8 vedge/religion.png"
+thumbnail: "english/str8 vedge/religion.png"
 instagram_url: "https://www.instagram.com/p/DYFns4_saOy/" # Link to IG
 author: "Str8 Vedge"
 tags: ["excuses", "religion",]

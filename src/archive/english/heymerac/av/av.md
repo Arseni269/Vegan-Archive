@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "Famous For Welfarism 🤡🗑️"
-thumbnail: "/archive/heymerac/av/1.jpg"
+thumbnail: "english/heymerac/av/1.jpg"
 instagram_url: "https://www.instagram.com/p/DYXum2GjvEi/?img_index=1" # Link to IG
 author: "Heymerac"
 misinformer: AV

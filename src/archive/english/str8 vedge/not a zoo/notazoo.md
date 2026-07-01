@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "A Vegan world isn't a ZOO"
-thumbnail: "/archive/str8 vedge/not a zoo/1.png"
+thumbnail: "english/str8 vedge/not a zoo/1.png"
 instagram_url: "https://www.instagram.com/p/DMODy5PMlbl/?img_index=1" # Link to IG
 author: "Str8 Vedge"
 tags: ["hunting ideology", "utilitarianism",]

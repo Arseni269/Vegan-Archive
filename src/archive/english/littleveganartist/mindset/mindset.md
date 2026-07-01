@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: 'Exploitative mindset'
-thumbnail: "/archive/littleveganartist/mindset/exploitative mindset.jpg"
+thumbnail: "english/littleveganartist/mindset/exploitative mindset.jpg"
 instagram_url: "https://www.instagram.com/p/DIPgVHozEEo/" # Link to IG
 author: "Little vegan artist"
 tags: ["principle", "art"]

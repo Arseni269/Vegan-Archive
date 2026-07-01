@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: 'Veganism is itself a principle'
-thumbnail: "/archive/littleveganartist/principle/1.jpg"
+thumbnail: "english/littleveganartist/principle/1.jpg"
 instagram_url: "https://www.instagram.com/p/C-zrRyeyIIw/" # Link to IG
 author: "Little vegan artist"
 tags: ["principle", "art"]

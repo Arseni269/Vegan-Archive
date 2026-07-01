@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "The root of today's so-called Vegan activism"
-thumbnail: "/archive/luliwizard/root of todays activism/1.jpg"
+thumbnail: "english/luliwizard/root of todays activism/1.jpg"
 instagram_url: "https://www.instagram.com/p/DSjW7PHjtDx/?img_index=1" # Link to IG
 author: "Luliwizard vegan"
 tags: ["hunting ideology",]

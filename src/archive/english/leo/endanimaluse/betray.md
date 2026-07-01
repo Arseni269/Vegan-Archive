@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: 'Vegan: end animal a̶b̶use'
-thumbnail: "/archive/leo/endanimaluse/animal use.png"
+thumbnail: "english/leo/endanimaluse/animal use.png"
 instagram_url: "https://www.instagram.com/p/DOYw5RmjEzQ/" # Link to IG
 author: "Leo"
 tags: ["education", "whatisveganism", "advocacy"]

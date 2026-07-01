@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "If veganism is abolitionist, how is it still not political?"
-thumbnail: "/archive/vic/political/1.jpg"
+thumbnail: "english/vic/political/1.jpg"
 instagram_url: "https://www.instagram.com/p/DYZrXOkFQLV/?img_index=1" # Link to IG
 author: "Vic Valente"
 tags: ["Welfarism"]

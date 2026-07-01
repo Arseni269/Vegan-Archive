@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "The emancipation of animals will come in spite of utilitarian humanity's exploitative interests"
-thumbnail: "/archive/heymerac/emancipation/1.jpg"
+thumbnail: "english/heymerac/emancipation/1.jpg"
 instagram_url: "https://www.instagram.com/p/DSvBv2IDArP/?img_index=1" # Link to IG
 author: "Heymerac"
 tags: ["education", "outreach"]

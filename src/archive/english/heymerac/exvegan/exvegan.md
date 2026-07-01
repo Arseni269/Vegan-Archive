@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "No longer vegan 🤡"
-thumbnail: "/archive/heymerac/exvegan/1.webp"
+thumbnail: "english/heymerac/exvegan/1.webp"
 instagram_url: "https://www.instagram.com/p/DHjiF59Okl2/?img_index=1" # Link to IG
 author: "Heymerac"
 tags: ["education", "exvegan", art]

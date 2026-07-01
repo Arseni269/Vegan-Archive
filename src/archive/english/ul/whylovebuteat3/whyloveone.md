@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "Problem in the way people talk about dogs in this movement"
-thumbnail: "/archive/ul/whylovebuteat3/1.png"
+thumbnail: "english/ul/whylovebuteat3/1.png"
 instagram_url: "https://www.instagram.com/p/DT87CJpAnmm/" # Link to IG
 author: "Uncompromised Liberation"
 tags: ["dog comparisons"]

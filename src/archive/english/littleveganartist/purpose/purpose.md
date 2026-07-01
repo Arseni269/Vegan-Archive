@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: 'Toy... slave... resource... object... vending machine...'
-thumbnail: "/archive/littleveganartist/purpose/1.jpg"
+thumbnail: "english/littleveganartist/purpose/1.jpg"
 instagram_url: "https://www.instagram.com/p/DBAZ6k5yIgt/" # Link to IG
 author: "Little vegan artist"
 tags: ["principle", "art"]

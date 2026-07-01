@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "It is time to leave the empty words and stop being an animal exploiter."
-thumbnail: "/archive/heymerac/endanimaluse1/end animal use.png"
+thumbnail: "english/heymerac/endanimaluse1/end animal use.png"
 instagram_url: "https://www.instagram.com/p/DZX42RkOX3q/" # Link to IG
 author: "Heymerac"
 tags: ["education", "what is veganism", "outreach"]

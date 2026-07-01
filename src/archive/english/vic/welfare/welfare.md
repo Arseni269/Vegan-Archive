@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "Animal welfare measures"
-thumbnail: "/archive/vic/welfare/1.jpg"
+thumbnail: "english/vic/welfare/1.jpg"
 instagram_url: "https://www.instagram.com/p/DX2-j_-FW2V/?img_index=1" # Link to IG
 author: "Vic Valente"
 tags: ["welfarism"]

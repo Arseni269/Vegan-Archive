@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "Lab grown flesh is animal exploitation"
-thumbnail: "/archive/str8 vedge/lab flesh/1.webp"
+thumbnail: "english/str8 vedge/lab flesh/1.webp"
 instagram_url: "https://www.instagram.com/p/DLu4GpwsX0n/?img_index=1" # Link to IG
 author: "Str8 Vedge"
 tags: ["lab flesh", "utilitarianism", "welfarism"]

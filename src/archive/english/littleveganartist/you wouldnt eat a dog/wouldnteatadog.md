@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: '"You wouldn`t eat a dog" - Doesn`t mean they are free'
-thumbnail: "/archive/littleveganartist/you wouldnt eat a dog/1.webp"
+thumbnail: "english/littleveganartist/you wouldnt eat a dog/1.webp"
 instagram_url: "https://www.instagram.com/p/DLagOYXsm29/?img_index=1" # Link to IG
 author: "Little vegan artist"
 tags: ["art", "dog comparisons"]

@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: 'You are so brainwashed!'
-thumbnail: "/archive/littleveganartist/brainwashed/1.jpg"
+thumbnail: "english/littleveganartist/brainwashed/1.jpg"
 instagram_url: "https://www.instagram.com/p/C-VImFgy-gn/" # Link to IG
 author: "Little vegan artist"
 tags: ["principle", "art"]

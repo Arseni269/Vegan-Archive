@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "¿Son las muertes de animales en cultivos una excusa valida contra el Veganismo?"
-thumbnail: "/spanish/arenas/cropdeaths/1.webp"
+thumbnail: "spanish/arenas/cropdeaths/1.webp"
 instagram_url: "https://www.instagram.com/p/Cn7QNBhJJ-z/?img_index=1" # Link to IG
 author: "David C Arenas"
 tags: ["crop deaths", "utilitarianism"]

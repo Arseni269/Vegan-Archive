@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: 'Is this for me to use?'
-thumbnail: "/archive/littleveganartist/mindset2/1.jpg"
+thumbnail: "english/littleveganartist/mindset2/1.jpg"
 instagram_url: "https://www.instagram.com/p/DOEGgADkghF/" # Link to IG
 author: "Little vegan artist"
 tags: ["principle", "art"]

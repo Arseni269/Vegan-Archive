@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "How irrelevant discussions hault the progress of Veganism"
-thumbnail: "/archive/str8 vedge/irrelevant/1.jpg"
+thumbnail: "english/str8 vedge/irrelevant/1.jpg"
 instagram_url: "https://www.instagram.com/p/DW4UExMDCrA/" # Link to IG
 author: "Str8 Vedge"
 tags: ["principle", "distortion"]

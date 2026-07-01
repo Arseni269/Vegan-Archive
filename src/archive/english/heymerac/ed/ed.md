@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "Misinform-ed"
-thumbnail: "/archive/heymerac/ed/1.png"
+thumbnail: "english/heymerac/ed/1.png"
 instagram_url: "https://www.instagram.com/p/DRuwIYhDHQr/?img_index=1" # Link to IG
 author: "Heymerac"
 misinformer: Ed Winters

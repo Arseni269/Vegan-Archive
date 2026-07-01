@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "But they are well treated"
-thumbnail: "/archive/vic/welltreated/1.jpg"
+thumbnail: "english/vic/welltreated/1.jpg"
 instagram_url: "https://www.instagram.com/p/DZPmZDtleid/?img_index=1" # Link to IG
 author: "Vic Valente"
 tags: ["Welfarism"]

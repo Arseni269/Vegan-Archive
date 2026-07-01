@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: 'Animals are here with us, not for us'
-thumbnail: "/archive/littleveganartist/notforus/1.jpg"
+thumbnail: "english/littleveganartist/notforus/1.jpg"
 instagram_url: "https://www.instagram.com/p/DAuW6yoSn8Z/" # Link to IG
 author: "Little vegan artist"
 tags: ["principle", "art"]

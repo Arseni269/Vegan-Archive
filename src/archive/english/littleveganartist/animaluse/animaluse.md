@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: 'Veganism is against animal USE'
-thumbnail: "/archive/littleveganartist/animaluse/animal use.jpg"
+thumbnail: "english/littleveganartist/animaluse/animal use.jpg"
 instagram_url: "https://www.instagram.com/p/DFzSdL3Safa/" # Link to IG
 author: "Little vegan artist"
 tags: ["principle", "art"]

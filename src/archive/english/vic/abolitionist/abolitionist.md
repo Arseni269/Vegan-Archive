@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "Why is veganism an abolitionist cause?"
-thumbnail: "/archive/vic/abolitionist/1.jpg"
+thumbnail: "english/vic/abolitionist/1.jpg"
 instagram_url: "https://www.instagram.com/p/DYXjJyIFHdC/?img_index=1" # Link to IG
 author: "Vic Valente"
 tags: ["what is veganism", "abolition"]

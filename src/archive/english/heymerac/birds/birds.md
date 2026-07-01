@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "Birds of the world ✨🐓 Illustrated!"
-thumbnail: "/archive/heymerac/birds/1.webp"
+thumbnail: "english/heymerac/birds/1.webp"
 instagram_url: "https://www.instagram.com/p/DGtTW1kuwjy/?img_index=1" # Link to IG
 author: "Heymerac"
 tags: ["education", "outreach", art]
