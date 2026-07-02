@@ -37,15 +37,6 @@ body.glightbox-open {
   margin-right: auto !important;
 }
 
-/* Force Lightbox's internal video container wrapper to remain absolutely centered */
-.glightbox-container .gvideo-container {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  margin: 0 auto !important;
-  width: 100% !important;
-}
-
 
 .back-to-archive-nav { 
     margin-bottom: 0.60rem; 
@@ -243,105 +234,28 @@ body.glightbox-open {
     max-width: 500px;               /* Limits massive blown up sizing layout */
     width: 100% !important;
   }
-  /* =============================================================
-   GLIGHTBOX GHOST OVERRIDE CLEANUP
-   ============================================================= */
 
-/* Completely hide the zoom utility button */
-.gzoom {
-  display: none !important;
+
+
+
+
+
+.gslide-media {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
-/* Force-reset structural styles inside the lightbox canvas container */
-.glightbox-container .ginner-container img,
-.glightbox-container .carousel-grid img,
-.glightbox-container img {
-  width: auto !important;
-  height: auto !important;
-  max-width: 100% !important;
-  max-height: 95vh !important;
-  min-height: 0 !important;
-  aspect-ratio: auto !important;
-  object-fit: contain !important; /* Preserves clear aspect integrity in view mode */
-  transform: none !important;
+/* Force the image/video to be centered within the slide */
+.gslide-image, .gslide-video {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
-
-/* Strip structural wrapping grids if cloned by the animation scripts */
-.glightbox-container .carousel-grid,
-.glightbox-container .carousel {
-  display: block !important;
-  width: auto !important;
-  height: auto !important;
-  gap: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.glightbox-container main .carousel .carousel-grid a.glightbox,
-.glightbox-container a.glightbox {
-  display: inline-block !important;
-  width: auto !important;
-  min-width: 0 !important;
-  flex: none !important;
-}
-
-/* =============================================================
-   ISOLATED GLIGHTBOX FIX (DOES NOT TOUCH POST CARD IMAGES)
-   ============================================================= */
-
-/* Force-kill the phantom layout box when GLightbox copies your elements */
-.glightbox-container .carousel-grid,
-.glightbox-container .carousel,
-.glightbox-container .post-view-wrapper main {
-  display: block !important;
-  grid-template-columns: none !important;
-  width: auto !important;
-  height: auto !important;
-  gap: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-/* Ensure the temporary rendering link within the modal behaves normally */
-.glightbox-container .carousel-grid a.glightbox,
-.glightbox-container a.glightbox {
-  display: inline-block !important;
-  width: auto !important;
-  height: auto !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-  flex: none !important;
-}
-
-/* Ensure only the active preview image scales inside the viewport */
-.glightbox-container .gslide-image img {
-  width: auto !important;
-  height: auto !important;
-  max-width: 100% !important;
-  max-height: 95vh !important;
-  object-fit: contain !important;
-  aspect-ratio: auto !important;
-}
-
 /* =============================================================
    PERFECT JUMP & PHANTOM BOX ELIMINATION
    ============================================================= */
 
-/* Force the vertical scrollbar track to stay pinned to the screen at all times */
-html, 
-html.glightbox-open {
-  overflow-y: scroll !important;
-}
-
-/* Strip GLightbox's dynamic padding adjustments so the page remains rigid */
-body.glightbox-open {
-  overflow: hidden !important;
-  padding-right: 0px !important;
-  margin-right: 0px !important;
-}
 
 /* =============================================================
    HORIZONTAL SCROLLBAR STABILIZER
@@ -353,10 +267,6 @@ body {
   overflow-x: hidden !important;
 }
 
-/* Ensure the body remains rigid on the x-axis when GLightbox is open */
-body.glightbox-open {
-  overflow-x: hidden !important;
-} 
 
 @media (max-width: 768px) {
   .post-page-container { flex-direction: column !important; }
@@ -387,16 +297,7 @@ body.glightbox-open {
     overflow: hidden; 
 }
 
-#media-container img, 
-#media-container video {
-    /* This forces the media to never be wider than the container */
-    max-width: 100% !important; 
-    /* This limits the height so it doesn't push the page too far */
-    max-height: 70vh !important; 
-    /* This maintains the aspect ratio while fitting the box */
-    object-fit: contain !important; 
-    display: block;
-}
+
 </style>
 
 <div class="post-view-wrapper">
@@ -434,7 +335,7 @@ body.glightbox-open {
 <div class="gallery-column" style="width: 100%;">
     <div class="media-nav-wrapper">
         <button id="prev-btn" class="nav-btn" onclick="changeImage(-1)">❮</button>
-        <div id="media-container"></div>
+        <div id="media-container" data-gallery="gallery1"></div>
         <button id="next-btn" class="nav-btn" onclick="changeImage(1)">❯</button>
     </div>
     
@@ -497,6 +398,37 @@ body.glightbox-open {
   </button>
 
   <style>
+
+/* --- CLEAN GLIGHTBOX OVERRIDES --- */
+.glightbox-container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 99999 !important;
+}
+
+.glightbox-container .gslide {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+}
+
+.glightbox-container .gslide-media {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: auto !important;
+}
+
+/* Ensure navigation arrows are visible */
+.glightbox-container .gnext, 
+.glightbox-container .gprev {
+    display: flex !important;
+    position: absolute !important;
+    z-index: 100 !important;
+}
+
     .back-to-top-btn {
       position: fixed;
       bottom: 40px;
@@ -586,6 +518,34 @@ body.glightbox-open {
 #prev-btn { left: 0; }
 #next-btn { right: 0; }
 .nav-btn:hover { background: #f1f5f9; }
+
+/* Fix Lightbox backdrop clickability */
+.glightbox-container .goverlay {
+    background: rgba(0, 0, 0, 0.9) !important;
+    cursor: zoom-out !important; /* Visual cue that it's clickable to close */
+    z-index: 9999 !important;
+}
+
+/* Ensure the modal content is above the overlay */
+.glightbox-container {
+    z-index: 10000 !important;
+}
+
+/* Force centering (removes the "left-aligned" issue) */
+.gslide-media {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+/* Remove phantom spacing around the image */
+.gslide-inner-content {
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+}
+
   </style>
 
   
@@ -596,37 +556,47 @@ body.glightbox-open {
 // --- GLOBAL STATE ---
 let currentIndex = 0;
 
-// --- CORE FUNCTION ---
 function updateMainImage(src, isVideo, index) {
     const container = document.getElementById('media-container');
     const thumbs = document.querySelectorAll('.thumb');
     
-    // Clear and update index
     container.innerHTML = '';
     currentIndex = index;
 
-    // Create and configure new element
     const media = isVideo ? document.createElement('video') : document.createElement('img');
     media.src = src;
     media.style.maxWidth = '100%';
     media.style.maxHeight = '70vh';
     media.style.objectFit = 'contain';
+    media.style.cursor = 'pointer'; // Shows users it is clickable
     if (isVideo) media.controls = true;
     
     container.appendChild(media);
 
-    // Update active thumbnail highlight
+    // --- ADD THIS CLICK TRIGGER ---
+    container.onclick = () => {
+        // Collect all thumbnails for the gallery
+        const galleryItems = Array.from(thumbs).map(thumb => ({
+            href: thumb.src,
+            type: thumb.tagName.toLowerCase() === 'video' ? 'video' : 'image'
+        }));
+        
+        // Load them into the Lightbox and open at the current index
+        window.myLightbox.setElements(galleryItems);
+        window.myLightbox.openAt(index);
+    };
+
+    // Update thumbnails
     thumbs.forEach(t => t.style.borderColor = 'transparent');
     if (thumbs[index]) {
         thumbs[index].style.borderColor = '#000000';
     }
 }
-
 // --- INITIALIZATION ---
 document.addEventListener("DOMContentLoaded", () => {
+  
     // 1. Initialize Lightbox
-    const lightbox = GLightbox({
-        selector: '.glightbox',
+    window.myLightbox = GLightbox({
         loop: true,
         zoomable: false,
         draggable: true,
@@ -654,6 +624,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 4. Keep your existing helper functions (Back-to-top, URL linkers, etc.) below this line...
     // ... (Keep your backToTop, auto-hyperlink, and linebreak logic here)
+    
 });
 
 // --- NEW HELPER FUNCTION ---
