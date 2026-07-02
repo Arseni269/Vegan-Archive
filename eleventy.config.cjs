@@ -109,6 +109,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/archive/**/*.mp4");
   eleventyConfig.addPassthroughCopy("src/spanish/**/*.webp");
   eleventyConfig.addPassthroughCopy("src/spanish");
+   eleventyConfig.addPassthroughCopy("src/ua");
 
   // 1. CASE-INSENSITIVE DEDUPLICATED TAG COLLECTION
   eleventyConfig.addCollection("uniqTags", function(collectionApi) {

@@ -5,7 +5,7 @@ thumbnail: "english/deathtokepism/avgary/1.jpg"
 instagram_url: "https://www.instagram.com/p/DNwAlLlWvzgheImnuK9eIWjMzELD2Fx3JI2LxM0/?img_index=1" # Link to IG
 author: "Death to Kepism"
 misinformer: ["Gary Yourofsky", "AV"]
-tags: ["hunting ideology",]
+tags: ["hunting ideology", "meme"]
 date: 2025-08-24    
 ---
 
