@@ -4,7 +4,7 @@ title: 'When will you finally completely change your perception of them? '
 thumbnail: "english/julia/perception.png"
 instagram_url: "https://www.instagram.com/p/DKALUVrMShI/" # Link to IG
 author: "Julia vegan"
-tags: ["outreach", "misinformation", "ecology",]
+tags: ["outreach", "mindset"]
 ---
 
 <p>Use is the problem—regardless of whether the exploitation leads to pain and suffering.

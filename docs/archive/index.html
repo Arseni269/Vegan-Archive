@@ -23,16 +23,21 @@
   }
 
   /* The state when a card is filtered out by search or a checkbox */
-  .post-card.is-hidden {
-    opacity: 0;
-    transform: scale(0.92);
-    /* Micro-scale shrink effect while fading out */
-    visibility: hidden;
-  }
+ .post-card.is-hidden {
+  opacity: 0;
+  transform: scale(0.92);
+  visibility: hidden;
+  /* REMOVE position: absolute; */
+  /* REMOVE pointer-events: none; */
+  
+  /* Use this instead to collapse the space without breaking layout flow */
+  display: none !important; 
+}
 
   /* FORCE FIXED WIDTHS INSIDE FILTER LISTS */
   .filter-list li {
     margin-bottom: 4px;
+    vertical-align: top;s
   }
 
   .filter-list .filter-link {
@@ -157,561 +162,184 @@
     <div style="display: flex; gap: 10px; align-items: center; flex-grow: 1; max-width: 500px;">
       <input type="text" id="archive-search-input" placeholder="🔍 Search titles, creators, topics, or personalities..."
         style="width: 100%; padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.95rem; outline: none; box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);">
-      <button id="clear-filters-btn" class="clear-btn" style="white-space: nowrap;">Clear All</button>
     </div>
   </div>
 
-  <details id="archive-filter-dropdown" class="top-filter-dropdown">
-    <summary>
-      <span>⚡ Filter Posts by Creator, Topic, or Language</span>
-      <div id="active-chips-container" style="display: inline-flex; flex-wrap: wrap; gap: 6px; margin-left: 20px;">
-      </div>
-
-    </summary>
-
-    <div class="dropdown-filter-grid">
-      <div class="filter-group-inner">
-        <h3 style="margin-top: 0; font-size: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 5px;">Creators</h3>
-        <ul class="filter-list" style="list-style: none; padding: 0; margin: 0;">
+<nav class="mega-menu">
+  <div class="menu-buttons" style="display: flex; border: 1px solid #e2e8f0; background: #fff;">
+    
+    <!-- Creators -->
+    <div class="menu-item"><button class="menu-btn">Creators</button>
+      <div class="mega-window">
+        <ul class="filter-list" style="list-style: none; padding: 0;">
           
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="creator" value="david-c-arenas" class="filter-checkbox">
-              <span>David C Arenas</span>
-              <span class="filter-count" data-count-target="david-c-arenas">(20)</span>
-            </label>
-          </li>
+          <li><label class="filter-link"><input type="checkbox" name="creator" value="vegangelic-activism" class="filter-checkbox"> <span>Vegangelic Activism</span> <span class="filter-count" data-count-target="vegangelic-activism">(20)</span></label></li>
           
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="creator" value="vegangelic-activism" class="filter-checkbox">
-              <span>Vegangelic Activism</span>
-              <span class="filter-count" data-count-target="vegangelic-activism">(20)</span>
-            </label>
-          </li>
+          <li><label class="filter-link"><input type="checkbox" name="creator" value="david-c-arenas" class="filter-checkbox"> <span>David C Arenas</span> <span class="filter-count" data-count-target="david-c-arenas">(19)</span></label></li>
           
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="creator" value="end-animal-exploitation" class="filter-checkbox">
-              <span>End animal exploitation</span>
-              <span class="filter-count" data-count-target="end-animal-exploitation">(9)</span>
-            </label>
-          </li>
+          <li><label class="filter-link"><input type="checkbox" name="creator" value="end-animal-exploitation" class="filter-checkbox"> <span>End animal exploitation</span> <span class="filter-count" data-count-target="end-animal-exploitation">(9)</span></label></li>
           
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="creator" value="little-vegan-artist" class="filter-checkbox">
-              <span>Little vegan artist</span>
-              <span class="filter-count" data-count-target="little-vegan-artist">(8)</span>
-            </label>
-          </li>
+          <li><label class="filter-link"><input type="checkbox" name="creator" value="little-vegan-artist" class="filter-checkbox"> <span>Little vegan artist</span> <span class="filter-count" data-count-target="little-vegan-artist">(8)</span></label></li>
           
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="creator" value="heymerac" class="filter-checkbox">
-              <span>Heymerac</span>
-              <span class="filter-count" data-count-target="heymerac">(7)</span>
-            </label>
-          </li>
+          <li><label class="filter-link"><input type="checkbox" name="creator" value="heymerac" class="filter-checkbox"> <span>Heymerac</span> <span class="filter-count" data-count-target="heymerac">(7)</span></label></li>
           
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="creator" value="death-to-kepism" class="filter-checkbox">
-              <span>Death to Kepism</span>
-              <span class="filter-count" data-count-target="death-to-kepism">(6)</span>
-            </label>
-          </li>
+          <li><label class="filter-link"><input type="checkbox" name="creator" value="death-to-kepism" class="filter-checkbox"> <span>Death to Kepism</span> <span class="filter-count" data-count-target="death-to-kepism">(6)</span></label></li>
           
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="creator" value="str8-vedge" class="filter-checkbox">
-              <span>Str8 Vedge</span>
-              <span class="filter-count" data-count-target="str8-vedge">(5)</span>
-            </label>
-          </li>
+          <li><label class="filter-link"><input type="checkbox" name="creator" value="str8-vedge" class="filter-checkbox"> <span>Str8 Vedge</span> <span class="filter-count" data-count-target="str8-vedge">(5)</span></label></li>
           
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="creator" value="uncompromised-liberation" class="filter-checkbox">
-              <span>Uncompromised Liberation</span>
-              <span class="filter-count" data-count-target="uncompromised-liberation">(5)</span>
-            </label>
-          </li>
+          <li><label class="filter-link"><input type="checkbox" name="creator" value="uncompromised-liberation" class="filter-checkbox"> <span>Uncompromised Liberation</span> <span class="filter-count" data-count-target="uncompromised-liberation">(5)</span></label></li>
           
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="creator" value="julia-vegan" class="filter-checkbox">
-              <span>Julia vegan</span>
-              <span class="filter-count" data-count-target="julia-vegan">(4)</span>
-            </label>
-          </li>
+          <li><label class="filter-link"><input type="checkbox" name="creator" value="julia-vegan" class="filter-checkbox"> <span>Julia vegan</span> <span class="filter-count" data-count-target="julia-vegan">(4)</span></label></li>
           
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="creator" value="vic-valente" class="filter-checkbox">
-              <span>Vic Valente</span>
-              <span class="filter-count" data-count-target="vic-valente">(4)</span>
-            </label>
-          </li>
+          <li><label class="filter-link"><input type="checkbox" name="creator" value="vic-valente" class="filter-checkbox"> <span>Vic Valente</span> <span class="filter-count" data-count-target="vic-valente">(4)</span></label></li>
           
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="creator" value="luliwizard-vegan" class="filter-checkbox">
-              <span>Luliwizard vegan</span>
-              <span class="filter-count" data-count-target="luliwizard-vegan">(2)</span>
-            </label>
-          </li>
+          <li><label class="filter-link"><input type="checkbox" name="creator" value="luliwizard-vegan" class="filter-checkbox"> <span>Luliwizard vegan</span> <span class="filter-count" data-count-target="luliwizard-vegan">(2)</span></label></li>
           
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="creator" value="leo" class="filter-checkbox">
-              <span>Leo</span>
-              <span class="filter-count" data-count-target="leo">(2)</span>
-            </label>
-          </li>
+          <li><label class="filter-link"><input type="checkbox" name="creator" value="leo" class="filter-checkbox"> <span>Leo</span> <span class="filter-count" data-count-target="leo">(2)</span></label></li>
           
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="creator" value="soul-hush" class="filter-checkbox">
-              <span>Soul Hush</span>
-              <span class="filter-count" data-count-target="soul-hush">(1)</span>
-            </label>
-          </li>
-          
-        </ul>
-      </div>
-
-      <div class="filter-group-inner">
-        <h3 style="margin-top: 0; font-size: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 5px;">Topics</h3>
-        <ul class="filter-list" style="list-style: none; padding: 0; margin: 0;">
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="education" class="filter-checkbox">
-              <span>education</span>
-              <span class="filter-count" data-count-target="education">(25)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="utilitarianism" class="filter-checkbox">
-              <span>utilitarianism</span>
-              <span class="filter-count" data-count-target="utilitarianism">(23)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="misinformation" class="filter-checkbox">
-              <span>misinformation</span>
-              <span class="filter-count" data-count-target="misinformation">(13)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="welfarism" class="filter-checkbox">
-              <span>welfarism</span>
-              <span class="filter-count" data-count-target="welfarism">(13)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="principle" class="filter-checkbox">
-              <span>principle</span>
-              <span class="filter-count" data-count-target="principle">(13)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="art" class="filter-checkbox">
-              <span>art</span>
-              <span class="filter-count" data-count-target="art">(12)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="excuses" class="filter-checkbox">
-              <span>excuses</span>
-              <span class="filter-count" data-count-target="excuses">(12)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="outreach" class="filter-checkbox">
-              <span>outreach</span>
-              <span class="filter-count" data-count-target="outreach">(8)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="what-is-veganism" class="filter-checkbox">
-              <span>what is veganism</span>
-              <span class="filter-count" data-count-target="what-is-veganism">(7)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="dog-comparisons" class="filter-checkbox">
-              <span>dog comparisons</span>
-              <span class="filter-count" data-count-target="dog-comparisons">(7)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="hunting-ideology" class="filter-checkbox">
-              <span>hunting ideology</span>
-              <span class="filter-count" data-count-target="hunting-ideology">(5)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="advocacy" class="filter-checkbox">
-              <span>advocacy</span>
-              <span class="filter-count" data-count-target="advocacy">(5)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="history" class="filter-checkbox">
-              <span>history</span>
-              <span class="filter-count" data-count-target="history">(4)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="leftist-anti-veganism" class="filter-checkbox">
-              <span>leftist-anti-veganism</span>
-              <span class="filter-count" data-count-target="leftist-anti-veganism">(4)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="intersectionality" class="filter-checkbox">
-              <span>intersectionality</span>
-              <span class="filter-count" data-count-target="intersectionality">(3)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="reducetarianism" class="filter-checkbox">
-              <span>reducetarianism</span>
-              <span class="filter-count" data-count-target="reducetarianism">(3)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="animal-rights" class="filter-checkbox">
-              <span>animal rights</span>
-              <span class="filter-count" data-count-target="animal-rights">(2)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="carnism" class="filter-checkbox">
-              <span>carnism</span>
-              <span class="filter-count" data-count-target="carnism">(2)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="crop-deaths" class="filter-checkbox">
-              <span>crop deaths</span>
-              <span class="filter-count" data-count-target="crop-deaths">(2)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="single-issue-campaigns" class="filter-checkbox">
-              <span>single issue campaigns</span>
-              <span class="filter-count" data-count-target="single-issue-campaigns">(2)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="lab-flesh" class="filter-checkbox">
-              <span>lab flesh</span>
-              <span class="filter-count" data-count-target="lab-flesh">(2)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="abolition" class="filter-checkbox">
-              <span>abolition</span>
-              <span class="filter-count" data-count-target="abolition">(2)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="distortion" class="filter-checkbox">
-              <span>distortion</span>
-              <span class="filter-count" data-count-target="distortion">(2)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="ecology" class="filter-checkbox">
-              <span>ecology</span>
-              <span class="filter-count" data-count-target="ecology">(2)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="vegetarianism" class="filter-checkbox">
-              <span>vegetarianism</span>
-              <span class="filter-count" data-count-target="vegetarianism">(2)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="apologists" class="filter-checkbox">
-              <span>apologists</span>
-              <span class="filter-count" data-count-target="apologists">(2)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="speciesism" class="filter-checkbox">
-              <span>speciesism</span>
-              <span class="filter-count" data-count-target="speciesism">(1)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="meme" class="filter-checkbox">
-              <span>meme</span>
-              <span class="filter-count" data-count-target="meme">(1)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="religion" class="filter-checkbox">
-              <span>religion</span>
-              <span class="filter-count" data-count-target="religion">(1)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="culture" class="filter-checkbox">
-              <span>culture</span>
-              <span class="filter-count" data-count-target="culture">(1)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="exvegan" class="filter-checkbox">
-              <span>exvegan</span>
-              <span class="filter-count" data-count-target="exvegan">(1)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="whatisveganism" class="filter-checkbox">
-              <span>whatisveganism</span>
-              <span class="filter-count" data-count-target="whatisveganism">(1)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="feminism" class="filter-checkbox">
-              <span>feminism</span>
-              <span class="filter-count" data-count-target="feminism">(1)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="moral-agency" class="filter-checkbox">
-              <span>moral agency</span>
-              <span class="filter-count" data-count-target="moral-agency">(1)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="holocaust" class="filter-checkbox">
-              <span>holocaust</span>
-              <span class="filter-count" data-count-target="holocaust">(1)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="imperfect" class="filter-checkbox">
-              <span>imperfect</span>
-              <span class="filter-count" data-count-target="imperfect">(1)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="anti-capitalism" class="filter-checkbox">
-              <span>anti-capitalism</span>
-              <span class="filter-count" data-count-target="anti-capitalism">(1)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="futility" class="filter-checkbox">
-              <span>futility</span>
-              <span class="filter-count" data-count-target="futility">(1)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="privilege" class="filter-checkbox">
-              <span>privilege</span>
-              <span class="filter-count" data-count-target="privilege">(1)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="pragmatic" class="filter-checkbox">
-              <span>pragmatic</span>
-              <span class="filter-count" data-count-target="pragmatic">(1)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="topic" value="hypocrisy" class="filter-checkbox">
-              <span>hypocrisy</span>
-              <span class="filter-count" data-count-target="hypocrisy">(1)</span>
-            </label>
-          </li>
-          
-        </ul>
-      </div>
-
-      <div class="filter-group-inner">
-        <h3 style="margin-top: 0; font-size: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 5px;">Languages
-        </h3>
-        <ul class="filter-list" style="list-style: none; padding: 0; margin: 0;">
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="language" value="english" class="filter-checkbox" />
-              <span>english</span>
-              <span class="filter-count" data-count-target="english">(95)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="language" value="spanish" class="filter-checkbox" />
-              <span>spanish</span>
-              <span class="filter-count" data-count-target="spanish">(2)</span>
-            </label>
-          </li>
-          
-        </ul>
-      </div>
-
-      <div class="filter-group-inner">
-        <h3 style="margin-top: 0; font-size: 1rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 5px;">Personalities and orgs
-        </h3>
-        <ul class="filter-list" style="list-style: none; padding: 0; margin: 0;">
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="misinformer" value="gary-yourofsky" class="filter-checkbox" />
-              <span>Gary Yourofsky</span>
-              <span class="filter-count" data-count-target="gary-yourofsky">(5)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="misinformer" value="melanie-joy" class="filter-checkbox" />
-              <span>Melanie Joy&quot;</span>
-              <span class="filter-count" data-count-target="melanie-joy">(4)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="misinformer" value="george-martin" class="filter-checkbox" />
-              <span>George Martin</span>
-              <span class="filter-count" data-count-target="george-martin">(4)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="misinformer" value="danny-ishay" class="filter-checkbox" />
-              <span>Danny Ishay</span>
-              <span class="filter-count" data-count-target="danny-ishay">(2)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="misinformer" value="av" class="filter-checkbox" />
-              <span>AV</span>
-              <span class="filter-count" data-count-target="av">(2)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="misinformer" value="dr-avi" class="filter-checkbox" />
-              <span>Dr Avi</span>
-              <span class="filter-count" data-count-target="dr-avi">(1)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="misinformer" value="peter-singer" class="filter-checkbox" />
-              <span>Peter Singer</span>
-              <span class="filter-count" data-count-target="peter-singer">(1)</span>
-            </label>
-          </li>
-          
-          <li>
-            <label class="filter-link">
-              <input type="checkbox" name="misinformer" value="ed-winters" class="filter-checkbox" />
-              <span>Ed Winters</span>
-              <span class="filter-count" data-count-target="ed-winters">(1)</span>
-            </label>
-          </li>
+          <li><label class="filter-link"><input type="checkbox" name="creator" value="soul-hush" class="filter-checkbox"> <span>Soul Hush</span> <span class="filter-count" data-count-target="soul-hush">(1)</span></label></li>
           
         </ul>
       </div>
     </div>
+
+    <!-- Topics -->
+    <div class="menu-item"><button class="menu-btn">Topics</button>
+      <div class="mega-window">
+        <ul class="filter-list" style="list-style: none; padding: 0;">
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="education" class="filter-checkbox"> <span>education</span> <span class="filter-count" data-count-target="education">(25)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="utilitarianism" class="filter-checkbox"> <span>utilitarianism</span> <span class="filter-count" data-count-target="utilitarianism">(23)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="welfarism" class="filter-checkbox"> <span>welfarism</span> <span class="filter-count" data-count-target="welfarism">(13)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="principle" class="filter-checkbox"> <span>principle</span> <span class="filter-count" data-count-target="principle">(13)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="misinformation" class="filter-checkbox"> <span>misinformation</span> <span class="filter-count" data-count-target="misinformation">(12)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="art" class="filter-checkbox"> <span>art</span> <span class="filter-count" data-count-target="art">(12)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="excuses" class="filter-checkbox"> <span>excuses</span> <span class="filter-count" data-count-target="excuses">(12)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="outreach" class="filter-checkbox"> <span>outreach</span> <span class="filter-count" data-count-target="outreach">(8)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="what-is-veganism" class="filter-checkbox"> <span>what is veganism</span> <span class="filter-count" data-count-target="what-is-veganism">(7)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="dog-comparisons" class="filter-checkbox"> <span>dog comparisons</span> <span class="filter-count" data-count-target="dog-comparisons">(7)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="hunting-ideology" class="filter-checkbox"> <span>hunting ideology</span> <span class="filter-count" data-count-target="hunting-ideology">(5)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="advocacy" class="filter-checkbox"> <span>advocacy</span> <span class="filter-count" data-count-target="advocacy">(4)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="history" class="filter-checkbox"> <span>history</span> <span class="filter-count" data-count-target="history">(4)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="leftist-anti-veganism" class="filter-checkbox"> <span>leftist-anti-veganism</span> <span class="filter-count" data-count-target="leftist-anti-veganism">(4)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="intersectionality" class="filter-checkbox"> <span>intersectionality</span> <span class="filter-count" data-count-target="intersectionality">(3)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="reducetarianism" class="filter-checkbox"> <span>reducetarianism</span> <span class="filter-count" data-count-target="reducetarianism">(3)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="carnism" class="filter-checkbox"> <span>carnism</span> <span class="filter-count" data-count-target="carnism">(2)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="animal-rights" class="filter-checkbox"> <span>animal rights</span> <span class="filter-count" data-count-target="animal-rights">(2)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="crop-deaths" class="filter-checkbox"> <span>crop deaths</span> <span class="filter-count" data-count-target="crop-deaths">(2)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="single-issue-campaigns" class="filter-checkbox"> <span>single issue campaigns</span> <span class="filter-count" data-count-target="single-issue-campaigns">(2)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="lab-flesh" class="filter-checkbox"> <span>lab flesh</span> <span class="filter-count" data-count-target="lab-flesh">(2)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="abolition" class="filter-checkbox"> <span>abolition</span> <span class="filter-count" data-count-target="abolition">(2)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="distortion" class="filter-checkbox"> <span>distortion</span> <span class="filter-count" data-count-target="distortion">(2)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="vegetarianism" class="filter-checkbox"> <span>vegetarianism</span> <span class="filter-count" data-count-target="vegetarianism">(2)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="apologists" class="filter-checkbox"> <span>apologists</span> <span class="filter-count" data-count-target="apologists">(2)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="speciesism" class="filter-checkbox"> <span>speciesism</span> <span class="filter-count" data-count-target="speciesism">(1)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="meme" class="filter-checkbox"> <span>meme</span> <span class="filter-count" data-count-target="meme">(1)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="religion" class="filter-checkbox"> <span>religion</span> <span class="filter-count" data-count-target="religion">(1)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="culture" class="filter-checkbox"> <span>culture</span> <span class="filter-count" data-count-target="culture">(1)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="exvegan" class="filter-checkbox"> <span>exvegan</span> <span class="filter-count" data-count-target="exvegan">(1)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="ecology" class="filter-checkbox"> <span>ecology</span> <span class="filter-count" data-count-target="ecology">(1)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="mindset" class="filter-checkbox"> <span>mindset</span> <span class="filter-count" data-count-target="mindset">(1)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="whatisveganism" class="filter-checkbox"> <span>whatisveganism</span> <span class="filter-count" data-count-target="whatisveganism">(1)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="moral-agency" class="filter-checkbox"> <span>moral agency</span> <span class="filter-count" data-count-target="moral-agency">(1)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="feminism" class="filter-checkbox"> <span>feminism</span> <span class="filter-count" data-count-target="feminism">(1)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="holocaust" class="filter-checkbox"> <span>holocaust</span> <span class="filter-count" data-count-target="holocaust">(1)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="imperfect" class="filter-checkbox"> <span>imperfect</span> <span class="filter-count" data-count-target="imperfect">(1)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="anti-capitalism" class="filter-checkbox"> <span>anti-capitalism</span> <span class="filter-count" data-count-target="anti-capitalism">(1)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="futility" class="filter-checkbox"> <span>futility</span> <span class="filter-count" data-count-target="futility">(1)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="pragmatic" class="filter-checkbox"> <span>pragmatic</span> <span class="filter-count" data-count-target="pragmatic">(1)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="privilege" class="filter-checkbox"> <span>privilege</span> <span class="filter-count" data-count-target="privilege">(1)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="topic" value="hypocrisy" class="filter-checkbox"> <span>hypocrisy</span> <span class="filter-count" data-count-target="hypocrisy">(1)</span></label></li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- Languages -->
+    <div class="menu-item"><button class="menu-btn">Languages</button>
+      <div class="mega-window">
+        <ul class="filter-list" style="list-style: none; padding: 0;">
+          
+          <li><label class="filter-link"><input type="checkbox" name="language" value="english" class="filter-checkbox"> <span>english</span> <span class="filter-count" data-count-target="english">(94)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="language" value="spanish" class="filter-checkbox"> <span>spanish</span> <span class="filter-count" data-count-target="spanish">(2)</span></label></li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- Personalities -->
+    <div class="menu-item"><button class="menu-btn">Personalities</button>
+      <div class="mega-window">
+        <ul class="filter-list" style="list-style: none; padding: 0;">
+          
+          <li><label class="filter-link"><input type="checkbox" name="misinformer" value="gary-yourofsky" class="filter-checkbox"> <span>Gary Yourofsky</span> <span class="filter-count" data-count-target="gary-yourofsky">(5)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="misinformer" value="melanie-joy" class="filter-checkbox"> <span>Melanie Joy&quot;</span> <span class="filter-count" data-count-target="melanie-joy">(4)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="misinformer" value="george-martin" class="filter-checkbox"> <span>George Martin</span> <span class="filter-count" data-count-target="george-martin">(4)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="misinformer" value="danny-ishay" class="filter-checkbox"> <span>Danny Ishay</span> <span class="filter-count" data-count-target="danny-ishay">(2)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="misinformer" value="av" class="filter-checkbox"> <span>AV</span> <span class="filter-count" data-count-target="av">(2)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="misinformer" value="dr-avi" class="filter-checkbox"> <span>Dr Avi</span> <span class="filter-count" data-count-target="dr-avi">(1)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="misinformer" value="peter-singer" class="filter-checkbox"> <span>Peter Singer</span> <span class="filter-count" data-count-target="peter-singer">(1)</span></label></li>
+          
+          <li><label class="filter-link"><input type="checkbox" name="misinformer" value="ed-winters" class="filter-checkbox"> <span>Ed Winters</span> <span class="filter-count" data-count-target="ed-winters">(1)</span></label></li>
+          
+        </ul>
+      </div>
+    </div>
+<div id="active-filters-container" style="display: none; padding: 1rem 0; gap: 10px; align-items: center; flex-wrap: wrap;">
+  <span style="font-size: 0.85rem; font-weight: 600; color: #64748b;">Active Filters:</span>
+  <div id="tags-list" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
+  <button id="clear-filters-btn" style="cursor: pointer; font-size: 0.8rem; border: none; background: #fee2e2; color: #991b1b; padding: 4px 10px; border-radius: 4px;">Clear All</button>
+</div>
+  </div>
+</nav>
   </details>
 
   <main class="main-content" style="width: 100%;">
@@ -849,66 +477,6 @@
           
           
           <div class="ig-link-container"><a href="https://www.instagram.com/p/CEw8cN1JUiT/" target="_blank"
-              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
-          
-        </div>
-      </div>
-      
-      
-      
-
-      
-      
-
-      
-      
-      
-
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-
-      <div class="post-card" 
-     data-creator="david-c-arenas" 
-     data-tags="posts,english,advocacy" 
-     data-misinformer="undefined">
-        <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
-          <a href="/archive/english/arenas/stopeatinganimals/stopeating/" style="display: block; text-decoration: none;">
-            
-            <img src="english/arenas/stopeatinganimals/1.jpg" alt="What&#39;s wrong with the message Stop eating animals?" class="archive-thumbnail"
-  style="width: 100%; display: block; height: auto;">
-            
-
-            
-          </a>
-        </div>
-
-        <div class="post-details">
-          <h2 class="post-title"><a href="/archive/english/arenas/stopeatinganimals/stopeating/">
-              What&#39;s wrong with the message Stop eating animals?
-            </a></h2>
-          
-          <div class="post-author"
-            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By David C Arenas</div>
-          
-          
-          <div class="ig-link-container"><a href="https://www.instagram.com/p/CQ_i4rqJBNv/" target="_blank"
               rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
@@ -6839,16 +6407,10 @@
       
       
       
-      
-      
-      
-      
-      
-      
 
       <div class="post-card" 
      data-creator="julia-vegan" 
-     data-tags="posts,english,outreach,misinformation,ecology" 
+     data-tags="posts,english,outreach,mindset" 
      data-misinformer="undefined">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/archive/english/julia/perception/" style="display: block; text-decoration: none;">
@@ -7041,6 +6603,82 @@
     display: flex !important;
     align-items: center !important;
   }
+  .mega-menu {
+  display: flex;
+  justify-content: space-between; /* Ensures equal gaps */
+  align-items: center;
+  gap: 1rem; /* Controls consistent spacing between columns */
+  padding: 1rem;
+  background-color: #f8f9fa; /* Optional: light background to define the area */
+  border-bottom: 1px solid #ddd;
+  width: 100%
+}
+
+.mega-menu-item {
+  flex: 1; /* Makes every column take equal width */
+  text-align: center;
+  font-weight: bold;
+}
+.menu-buttons {
+  flex-shrink: 0; /* Prevents the menu from being squished */
+  flex-wrap: wrap; /* Allows items to drop to a new line instead of stretching/overflowing */
+}
+.menu-item { position: static; flex: 1; border-right: 1px solid #e2e8f0; }
+.menu-item:last-child { border-right: none; }
+.menu-btn { width: 100%; padding: 15px; border: none; background: #fff; font-weight: 600; cursor: pointer; }
+
+/* 1. Reset: Ensure no leftover margins or gaps */
+.mega-window { 
+  display: none; 
+  position: absolute; 
+  left: 0; 
+  right: 0;
+  background: white; 
+  border: 1px solid #e2e8f0;
+  border-top: none;
+  z-index: 1000;
+  padding: 0;
+}
+
+/* 2. Show on hover: Use block for the container, grid for the list */
+.menu-item:hover .mega-window { 
+  display: block !important; 
+}
+
+/* 3. The only grid rule for the list */
+.mega-window .filter-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 0px; 
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* 4. Ensure links sit perfectly flush */
+.filter-list .filter-link {
+  background: #f1f5f9;
+  padding: 10px 12px;
+  border: 0.5px solid #e2e8f0;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+
+  cursor: pointer;
+  margin: 0;
+  height: 100%;
+  box-sizing: border-box; /* Crucial to prevent overflow/overlap */
+}
+
+/* 5. Hover and state effects */
+.filter-list .filter-link:hover {
+  background: #e2e8f0;
+  border-color: #cbd5e1;
+}
+
+.filter-checkbox:checked + span + .filter-count {
+  font-weight: bold;
+}
 </style>
 
 <script>
@@ -7083,6 +6721,34 @@
     });
 
     const dynamicCounts = {};
+
+    function updateActiveFiltersDisplay() {
+  const container = document.getElementById("active-filters-container");
+  const tagsList = document.getElementById("tags-list");
+  const checkboxes = document.querySelectorAll(".filter-checkbox:checked");
+  
+  tagsList.innerHTML = ""; // Clear current tags
+  
+  if (checkboxes.length > 0) {
+    container.style.display = "flex";
+    checkboxes.forEach(box => {
+      const tag = document.createElement("span");
+      tag.className = "active-tag";
+      // Get the display name from the span next to the checkbox
+      tag.innerHTML = `${box.nextElementSibling.innerText} <span style="cursor:pointer; margin-left:5px;">&times;</span>`;
+      tag.style = "background: #e2e8f0; padding: 4px 10px; border-radius: 15px; font-size: 0.85rem; display: flex; align-items: center;";
+      
+      // Allow clicking the tag to deselect
+      tag.onclick = () => {
+        box.checked = false;
+        filterPosts();
+      };
+      tagsList.appendChild(tag);
+    });
+  } else {
+    container.style.display = "none";
+  }
+}
   checkboxes.forEach(input => dynamicCounts[input.value.trim()] = 0);
 
     postCards.forEach(card => {
