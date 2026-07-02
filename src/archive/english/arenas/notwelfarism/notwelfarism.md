@@ -4,7 +4,7 @@ title: "Veganism is not welfarism"
 thumbnail: "english/arenas/notwelfarism/1.jpg"
 instagram_url: "https://www.instagram.com/p/CRjIiUhJr26/" # Link to IG
 author: "David C Arenas"
-tags: ["advocacy",]
+tags: ["messaging",]
 date: 2021-06-20
 ---
 

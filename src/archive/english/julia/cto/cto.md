@@ -5,4 +5,5 @@ thumbnail: "english/julia/cto/1.jpg"
 instagram_url: "https://www.instagram.com/p/DTC9iXVjL3E/?img_index=1" # Link to IG
 author: "Julia vegan"
 tags: ["education", "misinformation", "education"]
+date: 2026-01-03
 ---
