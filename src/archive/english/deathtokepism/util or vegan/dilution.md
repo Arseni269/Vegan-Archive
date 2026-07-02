@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: 'Utilitarian is not vegan'
-thumbnail: "english/deathtokepism/util or vegan/1.png"
+thumbnail: "english/deathtokepism/util or vegan/1.jpg"
 instagram_url: "https://www.instagram.com/p/DFBi9JONQXaTJbin0IJ5QUTUlGHJ5dYZuvlW000/?img_index=1" # Link to IG
 author: "Death to Kepism"
 tags: ["education", "utilitarianism"]

@@ -432,9 +432,13 @@ body.glightbox-open {
   <div class="post-page-container" style="display: flex; flex-direction: column; gap: 30px; max-width: 900px; margin: 0 auto; width: 100%;">
 
 <div class="gallery-column" style="width: 100%;">
-    <div id="media-container"></div>
+    <div class="media-nav-wrapper">
+        <button id="prev-btn" class="nav-btn" onclick="changeImage(-1)">❮</button>
+        <div id="media-container"></div>
+        <button id="next-btn" class="nav-btn" onclick="changeImage(1)">❯</button>
+    </div>
     
-    <p style="text-align: center; color: #64748b; font-size: 0.85rem; margin-top: 15px; margin-bottom: 15px; width: 100%;">
+    <p style="text-align: center; color: #64748b; font-size: 0.85rem; margin-top: 15px;">
         Click thumbnails or use arrow keys to navigate
     </p>
 
@@ -584,6 +588,31 @@ There is usually a double standard when it comes to animals that even animal rig
     border-radius: 8px;
     margin-top: 20px;
   }
+
+  .media-nav-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 300px; /* Ensures buttons have space to render */
+}
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #e2e8f0;
+  padding: 15px 10px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  z-index: 10;
+  border-radius: 4px;
+}
+
+#prev-btn { left: 0; }
+#next-btn { right: 0; }
+.nav-btn:hover { background: #f1f5f9; }
   </style>
 
   
@@ -652,6 +681,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 4. Keep your existing helper functions (Back-to-top, URL linkers, etc.) below this line...
     // ... (Keep your backToTop, auto-hyperlink, and linebreak logic here)
+});
+
+// --- NEW HELPER FUNCTION ---
+function changeImage(direction) {
+    const currentThumbs = document.querySelectorAll('.thumb');
+    let nextIndex = currentIndex + direction;
+    
+    // Boundary checks
+    if (nextIndex < 0) nextIndex = currentThumbs.length - 1;
+    if (nextIndex >= currentThumbs.length) nextIndex = 0;
+    
+    const isVideo = currentThumbs[nextIndex].tagName.toLowerCase() === 'video';
+    updateMainImage(currentThumbs[nextIndex].src, isVideo, nextIndex);
+}
+
+// --- UPDATED KEYBOARD LISTENER ---
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') {
+        changeImage(1);
+    } else if (e.key === 'ArrowLeft') {
+        changeImage(-1);
+    }
 });
 </script>
 </body>
