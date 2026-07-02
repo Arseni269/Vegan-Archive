@@ -207,15 +207,14 @@ templateEngineOverride: njk
         </ul>
       </div>
     </div>
-<div id="active-filters-container" style="display: none; padding: 1rem 0; gap: 10px; align-items: center; flex-wrap: wrap;">
-  <span style="font-size: 0.85rem; font-weight: 600; color: #64748b;">Active Filters:</span>
+<div id="active-filters-container" style="display: none; padding: 1rem; gap: 10px; align-items: center; flex-wrap: wrap;">
   <div id="tags-list" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
   <button id="clear-filters-btn" style="cursor: pointer; font-size: 0.8rem; border: none; background: #fee2e2; color: #991b1b; padding: 4px 10px; border-radius: 4px;">Clear All</button>
 </div>
   </div>
 </nav>
   </details>
-
+<div class="post-layout-grid">
   <main class="main-content" style="width: 100%;">
     <div class="imageboard-grid" id="archive-grid">
       {% for post in collections.posts %}
@@ -244,7 +243,7 @@ templateEngineOverride: njk
           <a href="{{ post.url | url }}" style="display: block; text-decoration: none;">
             {% if post.data.thumbnail %}
             <img src="{{ post.data.thumbnail | url }}" alt="{{ post.data.title }}" class="archive-thumbnail"
-  style="width: 100%; display: block; height: auto;">
+            style="width: 100%; display: block; height: auto;">
             {% else %}
             {% set galleryData = post.inputPath | getImagesData %}
             {% if galleryData.files.length > 0 %}
@@ -278,17 +277,28 @@ templateEngineOverride: njk
               rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           {% endif %}
         </div>
+        
       </div>
       {% endif %}
       {% endfor %}
     </div>
-  </main>
-
+      </main>
+    <aside class="sidebar-column">
+      </aside>
+       </div>
   <button id="back-to-top" class="back-to-top-btn" title="Go to top">
     ↑
   </button>
 
   <style>
+
+  .sidebar-column {
+    width: 350px !important;
+    min-width: 350px !important;
+    max-width: 350px !important;
+    flex: 0 0 350px !important;
+}
+
     .back-to-top-btn {
       position: fixed;
       bottom: 80px;
@@ -387,6 +397,7 @@ templateEngineOverride: njk
   padding: 1rem;
   background-color: #f8f9fa; /* Optional: light background to define the area */
   border-bottom: 1px solid #ddd;
+
 }
 
 .mega-menu-item {
@@ -454,6 +465,12 @@ templateEngineOverride: njk
 .filter-checkbox:checked + span + .filter-count {
   font-weight: bold;
 }
+.main-content {
+    min-width: 0 !important; /* Critical: allows children to shrink rather than pushing the grid */
+    width: 100% !important;
+}
+
+
 </style>
 
 <script>
@@ -506,18 +523,28 @@ templateEngineOverride: njk
   
   if (checkboxes.length > 0) {
     container.style.display = "flex";
+    
     checkboxes.forEach(box => {
       const tag = document.createElement("span");
       tag.className = "active-tag";
-      // Get the display name from the span next to the checkbox
-      tag.innerHTML = `${box.nextElementSibling.innerText} <span style="cursor:pointer; margin-left:5px;">&times;</span>`;
-      tag.style = "background: #e2e8f0; padding: 4px 10px; border-radius: 15px; font-size: 0.85rem; display: flex; align-items: center;";
       
-      // Allow clicking the tag to deselect
+      // Get the label text of the checkbox
+      const labelText = box.nextElementSibling.innerText;
+      
+      tag.innerHTML = `
+        ${labelText} 
+        <span style="cursor:pointer; margin-left:8px; font-weight:bold;">&times;</span>
+      `;
+      
+      // Style the tag
+      tag.style = "background: #e2e8f0; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; display: flex; align-items: center; border: 1px solid #cbd5e1;";
+      
+      // Click to remove
       tag.onclick = () => {
-        box.checked = false;
-        filterPosts();
+        box.checked = false; // Uncheck the box
+        filterPosts();       // Re-run the filter logic
       };
+      
       tagsList.appendChild(tag);
     });
   } else {
@@ -574,7 +601,7 @@ const isMatch = matchSearch && matchCreator && matchMisinformer && matchTopics &
           }
         }
       });
-
+updateActiveFiltersDisplay();
       if (isInitial) {
         const savedPosition = sessionStorage.getItem("archiveScrollPosition");
         if (savedPosition) {

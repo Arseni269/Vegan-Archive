@@ -15,8 +15,11 @@
 /* Force the layout engine to keep a permanent structural track for the scrollbar */
 html {
   scrollbar-gutter: stable both-edges !important;
+  overflow-y: scroll !important;
 }
-
+* {
+  box-sizing: border-box !important;
+}
 /* Ensure the layout remains rigid and centered without shifting left/right when modals trigger */
 html, body {
   overflow-x: hidden !important;
@@ -112,10 +115,23 @@ body.glightbox-open {
 
 .post-layout-grid {
   display: grid !important;
-  grid-template-columns: 1fr 350px !important; /* Image Gallery vs Sidebar */
-  gap: 20px;
+  /* 1fr tells the gallery to be flexible, 350px locks the sidebar */
+  grid-template-columns: 1fr 350px !important;
+  /* Force a strict gap */
+  gap: 20px !important;
+  /* Prevent the grid from shrinking if content is missing */
+  width: 100% !important;
+  max-width: 1400px !important;
+  margin: 0 auto !important;
 }
 
+.sidebar-column {
+  /* This prevents the sidebar from EVER changing width */
+  flex: 0 0 350px !important; 
+  width: 350px !important;
+  max-width: 350px !important;
+  min-width: 350px !important;
+}
 .gallery-column {
   display: flex;
   flex-direction: column;
@@ -235,11 +251,6 @@ body.glightbox-open {
     width: 100% !important;
   }
 
-
-
-
-
-
 .gslide-media {
     display: flex !important;
     align-items: center !important;
@@ -254,11 +265,6 @@ body.glightbox-open {
 }
 /* =============================================================
    PERFECT JUMP & PHANTOM BOX ELIMINATION
-   ============================================================= */
-
-
-/* =============================================================
-   HORIZONTAL SCROLLBAR STABILIZER
    ============================================================= */
 
 /* Strictly prevent any element on the page from overflowing horizontally */
@@ -692,6 +698,8 @@ document.addEventListener('keydown', (e) => {
         changeImage(-1);
     }
 });
+
+
 </script>
 </body>
 </html>
