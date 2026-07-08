@@ -1,6 +1,6 @@
 ---
 layout: post.njk
-title: 'Double standard'
+title: 'Dvojí standard'
 thumbnail: "czech/julia/double/1.png"
 instagram_url: "https://www.instagram.com/p/DXo8Nn7DFl9/?img_index=1" # Link to IG
 author: "Julia vegan"
