@@ -1,0 +1,167 @@
+[33mf917032[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Stop tracking build folder and finalize gitignore
+[33m3a07576[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m k
+[33mf5a7fc0[m scrollbar filters
+[33m7f8de9b[m lightbox fixed
+[33m83f44d7[m nav buttons. new posts
+[33mcdcd510[m Merge branch 'main' of https://github.com/Arseni269/Vegan-Archive
+[33m6457ffd[m ok
+[33m983675d[m p
+[33mdbb64dd[m Create CNAME
+[33m3b2a7b1[m improvement nav bar
+[33mcb1ca80[m Fix: thumbnails
+[33md0b6718[m x
+[33m7c37720[m x
+[33md5b7914[m Update index.html
+[33m4779f68[m run
+[33m586579c[m fixed
+[33m3e65acf[m fixed
+[33mb217ffd[m Revert "Merge branch 'main' of https://github.com/Arseni269/Vegan-Archive"
+[33m8a0f4ea[m Merge branch 'main' of https://github.com/Arseni269/Vegan-Archive
+[33m1bc8115[m x
+[33m4999bb2[m Create CNAME
+[33m489669f[m x
+[33mf04b56f[m ok
+[33mf7ff109[m x
+[33m6575f19[m fix img
+[33m649a769[m changes for deployment
+[33m7905197[m Merge branch 'main' of https://github.com/Arseni269/Vegan-Archive
+[33m8349e11[m Create CNAME
+[33m596a88b[m Delete CNAME
+[33m8ec42bb[m Create CNAME
+[33m7c63da3[m 2
+[33m71335a7[m Delete CNAME
+[33mbfa859d[m Create CNAME
+[33m0e478dd[m b
+[33m66f0a19[m changes
+[33m01d2642[m button
+[33ma40baa1[m yes
+[33m91e4db8[m x
+[33md1e8e91[m desc. margin fix
+[33maddbab4[m fix ratio
+[33mc8c723d[m .
+[33m2bf34bb[m improved gallery
+[33m6eec337[m width fix
+[33mc19b8cc[m new posts
+[33me2f4e93[m fixes
+[33m9226ac4[m new posts
+[33ma5459e4[m s
+[33m7d05a26[m qol improvements
+[33m1a09e18[m fixed numbers
+[33m75badee[m x
+[33m7710b04[m meme
+[33mb816ccb[m x
+[33mefc07cc[m fixed misinformers
+[33m38f613a[m 2
+[33mf2077a4[m fixed mobile filter
+[33mc1a0743[m x
+[33mede53ea[m fixed some things and added posts
+[33m43ecc63[m returned scroll thing
+[33md8ab787[m many things, filters
+[33m816ff83[m added fvck the lion
+[33m4c48a5b[m Update index.html
+[33mec9d514[m spacing
+[33m51dfb41[m fixed the text
+[33m0aae17c[m stopped the jump
+[33m537d374[m removed gap finally
+[33m27a02e8[m removed gap finally
+[33me534705[m gap
+[33m095ebe0[m removed gap between images
+[33m1b9a1ca[m Update index.html
+[33mba9957f[m i
+[33m9f14510[m imroved filtering
+[33m2fef5a6[m changed margins
+[33m79f8bce[m Fix: correct duplicate layout braces and implement structural br-to-paragraph splitting script
+[33ma54f105[m Fix: force layout engine to properly split text into distinct visual paragraphs
+[33m28ac061[m Fix: add runtime url linking fallback scripts and sync tag-post structural loops
+[33m94a2ee2[m Fix: resolve collection nesting syntax error and standardize layout image paths
+[33me0fd6b3[m Fix: resolve creator image thumbnail paths and restore markdown linkify
+[33m7355213[m Fix: route creator links to dynamically generated landing views
+[33m8584bbd[m Fix: move sorting logic out of templates and into core config collections
+[33mfb58322[m Fix: avoid Nunjucks dictsort bug using custom array mapping filter
+[33m07c8334[m Update index.html
+[33m0b3b0a1[m some fixes
+[33ma648545[m aspect ratio fix
+[33mc028ac7[m Fix: resolve 404 asset paths for stylesheet and post images on subpages
+[33mf1a10f0[m Fix: change gallery-grid container class to imageboard-grid in templates
+[33m5d0f673[m Fix: completely clean styles.css syntax error and optimize layout images
+[33mf1702fd[m Fix: implement cache busting string and nuclear layout dimension reset
+[33m8299848[m Update styles.css
+[33m5f6f524[m Fix: restore post thumbnail natural dimensions and remove square crop constraints
+[33m762d42d[m Build: fully automate creator sidebar tracking and counter metrics
+[33mdeaa45f[m Update deploy.yml
+[33m6ae4e2b[m Fix: correct output folder matching to docs and eliminate legacy site folder
+[33mef6e4a9[m Fix: use highly-compatible collection parsing loop to restore GitHub action build pipeline
+[33m5eac11e[m Fix: correct image grid cutting dimensions and unlock dynamic tag loop scanning
+[33m3a39d74[m Fix: correct base layout href path and execute tag compilation
+[33m8a6aaa3[m tags fix
+[33m4660c15[m sidebar tags
+[33mda5c12a[m fixed tags maybe
+[33m5f3de92[m Fix: route sidebar tags and authors navigation to correct repository subfolders
+[33m4936378[m Fix: correct layout path to deployment folder and add root landing redirect
+[33m52d55d6[m Force-update stylesheet layout paths in docs folder
+[33m452a276[m Force overwrite compiled template files
+[33m72225ff[m Fix: force layout links to use explicit path declarations
+[33m313900c[m Fix: include compiled docs folder for github pages deployment
+[33mdeceac3[m Perf: ignore heavy eleventy cache folder to speed up git operations
+[33mf21e6e8[m Fix: safely inject pathPrefix to existing config
+[33m4b3297b[m Fix: direct layout to compiled repository css path
+[33m47a1eb7[m Fix: direct layout to compiled repository css path
+[33mc175e12[m Test: completely stripped index to clear build block
+[33md116644[m Fix: enforce clean nunjucks syntax matching the base layout
+[33m2ff5c17[m Fix: simplify template syntax to pass github actions compilation
+[33m29ba5fc[m Fix: Resolve relative asset degradation with absolute repository routing rules
+[33mca71129[m Fix: Absolute path prefix implementation across image card items
+[33m507b446[m Fix: Route all archive page anchors and images through Eleventy url filter
+[33m5715903[m Fix: strip legacy jekyll syntax loops and reset default engine configurations
+[33m70d13d1[m Fix: eleventy config
+[33m2cce90a[m Fix: correct single-post navigation layout paths and drop phantom header elements
+[33m23f958b[m Fix: Route thumbnails cleanly by appending base repo prefix directly
+[33m69b36e0[m Fix: correct Liquid syntax for replace filter
+[33m9c80d46[m Fix: Trim compiled path prefix from front-matter thumbnail strings
+[33m10ffe0f[m Fix: apply routing updates permanently to src files
+[33md686e79[m Fix: Align local folder naming layout with repository slug layout
+[33mc60bb1e[m Fix: Remove url nesting since front-matter includes full thumbnail path
+[33m07347da[m Fix: Hardcode explicit subfolder path prefixes across layouts and archive loops
+[33m1d69f83[m Fix: stable absolute pathing for archive grid post thumbnails
+[33m9693658[m Fix: clean sidebar duplication error and repair image thumbnail relative links
+[33m059dc16[m Fix: resolve syntax typo and absolute sidebar routing paths
+[33m77474d1[m Fix: automate css copying into docs output folder
+[33m049cb92[m Fix: automate css copying into docs output folder
+[33mbc4bf4f[m Fix: Route Eleventy build output directly to docs folder
+[33mef223cf[m Fix: Clear build folder and re-apply stylesheet rules
+[33m0349dd1[m Fix stylesheet directory routing path
+[33mc20bf18[m Manually add .nojekyll bypass flag to docs
+[33mc50c881[m Disable Jekyll tracking to kill the 404 error
+[33mc6fc1c7[m Fix: Force compile raw index layout
+[33m9c35f1f[m Align image output directory with docs folder
+[33md42d80a[m home page
+[33mb98edc1[m Design home information layout and layout navbar paths
+[33ma44f92a[m Align image output directory with docs folder
+[33m74abbee[m Bring working docs folder to main branch
+[33ma0057cc[m Fix asset paths for GitHub Pages deployment
+[33m126a38d[m Fix asset paths for GitHub Pages deployment
+[33m7610cdd[m Switch build output to docs folder for GitHub Pages
+[33m8e851f9[m Include clean local build folder
+[33m5454602[m Change eleventy output directory to project root
+[33m73261e1[m Permanently untrack local build folder
+[33m6b72b7e[m Add eleventy-img plugin dependency
+[33mc951663[m Add gitignore and permanently ban node_modules
+[33mc8709bd[m Rename configuration file to .cjs extension
+[33m050ffc6[m Restore standard eleventy build script
+[33m31e36ca[m Remove tracked node_modules from git history
+[33mfaf97fe[m Configure package for ESM execution path
+[33m427f88c[m Execute Eleventy v3 via direct Cli.js path
+[33m6bca382[m Update build script to use npx absolute execution
+[33m124bc5f[m Reset dependencies and build scripts
+[33m2ec6f79[m Use direct node path for eleventy build
+[33m297fc9e[m Switch workflow build step to npm run build
+[33mce3e74b[m Add build script to package.json
+[33mf5c1527[m Switch build step to npm run build
+[33m32b2ce3[m Fix setup-node action typo
+[33m09c6edf[m Update deploy.yml
+[33mc2884f9[m Update deploy.yml
+[33mee0f41a[m Update deploy.yml
+[33mcaa97ff[m Update deploy.yml
+[33mbeea850[m Update deploy.yml
+[33m85094f1[m Update deploy.yml
+[33mb213edf[m Create deploy.yml

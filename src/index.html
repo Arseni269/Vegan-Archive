@@ -1,0 +1,13 @@
+---
+layout: base.njk
+title: Welcome
+permalink: /
+---
+<script>
+  // Instantly teleport visitors from the empty root to your active archive board
+  window.location.href = "{{ '/archive/' | url }}";
+</script>
+<main style="padding: 2rem; font-family: sans-serif; text-align: center;">
+  <p>Loading the Vegan Archive...</p>
+  <a href="/archive/">Click here if you are not redirected automatically</a>
+</main>

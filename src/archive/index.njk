@@ -1,0 +1,1026 @@
+---
+layout: base.njk
+title: End animal use - Archive
+permalink: /archive/
+templateEngineOverride: njk
+---
+
+<link rel="stylesheet" href="{{ '/css/styles.css?v=1.1' | url }}">
+
+<style>
+  /* --- SMOOTH GRID ANIMATION CODES --- */
+
+  /* Base state for all cards inside your grid layout */
+  .post-card {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease !important;
+    visibility: visible;
+  }
+
+  /* The state when a card is filtered out by search or a checkbox */
+ .post-card.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* User can't click it */
+    transform: scale(0);  /* Shrinks to nothing */
+    height: 0;            /* Shrinks height so it doesn't push */
+    margin: 0;            /* Removes padding */
+    padding: 0;
+    position: relative;
+}
+
+  /* Eliminate the sidebar structure and allow full screen spread */
+  .archive-layout {
+    display: block !important;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    
+  }
+
+  /* FORCE A BEAUTIFUL 5-COLUMN GRID */
+  .archive-layout .imageboard-grid {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 20px !important;
+  }
+
+  /* Responsive fallback steps */
+  @media (max-width: 1400px) {
+    .archive-layout .imageboard-grid {
+      grid-template-columns: repeat(4, 1fr) !important;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .archive-layout .imageboard-grid {
+      grid-template-columns: repeat(3, 1fr) !important;
+    }
+  }
+
+  @media (max-width: 750px) {
+    .archive-layout .imageboard-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .archive-layout .imageboard-grid {
+      grid-template-columns: 1fr !important;
+      gap: 15px !important;
+      padding: 0px;
+    }
+  header {
+    flex-direction: column;
+    align-items: center !important;
+    text-align: center;
+    margin: 15px !important;
+  }
+
+  /* Make buttons and resource box full width on mobile */
+  .nav-button, 
+  .recommended-box {
+    width: 100%;
+    max-width: 100% !important;
+  }
+
+  /* Fix the search bar/filter grid area */
+  .filter-options-grid {
+    display: flex;
+    flex-direction: column;
+  }
+  /* Optional: Ensure individual cards don't have side margins on mobile */
+  .post-card {
+    margin: 5px 0 !important;
+  }
+  .filter-bar {
+    margin: 1rem 0;
+  }
+
+.filter-panel-grid {
+  grid-template-columns: 110px minmax(0, 1fr) !important;
+}
+.filter-category-btn {
+  font-size: 0.8rem !important;
+  padding: 8px !important;
+}
+.filter-tag-panel {
+  max-height: 280px !important;
+}
+.filter-tag-group .filter-list {
+  grid-template-columns: 1fr !important;
+}
+}
+
+</style>
+
+<div class="archive-layout">
+  <header style="display: flex; justify-content: space-between; align-items: flex-start; margin: 30px; gap: 20px; flex-wrap: wrap;">
+    
+    <div style="flex: 1; min-width: 300px;">
+  <h1 style="margin: 0; font-size: 2.5rem; letter-spacing: -0.5px;">Veganism = no right to use animals</h1>
+  <p style="margin: 0.5rem 0; color: #475569; font-size: 1.1rem;">Veganism is the principle that humans have no right to use animals for their own ends</p>
+ <p style="margin: 0.5rem 0; color: #475569; font-size: 0.9rem;" font-style: italic;><a href="https://quilt-spring-c0c.notion.site/1951-Veganism-Defined-72f779524b7d4454b537cc4f0c36a380?pvs=25" style="text-decoration: none">~ Leslie J Cross - Veganism Defined, 1951</a></p>
+</div>
+  <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-end;">
+  <a href="https://ko-fi.com/arseni23" class="nav-button support-btn">
+  Support the website 
+  <img src="/archive/images/kofi.png" alt="Ko-fi" style="width: 20px; vertical-align: middle; margin-left: 8px;">
+</a>
+  <a href="https://discord.gg/GKBpJeXUBJ" class="nav-button discord-btn">
+  Join our Discord 
+  <img src="/archive/images/discord.png" alt="Discord" style="width: 20px; vertical-align: middle; margin-left: 8px;">
+  </a>
+</div>
+
+    <div class="recommended-box" style="flex: 0 0 auto; text-align: right; max-width: 300px; padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+  <p style="margin: 0 0 8px 0; font-size: 0.85rem; font-weight: 600; color: #475569;">Other vegan education</p>
+  <div style="display: flex; flex-direction: column; gap: 6px;">
+    <a href="https://understand-veganism.com/" style="text-decoration: none; color: #2563eb; font-size: 0.9rem;">Understand-veganism.com</a>
+    <a href="https://quilt-spring-c0c.notion.site/Leslie-Cross-7f30205a06324c518446fa6f3fd0933e" style="text-decoration: none; color: #2563eb; font-size: 0.9rem;">Leslie J Cross</a>
+    <a href="http://www.candidhominid.com/" style="text-decoration: none; color: #2563eb; font-size: 0.9rem;">Candid Hominid</a>
+  </div>
+</div>
+  </header>
+</div>
+<div class="input-container">
+      <input type="text" id="archive-search-input" placeholder="🔍 Animals are not ours...">
+      <button id="clear-search-btn" class="clear-btn" aria-label="Clear search">✖</button>
+    </div>
+<div class="filter-bar">
+  <button id="filter-bar-toggle" class="filter-bar-toggle" aria-expanded="false" aria-controls="filter-panel">
+    <span class="filter-bar-toggle-label">
+      <span aria-hidden="true">▤</span> Filters
+      <span id="active-filter-badge" class="filter-badge" style="display:none;">0</span>
+    </span>
+    <span class="filter-bar-chevron" aria-hidden="true">▾</span>
+  </button>
+
+  <div id="filter-panel" class="filter-panel" hidden>
+    <div class="filter-panel-grid">
+      <div class="filter-category-list" role="tablist">
+        <button type="button" class="filter-category-btn is-active" data-category="creators" role="tab" aria-selected="true">
+          Creators
+        </button>
+        <button type="button" class="filter-category-btn" data-category="topics" role="tab" aria-selected="false">
+          Topics
+        </button>
+        <button type="button" class="filter-category-btn" data-category="languages" role="tab" aria-selected="false">
+          Languages
+        </button>
+        <button type="button" class="filter-category-btn" data-category="personalities" role="tab" aria-selected="false">
+          Personalities
+        </button>
+      </div>
+
+      <div class="filter-tag-panel">
+        <div class="filter-tag-group" data-category-panel="creators">
+          <ul class="filter-list">
+            {% for creator in collections.sortedCreators %}
+            <li><label class="filter-link"><input type="checkbox" name="creator" value="{{ creator.slug }}" class="filter-checkbox"> <span>{{ creator.name }}</span> <span class="filter-count" data-count-target="{{ creator.slug }}">({{ creator.count }})</span></label></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="filter-tag-group" data-category-panel="topics" hidden>
+          <ul class="filter-list">
+            {% for topic in collections.sortedTopics %}
+            <li><label class="filter-link"><input type="checkbox" name="topic" value="{{ topic.slug }}" class="filter-checkbox"> <span>{{ topic.name }}</span> <span class="filter-count" data-count-target="{{ topic.slug }}">({{ topic.count }})</span></label></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="filter-tag-group" data-category-panel="languages" hidden>
+          <ul class="filter-list">
+            {% for lang in collections.sortedLanguages %}
+            <li><label class="filter-link"><input type="checkbox" name="language" value="{{ lang.slug }}" class="filter-checkbox"> <span>{{ lang.name }}</span> <span class="filter-count" data-count-target="{{ lang.slug }}">({{ lang.count }})</span></label></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="filter-tag-group" data-category-panel="personalities" hidden>
+          <ul class="filter-list">
+            {% for misinformer in collections.sortedMisinformers %}
+            <li><label class="filter-link"><input type="checkbox" name="misinformer" value="{{ misinformer.slug }}" class="filter-checkbox"> <span>{{ misinformer.name }}</span> <span class="filter-count" data-count-target="{{ misinformer.slug }}">({{ misinformer.count }})</span></label></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="active-filters-container" style="display: none; padding: 12px 20px; gap: 1rem; align-items: center; flex-wrap: wrap; border-top: 1px solid #e2e8f0;">
+      <div id="tags-list" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
+      <button id="clear-filters-btn" style="cursor: pointer; font-size: 0.8rem; border: none; background: #fee2e2; color: #991b1b; padding: 4px 10px; border-radius: 4px;">Clear All</button>
+    </div>
+  </div>
+
+  <div class="search-wrapper">
+    <div id="search-suggestions-container" class="search-suggestions-hidden"></div>
+    <select id="sort-order" class="custom-select">
+      <option value="newest">Newest First</option>
+      <option value="oldest">Oldest First</option>
+    </select>
+  </div>
+</div>
+<div class="post-layout-grid" class="filter-header">
+  <main class="main-content" style="width: 100%;">
+    <div class="imageboard-grid" id="archive-grid">
+      <div id="no-results-message" style="display: none; padding: 40px; text-align: center; color: #64748b;">
+    <p>No results found for your search.</p>
+    
+  </div>
+      
+      {% for post in collections.posts %}
+      {% if post.data.title and post.url != "/archive/" %}
+
+      {% set authorSlug = post.data.author | lower | replace(r/[^a-z0-9]+/g, '-') if post.data.author else '' %}
+      {% set tagSlugs = "" %}
+
+      {# Build text blob for structural real-time text matching #}
+      {% set searchBlob = post.data.title | lower %}
+      {% if post.data.author %}{% set searchBlob = searchBlob + " " + (post.data.author | lower) %}{% endif %}
+
+      {% for tag in post.data.tags %}
+      {% if tag %}
+      {% set cleanTag = tag | lower | replace(r/[^a-z0-9]+/g, '-') %}
+      {% set tagSlugs = tagSlugs + ("," if tagSlugs else "") + cleanTag %}
+      {% set searchBlob = searchBlob + " " + (tag | lower) %}
+      {% endif %}
+      {% endfor %}
+
+      {% for m in post.data.misinformer | ensureArray %}
+      {% set searchBlob = searchBlob + " " + (m | lower) %}
+      {% endfor %}
+
+      <div class="post-card" 
+     data-creator="{{ post.data.author | slugify }}" 
+     data-tags="{% for tag in post.data.tags %}{{ tag | slugify }}{% if not loop.last %},{% endif %}{% endfor %}" 
+     data-misinformer="{% for m in post.data.misinformer | ensureArray %}{{ m | slugify }}{% if not loop.last %},{% endif %}{% endfor %}"
+     data-search="{{ searchBlob }}"
+     data-date="{{ post.date.getTime() }}">
+        <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
+          <a href="{{ post.url | url }}" style="display: block; text-decoration: none;">
+            {% if post.data.thumbnail %}
+            <img src="{{ post.data.thumbnail | url }}" alt="{{ post.data.title }}" class="archive-thumbnail"
+            style="width: 100%; display: block; height: auto;">
+            {% else %}
+            {% set galleryData = post.inputPath | getImagesData %}
+            {% if galleryData.files.length > 0 %}
+            {% image galleryData.folder + "/" + galleryData.files[0].name, post.data.title %}
+            {% else %}
+            <div style="background:#e2e8f0; padding:40px 10px; text-align:center; color:#64748b; font-size:0.85rem;">No
+              Image Available</div>
+            {% endif %}
+            {% endif %}
+
+            {% if post.data.video_path %}
+            <div class="video-badge"
+              style="position: absolute; bottom: 12px; right: 12px; background: rgba(15, 23, 42, 0.9); color: #fff; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; border-radius: 4px; display: inline-flex; align-items: center; gap: 5px; backdrop-filter: blur(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+              <span>▶</span> Watch Video
+            </div>
+            {% endif %}
+          </a>
+        </div>
+
+        <div class="post-details">
+          <h2 class="post-title"><a href="{{ post.url | url }}">
+              {% if post.data.useQuotes %}“{% endif %}{{ post.data.title }}{% if post.data.useQuotes %}”{% endif %}
+            </a></h2>
+          {% if post.data.author %}
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By {{
+            post.data.author }}</div>
+          {% endif %}
+          {% if post.data.instagram_url %}
+          <div class="ig-link-container"><a href="{{ post.data.instagram_url }}" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          {% endif %}
+        </div>
+        
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+      </main>
+    <aside class="sidebar-column">
+      </aside>
+       </div>
+  <button id="back-to-top" class="back-to-top-btn" title="Go to top">
+    &#8679
+  </button>
+
+  <style>
+
+  .sidebar-column {
+    width: 350px !important;
+    min-width: 350px !important;
+    max-width: 350px !important;
+    flex: 0 0 350px !important;
+}
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999; /* Make sure this is higher than any other element */
+    display: block; /* Ensure it isn't set to 'none' */
+}
+    .back-to-top-btn {
+      position: fixed;
+      bottom: 40px;
+      /* Sits just above your mobile FAB */
+      right: 24px;
+      background: #0f172a;
+      color: #ffffff;
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border-color: white;
+      border: solid;
+      font-size: 1.8rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      z-index: 9998;
+      display: none;
+      /* Hidden by default */
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      transition: transform 0.2s ease, opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .back-to-top-btn.is-visible {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .back-to-top-btn:hover {
+    /* Moves the button up by 5 pixels on hover */
+    transform: translateY(-5px);
+    /* Optional: adds a slightly larger shadow for a "lifting" effect */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+
+  </style>
+
+</div>
+
+<style>
+  .mobile-only-filter-fab {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #0f172a;
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    .mobile-only-filter-fab {
+      display: inline-flex !important;
+    }
+  }
+
+  /* --- OVERALL GRID FADE STYLES --- */
+  #archive-grid {
+    min-height: 80vh;
+    display: grid;
+    transition: opacity 0.2s ease-in-out !important;
+    opacity: 1;
+  }
+
+  /* When this class is active, the entire gallery vanishes smoothly */
+  #archive-grid.grid-is-typing {
+    opacity: 0;
+  }
+
+  .filter-bar {
+    position: sticky;
+    top: var(--site-header-height, 64px);
+    z-index: 900;
+    margin: 1.5rem 0;
+  }
+
+  .filter-bar-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 14px 20px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0f172a;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+  }
+
+  .filter-bar-toggle:hover {
+    border-color: #cbd5e1;
+  }
+
+  .filter-bar-toggle.is-open {
+    border-radius: 10px 10px 0 0;
+    border-bottom-color: transparent;
+  }
+
+  .filter-bar-toggle-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .filter-badge {
+    background: #0f172a;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 1px 8px;
+    border-radius: 999px;
+  }
+
+  .filter-bar-chevron {
+    font-size: 0.75rem;
+    color: #64748b;
+    transition: transform 0.25s ease;
+  }
+
+  .filter-bar-toggle.is-open .filter-bar-chevron {
+    transform: rotate(180deg);
+  }
+
+  .filter-panel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 500;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+  }
+
+  .filter-panel-grid {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .filter-category-list {
+    border-right: 1px solid #e2e8f0;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .filter-category-btn {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    padding: 10px 12px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #334155;
+    cursor: pointer;
+  }
+
+  .filter-category-btn:hover {
+    background: #f1f5f9;
+  }
+
+  .filter-category-btn.is-active {
+    background: #0f172a;
+    color: #fff;
+  }
+
+  .filter-tag-panel {
+    padding: 16px 20px;
+    max-height: 340px;
+    overflow-y: auto;
+  }
+
+  .filter-tag-group .filter-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2px 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .filter-tag-group .filter-list li {
+    margin: 0;
+  }
+
+  .filter-tag-group .filter-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 4px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .filter-tag-group .filter-link:hover {
+    background: #f8fafc;
+  }
+
+  .filter-tag-group .filter-link span:not(.filter-count) {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.9rem;
+    color: #334155;
+  }
+
+  .filter-tag-group .filter-count {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .filter-checkbox:checked + span + .filter-count {
+    font-weight: bold;
+  }
+
+  .main-content {
+    min-width: 0 !important; /* Critical: allows children to shrink rather than pushing the grid */
+    width: 100% !important;
+}
+
+ { position: relative; width: 100%; }
+
+#search-suggestions-container {
+  position: absolute;
+  top: 100%; /* Pins it directly below the input */
+  left: 0;
+  right: 0;
+  max-height: 200px; /* Limits height, enables scrolling */
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-top: none;
+  z-index: 9999;
+  display: block;
+}
+.search-wrapper { 
+  position: relative; 
+  display: flex; 
+  align-items: center;
+}
+#archive-search-input {
+  width: 100%;
+  padding-right: 35px; /* Gives space for the X button */
+  margin-left: 15px;
+}
+#search-suggestions-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-top: none;
+  z-index: 9999;
+}
+
+.search-suggestions-hidden { display: none !important; }
+
+.suggestion-item {
+  padding: 10px 15px;
+  cursor: pointer;
+  border-bottom: 1px solid #f1f5f9;
+}
+.suggestion-item:hover { background: #f8fafc; }
+
+.clear-btn {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #94a3b8;
+  display: none; /* Hidden by default */
+}
+
+/* Show the X only when the input has text */
+#archive-search-input:not(:placeholder-shown) + .clear-btn {
+  display: block;
+}
+
+.nav-button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background 0.2s ease;
+  display: inline-block;
+  text-align: center;
+}
+
+.support-btn {
+  background-color: #ff5e5b; /* A vibrant 'support' color */
+  color: white;
+}
+
+.support-btn:hover { background-color: #e55351; }
+
+.discord-btn {
+  background-color: #5865F2; /* Official Discord blue */
+  color: white;
+}
+
+.discord-btn:hover { background-color: #4752c4; }
+
+/* Container for input and button */
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  max-width: 300px;
+}
+
+#archive-search-input {
+  width: 100%;
+  padding: 10px 35px 10px 16px; /* Added 35px padding-right for the button */
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  outline: none;
+}
+
+.clear-btn {
+  position: absolute;
+  right: 10px; /* Locked to the right of the input */
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #94a3b8;
+  display: none; /* Controlled by JS */
+}
+
+/* Ensure the wrapper doesn't force the dropdown to jump */
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  max-width: 400px; /* Adjust as needed */
+}
+
+.custom-select {
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background-color: white;
+  color: #475569;
+  cursor: pointer;
+  outline: none;
+  /* Ensures it doesn't shrink awkwardly */
+  flex-shrink: 0;
+  appearance: auto; /* Ensures the arrow shows up properly */
+}
+
+.custom-select:hover {
+  border-color: #cbd5e1;
+}
+
+/* Ensure both states take up the exact same amount of space */
+.tag {
+    box-sizing: border-box; /* Crucial for keeping size stable */
+    /* Give the unselected tag a transparent border of the same width as the selected one */
+    border: 2px solid transparent; 
+    transition: none; /* Turn off transitions while testing to see if the jump stops */
+}
+
+.tag.selected {
+    /* Only change the color, NEVER the border width */
+    border: 2px solid #000; 
+    font-weight: bold; /* If this causes jumping, see step 2 below */
+}
+.tag-filter-container {
+    /* Set a minimum height so it never collapses or expands unexpectedly */
+    min-height: 50px; 
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Ensures they stay aligned to the top */
+    height: auto; /* Allow growth, but don't force it */
+}
+.filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 80px; /* Force the container to always be this height */
+    align-items: center; /* Keeps everything vertically aligned */
+}
+.is-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(1);
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Elements
+    const sortDropdown = document.getElementById('sort-order');
+    const checkboxes = document.querySelectorAll(".filter-checkbox");
+    const postCards = document.querySelectorAll(".post-card");
+    const clearFilterBtn = document.getElementById("clear-filters-btn");
+    const clearSearchBtn = document.getElementById("clear-search-btn");
+    const searchInput = document.getElementById("archive-search-input");
+    const archiveGrid = document.getElementById("archive-grid");
+    const noResultsMsg = document.getElementById("no-results-message");
+    const searchContainer = document.getElementById("search-suggestions-container");
+    const slugify = text => text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : '';
+
+    // --- PERSISTENCE FUNCTIONS ---
+    function saveFilters() {
+        const activeFilters = { creator: [], topic: [], language: [], misinformer: [] };
+        checkboxes.forEach(box => { if (box.checked) activeFilters[box.name].push(box.value); });
+        sessionStorage.setItem('archiveFilters', JSON.stringify(activeFilters));
+    }
+
+    function restoreFilters() {
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Case 1: URL has parameters (highest priority — this is what makes shared links work)
+        if (urlParams.toString()) {
+            checkboxes.forEach(box => {
+                if (urlParams.getAll(box.name).includes(box.value)) {
+                    box.checked = true;
+                }
+            });
+            return;
+        }
+
+        // Case 2: No URL params, fall back to whatever was last selected this session
+        const saved = sessionStorage.getItem('archiveFilters');
+        if (!saved) return;
+        const activeFilters = JSON.parse(saved);
+        checkboxes.forEach(box => {
+            if (activeFilters[box.name] && activeFilters[box.name].includes(box.value)) {
+                box.checked = true;
+            }
+        });
+    }
+
+    // --- SORT FUNCTION ---
+    function triggerSort(order) {
+        const grid = document.getElementById('archive-grid');
+        const posts = Array.from(grid.querySelectorAll('.post-card'));
+        posts.sort((a, b) => {
+            const dateA = parseInt(a.getAttribute('data-date') || 0);
+            const dateB = parseInt(b.getAttribute('data-date') || 0);
+            return order === 'newest' ? dateB - dateA : dateA - dateB;
+        });
+        posts.forEach(post => grid.appendChild(post));
+    }
+
+    // --- FILTER LOGIC ---
+    function filterPosts(isInitial = false) {
+        const searchQuery = searchInput ? searchInput.value.toLowerCase().trim() : "";
+        const activeFilters = { creator: [], topic: [], language: [], misinformer: [] };
+        checkboxes.forEach(box => { if (box.checked) activeFilters[box.name].push(box.value); });
+
+        const dynamicCounts = {};
+        checkboxes.forEach(input => dynamicCounts[input.value.trim()] = 0);
+
+        let visibleCount = 0;
+        postCards.forEach(card => {
+            const creator = card.getAttribute('data-creator');
+            const tagsAttr = card.getAttribute('data-tags') || "";
+            const tags = tagsAttr.split(',').map(t => t.trim());
+            const misinformerAttr = card.getAttribute('data-misinformer') || "";
+            const misinformers = misinformerAttr.split(',').map(m => m.trim()).filter(Boolean);
+            const textContent = card.getAttribute('data-search') || "";
+
+            const matchSearch = textContent.includes(searchQuery);
+            const matchCreator = activeFilters.creator.length === 0 || activeFilters.creator.every(c => c === creator);
+            const matchMisinformer = activeFilters.misinformer.length === 0 || activeFilters.misinformer.every(c => misinformers.includes(c));
+            const matchTopics = activeFilters.topic.length === 0 || activeFilters.topic.every(t => tags.includes(t));
+            const matchLang = activeFilters.language.length === 0 || activeFilters.language.every(l => tags.includes(l));
+
+            const isMatch = matchSearch && matchCreator && matchMisinformer && matchTopics && matchLang;
+
+            if (isMatch) {
+                card.style.display = "";
+                visibleCount++;
+                const attributes = [creator, ...tags, ...misinformers].filter(Boolean);
+                attributes.forEach(val => { if (dynamicCounts.hasOwnProperty(val)) dynamicCounts[val]++; });
+            } else {
+                card.style.display = "none";
+            }
+        });
+
+        if (noResultsMsg) noResultsMsg.style.display = (visibleCount === 0) ? 'block' : 'none';
+        checkboxes.forEach(box => {
+            const count = dynamicCounts[box.value.trim()] || 0;
+            const isDisabled = count === 0 && !box.checked;
+            box.disabled = isDisabled;
+            if (box.parentElement) box.parentElement.classList.toggle("is-disabled", isDisabled);
+        });
+
+        if (typeof updateActiveFiltersDisplay === 'function') updateActiveFiltersDisplay();
+        updateFilterCounts(dynamicCounts);
+    }
+
+    // --- UI HELPERS ---
+    function updateActiveFiltersDisplay() {
+        const container = document.getElementById("active-filters-container");
+        const tagsList = document.getElementById("tags-list");
+        const checked = document.querySelectorAll(".filter-checkbox:checked");
+        const badge = document.getElementById("active-filter-badge");
+        if (badge) {
+            badge.textContent = checked.length;
+            badge.style.display = checked.length > 0 ? "inline-block" : "none";
+        }
+        if (!tagsList) return;
+        tagsList.innerHTML = "";
+        if (checked.length > 0) {
+            container.style.display = "flex";
+            checked.forEach(box => {
+                const tag = document.createElement("span");
+                tag.innerHTML = `${box.nextElementSibling.innerText} <span style="cursor:pointer; margin-left:8px;">&times;</span>`;
+                tag.style = "background: #e2e8f0; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; display: flex; align-items: center;";
+                tag.onclick = () => { box.checked = false; saveFilters(); filterPosts(); updateURL(); };
+                tagsList.appendChild(tag);
+            });
+        } else { container.style.display = "none"; }
+    }
+
+    function updateFilterCounts(counts) {
+        document.querySelectorAll('.filter-count').forEach(span => {
+            const target = span.getAttribute('data-count-target');
+            if (target in counts) {
+                span.textContent = `(${counts[target]})`;
+                span.closest('label').style.opacity = (counts[target] === 0) ? "0.3" : "1";
+            }
+        });
+    }
+
+    // --- LISTENERS ---
+    if (sortDropdown) {
+        sortDropdown.value = 'newest';
+        triggerSort(sortDropdown.value);
+        sortDropdown.addEventListener('change', (e) => triggerSort(e.target.value));
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener("input", () => {
+            clearTimeout(window.typingTimeout);
+            window.typingTimeout = setTimeout(filterPosts, 250);
+        });
+    }
+
+    if (clearSearchBtn) {
+        clearSearchBtn.addEventListener("click", () => {
+            searchInput.value = "";
+            filterPosts();
+            searchContainer.classList.add("search-suggestions-hidden");
+        });
+    }
+
+    checkboxes.forEach(box => box.addEventListener("change", () => {
+        saveFilters();
+        filterPosts();
+        updateURL();
+    }));
+function updateURL() {
+    const params = new URLSearchParams();
+    
+    // Collect all checked values
+    checkboxes.forEach(box => {
+        if (box.checked) {
+            params.append(box.name, box.value);
+        }
+    });
+
+    // Update the URL without reloading
+    const newRelativePathQuery = window.location.pathname + '?' + params.toString();
+    history.replaceState(null, '', newRelativePathQuery);
+}
+    if (clearFilterBtn) clearFilterBtn.addEventListener("click", () => { 
+        checkboxes.forEach(b => b.checked = false); 
+        sessionStorage.removeItem('archiveFilters');
+        filterPosts(); 
+        updateURL();
+    });
+// Use a more robust selector that finds the button anywhere on the page
+const backToTopBtn = document.getElementById("back-to-top");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 300) {
+    backToTopBtn.classList.add("is-visible");
+  } else {
+    backToTopBtn.classList.remove("is-visible");
+  }
+});
+
+backToTopBtn.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
+    // --- FILTER BAR: open/close + category switching ---
+    const filterBarToggle = document.getElementById("filter-bar-toggle");
+    const filterPanel = document.getElementById("filter-panel");
+    const categoryBtns = document.querySelectorAll(".filter-category-btn");
+    const tagGroups = document.querySelectorAll(".filter-tag-group");
+    const supportsHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+    function setActiveCategory(category) {
+        categoryBtns.forEach(btn => {
+            const isActive = btn.dataset.category === category;
+            btn.classList.toggle("is-active", isActive);
+            btn.setAttribute("aria-selected", String(isActive));
+        });
+        tagGroups.forEach(group => {
+            group.hidden = group.dataset.categoryPanel !== category;
+        });
+    }
+
+    categoryBtns.forEach(btn => {
+        btn.addEventListener("click", () => setActiveCategory(btn.dataset.category));
+        if (supportsHover) {
+            btn.addEventListener("mouseenter", () => setActiveCategory(btn.dataset.category));
+        }
+    });
+
+    if (filterBarToggle && filterPanel) {
+        filterBarToggle.addEventListener("click", () => {
+            const isOpen = !filterPanel.hidden;
+            filterPanel.hidden = isOpen;
+            filterBarToggle.setAttribute("aria-expanded", String(!isOpen));
+            filterBarToggle.classList.toggle("is-open", !isOpen);
+        });
+
+        // Click anywhere outside the filter bar closes the panel
+        document.addEventListener("click", (e) => {
+            if (!filterPanel.hidden && !e.target.closest(".filter-bar")) {
+                filterPanel.hidden = true;
+                filterBarToggle.setAttribute("aria-expanded", "false");
+                filterBarToggle.classList.remove("is-open");
+            }
+        });
+    }
+
+    // --- NEXT/PREV NAVIGATION CONTEXT ---
+    // Right before the user actually navigates into a post, snapshot the
+    // ordered list of URLs currently visible in the grid (i.e. respecting
+    // whatever filters/search are active) so post.njk can offer next/prev
+    // links that move through that same filtered set instead of the full
+    // unfiltered archive.
+    const archiveGridEl = document.getElementById("archive-grid");
+    if (archiveGridEl) {
+        archiveGridEl.addEventListener("click", (e) => {
+            const link = e.target.closest("a");
+            if (!link) return;
+            const card = link.closest(".post-card");
+            if (!card) return;
+
+            const visibleUrls = Array.from(document.querySelectorAll(".post-card"))
+                .filter(c => !c.classList.contains("is-hidden") && c.style.display !== "none")
+                .map(c => {
+                    const a = c.querySelector(".post-title a");
+                    return a ? a.getAttribute("href") : null;
+                })
+                .filter(Boolean);
+
+            const payload = {
+                urls: visibleUrls,
+                savedAt: Date.now()
+            };
+            localStorage.setItem("archiveNavContext", JSON.stringify(payload));
+        });
+    }
+
+    // --- INITIALIZATION ---
+    restoreFilters(); // Restore state first
+    filterPosts(true); // Then run the first filter
+});
+</script>

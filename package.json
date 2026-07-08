@@ -1,0 +1,16 @@
+{
+  "name": "vegan-archive",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "eleventy"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^3.1.6",
+    "@11ty/eleventy-img": "^5.0.0",
+    "@quasibit/eleventy-plugin-sitemap": "^2.2.0"
+  },
+  "devDependencies": {
+    "@11ty/eleventy-plugin-rss": "^3.0.0"
+  }
+}
