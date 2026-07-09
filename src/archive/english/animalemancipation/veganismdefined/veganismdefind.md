@@ -1,6 +1,6 @@
 ---
 layout: post.njk
-title: '"Reading "Veganism Defined"'
+title: 'Reading "Veganism Defined"'
 thumbnail: "english/animalemancipation/veganismdefined.png"
 instagram_url: "https://www.instagram.com/p/DRIlhdWjPmD/" # Link to IG
 author: "Animal Emancipation"

@@ -33,17 +33,16 @@
 
     <link rel="icon" href="/archive/images/paw.webp" type="image/webp">
     <style>
-      :root { --site-header-height: 64px; }
+      :root { --site-header-height: 50px; }
       .site-header {
         position: sticky;
         top: 0;
         z-index: 1000;
-        height: var(--site-header-height);
         background: #ffffff;
         border-bottom: 1px solid #e2e8f0;
         display: flex;
         align-items: center;
-        padding: 0 1.5rem;
+        padding: 5xp;
         box-sizing: border-box;
       }
       .site-header-inner {
@@ -62,11 +61,11 @@
         flex-shrink: 0;
       }
       .site-header-title {
-        font-weight: 700;
-        font-size: 1.05rem;
+        font-weight: 1000;
+        font-size: 1.50rem;
         color: #0f172a;
         text-decoration: none;
-        white-space: nowrap;
+        white-space: nowrap; 
       }
       .site-header-nav {
         display: flex;
@@ -85,6 +84,7 @@
       .site-header-nav a:hover {
         color: #0f172a;
       }
+      html {font-family: "Gill Sans",}
     </style>
 </head>
 <body>
@@ -96,7 +96,7 @@
           <span class="site-header-title">End Animal Use</span>
         </a>
         <ul class="site-header-nav">
-          <li><a href="/archive/">Archive</a></li>
+          <li margin-right: 5px><a href="/archive/"></a></li>
         </ul>
       </div>
     </header>
@@ -290,7 +290,7 @@
             
             <li><label class="filter-link"><input type="checkbox" name="creator" value="heymerac" class="filter-checkbox"> <span>Heymerac</span> <span class="filter-count" data-count-target="heymerac">(7)</span></label></li>
             
-            <li><label class="filter-link"><input type="checkbox" name="creator" value="julia-vegan" class="filter-checkbox"> <span>Julia vegan</span> <span class="filter-count" data-count-target="julia-vegan">(24)</span></label></li>
+            <li><label class="filter-link"><input type="checkbox" name="creator" value="julia-vegan" class="filter-checkbox"> <span>Julia vegan</span> <span class="filter-count" data-count-target="julia-vegan">(26)</span></label></li>
             
             <li><label class="filter-link"><input type="checkbox" name="creator" value="leo" class="filter-checkbox"> <span>Leo</span> <span class="filter-count" data-count-target="leo">(28)</span></label></li>
             
@@ -345,7 +345,7 @@
             
             <li><label class="filter-link"><input type="checkbox" name="topic" value="education" class="filter-checkbox"> <span>education</span> <span class="filter-count" data-count-target="education">(80)</span></label></li>
             
-            <li><label class="filter-link"><input type="checkbox" name="topic" value="educational" class="filter-checkbox"> <span>educational</span> <span class="filter-count" data-count-target="educational">(17)</span></label></li>
+            <li><label class="filter-link"><input type="checkbox" name="topic" value="educational" class="filter-checkbox"> <span>educational</span> <span class="filter-count" data-count-target="educational">(19)</span></label></li>
             
             <li><label class="filter-link"><input type="checkbox" name="topic" value="excuses" class="filter-checkbox"> <span>excuses</span> <span class="filter-count" data-count-target="excuses">(34)</span></label></li>
             
@@ -409,7 +409,7 @@
             
             <li><label class="filter-link"><input type="checkbox" name="topic" value="vegetarianism" class="filter-checkbox"> <span>vegetarianism</span> <span class="filter-count" data-count-target="vegetarianism">(2)</span></label></li>
             
-            <li><label class="filter-link"><input type="checkbox" name="topic" value="welfarism" class="filter-checkbox"> <span>welfarism</span> <span class="filter-count" data-count-target="welfarism">(22)</span></label></li>
+            <li><label class="filter-link"><input type="checkbox" name="topic" value="welfarism" class="filter-checkbox"> <span>welfarism</span> <span class="filter-count" data-count-target="welfarism">(24)</span></label></li>
             
             <li><label class="filter-link"><input type="checkbox" name="topic" value="what-is-veganism" class="filter-checkbox"> <span>what is veganism</span> <span class="filter-count" data-count-target="what-is-veganism">(24)</span></label></li>
             
@@ -418,11 +418,13 @@
         <div class="filter-tag-group" data-category-panel="languages" hidden>
           <ul class="filter-list">
             
-            <li><label class="filter-link"><input type="checkbox" name="language" value="czech" class="filter-checkbox"> <span>Czech</span> <span class="filter-count" data-count-target="czech">(9)</span></label></li>
+            <li><label class="filter-link"><input type="checkbox" name="language" value="czech" class="filter-checkbox"> <span>Czech</span> <span class="filter-count" data-count-target="czech">(10)</span></label></li>
             
             <li><label class="filter-link"><input type="checkbox" name="language" value="english" class="filter-checkbox"> <span>English</span> <span class="filter-count" data-count-target="english">(191)</span></label></li>
             
             <li><label class="filter-link"><input type="checkbox" name="language" value="german" class="filter-checkbox"> <span>German</span> <span class="filter-count" data-count-target="german">(6)</span></label></li>
+            
+            <li><label class="filter-link"><input type="checkbox" name="language" value="japanese" class="filter-checkbox"> <span>Japanese</span> <span class="filter-count" data-count-target="japanese">(1)</span></label></li>
             
             <li><label class="filter-link"><input type="checkbox" name="language" value="spanish" class="filter-checkbox"> <span>Spanish</span> <span class="filter-count" data-count-target="spanish">(5)</span></label></li>
             
@@ -8453,12 +8455,12 @@
      data-creator="animal-emancipation" 
      data-tags="posts,english,what-is-veganism,educational" 
      data-misinformer=""
-     data-search="&quot;reading &quot;veganism defined&quot; animal emancipation posts english what is veganism educational"
+     data-search="reading &quot;veganism defined&quot; animal emancipation posts english what is veganism educational"
      data-date="1763337600000">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/archive/english/animalemancipation/veganismdefined/reading-veganism-defined/" style="display: block; text-decoration: none;">
             
-            <img src="english/animalemancipation/veganismdefined.png" alt="&quot;Reading &quot;Veganism Defined&quot;" class="archive-thumbnail"
+            <img src="english/animalemancipation/veganismdefined.png" alt="Reading &quot;Veganism Defined&quot;" class="archive-thumbnail"
             style="width: 100%; display: block; height: auto;">
             
 
@@ -8468,7 +8470,7 @@
 
         <div class="post-details">
           <h2 class="post-title"><a href="/archive/english/animalemancipation/veganismdefined/reading-veganism-defined/">
-              &quot;Reading &quot;Veganism Defined&quot;
+              Reading &quot;Veganism Defined&quot;
             </a></h2>
           
           <div class="post-author"
@@ -9982,6 +9984,77 @@
 
       <div class="post-card" 
      data-creator="julia-vegan" 
+     data-tags="posts,czech,welfarism,educational" 
+     data-misinformer=""
+     data-search="když se hnutí zaměřuje na utlačovatele julia vegan posts czech welfarism educational"
+     data-date="1767398400000">
+        <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
+          <a href="/archive/czech/julia/centers/kdy-se-hnut-zam-uje-na-utla-ovatele/" style="display: block; text-decoration: none;">
+            
+            <img src="czech/julia/centers/1.jpg" alt="Když se hnutí zaměřuje na utlačovatele" class="archive-thumbnail"
+            style="width: 100%; display: block; height: auto;">
+            
+
+            
+          </a>
+        </div>
+
+        <div class="post-details">
+          <h2 class="post-title"><a href="/archive/czech/julia/centers/kdy-se-hnut-zam-uje-na-utla-ovatele/">
+              Když se hnutí zaměřuje na utlačovatele
+            </a></h2>
+          
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Julia vegan</div>
+          
+          
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DTv_R7MjOMY/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          
+        </div>
+        
+      </div>
+      
+      
+      
+
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      
+
+      <div class="post-card" 
+     data-creator="julia-vegan" 
      data-tags="posts,english,education,misinformation" 
      data-misinformer=""
      data-search="when the &quot;movement&quot; centers the oppressor julia vegan posts english education misinformation"
@@ -10007,6 +10080,77 @@
           
           
           <div class="ig-link-container"><a href="https://www.instagram.com/p/DTC9iXVjL3E/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          
+        </div>
+        
+      </div>
+      
+      
+      
+
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      
+
+      <div class="post-card" 
+     data-creator="julia-vegan" 
+     data-tags="posts,japanese,welfarism,educational" 
+     data-misinformer=""
+     data-search="被害者ではなく、抑圧者を中心に据える &quot;ムーブメント” julia vegan posts japanese welfarism educational"
+     data-date="1767398400000">
+        <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
+          <a href="/archive/japanese/julia/centers/" style="display: block; text-decoration: none;">
+            
+            <img src="japanese/julia/centers/1.jpg" alt="被害者ではなく、抑圧者を中心に据える &quot;ムーブメント”" class="archive-thumbnail"
+            style="width: 100%; display: block; height: auto;">
+            
+
+            
+          </a>
+        </div>
+
+        <div class="post-details">
+          <h2 class="post-title"><a href="/archive/japanese/julia/centers/">
+              被害者ではなく、抑圧者を中心に据える &quot;ムーブメント”
+            </a></h2>
+          
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Julia vegan</div>
+          
+          
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DUSb7gHD08P/?img_index=1" target="_blank"
               rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
           
         </div>
