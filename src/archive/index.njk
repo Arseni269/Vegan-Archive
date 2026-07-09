@@ -73,84 +73,59 @@ templateEngineOverride: njk
       gap: 15px !important;
       padding: 0px;
     }
-  header {
-    flex-direction: column;
-    align-items: center !important;
-    text-align: center;
-    margin: 15px !important;
-  }
 
-  /* Make buttons and resource box full width on mobile */
-  .nav-button, 
-  .recommended-box {
-    width: 100%;
-    max-width: 100% !important;
-  }
+    /* Optional: Ensure individual cards don't have side margins on mobile */
+    .post-card {
+      margin: 5px 0 !important;
+    }
 
-  /* Fix the search bar/filter grid area */
-  .filter-options-grid {
-    display: flex;
-    flex-direction: column;
+    .filter-panel-grid {
+      grid-template-columns: 110px minmax(0, 1fr) !important;
+    }
+    .filter-category-btn {
+      font-size: 0.8rem !important;
+      padding: 8px !important;
+    }
+    .filter-tag-panel {
+      max-height: 280px !important;
+    }
+    .filter-tag-group .filter-list {
+      grid-template-columns: 1fr !important;
+    }
   }
-  /* Optional: Ensure individual cards don't have side margins on mobile */
-  .post-card {
-    margin: 5px 0 !important;
-  }
-  .filter-bar {
-    margin: 1rem 0;
-  }
-
-.filter-panel-grid {
-  grid-template-columns: 110px minmax(0, 1fr) !important;
-}
-.filter-category-btn {
-  font-size: 0.8rem !important;
-  padding: 8px !important;
-}
-.filter-tag-panel {
-  max-height: 280px !important;
-}
-.filter-tag-group .filter-list {
-  grid-template-columns: 1fr !important;
-}
-}
 
 </style>
 
 <div class="archive-layout">
-  <header style="display: flex; justify-content: space-between; align-items: flex-start; margin: 30px; gap: 20px; flex-wrap: wrap;">
-    
-    <div style="flex: 1; min-width: 300px;">
-  <h1 style="margin: 0; font-size: 2.5rem; letter-spacing: -0.5px;">Veganism = no right to use animals</h1>
-  <p style="margin: 0.5rem 0; color: #475569; font-size: 1.1rem;">Veganism is the principle that humans have no right to use animals for their own ends</p>
- <p style="margin: 0.5rem 0; color: #475569; font-size: 0.9rem;" font-style: italic;><a href="https://quilt-spring-c0c.notion.site/1951-Veganism-Defined-72f779524b7d4454b537cc4f0c36a380?pvs=25" style="text-decoration: none">~ Leslie J Cross - Veganism Defined, 1951</a></p>
-</div>
-  <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-end;">
-  <a href="https://ko-fi.com/arseni23" class="nav-button support-btn">
-  Support the website 
-  <img src="/archive/images/kofi.png" alt="Ko-fi" style="width: 20px; vertical-align: middle; margin-left: 8px;">
-</a>
-  <a href="https://discord.gg/GKBpJeXUBJ" class="nav-button discord-btn">
-  Join our Discord 
-  <img src="/archive/images/discord.png" alt="Discord" style="width: 20px; vertical-align: middle; margin-left: 8px;">
-  </a>
-</div>
-
-    <div class="recommended-box" style="flex: 0 0 auto; text-align: right; max-width: 300px; padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-  <p style="margin: 0 0 8px 0; font-size: 0.85rem; font-weight: 600; color: #475569;">Other vegan education</p>
-  <div style="display: flex; flex-direction: column; gap: 6px;">
-    <a href="https://understand-veganism.com/" style="text-decoration: none; color: #2563eb; font-size: 0.9rem;">Understand-veganism.com</a>
-    <a href="https://quilt-spring-c0c.notion.site/Leslie-Cross-7f30205a06324c518446fa6f3fd0933e" style="text-decoration: none; color: #2563eb; font-size: 0.9rem;">Leslie J Cross</a>
-    <a href="http://www.candidhominid.com/" style="text-decoration: none; color: #2563eb; font-size: 0.9rem;">Candid Hominid</a>
-  </div>
-</div>
-  </header>
-</div>
-<div class="input-container">
-      <input type="text" id="archive-search-input" placeholder="🔍 Animals are not ours...">
-      <button id="clear-search-btn" class="clear-btn" aria-label="Clear search">✖</button>
+  <header class="hero">
+    <div class="hero-main">
+      <p class="hero-kicker">End Animal Use · The Archive</p>
+      <h1 class="hero-title">Veganism = no right to use animals</h1>
+      <p class="hero-subtitle">Veganism is the principle that humans have no right to use animals for their own ends</p>
+      <p class="hero-citation"><a href="https://quilt-spring-c0c.notion.site/1951-Veganism-Defined-72f779524b7d4454b537cc4f0c36a380?pvs=25">~ Leslie J Cross - Veganism Defined, 1951</a></p>
     </div>
-<div class="filter-bar">
+    <aside class="hero-aside">
+      <div class="hero-actions">
+        <a href="https://ko-fi.com/arseni23" class="btn btn-accent">
+          Support the website
+          <img src="/archive/images/kofi.png" alt="" class="btn-icon">
+        </a>
+        <a href="https://discord.gg/GKBpJeXUBJ" class="btn btn-outline">
+          Join our Discord
+          <img src="/archive/images/discord.png" alt="" class="btn-icon">
+        </a>
+      </div>
+      <div class="hero-links-card">
+        <p class="hero-links-title">Other vegan education</p>
+        <a href="https://understand-veganism.com/">Understand-veganism.com</a>
+        <a href="https://quilt-spring-c0c.notion.site/Leslie-Cross-7f30205a06324c518446fa6f3fd0933e">Leslie J Cross</a>
+        <a href="http://www.candidhominid.com/">Candid Hominid</a>
+      </div>
+    </aside>
+  </header>
+
+  <div class="controls-row">
+    <div class="filter-bar">
   <button id="filter-bar-toggle" class="filter-bar-toggle" aria-expanded="false" aria-controls="filter-panel">
     <span class="filter-bar-toggle-label">
       <span aria-hidden="true">▤</span> Filters
@@ -208,14 +183,19 @@ templateEngineOverride: njk
       </div>
     </div>
 
-    <div id="active-filters-container" style="display: none; padding: 12px 20px; gap: 1rem; align-items: center; flex-wrap: wrap; border-top: 1px solid #e2e8f0;">
+    <div id="active-filters-container" style="display: none; padding: 12px 20px; gap: 1rem; align-items: center; flex-wrap: wrap; border-top: 1px solid var(--border);">
       <div id="tags-list" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
-      <button id="clear-filters-btn" style="cursor: pointer; font-size: 0.8rem; border: none; background: #fee2e2; color: #991b1b; padding: 4px 10px; border-radius: 4px;">Clear All</button>
+      <button id="clear-filters-btn" class="clear-all-btn">Clear All</button>
     </div>
   </div>
+</div>
 
-  <div class="search-wrapper">
-    <div id="search-suggestions-container" class="search-suggestions-hidden"></div>
+    <div class="input-container">
+      <input type="text" id="archive-search-input" placeholder="🔍 Animals are not ours...">
+      <button id="clear-search-btn" class="clear-btn" aria-label="Clear search">✖</button>
+      <div id="search-suggestions-container" class="search-suggestions-hidden"></div>
+    </div>
+
     <select id="sort-order" class="custom-select">
       <option value="newest">Newest First</option>
       <option value="oldest">Oldest First</option>
@@ -368,14 +348,14 @@ templateEngineOverride: njk
     position: fixed;
     bottom: 24px;
     right: 24px;
-    background: #0f172a;
-    color: #ffffff;
+    background: var(--accent);
+    color: var(--accent-contrast);
     border: none;
     padding: 12px 24px;
     border-radius: 50px;
     font-weight: 600;
     font-size: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
     z-index: 9999;
     display: none;
     align-items: center;
@@ -386,6 +366,190 @@ templateEngineOverride: njk
   @media (max-width: 768px) {
     .mobile-only-filter-fab {
       display: inline-flex !important;
+    }
+  }
+
+  /* --- HERO --- */
+  .hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 32px;
+    flex-wrap: wrap;
+    padding: 40px 0 24px 0;
+  }
+
+  .hero-main {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .hero-kicker {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    color: var(--accent);
+    margin: 0 0 12px 0;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    margin: 0;
+    font-size: 2.75rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+    color: var(--text-primary);
+  }
+
+  .hero-subtitle {
+    margin: 1rem 0 0.5rem 0;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 560px;
+  }
+
+  .hero-citation {
+    margin: 0.5rem 0 0 0;
+    font-size: 0.9rem;
+  }
+
+  .hero-citation a {
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  .hero-citation a:hover {
+    color: var(--accent);
+  }
+
+  .hero-aside {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 280px;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+
+  .btn-icon {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+  }
+
+  .btn-accent {
+    background: var(--accent);
+    color: var(--accent-contrast);
+  }
+
+  .btn-accent:hover {
+    background: var(--accent-hover);
+  }
+
+  .btn-outline {
+    background: var(--surface-2);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--border-strong);
+    background: var(--surface-hover);
+  }
+
+  .hero-links-card {
+    padding: 14px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .hero-links-title {
+    margin: 0 0 4px 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+  }
+
+  .hero-links-card a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+
+  .hero-links-card a:hover {
+    color: var(--accent);
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      flex-direction: column;
+      align-items: stretch;
+      text-align: left;
+    }
+    .hero-aside {
+      width: 100%;
+    }
+  }
+
+  /* --- CONTROLS ROW: filters, search, sort, all in one aligned row --- */
+  .controls-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 0 0 1.5rem 0;
+    flex-wrap: wrap;
+  }
+
+  .controls-row .filter-bar {
+    flex: 1 1 260px;
+    min-width: 200px;
+  }
+
+  .controls-row .input-container {
+    flex: 2 1 320px;
+    min-width: 220px;
+  }
+
+  .controls-row .custom-select {
+    flex: 0 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    .controls-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .controls-row .filter-bar,
+    .controls-row .input-container,
+    .controls-row .custom-select {
+      flex: 1 1 auto;
+      width: 100%;
     }
   }
 
@@ -404,9 +568,8 @@ templateEngineOverride: njk
 
   .filter-bar {
     position: sticky;
-    top: var(--site-header-height, 35px);
+    top: var(--site-header-height, 56px);
     z-index: 900;
-    margin: 1.5rem 0;
   }
 
   .filter-bar-toggle {
@@ -414,23 +577,25 @@ templateEngineOverride: njk
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 14px 20px;
-    background: #fff;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    font-size: 1rem;
+    height: 44px;
+    box-sizing: border-box;
+    padding: 0 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.9rem;
     font-weight: 600;
-    color: #0f172a;
+    color: var(--text-primary);
     cursor: pointer;
     transition: border-color 0.2s ease;
   }
 
   .filter-bar-toggle:hover {
-    border-color: #cbd5e1;
+    border-color: var(--border-strong);
   }
 
   .filter-bar-toggle.is-open {
-    border-radius: 10px 10px 0 0;
+    border-radius: 8px 8px 0 0;
     border-bottom-color: transparent;
   }
 
@@ -441,8 +606,8 @@ templateEngineOverride: njk
   }
 
   .filter-badge {
-    background: #0f172a;
-    color: #fff;
+    background: var(--accent);
+    color: var(--accent-contrast);
     font-size: 0.75rem;
     font-weight: 700;
     padding: 1px 8px;
@@ -451,7 +616,7 @@ templateEngineOverride: njk
 
   .filter-bar-chevron {
     font-size: 0.75rem;
-    color: #64748b;
+    color: var(--text-muted);
     transition: transform 0.25s ease;
   }
 
@@ -464,11 +629,11 @@ templateEngineOverride: njk
     left: 0;
     right: 0;
     z-index: 500;
-    background: #fff;
-    border: 1px solid #e2e8f0;
+    background: var(--surface);
+    border: 1px solid var(--border);
     border-top: none;
     border-radius: 0 0 10px 10px;
-    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
   }
 
   .filter-panel-grid {
@@ -478,7 +643,7 @@ templateEngineOverride: njk
   }
 
   .filter-category-list {
-    border-right: 1px solid #e2e8f0;
+    border-right: 1px solid var(--border);
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -496,17 +661,17 @@ templateEngineOverride: njk
     border-radius: 8px;
     font-size: 0.9rem;
     font-weight: 600;
-    color: #334155;
+    color: var(--text-secondary);
     cursor: pointer;
   }
 
   .filter-category-btn:hover {
-    background: #f1f5f9;
+    background: var(--surface-hover);
   }
 
   .filter-category-btn.is-active {
-    background: #0f172a;
-    color: #fff;
+    background: var(--accent);
+    color: var(--accent-contrast);
   }
 
   .filter-tag-panel {
@@ -538,7 +703,7 @@ templateEngineOverride: njk
   }
 
   .filter-tag-group .filter-link:hover {
-    background: #f8fafc;
+    background: var(--surface-hover);
   }
 
   .filter-tag-group .filter-link span:not(.filter-count) {
@@ -547,12 +712,12 @@ templateEngineOverride: njk
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 0.9rem;
-    color: #334155;
+    color: var(--text-secondary);
   }
 
   .filter-tag-group .filter-count {
     font-size: 0.8rem;
-    color: #94a3b8;
+    color: var(--text-muted);
     font-variant-numeric: tabular-nums;
   }
 
@@ -560,188 +725,117 @@ templateEngineOverride: njk
     font-weight: bold;
   }
 
+  .clear-all-btn {
+    cursor: pointer;
+    font-size: 0.8rem;
+    border: none;
+    background: var(--accent-bg);
+    color: var(--accent);
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
   .main-content {
-    min-width: 0 !important; /* Critical: allows children to shrink rather than pushing the grid */
+    min-width: 0 !important;
     width: 100% !important;
-}
+  }
 
- { position: relative; width: 100%; }
-
-#search-suggestions-container {
-  position: absolute;
-  top: 100%; /* Pins it directly below the input */
-  left: 0;
-  right: 0;
-  max-height: 200px; /* Limits height, enables scrolling */
-  overflow-y: auto;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-top: none;
-  z-index: 9999;
-  display: block;
-}
-.search-wrapper { 
-  position: relative; 
-  display: flex; 
-  align-items: center;
-}
-#archive-search-input {
-  width: 100%;
-  padding-right: 35px; /* Gives space for the X button */
-  margin-left: 15px;
-}
-#search-suggestions-container {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  max-height: 200px;
-  overflow-y: auto;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-top: none;
-  z-index: 9999;
-}
-
-.search-suggestions-hidden { display: none !important; }
-
-.suggestion-item {
-  padding: 10px 15px;
-  cursor: pointer;
-  border-bottom: 1px solid #f1f5f9;
-}
-.suggestion-item:hover { background: #f8fafc; }
-
-.clear-btn {
-  position: absolute;
-  right: 10px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.2rem;
-  color: #94a3b8;
-  display: none; /* Hidden by default */
-}
-
-/* Show the X only when the input has text */
-#archive-search-input:not(:placeholder-shown) + .clear-btn {
-  display: block;
-}
-
-.nav-button {
-  padding: 8px 16px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 600;
-  transition: background 0.2s ease;
-  display: inline-block;
-  text-align: center;
-}
-
-.support-btn {
-  background-color: #ff5e5b; /* A vibrant 'support' color */
-  color: white;
-}
-
-.support-btn:hover { background-color: #e55351; }
-
-.discord-btn {
-  background-color: #5865F2; /* Official Discord blue */
-  color: white;
-}
-
-.discord-btn:hover { background-color: #4752c4; }
-
-/* Container for input and button */
-.input-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  flex-grow: 1;
-  max-width: 300px;
-}
-
-#archive-search-input {
-  width: 100%;
-  padding: 10px 35px 10px 16px; /* Added 35px padding-right for the button */
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  outline: none;
-}
-
-.clear-btn {
-  position: absolute;
-  right: 10px; /* Locked to the right of the input */
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #94a3b8;
-  display: none; /* Controlled by JS */
-}
-
-/* Ensure the wrapper doesn't force the dropdown to jump */
-.search-wrapper {
-  display: flex;
-  align-items: center;
-  max-width: 400px; /* Adjust as needed */
-}
-
-.custom-select {
-  padding: 10px 12px;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  background-color: white;
-  color: #475569;
-  cursor: pointer;
-  outline: none;
-  /* Ensures it doesn't shrink awkwardly */
-  flex-shrink: 0;
-  appearance: auto; /* Ensures the arrow shows up properly */
-}
-
-.custom-select:hover {
-  border-color: #cbd5e1;
-}
-
-/* Ensure both states take up the exact same amount of space */
-.tag {
-    box-sizing: border-box; /* Crucial for keeping size stable */
-    /* Give the unselected tag a transparent border of the same width as the selected one */
-    border: 2px solid transparent; 
-    transition: none; /* Turn off transitions while testing to see if the jump stops */
-}
-
-.tag.selected {
-    /* Only change the color, NEVER the border width */
-    border: 2px solid #000; 
-    font-weight: bold; /* If this causes jumping, see step 2 below */
-}
-.tag-filter-container {
-    /* Set a minimum height so it never collapses or expands unexpectedly */
-    min-height: 50px; 
+  /* --- SEARCH --- */
+  .input-container {
+    position: relative;
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
-}
-.filter-header {
+  }
+
+  #archive-search-input {
+    width: 100%;
+    height: 44px;
+    box-sizing: border-box;
+    padding: 0 35px 0 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+    background: var(--surface);
+    color: var(--text-primary);
+  }
+
+  #archive-search-input::placeholder {
+    color: var(--text-muted);
+  }
+
+  #archive-search-input:focus {
+    border-color: var(--accent);
+  }
+
+  #search-suggestions-container {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    max-height: 240px;
+    overflow-y: auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    z-index: 950;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  .search-suggestions-hidden { display: none !important; }
+
+  .suggestion-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-primary);
+  }
+  .suggestion-item:last-child { border-bottom: none; }
+  .suggestion-item:hover { background: var(--surface-hover); }
+
+  .clear-btn {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    display: none;
+  }
+
+  #archive-search-input:not(:placeholder-shown) + .clear-btn {
+    display: block;
+  }
+
+  .custom-select {
+    height: 44px;
+    box-sizing: border-box;
+    padding: 0 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background-color: var(--surface);
+    color: var(--text-secondary);
+    cursor: pointer;
+    outline: none;
+  }
+
+  .custom-select:hover {
+    border-color: var(--border-strong);
+  }
+
+  .filter-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start; /* Ensures they stay aligned to the top */
-    height: auto; /* Allow growth, but don't force it */
-}
-.filter-container {
-    display: flex;
-    flex-wrap: wrap;
-    min-height: 80px; /* Force the container to always be this height */
-    align-items: center; /* Keeps everything vertically aligned */
-}
-.is-disabled {
-    opacity: 0.5;
+    align-items: flex-start;
+    height: auto;
+  }
+
+  .is-disabled {
+    opacity: 0.4;
     cursor: not-allowed;
     filter: grayscale(1);
-}
+  }
 </style>
 <script>
 document.addEventListener("DOMContentLoaded", () => {

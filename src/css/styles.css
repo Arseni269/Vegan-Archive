@@ -55,7 +55,8 @@ html {
   height: auto;
   overflow: hidden;
   border-radius: 6px;
-  border: 1px solid #eee;
+  border: 1px solid var(--border, #eee);
+  background: var(--surface, #fff);
 }
 
 /* Force the image to scale naturally without squishing or square crops */
@@ -83,12 +84,12 @@ html {
 }
 
 .post-title a {
-  color: #111;
+  color: var(--text-primary, #111);
   text-decoration: none;
 }
 
 .post-title a:hover {
-  color: #0066cc;
+  color: var(--accent, #0066cc);
 }
 
 .ig-link-container {

@@ -1,0 +1,109 @@
+{# Define content safely #}
+{% set safeContent = content or "" %}
+{% set cleanContent = safeContent | replace(r/<style[^>]*>[\s\S]*?<\/style>/g, "") | replace(r/<script[^>]*>[\s\S]*?<\/script>/g, "") %}
+
+{# Create page-specific metadata #}
+{% set pageTitle = title or "End animal use - The Archive" %}
+{# Pull just the markdown write-up out of the rendered page (falls back to
+   the whole page on templates that don't have a #description-content div) #}
+{% set descSource = cleanContent | extractPostDescription %}
+{% set cleanDesc = (descSource | striptags | replace("← Back to Archive", "") | replace("❮", "") | replace("❯", "") | replace("\n", " ") | replace("\r", " ") | trim) %}
+{% set pageDesc = description or (cleanDesc | truncate(150)) or "The largest online database of vegan media." %}
+
+{% set finalThumbnail = thumbnail or "/archive/images/paw.webp" %}
+{% set pageImg = "https://end-animal-use.com/archive/" + (finalThumbnail | replace(r/^\//, "")) %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ pageTitle }}</title>
+    
+    <meta property="og:title" content="{{ pageTitle }}">
+    <meta property="og:description" content="{{ pageDesc }}">
+    <meta property="og:image" content="{{ pageImg }}">
+    <meta property="og:url" content="https://end-animal-use.com{{ page.url }}">
+    <meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="{{ pageImg }}">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+
+    <link rel="icon" href="/archive/images/paw.webp" type="image/webp">
+    <style>
+      :root { --site-header-height: 50px; }
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: #ffffff;
+        border-bottom: 1px solid #e2e8f0;
+        display: flex;
+        align-items: center;
+        padding: 5xp;
+        box-sizing: border-box;
+        padding: 9px;
+      }
+      .site-header-inner {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        max-width: 1600px;
+        margin: 0 auto;
+        width: 100%;
+      }
+      .site-header-logo {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+      .site-header-title {
+        font-weight: 1000;
+        font-size: 1.50rem;
+        color: #0f172a;
+        text-decoration: none;
+        white-space: nowrap; 
+      }
+      .site-header-nav {
+        display: flex;
+        gap: 1.5rem;
+        margin-left: auto;
+        list-style: none;
+        padding: 0;
+      }
+      .site-header-nav a {
+        text-decoration: none;
+        color: #64748b;
+        font-weight: 500;
+        font-size: 0.9rem;
+        transition: color 0.2s;
+      }
+      .site-header-nav a:hover {
+        color: #0f172a;
+      }
+      html {font-family: "Gill Sans",}
+    </style>
+</head>
+<body>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a href="/" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+          {# Placeholder logo — swap the src for your real mark whenever it's ready.
+             onerror hides it gracefully instead of showing a broken-image icon if
+             /archive/images/paw.webp isn't in place yet. #}
+          <img src="/archive/images/paw.webp" alt="" class="site-header-logo" onerror="this.style.display='none'">
+          <span class="site-header-title">End Animal Use</span>
+        </a>
+        <ul class="site-header-nav">
+          <li margin-right: 5px><a href="/archive/"></a></li>
+        </ul>
+      </div>
+    </header>
+    {{ content | safe }}
+</body>
+</html>
