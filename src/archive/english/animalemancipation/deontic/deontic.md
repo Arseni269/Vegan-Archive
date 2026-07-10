@@ -4,7 +4,7 @@ title: "Veganism is a deontic stance"
 thumbnail: "english/animalemancipation/deontic/1.webp"
 instagram_url: "https://www.instagram.com/p/DKX1UEkIEmO/?img_index=1" # Link to IG
 author: "Animal Emancipation"
-tags: ["educational", "what is veganism"]
+tags: ["education", "what is veganism"]
 date: 2025-06-01
 ---
 <p>The term "deontic" originates from Ancient Greek.</p>

@@ -4,7 +4,7 @@ title: "3 important things about veganism"
 thumbnail: "english/animalemancipation/3importantthings.png"
 instagram_url: "https://www.instagram.com/p/DSgYw0cCKeI/" # Link to IG
 author: "Animal Emancipation"
-tags: ["educational", "what is veganism"]
+tags: ["education", "what is veganism"]
 date: 2025-12-21
 ---
 <p>"Recently, the Vegan Society adopted revised and extended rules which, among other things, clarify the goal towards which the movement aspires. The Society’s object and the meaning of the word “veganism,” which until now had been matters of inference and personal predilection, are now defined as follows:</p>

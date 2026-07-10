@@ -4,7 +4,7 @@ title: "Soft drink is protected..."
 thumbnail: "english/animalemancipation/softdrink.png"
 instagram_url: "https://www.instagram.com/p/DYk9RRqsfUW/" # Link to IG
 author: "Animal Emancipation"
-tags: ["educational", "what is veganism", "utilitarianism"]
+tags: ["education", "what is veganism", "utilitarianism"]
 date: 2026-05-21
 ---
 <p>Sugarwater has better protection than the innocent and vulnerable. This is insane.</p>

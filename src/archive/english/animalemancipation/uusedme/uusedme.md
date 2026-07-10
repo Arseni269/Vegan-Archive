@@ -4,7 +4,7 @@ title: '"You can`t say use" criticism'
 thumbnail: "english/animalemancipation/uusedme.png"
 instagram_url: "https://www.instagram.com/p/DNtx62H1Kra/" # Link to IG
 author: "Animal Emancipation"
-tags: ["educational", "messaging", "German"]
+tags: ["education", "messaging", "German"]
 date: 2025-08-24
 ---
 <p>Teil 5</p>

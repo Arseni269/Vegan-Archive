@@ -4,7 +4,7 @@ title: "New outreach series"
 thumbnail: "english/adr/newoutreach/1.webp"
 instagram_url: "https://www.instagram.com/p/DaeGJHSj-Ut/" # Link to IG
 author: "Animals Deserve Respect"
-tags: ["educational", "outreach", "messaging"]
+tags: ["education", "outreach", "messaging"]
 date: 2026-07-07
 ---
 <p>We must address sentience, objectification, societal conditioning, the meaning of exploitation (any use of other animals) and personal accountability.</p>
