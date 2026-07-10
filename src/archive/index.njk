@@ -133,6 +133,7 @@ templateEngineOverride: njk
     </span>
     <span class="filter-bar-chevron" aria-hidden="true">▾</span>
   </button>
+</div>
 
   <div id="filter-panel" class="filter-panel" hidden>
     <div class="filter-panel-grid">
@@ -188,7 +189,6 @@ templateEngineOverride: njk
       <button id="clear-filters-btn" class="clear-all-btn">Clear All</button>
     </div>
   </div>
-</div>
 
     <div class="input-container">
       <input type="text" id="archive-search-input" placeholder="🔍 Animals are not ours...">
@@ -519,6 +519,9 @@ templateEngineOverride: njk
 
   /* --- CONTROLS ROW: filters, search, sort, all in one aligned row --- */
   .controls-row {
+    position: sticky;
+    top: var(--site-header-height, 56px);
+    z-index: 900;
     display: flex;
     align-items: flex-start;
     gap: 12px;
@@ -567,9 +570,7 @@ templateEngineOverride: njk
   }
 
   .filter-bar {
-    position: sticky;
-    top: var(--site-header-height, 56px);
-    z-index: 900;
+    position: static;
   }
 
   .filter-bar-toggle {
@@ -595,8 +596,7 @@ templateEngineOverride: njk
   }
 
   .filter-bar-toggle.is-open {
-    border-radius: 8px 8px 0 0;
-    border-bottom-color: transparent;
+    border-color: var(--accent);
   }
 
   .filter-bar-toggle-label {
@@ -626,13 +626,14 @@ templateEngineOverride: njk
 
   .filter-panel {
     position: absolute;
+    top: 100%;
+    margin-top: 4px;
     left: 0;
     right: 0;
     z-index: 500;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-top: none;
-    border-radius: 0 0 10px 10px;
+    border-radius: 10px;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
   }
 
