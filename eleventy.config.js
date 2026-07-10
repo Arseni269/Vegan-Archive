@@ -28,7 +28,7 @@ const slugify = (text) => {
 // Single source of truth for which tags count as "languages" — used by the
 // sortedLanguages collection below AND exposed as global data so templates
 // (e.g. post.njk) can group language tags together without duplicating this list.
-const languageTerms = ["english", "russian", "spanish", "czech", "ukrainian", "german", "french", "japanese"];
+const languageTerms = ["english", "russian", "spanish", "czech", "ukrainian", "german", "french", "japanese", "Swahili", "Italian", "Hindi", "French", "Chinese"];
 
 export default function(eleventyConfig) {
   eleventyConfig.addFilter("slugify", slugify);
@@ -289,7 +289,7 @@ eleventyConfig.addCollection("sortedMisinformers", function(collectionApi) {
   eleventyConfig.addCollection("sortedTopics", function(collectionApi) {
     const topicMap = {};
     const creatorSlugs = new Set();
-    const reservedTerms = ["all", "posts", "taglist", "uniqtags", "english", "russian", "spanish", "german", "french", "ukrainian", "czech", "japanese"];
+    const reservedTerms = ["all", "posts", "taglist", "uniqtags", "english", "russian", "spanish", "german", "french", "ukrainian", "czech", "japanese", "Swahili", "Italian", "Hindi", "French", "Chinese"];
 
     // First pass: collect creators
     collectionApi.getAll().forEach(function(item) {
