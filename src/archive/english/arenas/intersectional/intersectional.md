@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: "Reject the co-opting of the vegan movement"
-thumbnail: "english/arenas/intersectional/1.png"
+thumbnail: "english/arenas/intersectional/1.webp"
 instagram_url: "https://www.instagram.com/p/C8FtZeXJDxd/" # Link to IG
 author: "David C Arenas"
 tags: ["intersectionality"]

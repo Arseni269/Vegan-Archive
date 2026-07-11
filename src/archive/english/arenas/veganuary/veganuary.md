@@ -1,7 +1,7 @@
 ---
 layout: post.njk
 title: 'Veganism is not a diet / El Veganismo no es una dieta (Veganuary)'
-thumbnail: "english/arenas/veganuary/1.jpg"
+thumbnail: "english/arenas/veganuary/1.webp"
 instagram_url: "https://www.instagram.com/p/Cm2wVoOOF34/?img_index=1" # Link to IG
 author: "David C Arenas"
 tags: ["Veganuary", "misinformation"]
