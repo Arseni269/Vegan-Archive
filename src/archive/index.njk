@@ -852,6 +852,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchContainer = document.getElementById("search-suggestions-container");
     const slugify = text => text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : '';
 
+    // --- SEARCH SUGGESTIONS INDEX ---
+    // Built once from what's already rendered — no extra data needed.
+    const tagIndex = Array.from(checkboxes).map(box => ({
+        name: box.nextElementSibling ? box.nextElementSibling.innerText.trim() : box.value,
+        slug: box.value,
+        category: box.name,
+        checkboxRef: box
+    }));
+    const postIndex = Array.from(postCards).map(card => {
+        const link = card.querySelector(".post-title a");
+        return link ? { name: link.innerText.trim(), href: link.getAttribute("href") } : null;
+    }).filter(Boolean);
+
     // --- PERSISTENCE FUNCTIONS ---
     function saveFilters() {
         const activeFilters = { creator: [], topic: [], language: [], misinformer: [] };
@@ -960,7 +973,7 @@ document.addEventListener("DOMContentLoaded", () => {
             checked.forEach(box => {
                 const tag = document.createElement("span");
                 tag.innerHTML = `${box.nextElementSibling.innerText} <span style="cursor:pointer; margin-left:8px;">&times;</span>`;
-                tag.style = "background: #e2e8f0; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; display: flex; align-items: center;";
+                tag.style = "background: var(--surface-2, #e2e8f0); color: var(--text-primary, #0f172a); padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; display: flex; align-items: center; border: 1px solid var(--border, transparent);";
                 tag.onclick = () => { box.checked = false; saveFilters(); filterPosts(); updateURL(); };
                 tagsList.appendChild(tag);
             });
@@ -977,6 +990,84 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    function hideSuggestions() {
+        if (!searchContainer) return;
+        searchContainer.classList.add("search-suggestions-hidden");
+        searchContainer.innerHTML = "";
+    }
+
+    function matchScore(name, q) {
+        const lower = name.toLowerCase();
+        const idx = lower.indexOf(q);
+        if (idx === -1) return -1;
+        if (lower === q) return 3;                                  // exact match
+        if (idx === 0) return 2;                                     // starts with query
+        if (/[\s-]/.test(lower[idx - 1])) return 1;                  // starts a later word
+        return 0;                                                    // buried mid-word
+    }
+
+    function renderSuggestions(query) {
+        if (!searchContainer) return;
+        const q = query.trim().toLowerCase();
+        if (!q) { hideSuggestions(); return; }
+
+        const matchedPosts = postIndex
+            .map(p => ({ ...p, score: matchScore(p.name, q) }))
+            .filter(p => p.score > -1)
+            .sort((a, b) => b.score - a.score || a.name.localeCompare(b.name))
+            .slice(0, 5);
+
+        // De-duplicate tags that share a name across categories (e.g. same word
+        // appearing as both a topic and a language) so suggestions aren't confusing.
+        const seenSlugs = new Set();
+        const matchedTags = tagIndex
+            .map(t => ({ ...t, score: matchScore(t.name, q) }))
+            .filter(t => {
+                if (t.score === -1) return false;
+                const key = t.category + ":" + t.slug;
+                if (seenSlugs.has(key)) return false;
+                seenSlugs.add(key);
+                return true;
+            })
+            .sort((a, b) => b.score - a.score || a.name.localeCompare(b.name))
+            .slice(0, 6);
+
+        if (matchedPosts.length === 0 && matchedTags.length === 0) { hideSuggestions(); return; }
+
+        let html = "";
+        if (matchedTags.length) {
+            html += `<div style="padding: 8px 15px 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted);">Tags</div>`;
+            matchedTags.forEach((t, i) => {
+                html += `<div class="suggestion-item" data-type="tag" data-index="${i}" style="display: flex; justify-content: space-between; align-items: center;"><span>${t.name}</span><span style="font-size: 0.75rem; color: var(--text-muted); text-transform: capitalize;">${t.category}</span></div>`;
+            });
+        }
+        if (matchedPosts.length) {
+            html += `<div style="padding: 8px 15px 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted);">Posts</div>`;
+            matchedPosts.forEach((p, i) => {
+                html += `<div class="suggestion-item" data-type="post" data-index="${i}">${p.name}</div>`;
+            });
+        }
+        searchContainer.innerHTML = html;
+        searchContainer.classList.remove("search-suggestions-hidden");
+
+        searchContainer.querySelectorAll('.suggestion-item[data-type="post"]').forEach(el => {
+            el.addEventListener("click", () => {
+                window.location.href = matchedPosts[parseInt(el.dataset.index, 10)].href;
+            });
+        });
+        searchContainer.querySelectorAll('.suggestion-item[data-type="tag"]').forEach(el => {
+            el.addEventListener("click", () => {
+                const t = matchedTags[parseInt(el.dataset.index, 10)];
+                t.checkboxRef.checked = true;
+                saveFilters();
+                filterPosts();
+                updateURL();
+                searchInput.value = "";
+                hideSuggestions();
+            });
+        });
+    }
+
     // --- LISTENERS ---
     if (sortDropdown) {
         sortDropdown.value = 'newest';
@@ -986,16 +1077,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (searchInput) {
         searchInput.addEventListener("input", () => {
+            renderSuggestions(searchInput.value);
             clearTimeout(window.typingTimeout);
             window.typingTimeout = setTimeout(filterPosts, 250);
         });
+        searchInput.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") hideSuggestions();
+        });
+        searchInput.addEventListener("focus", () => {
+            if (searchInput.value.trim()) renderSuggestions(searchInput.value);
+        });
     }
+
+    document.addEventListener("click", (e) => {
+        if (searchContainer && !searchContainer.classList.contains("search-suggestions-hidden") && !e.target.closest(".input-container")) {
+            hideSuggestions();
+        }
+    });
 
     if (clearSearchBtn) {
         clearSearchBtn.addEventListener("click", () => {
             searchInput.value = "";
             filterPosts();
-            searchContainer.classList.add("search-suggestions-hidden");
+            hideSuggestions();
         });
     }
 
@@ -1073,6 +1177,11 @@ backToTopBtn.addEventListener("click", () => {
             filterBarToggle.setAttribute("aria-expanded", String(!isOpen));
             filterBarToggle.classList.toggle("is-open", !isOpen);
         });
+
+        // Clicks inside the panel (checkboxes, category buttons, etc.) should
+        // never count as "outside" — stop them here rather than relying on
+        // the outside-click listener below to correctly tell the difference.
+        filterPanel.addEventListener("click", (e) => e.stopPropagation());
 
         // Click anywhere outside the filter bar closes the panel
         document.addEventListener("click", (e) => {
