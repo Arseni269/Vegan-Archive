@@ -124,6 +124,11 @@ templateEngineOverride: njk
     </aside>
   </header>
 
+  <div id="active-filters-container" class="active-filters-bar" style="display: none;">
+    <div id="tags-list" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
+    <button id="clear-filters-btn" class="clear-all-btn">Clear All</button>
+  </div>
+
   <div class="controls-row">
     <div class="filter-bar">
   <button id="filter-bar-toggle" class="filter-bar-toggle" aria-expanded="false" aria-controls="filter-panel">
@@ -182,11 +187,6 @@ templateEngineOverride: njk
           </ul>
         </div>
       </div>
-    </div>
-
-    <div id="active-filters-container" style="display: none; padding: 12px 20px; gap: 1rem; align-items: center; flex-wrap: wrap; border-top: 1px solid var(--border);">
-      <div id="tags-list" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
-      <button id="clear-filters-btn" class="clear-all-btn">Clear All</button>
     </div>
   </div>
 
@@ -515,6 +515,19 @@ templateEngineOverride: njk
     .hero-aside {
       width: 100%;
     }
+  }
+
+  /* --- ACTIVE FILTERS: always visible above the search bar, independent of
+     whether the filter dropdown itself is open or closed --- */
+  .active-filters-bar {
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 10px 16px;
+    margin: 0 0 12px 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
   }
 
   /* --- CONTROLS ROW: filters, search, sort, all in one aligned row --- */

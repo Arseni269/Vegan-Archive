@@ -304,6 +304,11 @@
     </aside>
   </header>
 
+  <div id="active-filters-container" class="active-filters-bar" style="display: none;">
+    <div id="tags-list" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
+    <button id="clear-filters-btn" class="clear-all-btn">Clear All</button>
+  </div>
+
   <div class="controls-row">
     <div class="filter-bar">
   <button id="filter-bar-toggle" class="filter-bar-toggle" aria-expanded="false" aria-controls="filter-panel">
@@ -364,7 +369,7 @@
             
             <li><label class="filter-link"><input type="checkbox" name="creator" value="noriko" class="filter-checkbox"> <span>Noriko</span> <span class="filter-count" data-count-target="noriko">(2)</span></label></li>
             
-            <li><label class="filter-link"><input type="checkbox" name="creator" value="reject-animal-use" class="filter-checkbox"> <span>Reject Animal Use</span> <span class="filter-count" data-count-target="reject-animal-use">(1)</span></label></li>
+            <li><label class="filter-link"><input type="checkbox" name="creator" value="reject-animal-use" class="filter-checkbox"> <span>Reject Animal Use</span> <span class="filter-count" data-count-target="reject-animal-use">(2)</span></label></li>
             
             <li><label class="filter-link"><input type="checkbox" name="creator" value="sintiencia-org" class="filter-checkbox"> <span>Sintiencia.org</span> <span class="filter-count" data-count-target="sintiencia-org">(2)</span></label></li>
             
@@ -372,7 +377,7 @@
             
             <li><label class="filter-link"><input type="checkbox" name="creator" value="soul-hush" class="filter-checkbox"> <span>Soul Hush</span> <span class="filter-count" data-count-target="soul-hush">(2)</span></label></li>
             
-            <li><label class="filter-link"><input type="checkbox" name="creator" value="str8-vedge" class="filter-checkbox"> <span>Str8 Vedge</span> <span class="filter-count" data-count-target="str8-vedge">(17)</span></label></li>
+            <li><label class="filter-link"><input type="checkbox" name="creator" value="str8-vedge" class="filter-checkbox"> <span>Str8 Vedge</span> <span class="filter-count" data-count-target="str8-vedge">(19)</span></label></li>
             
             <li><label class="filter-link"><input type="checkbox" name="creator" value="uncompromised-liberation" class="filter-checkbox"> <span>Uncompromised Liberation</span> <span class="filter-count" data-count-target="uncompromised-liberation">(19)</span></label></li>
             
@@ -407,9 +412,9 @@
             
             <li><label class="filter-link"><input type="checkbox" name="topic" value="ecology" class="filter-checkbox"> <span>ecology</span> <span class="filter-count" data-count-target="ecology">(5)</span></label></li>
             
-            <li><label class="filter-link"><input type="checkbox" name="topic" value="education" class="filter-checkbox"> <span>education</span> <span class="filter-count" data-count-target="education">(108)</span></label></li>
+            <li><label class="filter-link"><input type="checkbox" name="topic" value="education" class="filter-checkbox"> <span>education</span> <span class="filter-count" data-count-target="education">(111)</span></label></li>
             
-            <li><label class="filter-link"><input type="checkbox" name="topic" value="excuses" class="filter-checkbox"> <span>excuses</span> <span class="filter-count" data-count-target="excuses">(34)</span></label></li>
+            <li><label class="filter-link"><input type="checkbox" name="topic" value="excuses" class="filter-checkbox"> <span>excuses</span> <span class="filter-count" data-count-target="excuses">(36)</span></label></li>
             
             <li><label class="filter-link"><input type="checkbox" name="topic" value="exvegan" class="filter-checkbox"> <span>exvegan</span> <span class="filter-count" data-count-target="exvegan">(1)</span></label></li>
             
@@ -463,7 +468,7 @@
             
             <li><label class="filter-link"><input type="checkbox" name="topic" value="religion" class="filter-checkbox"> <span>religion</span> <span class="filter-count" data-count-target="religion">(1)</span></label></li>
             
-            <li><label class="filter-link"><input type="checkbox" name="topic" value="single-issue-campaigns" class="filter-checkbox"> <span>single issue campaigns</span> <span class="filter-count" data-count-target="single-issue-campaigns">(3)</span></label></li>
+            <li><label class="filter-link"><input type="checkbox" name="topic" value="single-issue-campaigns" class="filter-checkbox"> <span>single issue campaigns</span> <span class="filter-count" data-count-target="single-issue-campaigns">(4)</span></label></li>
             
             <li><label class="filter-link"><input type="checkbox" name="topic" value="speciesism" class="filter-checkbox"> <span>speciesism</span> <span class="filter-count" data-count-target="speciesism">(1)</span></label></li>
             
@@ -477,7 +482,7 @@
             
             <li><label class="filter-link"><input type="checkbox" name="topic" value="vegetarianism" class="filter-checkbox"> <span>vegetarianism</span> <span class="filter-count" data-count-target="vegetarianism">(2)</span></label></li>
             
-            <li><label class="filter-link"><input type="checkbox" name="topic" value="welfarism" class="filter-checkbox"> <span>welfarism</span> <span class="filter-count" data-count-target="welfarism">(25)</span></label></li>
+            <li><label class="filter-link"><input type="checkbox" name="topic" value="welfarism" class="filter-checkbox"> <span>welfarism</span> <span class="filter-count" data-count-target="welfarism">(26)</span></label></li>
             
             <li><label class="filter-link"><input type="checkbox" name="topic" value="what-is-veganism" class="filter-checkbox"> <span>what is veganism</span> <span class="filter-count" data-count-target="what-is-veganism">(28)</span></label></li>
             
@@ -488,9 +493,9 @@
             
             <li><label class="filter-link"><input type="checkbox" name="language" value="chinese" class="filter-checkbox"> <span>Chinese</span> <span class="filter-count" data-count-target="chinese">(1)</span></label></li>
             
-            <li><label class="filter-link"><input type="checkbox" name="language" value="czech" class="filter-checkbox"> <span>Czech</span> <span class="filter-count" data-count-target="czech">(10)</span></label></li>
+            <li><label class="filter-link"><input type="checkbox" name="language" value="czech" class="filter-checkbox"> <span>Czech</span> <span class="filter-count" data-count-target="czech">(11)</span></label></li>
             
-            <li><label class="filter-link"><input type="checkbox" name="language" value="english" class="filter-checkbox"> <span>English</span> <span class="filter-count" data-count-target="english">(200)</span></label></li>
+            <li><label class="filter-link"><input type="checkbox" name="language" value="english" class="filter-checkbox"> <span>English</span> <span class="filter-count" data-count-target="english">(201)</span></label></li>
             
             <li><label class="filter-link"><input type="checkbox" name="language" value="french" class="filter-checkbox"> <span>French</span> <span class="filter-count" data-count-target="french">(1)</span></label></li>
             
@@ -506,7 +511,7 @@
             
             <li><label class="filter-link"><input type="checkbox" name="language" value="swahili" class="filter-checkbox"> <span>Swahili</span> <span class="filter-count" data-count-target="swahili">(1)</span></label></li>
             
-            <li><label class="filter-link"><input type="checkbox" name="language" value="ukrainian" class="filter-checkbox"> <span>Ukrainian</span> <span class="filter-count" data-count-target="ukrainian">(9)</span></label></li>
+            <li><label class="filter-link"><input type="checkbox" name="language" value="ukrainian" class="filter-checkbox"> <span>Ukrainian</span> <span class="filter-count" data-count-target="ukrainian">(10)</span></label></li>
             
           </ul>
         </div>
@@ -538,11 +543,6 @@
           </ul>
         </div>
       </div>
-    </div>
-
-    <div id="active-filters-container" style="display: none; padding: 12px 20px; gap: 1rem; align-items: center; flex-wrap: wrap; border-top: 1px solid var(--border);">
-      <div id="tags-list" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
-      <button id="clear-filters-btn" class="clear-all-btn">Clear All</button>
     </div>
   </div>
 
@@ -15500,6 +15500,148 @@
       
 
       <div class="post-card" 
+     data-creator="str8-vedge" 
+     data-tags="posts,english,excuses,education" 
+     data-misinformer=""
+     data-search="the danger of comfort str8 vedge posts english excuses education"
+     data-date="1782000000000">
+        <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
+          <a href="/archive/english/str8 vedge/comfort/the-danger-of-comfort/" style="display: block; text-decoration: none;">
+            
+            <img src="english/str8 vedge/comfort/1.webp" alt="The danger of comfort" class="archive-thumbnail"
+            style="width: 100%; display: block; height: auto;">
+            
+
+            
+          </a>
+        </div>
+
+        <div class="post-details">
+          <h2 class="post-title"><a href="/archive/english/str8 vedge/comfort/the-danger-of-comfort/">
+              The danger of comfort
+            </a></h2>
+          
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Str8 Vedge</div>
+          
+          
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DZ20ewujBv0/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          
+        </div>
+        
+      </div>
+      
+      
+      
+
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      
+
+      <div class="post-card" 
+     data-creator="str8-vedge" 
+     data-tags="posts,ukrainian,excuses,education" 
+     data-misinformer=""
+     data-search="небезпека комфорту str8 vedge posts ukrainian excuses education"
+     data-date="1782000000000">
+        <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
+          <a href="/archive/ukrainian/str8 vedge/comfort/" style="display: block; text-decoration: none;">
+            
+            <img src="ukrainian/str8 vedge/comfort/1.webp" alt="Небезпека комфорту" class="archive-thumbnail"
+            style="width: 100%; display: block; height: auto;">
+            
+
+            
+          </a>
+        </div>
+
+        <div class="post-details">
+          <h2 class="post-title"><a href="/archive/ukrainian/str8 vedge/comfort/">
+              Небезпека комфорту
+            </a></h2>
+          
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Str8 Vedge</div>
+          
+          
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DZ2xg0mjDtV/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          
+        </div>
+        
+      </div>
+      
+      
+      
+
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      
+
+      <div class="post-card" 
      data-creator="emma-for-animals" 
      data-tags="posts,english,education,ecology" 
      data-misinformer=""
@@ -16569,6 +16711,83 @@
       
 
       <div class="post-card" 
+     data-creator="reject-animal-use" 
+     data-tags="posts,czech,education,welfarism,single-issue-campaigns" 
+     data-misinformer=""
+     data-search="veganství = konec welfarismu reject animal use posts czech education welfarism single issue campaigns"
+     data-date="1783382400000">
+        <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
+          <a href="/archive/czech/rejectanimaluse/welfarism/veganstv-konec-welfarismu/" style="display: block; text-decoration: none;">
+            
+            <img src="czech/rejectanimaluse/welfarism/1.png" alt="Veganství = konec welfarismu" class="archive-thumbnail"
+            style="width: 100%; display: block; height: auto;">
+            
+
+            
+          </a>
+        </div>
+
+        <div class="post-details">
+          <h2 class="post-title"><a href="/archive/czech/rejectanimaluse/welfarism/veganstv-konec-welfarismu/">
+              Veganství = konec welfarismu
+            </a></h2>
+          
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By Reject Animal Use</div>
+          
+          
+          <div class="ig-link-container"><a href="https://www.instagram.com/p/DapkgYZDEVe/?img_index=1" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          
+        </div>
+        
+      </div>
+      
+      
+      
+
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      
+
+      <div class="post-card" 
      data-creator="animals-deserve-respect" 
      data-tags="posts,english,education,outreach,messaging" 
      data-misinformer=""
@@ -17193,6 +17412,19 @@
     .hero-aside {
       width: 100%;
     }
+  }
+
+  /* --- ACTIVE FILTERS: always visible above the search bar, independent of
+     whether the filter dropdown itself is open or closed --- */
+  .active-filters-bar {
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 10px 16px;
+    margin: 0 0 12px 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
   }
 
   /* --- CONTROLS ROW: filters, search, sort, all in one aligned row --- */
