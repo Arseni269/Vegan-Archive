@@ -1,31 +1,30 @@
-{# Define content safely #}
-{% set safeContent = content or "" %}
-{% set cleanContent = safeContent | replace(r/<style[^>]*>[\s\S]*?<\/style>/g, "") | replace(r/<script[^>]*>[\s\S]*?<\/script>/g, "") %}
 
-{# Create page-specific metadata #}
-{% set pageTitle = title or "End animal use - The Archive" %}
-{# Pull just the markdown write-up out of the rendered page (falls back to
-   the whole page on templates that don't have a #description-content div) #}
-{% set descSource = cleanContent | extractPostDescription %}
-{% set cleanDesc = (descSource | striptags | replace("← Back to Archive", "") | replace("❮", "") | replace("❯", "") | replace("\n", " ") | replace("\r", " ") | trim) %}
-{% set pageDesc = description or (cleanDesc | truncate(150)) or "The largest online database of vegan media." %}
 
-{% set finalThumbnail = thumbnail or "/archive/images/paw.webp" %}
-{% set pageImg = "https://end-animal-use.com/archive/" + (finalThumbnail | replace(r/^\//, "")) %}
+
+
+
+
+
+
+
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ pageTitle }}</title>
+    <title>End animal use - Store</title>
     
-    <meta property="og:title" content="{{ pageTitle }}">
-    <meta property="og:description" content="{{ pageDesc }}">
-    <meta property="og:image" content="{{ pageImg }}">
-    <meta property="og:url" content="https://end-animal-use.com{{ page.url }}">
+    <meta property="og:title" content="End animal use - Store">
+    <meta property="og:description" content="Support the Archive Every purchase here directly supports the maintenance of this database and the production of abolitionist outreach content. Wear...">
+    <meta property="og:image" content="https://end-animal-use.com/archive/archive/images/paw.webp">
+    <meta property="og:url" content="https://end-animal-use.com/store/">
     <meta name="twitter:card" content="summary_large_image">
-<meta property="og:image" content="{{ pageImg }}">
+<meta property="og:image" content="https://end-animal-use.com/archive/archive/images/paw.webp">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -37,7 +36,7 @@
 
     <link rel="icon" href="/archive/images/paw.webp" type="image/webp">
 
-    {# Runs before first paint so there's no flash of the wrong theme on load. #}
+    
     <script>
       (function() {
         var saved = localStorage.getItem("theme");
@@ -175,9 +174,7 @@
     <header class="site-header">
       <div class="site-header-inner">
         <a href="/" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
-          {# Placeholder logo — swap the src for your real mark whenever it's ready.
-             onerror hides it gracefully instead of showing a broken-image icon if
-             /archive/images/paw.webp isn't in place yet. #}
+          
           <img src="/archive/images/paw.webp" alt="" class="site-header-logo" onerror="this.style.display='none'">
           <span class="site-header-title">End Animal Use</span>
         </a>
@@ -188,7 +185,114 @@
         </ul>
       </div>
     </header>
-    {{ content | safe }}
+    
+<link rel="stylesheet" href="/css/styles.css?v=1.1">
+
+<style>
+  /* --- SMOOTH GRID ANIMATION CODES --- */
+
+  /* Base state for all cards inside your grid layout */
+  .post-card {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease !important;
+    visibility: visible;
+  }
+
+  /* The state when a card is filtered out by search or a checkbox */
+ .post-card.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* User can't click it */
+    transform: scale(0);  /* Shrinks to nothing */
+    height: 0;            /* Shrinks height so it doesn't push */
+    margin: 0;            /* Removes padding */
+    padding: 0;
+    position: relative;
+}
+
+  /* Eliminate the sidebar structure and allow full screen spread */
+  .archive-layout {
+    display: block !important;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    
+  }
+
+  /* FORCE A BEAUTIFUL 5-COLUMN GRID */
+  .archive-layout .imageboard-grid {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 20px !important;
+  }
+
+  /* Responsive fallback steps */
+  @media (max-width: 1400px) {
+    .archive-layout .imageboard-grid {
+      grid-template-columns: repeat(4, 1fr) !important;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .archive-layout .imageboard-grid {
+      grid-template-columns: repeat(3, 1fr) !important;
+    }
+  }
+
+  @media (max-width: 750px) {
+    .archive-layout .imageboard-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .archive-layout .imageboard-grid {
+      grid-template-columns: 1fr !important;
+      gap: 15px !important;
+      padding: 0px;
+    }
+
+    /* Optional: Ensure individual cards don't have side margins on mobile */
+    .post-card {
+      margin: 5px 0 !important;
+    }
+
+    .filter-panel-grid {
+      grid-template-columns: 110px minmax(0, 1fr) !important;
+    }
+    .filter-category-btn {
+      font-size: 0.8rem !important;
+      padding: 8px !important;
+    }
+    .filter-tag-panel {
+      max-height: 280px !important;
+    }
+    .filter-tag-group .filter-list {
+      grid-template-columns: 1fr !important;
+    }
+  }
+
+</style>
+<div class="archive-layout">
+  <header style="margin-bottom: 40px; text-align: center;">
+    <h1>Support the Archive</h1>
+    <p style="max-width: 600px; margin: 0 auto;">
+      Every purchase here directly supports the maintenance of this database 
+      and the production of abolitionist outreach content. 
+      Wear your values and help spread the message.
+    </p>
+  </header>
+
+  <!-- Your existing iframe -->
+  <iframe src="https://arseniforfreedom.dashery.com/embed/v1/carousel?wmode=opaque" 
+          width="100%" 
+          height="600px" 
+          style="border:none;">
+  </iframe>
+</div>
 
     <script>
       (function() {
