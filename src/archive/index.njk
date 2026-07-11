@@ -124,7 +124,7 @@ templateEngineOverride: njk
     </aside>
   </header>
 
-  <div id="active-filters-container" class="active-filters-bar" style="display: none;">
+  <div id="active-filters-container" class="active-filters-bar is-empty">
     <div id="tags-list" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
     <button id="clear-filters-btn" class="clear-all-btn">Clear All</button>
   </div>
@@ -518,16 +518,27 @@ templateEngineOverride: njk
   }
 
   /* --- ACTIVE FILTERS: always visible above the search bar, independent of
-     whether the filter dropdown itself is open or closed --- */
+     whether the filter dropdown itself is open or closed. Space is always
+     reserved (never display:none) so it can never push the controls row
+     below it up or down when filters are added/removed. --- */
   .active-filters-bar {
+    display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 12px;
+    min-height: 44px;
+    box-sizing: border-box;
     padding: 10px 16px;
     margin: 0 0 12px 0;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 8px;
+    transition: opacity 0.15s ease;
+  }
+
+  .active-filters-bar.is-empty {
+    opacity: 0;
+    pointer-events: none;
   }
 
   /* --- CONTROLS ROW: filters, search, sort, all in one aligned row --- */
@@ -982,7 +993,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!tagsList) return;
         tagsList.innerHTML = "";
         if (checked.length > 0) {
-            container.style.display = "flex";
+            container.classList.remove("is-empty");
             checked.forEach(box => {
                 const tag = document.createElement("span");
                 tag.innerHTML = `${box.nextElementSibling.innerText} <span style="cursor:pointer; margin-left:8px;">&times;</span>`;
@@ -990,7 +1001,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 tag.onclick = () => { box.checked = false; saveFilters(); filterPosts(); updateURL(); };
                 tagsList.appendChild(tag);
             });
-        } else { container.style.display = "none"; }
+        } else { container.classList.add("is-empty"); }
     }
 
     function updateFilterCounts(counts) {
