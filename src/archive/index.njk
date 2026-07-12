@@ -1250,8 +1250,13 @@ backToTopBtn.addEventListener("click", () => {
                 })
                 .filter(Boolean);
 
+            const clickedTitleLink = card.querySelector(".post-title a");
+            const clickedUrl = clickedTitleLink ? clickedTitleLink.getAttribute("href") : null;
+
             const payload = {
                 urls: visibleUrls,
+                archiveUrl: window.location.pathname + window.location.search,
+                clickedUrl: clickedUrl,
                 savedAt: Date.now()
             };
             localStorage.setItem("archiveNavContext", JSON.stringify(payload));
@@ -1261,5 +1266,49 @@ backToTopBtn.addEventListener("click", () => {
     // --- INITIALIZATION ---
     restoreFilters(); // Restore state first
     filterPosts(true); // Then run the first filter
+
+    // Scroll the previously-clicked post's card back into view when arriving
+    // back from a post via "Back to Archive" — only if the URL (i.e. the
+    // filters/search in effect) matches exactly what was saved, so a normal
+    // fresh visit to /archive/ never gets an unexpected jump. Targeting a
+    // specific element (rather than a raw scrollY pixel) means this stays
+    // correct even though thumbnail images are still lazy-loading and
+    // changing the page's total height at this point.
+    (function restoreScrollPosition() {
+        const raw = localStorage.getItem("archiveNavContext");
+        if (!raw) return;
+        let payload;
+        try {
+            payload = JSON.parse(raw);
+        } catch (e) {
+            return;
+        }
+        const { archiveUrl, clickedUrl, savedAt } = payload || {};
+        if (!clickedUrl || !archiveUrl) return;
+
+        const ONE_HOUR_MS = 60 * 60 * 1000;
+        if (!savedAt || Date.now() - savedAt > ONE_HOUR_MS) return;
+
+        const currentUrl = window.location.pathname + window.location.search;
+        if (currentUrl !== archiveUrl) return;
+
+        const scrollToCard = () => {
+            const targetLink = Array.from(document.querySelectorAll(".post-title a"))
+                .find(a => a.getAttribute("href") === clickedUrl);
+            const targetCard = targetLink ? targetLink.closest(".post-card") : null;
+            if (targetCard) {
+                targetCard.scrollIntoView({ block: "center" });
+            }
+        };
+
+        // Wait for the page to finish loading (images included) so the
+        // layout is stable before scrolling — otherwise images still
+        // loading below the target would shift it right after we land on it.
+        if (document.readyState === "complete") {
+            scrollToCard();
+        } else {
+            window.addEventListener("load", scrollToCard, { once: true });
+        }
+    })();
 });
 </script>

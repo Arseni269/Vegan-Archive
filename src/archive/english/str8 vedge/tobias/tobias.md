@@ -1,6 +1,6 @@
 ---
 layout: post.njk
-title: 'Charlatan "Vegan strategist" promotes animal exploitation'
+title: 'Charlatan "Vegan strategist" promotes animal exploitation (Tobias Leenaert)'
 thumbnail: "english/str8 vedge/tobias.png"
 instagram_url: "https://www.instagram.com/p/DaqATqRMiSc/" # Link to IG
 author: "Str8 Vedge"

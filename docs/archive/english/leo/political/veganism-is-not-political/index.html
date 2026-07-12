@@ -187,7 +187,7 @@
     </header>
     <div class="post-view-wrapper">
   <nav class="back-to-archive-nav" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
-    <a href="/archive/" class="back-link">
+    <a href="/archive/" class="back-link" id="back-to-archive-link">
       ← Back to Archive
     </a>
     <div id="post-nav-arrows" style="display: none; gap: 16px; align-items: center;">
@@ -833,7 +833,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 0. Post-to-post navigation, respecting whichever filtered set the user
     // came from on the archive page (falls back to just hiding the arrows
-    // if there's no context — e.g. a direct link or a shared post).
+    // if there's no context — e.g. a direct link or a shared post). Also
+    // points "Back to Archive" at that same origin archive URL (filters and
+    // all), which stays correct no matter how many posts get visited
+    // afterward via the next/prev arrows below.
     (function setupPostNav() {
         const raw = localStorage.getItem("archiveNavContext");
         if (!raw) return;
@@ -843,13 +846,18 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (e) {
             return;
         }
-        const { urls, savedAt } = payload || {};
+        const { urls, archiveUrl, savedAt } = payload || {};
         if (!Array.isArray(urls) || urls.length === 0) return;
 
         const ONE_HOUR_MS = 60 * 60 * 1000;
         if (!savedAt || Date.now() - savedAt > ONE_HOUR_MS) {
             localStorage.removeItem("archiveNavContext");
             return;
+        }
+
+        const backLink = document.getElementById("back-to-archive-link");
+        if (backLink && archiveUrl) {
+            backLink.href = archiveUrl;
         }
 
         const currentIndex = urls.indexOf(window.location.pathname);
@@ -864,11 +872,19 @@ document.addEventListener("DOMContentLoaded", () => {
         if (currentIndex > 0) {
             prevLink.href = urls[currentIndex - 1];
             prevLink.style.display = "inline";
+            prevLink.addEventListener("click", () => {
+                payload.clickedUrl = window.location.pathname;
+                localStorage.setItem("archiveNavContext", JSON.stringify(payload));
+            });
             shown = true;
         }
         if (currentIndex < urls.length - 1) {
             nextLink.href = urls[currentIndex + 1];
             nextLink.style.display = "inline";
+            nextLink.addEventListener("click", () => {
+                payload.clickedUrl = window.location.pathname;
+                localStorage.setItem("archiveNavContext", JSON.stringify(payload));
+            });
             shown = true;
         }
         if (shown) navWrapper.style.display = "flex";
