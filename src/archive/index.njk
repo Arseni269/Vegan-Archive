@@ -93,7 +93,9 @@ templateEngineOverride: njk
       grid-template-columns: 1fr !important;
     }
   }
-
+.filter-tag-group .filter-link span:not(.filter-count) {
+    font-family: 'Trebuchet MS', sans-serif !important;
+  }
 </style>
 
 <div class="archive-layout">
@@ -161,28 +163,28 @@ templateEngineOverride: njk
         <div class="filter-tag-group" data-category-panel="creators">
           <ul class="filter-list">
             {% for creator in collections.sortedCreators %}
-            <li><label class="filter-link"><input type="checkbox" name="creator" value="{{ creator.slug }}" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) {{ creator.intensityPercent }}%, var(--text-muted));">{{ creator.name }}</span> <span class="filter-count" data-count-target="{{ creator.slug }}" style="color: color-mix(in srgb, var(--accent) {{ creator.intensityPercent }}%, var(--text-muted));">({{ creator.count }})</span></label></li>
+            <li><label class="filter-link"><input type="checkbox" name="creator" value="{{ creator.slug }}" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) {{ creator.intensityPercent }}%, var(--text-primary));">{{ creator.name }}</span> <span class="filter-count" data-count-target="{{ creator.slug }}" style="color: color-mix(in srgb, var(--accent) {{ creator.intensityPercent }}%, var(--text-primary));">({{ creator.count }})</span></label></li>
             {% endfor %}
           </ul>
         </div>
         <div class="filter-tag-group" data-category-panel="topics" hidden>
           <ul class="filter-list">
             {% for topic in collections.sortedTopics %}
-            <li><label class="filter-link"><input type="checkbox" name="topic" value="{{ topic.slug }}" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) {{ topic.intensityPercent }}%, var(--text-muted));">{{ topic.name }}</span> <span class="filter-count" data-count-target="{{ topic.slug }}" style="color: color-mix(in srgb, var(--accent) {{ topic.intensityPercent }}%, var(--text-muted));">({{ topic.count }})</span></label></li>
+            <li><label class="filter-link"><input type="checkbox" name="topic" value="{{ topic.slug }}" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) {{ topic.intensityPercent }}%, var(--text-primary));">{{ topic.name }}</span> <span class="filter-count" data-count-target="{{ topic.slug }}" style="color: color-mix(in srgb, var(--accent) {{ topic.intensityPercent }}%, var(--text-primary));">({{ topic.count }})</span></label></li>
             {% endfor %}
           </ul>
         </div>
         <div class="filter-tag-group" data-category-panel="languages" hidden>
           <ul class="filter-list">
             {% for lang in collections.sortedLanguages %}
-            <li><label class="filter-link"><input type="checkbox" name="language" value="{{ lang.slug }}" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) {{ lang.intensityPercent }}%, var(--text-muted));">{{ lang.name }}</span> <span class="filter-count" data-count-target="{{ lang.slug }}" style="color: color-mix(in srgb, var(--accent) {{ lang.intensityPercent }}%, var(--text-muted));">({{ lang.count }})</span></label></li>
+            <li><label class="filter-link"><input type="checkbox" name="language" value="{{ lang.slug }}" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) {{ lang.intensityPercent }}%, var(--text-primary));">{{ lang.name }}</span> <span class="filter-count" data-count-target="{{ lang.slug }}" style="color: color-mix(in srgb, var(--accent) {{ lang.intensityPercent }}%, var(--text-primary));">({{ lang.count }})</span></label></li>
             {% endfor %}
           </ul>
         </div>
         <div class="filter-tag-group" data-category-panel="personalities" hidden>
           <ul class="filter-list">
             {% for misinformer in collections.sortedMisinformers %}
-            <li><label class="filter-link"><input type="checkbox" name="misinformer" value="{{ misinformer.slug }}" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) {{ misinformer.intensityPercent }}%, var(--text-muted));">{{ misinformer.name }}</span> <span class="filter-count" data-count-target="{{ misinformer.slug }}" style="color: color-mix(in srgb, var(--accent) {{ misinformer.intensityPercent }}%, var(--text-muted));">({{ misinformer.count }})</span></label></li>
+            <li><label class="filter-link"><input type="checkbox" name="misinformer" value="{{ misinformer.slug }}" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) {{ misinformer.intensityPercent }}%, var(--text-primary));">{{ misinformer.name }}</span> <span class="filter-count" data-count-target="{{ misinformer.slug }}" style="color: color-mix(in srgb, var(--accent) {{ misinformer.intensityPercent }}%, var(--text-primary));">({{ misinformer.count }})</span></label></li>
             {% endfor %}
           </ul>
         </div>
@@ -416,7 +418,7 @@ templateEngineOverride: njk
   }
 
   .hero-citation a {
-    color: var(--text-muted);
+    color: var(--text-primary);
     text-decoration: none;
   }
 
@@ -493,7 +495,7 @@ templateEngineOverride: njk
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    color: var(--text-muted);
+    color: var(--text-primary);
   }
 
   .hero-links-card a {
@@ -641,7 +643,7 @@ templateEngineOverride: njk
 
   .filter-bar-chevron {
     font-size: 0.75rem;
-    color: var(--text-muted);
+    color: var(--text-primary);
     transition: transform 0.25s ease;
   }
 
@@ -743,7 +745,7 @@ templateEngineOverride: njk
 
   .filter-tag-group .filter-count {
     font-size: 0.8rem;
-    color: var(--text-muted);
+    color: var(--text-primary);
     font-variant-numeric: tabular-nums;
   }
 
@@ -786,7 +788,7 @@ templateEngineOverride: njk
   }
 
   #archive-search-input::placeholder {
-    color: var(--text-muted);
+    color: var(--text-primary);
   }
 
   #archive-search-input:focus {
@@ -825,7 +827,7 @@ templateEngineOverride: njk
     border: none;
     cursor: pointer;
     font-size: 1.1rem;
-    color: var(--text-muted);
+    color: var(--text-primary);
     display: none;
   }
 
@@ -1061,13 +1063,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let html = "";
         if (matchedTags.length) {
-            html += `<div style="padding: 8px 15px 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted);">Tags</div>`;
+            html += `<div style="padding: 8px 15px 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-primary);">Tags</div>`;
             matchedTags.forEach((t, i) => {
-                html += `<div class="suggestion-item" data-type="tag" data-index="${i}" style="display: flex; justify-content: space-between; align-items: center;"><span>${t.name}</span><span style="font-size: 0.75rem; color: var(--text-muted); text-transform: capitalize;">${t.category}</span></div>`;
+                html += `<div class="suggestion-item" data-type="tag" data-index="${i}" style="display: flex; justify-content: space-between; align-items: center;"><span>${t.name}</span><span style="font-size: 0.75rem; color: var(--text-primary); text-transform: capitalize;">${t.category}</span></div>`;
             });
         }
         if (matchedPosts.length) {
-            html += `<div style="padding: 8px 15px 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted);">Posts</div>`;
+            html += `<div style="padding: 8px 15px 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-primary);">Posts</div>`;
             matchedPosts.forEach((p, i) => {
                 html += `<div class="suggestion-item" data-type="post" data-index="${i}">${p.name}</div>`;
             });
