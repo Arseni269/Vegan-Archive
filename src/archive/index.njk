@@ -1208,9 +1208,17 @@ backToTopBtn.addEventListener("click", () => {
         // the outside-click listener below to correctly tell the difference.
         filterPanel.addEventListener("click", (e) => e.stopPropagation());
 
-        // Click anywhere outside the filter bar closes the panel
+        // Same defensive stop for the active-filters bar (Clear All, chip
+        // removal), which now lives above the search bar rather than inside
+        // the dropdown panel.
+        const activeFiltersBar = document.getElementById("active-filters-container");
+        if (activeFiltersBar) activeFiltersBar.addEventListener("click", (e) => e.stopPropagation());
+
+        // Click anywhere outside the filter bar (and outside the active-filters
+        // bar, which now lives above the search bar rather than inside the
+        // dropdown) closes the panel.
         document.addEventListener("click", (e) => {
-            if (!filterPanel.hidden && !e.target.closest(".filter-bar")) {
+            if (!filterPanel.hidden && !e.target.closest(".filter-bar") && !e.target.closest("#active-filters-container")) {
                 filterPanel.hidden = true;
                 filterBarToggle.setAttribute("aria-expanded", "false");
                 filterBarToggle.classList.remove("is-open");

@@ -437,9 +437,7 @@
             
             <li><label class="filter-link"><input type="checkbox" name="topic" value="kepism" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) 5%, var(--text-muted));">kepism</span> <span class="filter-count" data-count-target="kepism" style="color: color-mix(in srgb, var(--accent) 5%, var(--text-muted));">(6)</span></label></li>
             
-            <li><label class="filter-link"><input type="checkbox" name="topic" value="lab-flesh" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) 3%, var(--text-muted));">lab flesh</span> <span class="filter-count" data-count-target="lab-flesh" style="color: color-mix(in srgb, var(--accent) 3%, var(--text-muted));">(3)</span></label></li>
-            
-            <li><label class="filter-link"><input type="checkbox" name="topic" value="labflesh" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) 1%, var(--text-muted));">labflesh</span> <span class="filter-count" data-count-target="labflesh" style="color: color-mix(in srgb, var(--accent) 1%, var(--text-muted));">(1)</span></label></li>
+            <li><label class="filter-link"><input type="checkbox" name="topic" value="lab-flesh" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) 4%, var(--text-muted));">lab flesh</span> <span class="filter-count" data-count-target="lab-flesh" style="color: color-mix(in srgb, var(--accent) 4%, var(--text-muted));">(4)</span></label></li>
             
             <li><label class="filter-link"><input type="checkbox" name="topic" value="leftist-anti-veganism" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) 4%, var(--text-muted));">leftist-anti-veganism</span> <span class="filter-count" data-count-target="leftist-anti-veganism" style="color: color-mix(in srgb, var(--accent) 4%, var(--text-muted));">(4)</span></label></li>
             
@@ -475,8 +473,6 @@
             
             <li><label class="filter-link"><input type="checkbox" name="topic" value="tipping-point" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) 3%, var(--text-muted));">tipping point</span> <span class="filter-count" data-count-target="tipping-point" style="color: color-mix(in srgb, var(--accent) 3%, var(--text-muted));">(3)</span></label></li>
             
-            <li><label class="filter-link"><input type="checkbox" name="topic" value="turkish" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) 1%, var(--text-muted));">Turkish</span> <span class="filter-count" data-count-target="turkish" style="color: color-mix(in srgb, var(--accent) 1%, var(--text-muted));">(1)</span></label></li>
-            
             <li><label class="filter-link"><input type="checkbox" name="topic" value="utilitarianism" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) 40%, var(--text-muted));">utilitarianism</span> <span class="filter-count" data-count-target="utilitarianism" style="color: color-mix(in srgb, var(--accent) 40%, var(--text-muted));">(45)</span></label></li>
             
             <li><label class="filter-link"><input type="checkbox" name="topic" value="veganuary" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) 2%, var(--text-muted));">Veganuary</span> <span class="filter-count" data-count-target="veganuary" style="color: color-mix(in srgb, var(--accent) 2%, var(--text-muted));">(2)</span></label></li>
@@ -511,6 +507,8 @@
             <li><label class="filter-link"><input type="checkbox" name="language" value="spanish" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) 3%, var(--text-muted));">Spanish</span> <span class="filter-count" data-count-target="spanish" style="color: color-mix(in srgb, var(--accent) 3%, var(--text-muted));">(7)</span></label></li>
             
             <li><label class="filter-link"><input type="checkbox" name="language" value="swahili" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) 0%, var(--text-muted));">Swahili</span> <span class="filter-count" data-count-target="swahili" style="color: color-mix(in srgb, var(--accent) 0%, var(--text-muted));">(1)</span></label></li>
+            
+            <li><label class="filter-link"><input type="checkbox" name="language" value="turkish" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) 0%, var(--text-muted));">Turkish</span> <span class="filter-count" data-count-target="turkish" style="color: color-mix(in srgb, var(--accent) 0%, var(--text-muted));">(1)</span></label></li>
             
             <li><label class="filter-link"><input type="checkbox" name="language" value="ukrainian" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) 5%, var(--text-muted));">Ukrainian</span> <span class="filter-count" data-count-target="ukrainian" style="color: color-mix(in srgb, var(--accent) 5%, var(--text-muted));">(10)</span></label></li>
             
@@ -1830,9 +1828,9 @@
 
       <div class="post-card" 
      data-creator="luliwizard-vegan" 
-     data-tags="posts,english,utilitarianism,labflesh" 
+     data-tags="posts,english,utilitarianism,lab-flesh" 
      data-misinformer=""
-     data-search="no es vegano explotar animales luliwizard vegan posts english utilitarianism labflesh"
+     data-search="no es vegano explotar animales luliwizard vegan posts english utilitarianism lab flesh"
      data-date="1719187200000">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/archive/english/luliwizard/labflesh/no-es-vegano-explotar-animales/" style="display: block; text-decoration: none;">
@@ -18457,9 +18455,17 @@ backToTopBtn.addEventListener("click", () => {
         // the outside-click listener below to correctly tell the difference.
         filterPanel.addEventListener("click", (e) => e.stopPropagation());
 
-        // Click anywhere outside the filter bar closes the panel
+        // Same defensive stop for the active-filters bar (Clear All, chip
+        // removal), which now lives above the search bar rather than inside
+        // the dropdown panel.
+        const activeFiltersBar = document.getElementById("active-filters-container");
+        if (activeFiltersBar) activeFiltersBar.addEventListener("click", (e) => e.stopPropagation());
+
+        // Click anywhere outside the filter bar (and outside the active-filters
+        // bar, which now lives above the search bar rather than inside the
+        // dropdown) closes the panel.
         document.addEventListener("click", (e) => {
-            if (!filterPanel.hidden && !e.target.closest(".filter-bar")) {
+            if (!filterPanel.hidden && !e.target.closest(".filter-bar") && !e.target.closest("#active-filters-container")) {
                 filterPanel.hidden = true;
                 filterBarToggle.setAttribute("aria-expanded", "false");
                 filterBarToggle.classList.remove("is-open");

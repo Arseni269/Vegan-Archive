@@ -4,7 +4,7 @@ title: "No es vegano explotar animales"
 thumbnail: "english/luliwizard/labflesh/1.webp"
 instagram_url: "https://www.instagram.com/p/C8lYzzJsbbh/" # Link to IG
 author: "Luliwizard vegan"
-tags: ["utilitarianism", "labflesh"]
+tags: ["utilitarianism", "lab flesh"]
 date: 2024-06-24
 ---
 
