@@ -885,6 +885,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                  // this is what let you grab and move the image with a mouse.
                                  // touchNavigation (left at its default of true) is the separate
                                  // option that handles mobile swipe, so this doesn't affect mobile.
+        closeOnOutsideClick: true,
         autoplayVideos: true
     });
 
@@ -903,19 +904,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Add a listener for the lightbox open event
     window.myLightbox.on('open', () => {
-    // Select the backdrop/overlay
-    const overlay = document.querySelector('.goverlay');
-    
-    const closeHandler = (e) => {
-        // Prevent default browser behavior to ensure it triggers correctly
-        e.preventDefault();
-        window.myLightbox.close();
-    };
-    overlay.addEventListener('click', closeHandler, { once: true });
-    overlay.addEventListener('touchstart', closeHandler, { once: true });
+        // Select the backdrop/overlay
+        const overlay = document.querySelector('.goverlay');
 
-    stripZoomAffordances();
-});
+        // 'click' alone is what a real tap reliably fires on mobile. Also
+        // binding 'touchstart' here (as this used to) fires the instant a
+        // finger touches down — before the browser can tell a tap from the
+        // start of a swipe — and can fight with GLightbox's own internal
+        // touch handling, which is why the overlay tap wasn't reliably
+        // closing anything on mobile.
+        if (overlay) {
+            const closeHandler = (e) => {
+                e.preventDefault();
+                window.myLightbox.close();
+            };
+            overlay.addEventListener('click', closeHandler, { once: true });
+        }
+
+        // Mobile back button should close the lightbox, not leave the page.
+        history.pushState({ lightboxOpen: true }, "");
+        lightboxHistoryEntryActive = true;
+
+        stripZoomAffordances();
+    });
+
+    window.myLightbox.on('close', () => {
+        // If we're the ones who closed it (X button, overlay tap, Escape —
+        // not the back button, which already consumed this via popstate
+        // above), clean up the throwaway history entry we pushed on open.
+        if (lightboxHistoryEntryActive) {
+            lightboxHistoryEntryActive = false;
+            history.back();
+        }
+    });
+
     window.myLightbox.on('slide_changed', stripZoomAffordances);
     // 2. Load first image
     const thumbs = document.querySelectorAll('.thumb');
@@ -954,30 +976,20 @@ function changeImage(direction) {
 }
 
 
-// When opening your lightbox
-function openLightbox() {
-  // Add a fake state to the history
-  history.pushState({ lightboxOpen: true }, "Lightbox");
-  // ... your existing code to show the image ...
-}
+// Mobile hardware/gesture back button should close the lightbox instead of
+// leaving the page. Push a throwaway history entry the moment the lightbox
+// actually opens (via GLightbox's own 'open' event, not a guess), and treat
+// back-navigation while that entry is active as "close the lightbox" rather
+// than "leave the post." If the lightbox gets closed some other way (X
+// button, overlay tap, Escape) we pop that throwaway entry ourselves so a
+// second back-press doesn't hit a stale state.
+let lightboxHistoryEntryActive = false;
 
-// When closing your lightbox
-function closeLightbox() {
-  // If the user closed it normally (not by back button), remove the state
-  if (history.state && history.state.lightboxOpen) {
-    history.back(); 
-  }
-  // ... your existing code to hide the image ...
-}
 window.addEventListener('popstate', (event) => {
-  // Check if our custom state exists
-  if (event.state && event.state.lightboxOpen) {
-    // Lightbox is open, so just close the UI
-    hideLightboxUI(); // Replace this with your actual close function
-  } else {
-    // If there's no state, the user is really trying to leave the page
-    // So let the back action happen naturally
-  }
+    if (lightboxHistoryEntryActive) {
+        lightboxHistoryEntryActive = false;
+        if (window.myLightbox) window.myLightbox.close();
+    }
 });
 </script>
 
