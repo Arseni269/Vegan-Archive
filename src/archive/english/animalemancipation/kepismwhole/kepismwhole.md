@@ -2,7 +2,7 @@
 layout: post.njk
 title: "Introduction to Kepism"
 thumbnail: "english/animalemancipation/kepismwhole.png"
-instagram_url: "https://www.instagram.com/p/DSzelVCALlK/?img_index=1" # Link to IG
+instagram_url: "https://www.instagram.com/p/DZbDOpso6Bg/" # Link to IG
 author: "Animal Emancipation"
 tags: ["education", "kepism",]
 date: 2025-12-28
