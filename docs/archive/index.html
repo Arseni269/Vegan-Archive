@@ -173,13 +173,12 @@
 <body>
     <header class="site-header">
       <div class="site-header-inner">
-        <a href="/" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+        <a href="/" id="site-logo-link" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
           
           <img src="/archive/images/paw.webp" alt="" class="site-header-logo" onerror="this.style.display='none'">
           <span class="site-header-title">End Animal Use</span>
         </a>
         <ul class="site-header-nav">
-          <li><a href="/store/">Store</a></li>
           <li><a href="/archive/">Archive</a></li>
           <li><button id="theme-toggle" aria-label="Switch to light mode">☾</button></li>
         </ul>
@@ -530,6 +529,8 @@
             <li><label class="filter-link"><input type="checkbox" name="misinformer" value="danny-ishay" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) 25%, var(--text-primary));">Danny Ishay</span> <span class="filter-count" data-count-target="danny-ishay" style="color: color-mix(in srgb, var(--accent) 25%, var(--text-primary));">(2)</span></label></li>
             
             <li><label class="filter-link"><input type="checkbox" name="misinformer" value="ed-winters" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) 13%, var(--text-primary));">Ed Winters</span> <span class="filter-count" data-count-target="ed-winters" style="color: color-mix(in srgb, var(--accent) 13%, var(--text-primary));">(1)</span></label></li>
+            
+            <li><label class="filter-link"><input type="checkbox" name="misinformer" value="esdras-sep-lveda" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) 25%, var(--text-primary));">Esdras Sepúlveda</span> <span class="filter-count" data-count-target="esdras-sep-lveda" style="color: color-mix(in srgb, var(--accent) 25%, var(--text-primary));">(2)</span></label></li>
             
             <li><label class="filter-link"><input type="checkbox" name="misinformer" value="gary-yourofsky" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) 100%, var(--text-primary));">Gary Yourofsky</span> <span class="filter-count" data-count-target="gary-yourofsky" style="color: color-mix(in srgb, var(--accent) 100%, var(--text-primary));">(8)</span></label></li>
             
@@ -17652,12 +17653,14 @@
       
 
       
+      
+      
 
       <div class="post-card" 
      data-creator="david-c-arenas" 
      data-tags="posts,english,abolitionism,spanish,welfarism,misinformation" 
-     data-misinformer=""
-     data-search="esdras sepúlveda - multiple abolitionisms? david c arenas posts english abolitionism spanish welfarism misinformation"
+     data-misinformer="esdras-sep-lveda"
+     data-search="esdras sepúlveda - multiple abolitionisms? david c arenas posts english abolitionism spanish welfarism misinformation esdras sepúlveda"
      data-date="1783814400000">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/archive/english/arenas/esdrasabolitionism/esdras-sep-lveda-multiple-abolitionisms/" style="display: block; text-decoration: none;">
@@ -18011,12 +18014,14 @@
       
 
       
+      
+      
 
       <div class="post-card" 
      data-creator="david-c-arenas" 
      data-tags="posts,english,abolitionism,spanish,welfarism,misinformation" 
-     data-misinformer=""
-     data-search="esdras sepúlveda - multiple abolitionisms? david c arenas posts english abolitionism spanish welfarism misinformation"
+     data-misinformer="esdras-sep-lveda"
+     data-search="esdras sepúlveda - multiple abolitionisms? david c arenas posts english abolitionism spanish welfarism misinformation esdras sepúlveda"
      data-date="1783987200000">
         <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
           <a href="/archive/english/arenas/esdrasabolitionism2/esdras-sep-lveda-multiple-abolitionisms/" style="display: block; text-decoration: none;">
@@ -19183,6 +19188,18 @@ backToTopBtn.addEventListener("click", () => {
         });
 
         syncButton();
+      })();
+
+      // Clicking the logo should always be a clean slate — without this,
+      // restoreFilters() on the archive page falls back to whatever's saved
+      // in sessionStorage whenever the URL has no query params, so a "fresh"
+      // visit via the logo would silently re-apply your last filters.
+      (function() {
+        var logo = document.getElementById("site-logo-link");
+        if (!logo) return;
+        logo.addEventListener("click", function() {
+          sessionStorage.removeItem("archiveFilters");
+        });
       })();
     </script>
 </body>

@@ -173,13 +173,12 @@
 <body>
     <header class="site-header">
       <div class="site-header-inner">
-        <a href="/" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+        <a href="/" id="site-logo-link" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
           
           <img src="/archive/images/paw.webp" alt="" class="site-header-logo" onerror="this.style.display='none'">
           <span class="site-header-title">End Animal Use</span>
         </a>
         <ul class="site-header-nav">
-          <li><a href="/store/">Store</a></li>
           <li><a href="/archive/">Archive</a></li>
           <li><button id="theme-toggle" aria-label="Switch to light mode">☾</button></li>
         </ul>
@@ -1020,6 +1019,18 @@ window.addEventListener('popstate', (event) => {
         });
 
         syncButton();
+      })();
+
+      // Clicking the logo should always be a clean slate — without this,
+      // restoreFilters() on the archive page falls back to whatever's saved
+      // in sessionStorage whenever the URL has no query params, so a "fresh"
+      // visit via the logo would silently re-apply your last filters.
+      (function() {
+        var logo = document.getElementById("site-logo-link");
+        if (!logo) return;
+        logo.addEventListener("click", function() {
+          sessionStorage.removeItem("archiveFilters");
+        });
       })();
     </script>
 </body>
