@@ -13,6 +13,18 @@ templateEngineOverride: njk
     </div>
   </nav>
 
+  <div class="site-search-wrapper" style="max-width: 480px; margin: 16px 0 0 0; position: relative;">
+    <input type="text" id="site-search-input" placeholder="🔍 Search posts and tags...">
+    <button id="site-search-clear-btn" class="clear-btn" aria-label="Clear search">✖</button>
+    <div id="site-search-suggestions" class="search-suggestions-hidden"></div>
+  </div>
+
+  {# Site-wide search index, generated once at build time — same data any
+     future page can reuse by embedding these two blocks and the script
+     further down, without needing any new backend work. #}
+  <script type="application/json" id="site-search-posts-data">{{ collections.searchablePosts | dump | safe }}</script>
+  <script type="application/json" id="site-search-tags-data">{{ collections.sortedCreators | mergeTagCategories(collections.sortedTopics, collections.sortedLanguages, collections.sortedMisinformers) | dump | safe }}</script>
+
   <h1 class="post-main-title">{{ title }}</h1>
   {% if tags or misinformer %}
     <div class="post-tags-container">
@@ -82,7 +94,7 @@ templateEngineOverride: njk
     <div class="description-column" style="margin: 20px; background: var(--surface-2, #f8fafc); padding: 20px; border: 1px solid var(--border, #e2e8f0); border-radius: 8px;">
   <div class="meta-section" style="margin-bottom: 1.5rem;">
     <h2 style="margin: 0 0 0.3rem 0; font-size: 1.1rem; color: var(--text-primary, #1e293b);">Creator</h2>
-    <p style="margin: 0; color: var(--text-secondary, #475569); font-size: 1.5rem; font-weight: 700;">{{ author }}</p>
+    <p style="margin: 0; font-size: 1.5rem; font-weight: 700;"><a href="{{ '/archive/?creator=' + (author | slugify) | urlencode | url }}" class="creator-link">{{ author }}</a></p>
   </div>
 
  {% if instagram_url %}
@@ -486,6 +498,76 @@ body.glightbox-open {
     color: var(--accent, #991b1b);
   }
 
+  .creator-link {
+    color: var(--text-secondary, #475569);
+    text-decoration: none;
+  }
+  .creator-link:hover {
+    color: var(--accent, #0066cc);
+  }
+
+  /* --- SITE SEARCH (also used identically on the archive page) --- */
+  .site-search-wrapper input {
+    width: 100%;
+    height: 44px;
+    box-sizing: border-box;
+    padding: 0 35px 0 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+    background: var(--surface);
+    color: var(--text-primary);
+  }
+
+  .site-search-wrapper input::placeholder {
+    color: var(--text-muted);
+  }
+
+  .site-search-wrapper input:focus {
+    border-color: var(--accent);
+  }
+
+  .site-search-wrapper .clear-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    display: none;
+  }
+
+  .site-search-wrapper input:not(:placeholder-shown) + .clear-btn {
+    display: block;
+  }
+
+  #site-search-suggestions {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    max-height: 280px;
+    overflow-y: auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    z-index: 950;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  .search-suggestions-hidden { display: none !important; }
+
+  #site-search-suggestions .suggestion-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-primary);
+  }
+  #site-search-suggestions .suggestion-item:last-child { border-bottom: none; }
+  #site-search-suggestions .suggestion-item:hover { background: var(--surface-hover); }
+
   /* CAROUSEL GRID CENTER ADJUSTMENT */
   .post-view-wrapper .carousel-grid { 
     display: grid !important;
@@ -802,5 +884,118 @@ window.addEventListener('popstate', (event) => {
         lightboxHistoryEntryActive = false;
         if (window.myLightbox) window.myLightbox.close();
     }
+});
+
+// --- SITE-WIDE SEARCH ---
+// Same matching/scoring approach as the archive page's search, but reading
+// from build-time-embedded JSON instead of DOM checkboxes/cards (this page
+// has neither). Any future page can get identical search behavior by
+// embedding the same two JSON script tags and this same script.
+document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("site-search-input");
+    const clearBtn = document.getElementById("site-search-clear-btn");
+    const suggestionsBox = document.getElementById("site-search-suggestions");
+    const postsDataEl = document.getElementById("site-search-posts-data");
+    const tagsDataEl = document.getElementById("site-search-tags-data");
+    if (!searchInput || !suggestionsBox || !postsDataEl || !tagsDataEl) return;
+
+    let postIndex = [];
+    let tagIndex = [];
+    try {
+        postIndex = JSON.parse(postsDataEl.textContent) || [];
+        tagIndex = JSON.parse(tagsDataEl.textContent) || [];
+    } catch (e) {
+        return;
+    }
+
+    function matchScore(name, q) {
+        const lower = name.toLowerCase();
+        const idx = lower.indexOf(q);
+        if (idx === -1) return -1;
+        if (lower === q) return 3;
+        if (idx === 0) return 2;
+        if (/[\s-]/.test(lower[idx - 1])) return 1;
+        return 0;
+    }
+
+    function hideSuggestions() {
+        suggestionsBox.classList.add("search-suggestions-hidden");
+        suggestionsBox.innerHTML = "";
+    }
+
+    function renderSuggestions(query) {
+        const q = query.trim().toLowerCase();
+        if (!q) { hideSuggestions(); return; }
+
+        const matchedPosts = postIndex
+            .map(p => ({ ...p, score: matchScore(p.title, q) }))
+            .filter(p => p.score > -1)
+            .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title))
+            .slice(0, 5);
+
+        const seenSlugs = new Set();
+        const matchedTags = tagIndex
+            .map(t => ({ ...t, score: matchScore(t.name, q) }))
+            .filter(t => {
+                if (t.score === -1) return false;
+                const key = t.category + ":" + t.slug;
+                if (seenSlugs.has(key)) return false;
+                seenSlugs.add(key);
+                return true;
+            })
+            .sort((a, b) => b.score - a.score || a.name.localeCompare(b.name))
+            .slice(0, 6);
+
+        if (matchedPosts.length === 0 && matchedTags.length === 0) { hideSuggestions(); return; }
+
+        let html = "";
+        if (matchedTags.length) {
+            html += `<div style="padding: 8px 15px 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted);">Tags</div>`;
+            matchedTags.forEach((t, i) => {
+                html += `<div class="suggestion-item" data-type="tag" data-index="${i}" style="display: flex; justify-content: space-between; align-items: center;"><span>${t.name}</span><span style="font-size: 0.75rem; color: var(--text-muted); text-transform: capitalize;">${t.category}</span></div>`;
+            });
+        }
+        if (matchedPosts.length) {
+            html += `<div style="padding: 8px 15px 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted);">Posts</div>`;
+            matchedPosts.forEach((p, i) => {
+                html += `<div class="suggestion-item" data-type="post" data-index="${i}">${p.title}</div>`;
+            });
+        }
+        suggestionsBox.innerHTML = html;
+        suggestionsBox.classList.remove("search-suggestions-hidden");
+
+        suggestionsBox.querySelectorAll('.suggestion-item[data-type="post"]').forEach(el => {
+            el.addEventListener("click", () => {
+                window.location.href = matchedPosts[parseInt(el.dataset.index, 10)].url;
+            });
+        });
+        suggestionsBox.querySelectorAll('.suggestion-item[data-type="tag"]').forEach(el => {
+            el.addEventListener("click", () => {
+                const t = matchedTags[parseInt(el.dataset.index, 10)];
+                window.location.href = "/archive/?" + t.category + "=" + t.slug;
+            });
+        });
+    }
+
+    searchInput.addEventListener("input", () => renderSuggestions(searchInput.value));
+    searchInput.addEventListener("focus", () => {
+        if (searchInput.value.trim()) renderSuggestions(searchInput.value);
+    });
+    searchInput.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") hideSuggestions();
+    });
+
+    if (clearBtn) {
+        clearBtn.addEventListener("click", () => {
+            searchInput.value = "";
+            hideSuggestions();
+        });
+    }
+
+    document.addEventListener("click", (e) => {
+        if (!suggestionsBox.classList.contains("search-suggestions-hidden") && !e.target.closest(".site-search-wrapper")) {
+            hideSuggestions();
+        }
+    });
 });
 </script>

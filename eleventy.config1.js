@@ -28,7 +28,18 @@ const slugify = (text) => {
 // Single source of truth for which tags count as "languages" — used by the
 // sortedLanguages collection below AND exposed as global data so templates
 // (e.g. post.njk) can group language tags together without duplicating this list.
-const languageTerms = ["english", "russian", "spanish", "czech", "ukrainian", "german", "french", "japanese", "swahili", "ttalian", "hindi", "french", "chinese", "portuguese"];
+const languageTerms = ["english", "russian", "spanish", "czech", "ukrainian", "german", "french", "japanese", "swahili", "ttalian", "hindi", "french", "chinese", "portuguese", "turkish"];
+
+// Given a map of { slug: {name, slug, count} }, attaches an intensityPercent
+// (0-100) to each item, relative to whichever item in that same category has
+// the highest count. Used to color filter list entries brighter/dimmer based
+// on how many posts they actually have, so the busiest filters stand out at
+// a glance instead of every entry looking equally weighted.
+const withIntensity = (map) => {
+  const values = Object.values(map);
+  const maxCount = Math.max(1, ...values.map(v => v.count));
+  return values.map(v => ({ ...v, intensityPercent: Math.round((v.count / maxCount) * 100) }));
+};
 
 export default function(eleventyConfig) {
   eleventyConfig.addFilter("slugify", slugify);
@@ -233,7 +244,7 @@ eleventyConfig.addCollection("postsSorted", function(collectionApi) {
       creatorMap[slug].count++;
     });
 
-    return Object.values(creatorMap).sort((a, b) => a.name.localeCompare(b.name));
+    return withIntensity(creatorMap).sort((a, b) => a.name.localeCompare(b.name));
   });
 
   // 3. DYNAMIC LANGUAGES COLLECTION
@@ -253,7 +264,7 @@ eleventyConfig.addCollection("postsSorted", function(collectionApi) {
         }
       });
     });
-    return Object.values(langMap).sort((a, b) => a.name.localeCompare(b.name));
+    return withIntensity(langMap).sort((a, b) => a.name.localeCompare(b.name));
   });
 eleventyConfig.addCollection("sortedMisinformers", function(collectionApi) {
   const misinformerMap = {};
@@ -283,13 +294,13 @@ eleventyConfig.addCollection("sortedMisinformers", function(collectionApi) {
       misinformerMap[slug].count++;
     });
   });
-  return Object.values(misinformerMap).sort((a, b) => a.name.localeCompare(b.name));
+  return withIntensity(misinformerMap).sort((a, b) => a.name.localeCompare(b.name));
 });
   // 5. DYNAMIC TOPICS COLLECTION
   eleventyConfig.addCollection("sortedTopics", function(collectionApi) {
     const topicMap = {};
     const creatorSlugs = new Set();
-    const reservedTerms = ["all", "posts", "taglist", "uniqtags", "english", "russian", "spanish", "german", "french", "ukrainian", "czech", "japanese", "swahili", "italian", "hindi", "french", "chinese", "portuguese"];
+    const reservedTerms = ["all", "posts", "taglist", "uniqtags", "english", "russian", "spanish", "german", "french", "ukrainian", "turkish", "czech", "japanese", "swahili", "italian", "hindi", "french", "chinese", "portuguese"];
 
     // First pass: collect creators
     collectionApi.getAll().forEach(function(item) {
@@ -319,7 +330,7 @@ eleventyConfig.addCollection("sortedMisinformers", function(collectionApi) {
       });
     });
     
-    return Object.values(topicMap).sort((a, b) => a.name.localeCompare(b.name));
+    return withIntensity(topicMap).sort((a, b) => a.name.localeCompare(b.name));
   });
   // Add this helper filter
 eleventyConfig.addFilter("getMisinformerCount", function(collection, name) {
