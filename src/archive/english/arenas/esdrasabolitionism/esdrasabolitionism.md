@@ -1,6 +1,6 @@
 ---
 layout: post.njk
-title: "Esdras Sepúlveda - Multiple Abolitionisms?"
+title: "Esdras Sepúlveda - Multiple Abolitionisms? (Part 2)"
 thumbnail: "english/arenas/esdrasabolitionism.png"
 instagram_url: "https://www.instagram.com/p/DatID5zyFfe/" # Link to IG
 author: "David C Arenas"

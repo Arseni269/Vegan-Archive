@@ -3,7 +3,7 @@ layout: post.njk
 title: 'Animals are not our exploitable inferiors'
 thumbnail: "english/stargazing/notinferiors.png"
 instagram_url: "https://www.instagram.com/p/DausPq5C5zA/" # Link to IG
-author: "𝙿𝚊𝚝𝚜𝚢 𝙳𝚢𝚓𝚊𝚜"
+author: "Patsy Dyjas"
 tags: [outreach",]
 date: 2026-07-13
 ---
