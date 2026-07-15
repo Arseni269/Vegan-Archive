@@ -1,0 +1,1319 @@
+---
+layout: base.njk
+title: End animal use - Archive
+permalink: /archive/
+templateEngineOverride: njk
+---
+
+<link rel="stylesheet" href="{{ '/css/styles.css?v=1.1' | url }}">
+
+<style>
+  /* --- SMOOTH GRID ANIMATION CODES --- */
+
+  /* Base state for all cards inside your grid layout */
+  .post-card {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease !important;
+    visibility: visible;
+  }
+
+  /* The state when a card is filtered out by search or a checkbox */
+ .post-card.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* User can't click it */
+    transform: scale(0);  /* Shrinks to nothing */
+    height: 0;            /* Shrinks height so it doesn't push */
+    margin: 0;            /* Removes padding */
+    padding: 0;
+    position: relative;
+}
+
+  /* Eliminate the sidebar structure and allow full screen spread */
+  .archive-layout {
+    display: block !important;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    
+  }
+
+  /* FORCE A BEAUTIFUL 5-COLUMN GRID */
+  .archive-layout .imageboard-grid {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 20px !important;
+  }
+
+  /* Responsive fallback steps */
+  @media (max-width: 1400px) {
+    .archive-layout .imageboard-grid {
+      grid-template-columns: repeat(4, 1fr) !important;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .archive-layout .imageboard-grid {
+      grid-template-columns: repeat(3, 1fr) !important;
+    }
+  }
+
+  @media (max-width: 750px) {
+    .archive-layout .imageboard-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .archive-layout .imageboard-grid {
+      grid-template-columns: 1fr !important;
+      gap: 15px !important;
+      padding: 0px;
+    }
+
+    /* Optional: Ensure individual cards don't have side margins on mobile */
+    .post-card {
+      margin: 5px 0 !important;
+    }
+
+    .filter-panel-grid {
+      grid-template-columns: 110px minmax(0, 1fr) !important;
+    }
+    .filter-category-btn {
+      font-size: 0.8rem !important;
+      padding: 8px !important;
+    }
+    .filter-tag-panel {
+      max-height: 280px !important;
+    }
+    .filter-tag-group .filter-list {
+      grid-template-columns: 1fr !important;
+    }
+  }
+.filter-tag-group .filter-link span:not(.filter-count) {
+    font-family: 'Trebuchet MS', sans-serif !important;
+  }
+</style>
+
+<div class="archive-layout">
+  <header class="hero">
+    <div class="hero-main">
+      <h1 class="hero-title">Veganism is the principle that we have <u>no right to use</u> animals for our own ends.</h1>
+            <p class="hero-subtitle">The object of the Vegan Movement is to seek to end the use of animals by humans for food,
+               commodities, work, hunting, vivisection, and all other uses involving exploitation of animal life by humans.<br> 
+                It is not so much welfare that we seek, as freedom.<br> Our aim is not to make the present relationship between
+                 humans and animals <br> (which if honestly viewed is mostly one of master and slave) more tolerable, but to abolish it.
+                 <br>  In short, our aim is to <i>set the creatures free</i> — to return them to the balance and sanity of nature, <br> which is 
+                  their rightful place, and so to end the historic wrong perpetrated when humans first decided <br> they had the right 
+                  to exploit and enslave them.</p>
+      <p class="hero-citation"><a href="https://quilt-spring-c0c.notion.site/Leslie-Cross-7f30205a06324c518446fa6f3fd0933e">~ Leslie J Cross - 1951</a></p>
+    </div>
+    <aside class="hero-aside">
+      <div class="hero-links-card">
+        <p class="hero-links-title">Other vegan education</p>
+        <a href="https://understand-veganism.com/">Understand-veganism.com</a>
+        <a href="https://quilt-spring-c0c.notion.site/Leslie-Cross-7f30205a06324c518446fa6f3fd0933e">Leslie J Cross</a>
+        <a href="http://www.candidhominid.com/">Candid Hominid</a>
+      </div>
+      <div class="hero-actions">
+        <a href="https://ko-fi.com/arseni23" class="btn btn-accent">
+          Support the website
+          <img src="/archive/images/kofi.png" alt="" class="btn-icon">
+        </a>
+        <a href="https://discord.gg/GKBpJeXUBJ" class="btn btn-outline">
+          Join our Discord
+          <img src="/archive/images/discord.png" alt="" class="btn-icon">
+        </a>
+      </div>
+    </aside>
+  </header>
+
+  <div id="active-filters-container" class="active-filters-bar is-empty">
+    <div id="tags-list" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
+    <button id="clear-filters-btn" class="clear-all-btn">Clear All</button>
+  </div>
+
+  <div class="controls-row">
+    <div class="filter-bar">
+  <button id="filter-bar-toggle" class="filter-bar-toggle" aria-expanded="false" aria-controls="filter-panel">
+    <span class="filter-bar-toggle-label">
+      <span aria-hidden="true">▤</span> Filters
+      <span id="active-filter-badge" class="filter-badge" style="display:none;">0</span>
+    </span>
+    <span class="filter-bar-chevron" aria-hidden="true">▾</span>
+  </button>
+</div>
+
+  <div id="filter-panel" class="filter-panel" hidden>
+    <div class="filter-panel-grid">
+      <div class="filter-category-list" role="tablist">
+        <button type="button" class="filter-category-btn is-active" data-category="creators" role="tab" aria-selected="true">
+          Creators
+        </button>
+        <button type="button" class="filter-category-btn" data-category="topics" role="tab" aria-selected="false">
+          Topics
+        </button>
+        <button type="button" class="filter-category-btn" data-category="languages" role="tab" aria-selected="false">
+          Languages
+        </button>
+        <button type="button" class="filter-category-btn" data-category="personalities" role="tab" aria-selected="false">
+          Personalities
+        </button>
+      </div>
+
+      <div class="filter-tag-panel">
+        <div class="filter-tag-group" data-category-panel="creators">
+          <ul class="filter-list">
+            {% for creator in collections.sortedCreators %}
+            <li><label class="filter-link"><input type="checkbox" name="creator" value="{{ creator.slug }}" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) {{ creator.intensityPercent }}%, var(--text-primary));">{{ creator.name }}</span> <span class="filter-count" data-count-target="{{ creator.slug }}" style="color: color-mix(in srgb, var(--accent) {{ creator.intensityPercent }}%, var(--text-primary));">({{ creator.count }})</span></label></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="filter-tag-group" data-category-panel="topics" hidden>
+          <ul class="filter-list">
+            {% for topic in collections.sortedTopics %}
+            <li><label class="filter-link"><input type="checkbox" name="topic" value="{{ topic.slug }}" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) {{ topic.intensityPercent }}%, var(--text-primary));">{{ topic.name }}</span> <span class="filter-count" data-count-target="{{ topic.slug }}" style="color: color-mix(in srgb, var(--accent) {{ topic.intensityPercent }}%, var(--text-primary));">({{ topic.count }})</span></label></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="filter-tag-group" data-category-panel="languages" hidden>
+          <ul class="filter-list">
+            {% for lang in collections.sortedLanguages %}
+            <li><label class="filter-link"><input type="checkbox" name="language" value="{{ lang.slug }}" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) {{ lang.intensityPercent }}%, var(--text-primary));">{{ lang.name }}</span> <span class="filter-count" data-count-target="{{ lang.slug }}" style="color: color-mix(in srgb, var(--accent) {{ lang.intensityPercent }}%, var(--text-primary));">({{ lang.count }})</span></label></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="filter-tag-group" data-category-panel="personalities" hidden>
+          <ul class="filter-list">
+            {% for misinformer in collections.sortedMisinformers %}
+            <li><label class="filter-link"><input type="checkbox" name="misinformer" value="{{ misinformer.slug }}" class="filter-checkbox"> <span style="color: color-mix(in srgb, var(--accent) {{ misinformer.intensityPercent }}%, var(--text-primary));">{{ misinformer.name }}</span> <span class="filter-count" data-count-target="{{ misinformer.slug }}" style="color: color-mix(in srgb, var(--accent) {{ misinformer.intensityPercent }}%, var(--text-primary));">({{ misinformer.count }})</span></label></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="input-container">
+      <input type="text" id="archive-search-input" placeholder="🔍 Animals are not ours...">
+      <button id="clear-search-btn" class="clear-btn" aria-label="Clear search">✖</button>
+      <div id="search-suggestions-container" class="search-suggestions-hidden"></div>
+    </div>
+
+    <select id="sort-order" class="custom-select">
+      <option value="newest">Newest First</option>
+      <option value="oldest">Oldest First</option>
+    </select>
+  </div>
+</div>
+<div class="post-layout-grid" class="filter-header">
+  <main class="main-content" style="width: 100%;">
+    <div class="imageboard-grid" id="archive-grid">
+      <div id="no-results-message" style="display: none; padding: 40px; text-align: center; color: #64748b;">
+    <p>No results found for your search.</p>
+    
+  </div>
+      
+      {% for post in collections.posts %}
+      {% if post.data.title and post.url != "/archive/" %}
+
+      {% set authorSlug = post.data.author | lower | replace(r/[^a-z0-9]+/g, '-') if post.data.author else '' %}
+      {% set tagSlugs = "" %}
+
+      {# Build text blob for structural real-time text matching #}
+      {% set searchBlob = post.data.title | lower %}
+      {% if post.data.author %}{% set searchBlob = searchBlob + " " + (post.data.author | lower) %}{% endif %}
+
+      {% for tag in post.data.tags %}
+      {% if tag %}
+      {% set cleanTag = tag | lower | replace(r/[^a-z0-9]+/g, '-') %}
+      {% set tagSlugs = tagSlugs + ("," if tagSlugs else "") + cleanTag %}
+      {% set searchBlob = searchBlob + " " + (tag | lower) %}
+      {% endif %}
+      {% endfor %}
+
+      {% for m in post.data.misinformer | ensureArray %}
+      {% set searchBlob = searchBlob + " " + (m | lower) %}
+      {% endfor %}
+
+      <div class="post-card" 
+     data-creator="{{ post.data.author | slugify }}" 
+     data-tags="{% for tag in post.data.tags %}{{ tag | slugify }}{% if not loop.last %},{% endif %}{% endfor %}" 
+     data-misinformer="{% for m in post.data.misinformer | ensureArray %}{{ m | slugify }}{% if not loop.last %},{% endif %}{% endfor %}"
+     data-search="{{ searchBlob }}"
+     data-date="{{ post.date.getTime() }}">
+        <div class="post-thumbnail" style="position: relative; overflow: hidden; border-radius: 0px;">
+          <a href="{{ post.url | url }}" style="display: block; text-decoration: none;">
+            {% if post.data.thumbnail %}
+            <img src="{{ post.data.thumbnail | url }}" alt="{{ post.data.title }}" class="archive-thumbnail"
+            style="width: 100%; display: block; height: auto;">
+            {% else %}
+            {% set galleryData = post.inputPath | getImagesData %}
+            {% if galleryData.files.length > 0 %}
+            {% image galleryData.folder + "/" + galleryData.files[0].name, post.data.title %}
+            {% else %}
+            <div style="background:#e2e8f0; padding:40px 10px; text-align:center; color:#64748b; font-size:0.85rem;">No
+              Image Available</div>
+            {% endif %}
+            {% endif %}
+
+            {% if post.data.video_path %}
+            <div class="video-badge"
+              style="position: absolute; bottom: 12px; right: 12px; background: rgba(15, 23, 42, 0.9); color: #fff; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; border-radius: 4px; display: inline-flex; align-items: center; gap: 5px; backdrop-filter: blur(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+              <span>▶</span> Watch Video
+            </div>
+            {% endif %}
+          </a>
+        </div>
+
+        <div class="post-details">
+          <h2 class="post-title"><a href="{{ post.url | url }}">
+              {% if post.data.useQuotes %}“{% endif %}{{ post.data.title }}{% if post.data.useQuotes %}”{% endif %}
+            </a></h2>
+          {% if post.data.author %}
+          <div class="post-author"
+            style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0.5rem 0; font-weight: 500;">By {{
+            post.data.author }}</div>
+          {% endif %}
+          {% if post.data.instagram_url %}
+          <div class="ig-link-container"><a href="{{ post.data.instagram_url }}" target="_blank"
+              rel="noopener noreferrer" class="instagram-link">Instagram</a></div>
+          {% endif %}
+        </div>
+        
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+      </main>
+    <aside class="sidebar-column">
+      </aside>
+       </div>
+  <button id="back-to-top" class="back-to-top-btn" title="Go to top">
+    &#8679
+  </button>
+
+  <style>
+
+  .sidebar-column {
+    width: 350px !important;
+    min-width: 350px !important;
+    max-width: 350px !important;
+    flex: 0 0 350px !important;
+}
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999; /* Make sure this is higher than any other element */
+    display: block; /* Ensure it isn't set to 'none' */
+}
+    .back-to-top-btn {
+      position: fixed;
+      bottom: 40px;
+      /* Sits just above your mobile FAB */
+      right: 24px;
+      background: #0f172a;
+      color: #ffffff;
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border-color: white;
+      border: solid;
+      font-size: 1.8rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      z-index: 9998;
+      display: none;
+      /* Hidden by default */
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      transition: transform 0.2s ease, opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .back-to-top-btn.is-visible {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .back-to-top-btn:hover {
+    /* Moves the button up by 5 pixels on hover */
+    transform: translateY(-5px);
+    /* Optional: adds a slightly larger shadow for a "lifting" effect */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+
+  </style>
+
+</div>
+
+<style>
+  .mobile-only-filter-fab {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--accent);
+    color: var(--accent-contrast);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    .mobile-only-filter-fab {
+      display: inline-flex !important;
+    }
+  }
+
+  /* --- HERO --- */
+  .hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 32px;
+    flex-wrap: wrap;
+    padding: 40px 0 24px 0;
+  }
+
+  .hero-main {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .hero-kicker {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    color: var(--accent);
+    margin: 0 0 12px 0;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    margin: 0 0 1.25rem 0;
+    font-size: 2.75rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+    color: var(--text-primary);
+  }
+
+  .hero-subtitle {
+    margin: 0 0 2rem 0;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 800px;
+  }
+
+  .hero-citation {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+
+  .hero-citation a {
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  .hero-citation a:hover {
+    color: var(--accent);
+  }
+
+  .hero-aside {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 280px;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+
+  .btn-icon {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+  }
+
+  .btn-accent {
+    background: var(--accent);
+    color: var(--accent-contrast);
+  }
+
+  .btn-accent:hover {
+    background: var(--accent-hover);
+  }
+
+  .btn-outline {
+    background: var(--surface-2);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--border-strong);
+    background: var(--surface-hover);
+  }
+
+  .hero-links-card {
+    padding: 14px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .hero-links-title {
+    margin: 0 0 4px 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-primary);
+  }
+
+  .hero-links-card a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+
+  .hero-links-card a:hover {
+    color: var(--accent);
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      flex-direction: column;
+      align-items: stretch;
+      text-align: left;
+    }
+    .hero-aside {
+      width: 100%;
+    }
+  }
+
+  /* --- ACTIVE FILTERS: always visible above the search bar, independent of
+     whether the filter dropdown itself is open or closed. Space is always
+     reserved (never display:none) so it can never push the controls row
+     below it up or down when filters are added/removed. --- */
+  .active-filters-bar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    height: 48px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    padding: 8px 16px;
+    margin: 0 0 12px 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: opacity 0.15s ease;
+  }
+
+  .active-filters-bar.is-empty {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* --- CONTROLS ROW: filters, search, sort, all in one aligned row --- */
+  .controls-row {
+    position: sticky;
+    top: var(--site-header-height, 56px);
+    z-index: 900;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 0 0 1.5rem 0;
+    flex-wrap: wrap;
+  }
+
+  .controls-row .filter-bar {
+    flex: 1 1 260px;
+    min-width: 200px;
+  }
+
+  .controls-row .input-container {
+    flex: 2 1 320px;
+    min-width: 220px;
+  }
+
+  .controls-row .custom-select {
+    flex: 0 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    .controls-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .controls-row .filter-bar,
+    .controls-row .input-container,
+    .controls-row .custom-select {
+      flex: 1 1 auto;
+      width: 100%;
+    }
+  }
+
+  /* --- OVERALL GRID FADE STYLES --- */
+  #archive-grid {
+    min-height: 80vh;
+    display: grid;
+    transition: opacity 0.2s ease-in-out !important;
+    opacity: 1;
+  }
+
+  /* When this class is active, the entire gallery vanishes smoothly */
+  #archive-grid.grid-is-typing {
+    opacity: 0;
+  }
+
+  .filter-bar {
+    position: static;
+  }
+
+  .filter-bar-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 44px;
+    box-sizing: border-box;
+    padding: 0 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+  }
+
+  .filter-bar-toggle:hover {
+    border-color: var(--border-strong);
+  }
+
+  .filter-bar-toggle.is-open {
+    border-color: var(--accent);
+  }
+
+  .filter-bar-toggle-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .filter-badge {
+    background: var(--accent);
+    color: var(--accent-contrast);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 1px 8px;
+    border-radius: 999px;
+  }
+
+  .filter-bar-chevron {
+    font-size: 0.75rem;
+    color: var(--text-primary);
+    transition: transform 0.25s ease;
+  }
+
+  .filter-bar-toggle.is-open .filter-bar-chevron {
+    transform: rotate(180deg);
+  }
+
+  .filter-panel {
+    position: absolute;
+    top: 100%;
+    margin-top: 4px;
+    left: 0;
+    right: 0;
+    z-index: 500;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  .filter-panel-grid {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .filter-category-list {
+    border-right: 1px solid var(--border);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .filter-category-btn {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    padding: 10px 12px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+  }
+
+  .filter-category-btn:hover {
+    background: var(--surface-hover);
+  }
+
+  .filter-category-btn.is-active {
+    background: var(--accent);
+    color: var(--accent-contrast);
+  }
+
+  .filter-tag-panel {
+    padding: 16px 20px;
+    max-height: 340px;
+    overflow-y: auto;
+  }
+
+  .filter-tag-group .filter-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2px 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .filter-tag-group .filter-list li {
+    margin: 0;
+  }
+
+  .filter-tag-group .filter-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 4px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .filter-tag-group .filter-link:hover {
+    background: var(--surface-hover);
+  }
+
+  .filter-tag-group .filter-link span:not(.filter-count) {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .filter-tag-group .filter-count {
+    font-size: 0.8rem;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .filter-checkbox:checked + span + .filter-count {
+    font-weight: bold;
+  }
+
+  .clear-all-btn {
+    cursor: pointer;
+    font-size: 0.8rem;
+    border: none;
+    background: var(--accent-bg);
+    color: var(--accent);
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  .main-content {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  /* --- SEARCH --- */
+  .input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  #archive-search-input {
+    width: 100%;
+    height: 44px;
+    box-sizing: border-box;
+    padding: 0 35px 0 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+    background: var(--surface);
+    color: var(--text-primary);
+  }
+
+  #archive-search-input::placeholder {
+    color: var(--text-primary);
+  }
+
+  #archive-search-input:focus {
+    border-color: var(--accent);
+  }
+
+  #search-suggestions-container {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    max-height: 240px;
+    overflow-y: auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    z-index: 950;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  .search-suggestions-hidden { display: none !important; }
+
+  .suggestion-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-primary);
+  }
+  .suggestion-item:last-child { border-bottom: none; }
+  .suggestion-item:hover { background: var(--surface-hover); }
+
+  .clear-btn {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    display: none;
+  }
+
+  #archive-search-input:not(:placeholder-shown) + .clear-btn {
+    display: block;
+  }
+
+  .custom-select {
+    height: 44px;
+    box-sizing: border-box;
+    padding: 0 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background-color: var(--surface);
+    color: var(--text-secondary);
+    cursor: pointer;
+    outline: none;
+  }
+
+  .custom-select:hover {
+    border-color: var(--border-strong);
+  }
+
+  .filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: auto;
+  }
+
+  .is-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    filter: grayscale(1);
+  }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Elements
+    const sortDropdown = document.getElementById('sort-order');
+    const checkboxes = document.querySelectorAll(".filter-checkbox");
+    const postCards = document.querySelectorAll(".post-card");
+    const clearFilterBtn = document.getElementById("clear-filters-btn");
+    const clearSearchBtn = document.getElementById("clear-search-btn");
+    const searchInput = document.getElementById("archive-search-input");
+    const archiveGrid = document.getElementById("archive-grid");
+    const noResultsMsg = document.getElementById("no-results-message");
+    const searchContainer = document.getElementById("search-suggestions-container");
+    const slugify = text => text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : '';
+
+    // --- SEARCH SUGGESTIONS INDEX ---
+    // Built once from what's already rendered — no extra data needed.
+    const tagIndex = Array.from(checkboxes).map(box => ({
+        name: box.nextElementSibling ? box.nextElementSibling.innerText.trim() : box.value,
+        slug: box.value,
+        category: box.name,
+        checkboxRef: box
+    }));
+    const postIndex = Array.from(postCards).map(card => {
+        const link = card.querySelector(".post-title a");
+        return link ? { name: link.innerText.trim(), href: link.getAttribute("href") } : null;
+    }).filter(Boolean);
+
+    // --- PERSISTENCE FUNCTIONS ---
+    function saveFilters() {
+        const activeFilters = { creator: [], topic: [], language: [], misinformer: [] };
+        checkboxes.forEach(box => { if (box.checked) activeFilters[box.name].push(box.value); });
+        sessionStorage.setItem('archiveFilters', JSON.stringify(activeFilters));
+    }
+
+    function restoreFilters() {
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Case 1: URL has parameters (highest priority — this is what makes shared links work)
+        if (urlParams.toString()) {
+            checkboxes.forEach(box => {
+                if (urlParams.getAll(box.name).includes(box.value)) {
+                    box.checked = true;
+                }
+            });
+            return;
+        }
+
+        // Case 2: No URL params, fall back to whatever was last selected this session
+        const saved = sessionStorage.getItem('archiveFilters');
+        if (!saved) return;
+        const activeFilters = JSON.parse(saved);
+        checkboxes.forEach(box => {
+            if (activeFilters[box.name] && activeFilters[box.name].includes(box.value)) {
+                box.checked = true;
+            }
+        });
+    }
+
+    // --- SORT FUNCTION ---
+    function triggerSort(order) {
+        const grid = document.getElementById('archive-grid');
+        const posts = Array.from(grid.querySelectorAll('.post-card'));
+        posts.sort((a, b) => {
+            const dateA = parseInt(a.getAttribute('data-date') || 0);
+            const dateB = parseInt(b.getAttribute('data-date') || 0);
+            return order === 'newest' ? dateB - dateA : dateA - dateB;
+        });
+        posts.forEach(post => grid.appendChild(post));
+    }
+
+    // --- FILTER LOGIC ---
+    function filterPosts(isInitial = false) {
+        const searchQuery = searchInput ? searchInput.value.toLowerCase().trim() : "";
+        const activeFilters = { creator: [], topic: [], language: [], misinformer: [] };
+        checkboxes.forEach(box => { if (box.checked) activeFilters[box.name].push(box.value); });
+
+        const dynamicCounts = {};
+        checkboxes.forEach(input => dynamicCounts[input.value.trim()] = 0);
+
+        let visibleCount = 0;
+        postCards.forEach(card => {
+            const creator = card.getAttribute('data-creator');
+            const tagsAttr = card.getAttribute('data-tags') || "";
+            const tags = tagsAttr.split(',').map(t => t.trim());
+            const misinformerAttr = card.getAttribute('data-misinformer') || "";
+            const misinformers = misinformerAttr.split(',').map(m => m.trim()).filter(Boolean);
+            const textContent = card.getAttribute('data-search') || "";
+
+            const matchSearch = textContent.includes(searchQuery);
+            const matchCreator = activeFilters.creator.length === 0 || activeFilters.creator.every(c => c === creator);
+            const matchMisinformer = activeFilters.misinformer.length === 0 || activeFilters.misinformer.every(c => misinformers.includes(c));
+            const matchTopics = activeFilters.topic.length === 0 || activeFilters.topic.every(t => tags.includes(t));
+            const matchLang = activeFilters.language.length === 0 || activeFilters.language.every(l => tags.includes(l));
+
+            const isMatch = matchSearch && matchCreator && matchMisinformer && matchTopics && matchLang;
+
+            if (isMatch) {
+                card.style.display = "";
+                visibleCount++;
+                const attributes = [creator, ...tags, ...misinformers].filter(Boolean);
+                attributes.forEach(val => { if (dynamicCounts.hasOwnProperty(val)) dynamicCounts[val]++; });
+            } else {
+                card.style.display = "none";
+            }
+        });
+
+        if (noResultsMsg) noResultsMsg.style.display = (visibleCount === 0) ? 'block' : 'none';
+        checkboxes.forEach(box => {
+            const count = dynamicCounts[box.value.trim()] || 0;
+            const isDisabled = count === 0 && !box.checked;
+            box.disabled = isDisabled;
+            if (box.parentElement) box.parentElement.classList.toggle("is-disabled", isDisabled);
+        });
+
+        if (typeof updateActiveFiltersDisplay === 'function') updateActiveFiltersDisplay();
+        updateFilterCounts(dynamicCounts);
+    }
+
+    // --- UI HELPERS ---
+    function updateActiveFiltersDisplay() {
+        const container = document.getElementById("active-filters-container");
+        const tagsList = document.getElementById("tags-list");
+        const checked = document.querySelectorAll(".filter-checkbox:checked");
+        const badge = document.getElementById("active-filter-badge");
+        if (badge) {
+            badge.textContent = checked.length;
+            badge.style.display = checked.length > 0 ? "inline-block" : "none";
+        }
+        if (!tagsList) return;
+        tagsList.innerHTML = "";
+        if (checked.length > 0) {
+            container.classList.remove("is-empty");
+            checked.forEach(box => {
+                const tag = document.createElement("span");
+                tag.innerHTML = `${box.nextElementSibling.innerText} <span style="cursor:pointer; margin-left:8px;">&times;</span>`;
+                tag.style = "background: var(--surface-2, #e2e8f0); color: var(--text-primary, #0f172a); padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; display: flex; align-items: center; border: 1px solid var(--border, transparent);";
+                tag.onclick = () => { box.checked = false; saveFilters(); filterPosts(); updateURL(); };
+                tagsList.appendChild(tag);
+            });
+        } else { container.classList.add("is-empty"); }
+    }
+
+    function updateFilterCounts(counts) {
+        document.querySelectorAll('.filter-count').forEach(span => {
+            const target = span.getAttribute('data-count-target');
+            if (target in counts) {
+                span.textContent = `(${counts[target]})`;
+                span.closest('label').style.opacity = (counts[target] === 0) ? "0.3" : "1";
+            }
+        });
+    }
+
+    function hideSuggestions() {
+        if (!searchContainer) return;
+        searchContainer.classList.add("search-suggestions-hidden");
+        searchContainer.innerHTML = "";
+    }
+
+    function matchScore(name, q) {
+        const lower = name.toLowerCase();
+        const idx = lower.indexOf(q);
+        if (idx === -1) return -1;
+        if (lower === q) return 3;                                  // exact match
+        if (idx === 0) return 2;                                     // starts with query
+        if (/[\s-]/.test(lower[idx - 1])) return 1;                  // starts a later word
+        return 0;                                                    // buried mid-word
+    }
+
+    function renderSuggestions(query) {
+        if (!searchContainer) return;
+        const q = query.trim().toLowerCase();
+        if (!q) { hideSuggestions(); return; }
+
+        const matchedPosts = postIndex
+            .map(p => ({ ...p, score: matchScore(p.name, q) }))
+            .filter(p => p.score > -1)
+            .sort((a, b) => b.score - a.score || a.name.localeCompare(b.name))
+            .slice(0, 5);
+
+        // De-duplicate tags that share a name across categories (e.g. same word
+        // appearing as both a topic and a language) so suggestions aren't confusing.
+        const seenSlugs = new Set();
+        const matchedTags = tagIndex
+            .map(t => ({ ...t, score: matchScore(t.name, q) }))
+            .filter(t => {
+                if (t.score === -1) return false;
+                const key = t.category + ":" + t.slug;
+                if (seenSlugs.has(key)) return false;
+                seenSlugs.add(key);
+                return true;
+            })
+            .sort((a, b) => b.score - a.score || a.name.localeCompare(b.name))
+            .slice(0, 6);
+
+        if (matchedPosts.length === 0 && matchedTags.length === 0) { hideSuggestions(); return; }
+
+        let html = "";
+        if (matchedTags.length) {
+            html += `<div style="padding: 8px 15px 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-primary);">Tags</div>`;
+            matchedTags.forEach((t, i) => {
+                html += `<div class="suggestion-item" data-type="tag" data-index="${i}" style="display: flex; justify-content: space-between; align-items: center;"><span>${t.name}</span><span style="font-size: 0.75rem; color: var(--text-primary); text-transform: capitalize;">${t.category}</span></div>`;
+            });
+        }
+        if (matchedPosts.length) {
+            html += `<div style="padding: 8px 15px 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-primary);">Posts</div>`;
+            matchedPosts.forEach((p, i) => {
+                html += `<div class="suggestion-item" data-type="post" data-index="${i}">${p.name}</div>`;
+            });
+        }
+        searchContainer.innerHTML = html;
+        searchContainer.classList.remove("search-suggestions-hidden");
+
+        searchContainer.querySelectorAll('.suggestion-item[data-type="post"]').forEach(el => {
+            el.addEventListener("click", () => {
+                window.location.href = matchedPosts[parseInt(el.dataset.index, 10)].href;
+            });
+        });
+        searchContainer.querySelectorAll('.suggestion-item[data-type="tag"]').forEach(el => {
+            el.addEventListener("click", () => {
+                const t = matchedTags[parseInt(el.dataset.index, 10)];
+                t.checkboxRef.checked = true;
+                saveFilters();
+                filterPosts();
+                updateURL();
+                searchInput.value = "";
+                hideSuggestions();
+            });
+        });
+    }
+
+    // --- LISTENERS ---
+    if (sortDropdown) {
+        sortDropdown.value = 'newest';
+        triggerSort(sortDropdown.value);
+        sortDropdown.addEventListener('change', (e) => triggerSort(e.target.value));
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener("input", () => {
+            renderSuggestions(searchInput.value);
+            clearTimeout(window.typingTimeout);
+            window.typingTimeout = setTimeout(filterPosts, 250);
+        });
+        searchInput.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") hideSuggestions();
+        });
+        searchInput.addEventListener("focus", () => {
+            if (searchInput.value.trim()) renderSuggestions(searchInput.value);
+        });
+    }
+
+    document.addEventListener("click", (e) => {
+        if (searchContainer && !searchContainer.classList.contains("search-suggestions-hidden") && !e.target.closest(".input-container")) {
+            hideSuggestions();
+        }
+    });
+
+    if (clearSearchBtn) {
+        clearSearchBtn.addEventListener("click", () => {
+            searchInput.value = "";
+            filterPosts();
+            hideSuggestions();
+        });
+    }
+
+    checkboxes.forEach(box => box.addEventListener("change", () => {
+        saveFilters();
+        filterPosts();
+        updateURL();
+    }));
+function updateURL() {
+    const params = new URLSearchParams();
+    
+    // Collect all checked values
+    checkboxes.forEach(box => {
+        if (box.checked) {
+            params.append(box.name, box.value);
+        }
+    });
+
+    // Update the URL without reloading
+    const newRelativePathQuery = window.location.pathname + '?' + params.toString();
+    history.replaceState(null, '', newRelativePathQuery);
+}
+    if (clearFilterBtn) clearFilterBtn.addEventListener("click", () => { 
+        checkboxes.forEach(b => b.checked = false); 
+        sessionStorage.removeItem('archiveFilters');
+        filterPosts(); 
+        updateURL();
+    });
+// Use a more robust selector that finds the button anywhere on the page
+const backToTopBtn = document.getElementById("back-to-top");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 300) {
+    backToTopBtn.classList.add("is-visible");
+  } else {
+    backToTopBtn.classList.remove("is-visible");
+  }
+});
+
+backToTopBtn.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
+    // --- FILTER BAR: open/close + category switching ---
+    const filterBarToggle = document.getElementById("filter-bar-toggle");
+    const filterPanel = document.getElementById("filter-panel");
+    const categoryBtns = document.querySelectorAll(".filter-category-btn");
+    const tagGroups = document.querySelectorAll(".filter-tag-group");
+    const supportsHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+    function setActiveCategory(category) {
+        categoryBtns.forEach(btn => {
+            const isActive = btn.dataset.category === category;
+            btn.classList.toggle("is-active", isActive);
+            btn.setAttribute("aria-selected", String(isActive));
+        });
+        tagGroups.forEach(group => {
+            group.hidden = group.dataset.categoryPanel !== category;
+        });
+    }
+
+    categoryBtns.forEach(btn => {
+        btn.addEventListener("click", () => setActiveCategory(btn.dataset.category));
+        if (supportsHover) {
+            btn.addEventListener("mouseenter", () => setActiveCategory(btn.dataset.category));
+        }
+    });
+
+    if (filterBarToggle && filterPanel) {
+        filterBarToggle.addEventListener("click", () => {
+            const isOpen = !filterPanel.hidden;
+            filterPanel.hidden = isOpen;
+            filterBarToggle.setAttribute("aria-expanded", String(!isOpen));
+            filterBarToggle.classList.toggle("is-open", !isOpen);
+        });
+
+        // Clicks inside the panel (checkboxes, category buttons, etc.) should
+        // never count as "outside" — stop them here rather than relying on
+        // the outside-click listener below to correctly tell the difference.
+        filterPanel.addEventListener("click", (e) => e.stopPropagation());
+
+        // Same defensive stop for the active-filters bar (Clear All, chip
+        // removal), which now lives above the search bar rather than inside
+        // the dropdown panel.
+        const activeFiltersBar = document.getElementById("active-filters-container");
+        if (activeFiltersBar) activeFiltersBar.addEventListener("click", (e) => e.stopPropagation());
+
+        // Click anywhere outside the filter bar (and outside the active-filters
+        // bar, which now lives above the search bar rather than inside the
+        // dropdown) closes the panel.
+        document.addEventListener("click", (e) => {
+            if (!filterPanel.hidden && !e.target.closest(".filter-bar") && !e.target.closest("#active-filters-container")) {
+                filterPanel.hidden = true;
+                filterBarToggle.setAttribute("aria-expanded", "false");
+                filterBarToggle.classList.remove("is-open");
+            }
+        });
+    }
+
+    // --- NEXT/PREV NAVIGATION CONTEXT ---
+    // Right before the user actually navigates into a post, snapshot the
+    // ordered list of URLs currently visible in the grid (i.e. respecting
+    // whatever filters/search are active) so post.njk can offer next/prev
+    // links that move through that same filtered set instead of the full
+    // unfiltered archive.
+    const archiveGridEl = document.getElementById("archive-grid");
+    if (archiveGridEl) {
+        archiveGridEl.addEventListener("click", (e) => {
+            const link = e.target.closest("a");
+            if (!link) return;
+            const card = link.closest(".post-card");
+            if (!card) return;
+
+            const visibleUrls = Array.from(document.querySelectorAll(".post-card"))
+                .filter(c => !c.classList.contains("is-hidden") && c.style.display !== "none")
+                .map(c => {
+                    const a = c.querySelector(".post-title a");
+                    return a ? a.getAttribute("href") : null;
+                })
+                .filter(Boolean);
+
+            const clickedTitleLink = card.querySelector(".post-title a");
+            const clickedUrl = clickedTitleLink ? clickedTitleLink.getAttribute("href") : null;
+
+            const payload = {
+                urls: visibleUrls,
+                archiveUrl: window.location.pathname + window.location.search,
+                clickedUrl: clickedUrl,
+                savedAt: Date.now()
+            };
+            localStorage.setItem("archiveNavContext", JSON.stringify(payload));
+        });
+    }
+
+    // --- INITIALIZATION ---
+    restoreFilters(); // Restore state first
+    filterPosts(true); // Then run the first filter
+
+    // Scroll the previously-clicked post's card back into view when arriving
+    // back from a post via "Back to Archive" — only if the URL (i.e. the
+    // filters/search in effect) matches exactly what was saved, so a normal
+    // fresh visit to /archive/ never gets an unexpected jump. Targeting a
+    // specific element (rather than a raw scrollY pixel) means this stays
+    // correct even though thumbnail images are still lazy-loading and
+    // changing the page's total height at this point.
+    (function restoreScrollPosition() {
+        const raw = localStorage.getItem("archiveNavContext");
+        if (!raw) return;
+        let payload;
+        try {
+            payload = JSON.parse(raw);
+        } catch (e) {
+            return;
+        }
+        const { archiveUrl, clickedUrl, savedAt } = payload || {};
+        if (!clickedUrl || !archiveUrl) return;
+
+        const ONE_HOUR_MS = 60 * 60 * 1000;
+        if (!savedAt || Date.now() - savedAt > ONE_HOUR_MS) return;
+
+        const currentUrl = window.location.pathname + window.location.search;
+        if (currentUrl !== archiveUrl) return;
+
+        const scrollToCard = () => {
+            const targetLink = Array.from(document.querySelectorAll(".post-title a"))
+                .find(a => a.getAttribute("href") === clickedUrl);
+            const targetCard = targetLink ? targetLink.closest(".post-card") : null;
+            if (targetCard) {
+                targetCard.scrollIntoView({ block: "center" });
+            }
+        };
+
+        // Wait for the page to finish loading (images included) so the
+        // layout is stable before scrolling — otherwise images still
+        // loading below the target would shift it right after we land on it.
+        if (document.readyState === "complete") {
+            scrollToCard();
+        } else {
+            window.addEventListener("load", scrollToCard, { once: true });
+        }
+    })();
+});
+</script>

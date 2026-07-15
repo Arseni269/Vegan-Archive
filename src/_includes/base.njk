@@ -22,16 +22,13 @@
     
     <meta property="og:title" content="{{ pageTitle }}">
     <meta property="og:description" content="{{ pageDesc }}">
-    <meta property="og:url" content="https://end-animal-use.com{{ page.url }}">
-    <meta property="og:type" content="website"> <!-- This fixes your missing property error -->
-    
-    <!-- Optimized Image Tags -->
     <meta property="og:image" content="{{ pageImg }}">
-    <meta property="og:image:type" content="image/jpeg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    
+    <meta property="og:url" content="https://end-animal-use.com{{ page.url }}">
     <meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="{{ pageImg }}">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -227,13 +224,17 @@
 
       // Clicking the logo should always be a clean slate — without this,
       // restoreFilters() on the archive page falls back to whatever's saved
-      // in sessionStorage whenever the URL has no query params, so a "fresh"
-      // visit via the logo would silently re-apply your last filters.
+      // in sessionStorage whenever the URL has no query params (silently
+      // re-applying old filters), and separately the scroll-restore /
+      // next-prev logic reads its own saved context from localStorage and
+      // would jump straight back to wherever you last were in the gallery.
+      // Both need clearing for the logo to be a genuine full reset.
       (function() {
         var logo = document.getElementById("site-logo-link");
         if (!logo) return;
         logo.addEventListener("click", function() {
           sessionStorage.removeItem("archiveFilters");
+          localStorage.removeItem("archiveNavContext");
         });
       })();
     </script>
