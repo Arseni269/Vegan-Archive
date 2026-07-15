@@ -19,13 +19,13 @@ templateEngineOverride: njk
       {# Languages first, grouped together, regardless of where they land in the merged tags array #}
       {% for tag in tags %}
         {% if (tag | slugify) in languageTerms %}
-          <a href="{{ '/archive/?tag=' + (tag | slugify) | urlencode | url }}" class="post-inline-tag" style="text-decoration: none;">#{{ tag }}</a>
+          <a href="{{ '/archive/?language=' + (tag | slugify) | urlencode | url }}" class="post-inline-tag" style="text-decoration: none;">#{{ tag }}</a>
         {% endif %}
       {% endfor %}
       {# Then everything else #}
       {% for tag in tags %}
         {% if tag != "posts" and tag != "all" and (tag | slugify) not in languageTerms %}
-          <a href="{{ '/archive/?tag=' + (tag | slugify) | urlencode | url }}" class="post-inline-tag" style="text-decoration: none;">#{{ tag }}</a>
+          <a href="{{ '/archive/?topic=' + (tag | slugify) | urlencode | url }}" class="post-inline-tag" style="text-decoration: none;">#{{ tag }}</a>
         {% endif %}
       {% endfor %}
       {% for name in misinformer | ensureArray %}
