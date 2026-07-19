@@ -1,0 +1,68 @@
+---
+layout: base.njk
+templateEngineOverride: njk
+title: "Founding Letters"
+permalink: /letters/
+---
+<style>
+  .letters-index-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  .letters-index-title {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .letters-index-subtitle {
+    color: var(--text-secondary);
+    margin: 0 0 2rem 0;
+    max-width: 640px;
+  }
+
+  .author-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-decoration: none;
+    margin-bottom: 0.75rem;
+  }
+  .author-card:hover {
+    border-color: var(--border-strong);
+    background: var(--surface-hover);
+  }
+
+  .author-card-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .author-card-count {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+</style>
+
+<div class="letters-index-wrapper">
+  <h1 class="letters-index-title">Founding Letters</h1>
+  <p class="letters-index-subtitle">Original correspondence from the founders of the vegan movement, preserved here in full alongside scanned copies of the source documents.</p>
+
+  {% for author in collections.letterAuthors %}
+  <a href="/letters/{{ author.slug }}/" class="author-card">
+    <span class="author-card-name">{{ author.name }}</span>
+    <span class="author-card-count">{{ author.letters.length }} letter{% if author.letters.length != 1 %}s{% endif %}</span>
+  </a>
+  {% else %}
+  <p style="color: var(--text-muted);">No letters have been added yet.</p>
+  {% endfor %}
+</div>

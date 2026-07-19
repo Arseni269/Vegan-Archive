@@ -208,6 +208,7 @@ eleventyConfig.addCollection("postsSorted", function(collectionApi) {
   eleventyConfig.addPassthroughCopy("src/**/*.png");
   eleventyConfig.addPassthroughCopy("src/**/*.webp");
   eleventyConfig.addPassthroughCopy("src/german");
+  eleventyConfig.addPassthroughCopy("src/letters/**/*.pdf");
   eleventyConfig.addPassthroughCopy("src/japanese");
   // 1. CASE-INSENSITIVE DEDUPLICATED TAG COLLECTION
   eleventyConfig.addCollection("uniqTags", function(collectionApi) {
@@ -362,6 +363,40 @@ eleventyConfig.addFilter("getMisinformerCount", function(collection, name) {
       ...tag(languages, "language"),
       ...tag(misinformers, "misinformer")
     ];
+  });
+
+  // 7. FOUNDING LETTERS, GROUPED BY AUTHOR — new letters just need front
+  // matter (layout: letter.njk, author: "..."), nothing here needs to
+  // change when you add more letters or even a brand-new author; the
+  // per-author page is generated automatically via pagination (see
+  // src/letters/author.njk).
+  eleventyConfig.addCollection("letterAuthors", function(collectionApi) {
+    const authorMap = {};
+
+    collectionApi.getAll()
+      .filter(item => item.data.layout === "letter.njk")
+      .forEach(item => {
+        const name = item.data.author;
+        if (!name) return;
+        const authorSlug = slugify(name);
+
+        if (!authorMap[authorSlug]) {
+          authorMap[authorSlug] = { name: name, slug: authorSlug, letters: [] };
+        }
+        authorMap[authorSlug].letters.push({
+          title: item.data.title,
+          url: item.url,
+          writtenAt: item.data.writtenAt || "",
+          writtenDate: item.data.writtenDate || "",
+          date: item.date
+        });
+      });
+
+    Object.values(authorMap).forEach(a => {
+      a.letters.sort((x, y) => (x.date && y.date) ? x.date - y.date : 0);
+    });
+
+    return Object.values(authorMap).sort((a, b) => a.name.localeCompare(b.name));
   });
 
   return {

@@ -338,6 +338,32 @@ eleventyConfig.addFilter("getMisinformerCount", function(collection, name) {
   const item = collection.find(m => m.slug === slug);
   return item ? item.count : 0;
 });
+
+  // 6. SITE-WIDE SEARCH INDEX — every real post (title + url), covering all
+  // language folders (unlike the older postsSorted collection above, which
+  // only ever looked at src/posts/ and src/ukrainian/). Meant to be dumped
+  // as JSON and embedded on any page that wants the search bar + suggestions
+  // (currently the archive and individual posts), not just the archive grid.
+  eleventyConfig.addCollection("searchablePosts", function(collectionApi) {
+    return collectionApi.getAll()
+      .filter(item => item.data.layout === "post.njk")
+      .map(item => ({ title: item.data.title, url: item.url }));
+  });
+
+  // Merges the four separate tag-category collections (creators/topics/
+  // languages/misinformers) into one flat list with a category attached to
+  // each, for the same JSON-embed-and-search-client-side purpose as above.
+  // Usage: {{ collections.sortedCreators | mergeTagCategories(collections.sortedTopics, collections.sortedLanguages, collections.sortedMisinformers) | dump | safe }}
+  eleventyConfig.addFilter("mergeTagCategories", function(creators, topics, languages, misinformers) {
+    const tag = (arr, category) => (arr || []).map(v => ({ name: v.name, slug: v.slug, category }));
+    return [
+      ...tag(creators, "creator"),
+      ...tag(topics, "topic"),
+      ...tag(languages, "language"),
+      ...tag(misinformers, "misinformer")
+    ];
+  });
+
   return {
     dir: {
       input: "src",
